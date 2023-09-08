@@ -1,0 +1,11 @@
+body {
+    background-color: pink;
+}
+#cat {
+    width: 100px;
+    height: 100px;
+    background-color:fuchsia;
+    position: relative;
+    top: 0;
+  }
+  
