@@ -1,8 +1,28 @@
 @charset "UTF-8";
+body {
+	background-color:#ffd9fa; 
+	/* 255 217 250 */
+	font-family: Roboto_2d0052, Roboto_Fallback_2d0052, sans-serif, system-ui, sans-serif;
+	color:white;
+}
 .header-rap {
 	width:1080px;
-	height:70px;
-	background-color:pink;
+	height:88px;
+}
+.tap1 {
+	width:1080px;
+	height:48px;
+	background-color:#bb35fb;
+}
+nav {
+	width:1080px;
+	height:40px;
+	background-color:#bb35fb;
+	/*187 53 251  */
 }
 
+nav li {
+	width:150px;
+	height:40px;
+	
 }

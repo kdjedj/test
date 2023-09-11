@@ -19,7 +19,7 @@
 <header class="">
 	<div class="header-rap">
 		<!-- 로고 -->
-		<div class = "css">
+		<div class = "tap1">
 			<a herf="" class = "logo">
 				<img alt="로고" src="${cp}/resources/logo.jpg">
 			</a><!-- 로고 이미지 넣어야함. -->
