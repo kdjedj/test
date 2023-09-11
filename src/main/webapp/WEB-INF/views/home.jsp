@@ -23,72 +23,73 @@
 			<a herf="" class = "logo">
 				<img alt="로고" src="${cp}/resources/logo.jpg">
 			</a><!-- 로고 이미지 넣어야함. -->
-		</div>
 		
-		<!-- 탭메뉴 -->
-		<nav>
-			<ul>
-				<li>
-					<span>
-						<img alt="롤아이콘" src="*jpg">
-						<span>리그오브레전드</span>
-					</span>
-				</li>
-				<!-- 롤 제외 전부 주석
-				<li>
-					<span>
-						<img alt="tft아이콘" src="*jpg">
-						<span>전략적 팀 전투</span>
-					</span>
-				</li>
-				<li>
-					<span>
-						<img alt="오버워치2아이콘" src="*jpg">
-						<span>오버워치2</span>
-					</span>
-				</li>
-			</ul> -->
-		</nav>
 		
-		<!--  ...버튼
-		<div>
-			<button class="">
-				<img src ="*.jpg" alt="more">
-			</button>
-		</div>
-	
-		faq/피드백 버튼
-		<div>
-			<button class="">
-				<span class="hidden">Theme Button</span>
-			</button>
+			<!-- 탭메뉴 -->
+			<nav>
+				<ul>
+					<li>
+						<span>
+							<img alt="" src="*jpg">
+							<span>리그오브레전드</span>
+						</span>
+					</li>
+					<!-- 롤 제외 전부 주석
+					<li>
+						<span>
+							<img alt="tft아이콘" src="*jpg">
+							<span>전략적 팀 전투</span>
+						</span>
+					</li>
+					<li>
+						<span>
+							<img alt="오버워치2아이콘" src="*jpg">
+							<span>오버워치2</span>
+						</span>
+					</li>
+				</ul> -->
+			</nav>
 			
-		</div> -->
-	
-		<!-- 다크모드 버튼
-		<div>
-			<button class="">
-				<span class="hidden">Theme Button</span>
-			</button>
-		</div>
- 			-->		
-		<!-- 언어선택
-		<div class="">
-			<img alt="" src="*.jpg">
-			<div class="">
-				<label class="hidden" for="ko_KR">ko_KR</label>
-				<select id="ko_KR">
-					<option value="en_US" selected>English</option>
-					<option value="ko_KR" selected>한국어</option>
-					<option value="ja_JP" selected>日本語</option>
-				</select>
-			</div>	
-		</div> -->
+			<!--  ...버튼
+			<div>
+				<button class="">
+					<img src ="*.jpg" alt="more">
+				</button>
+			</div>
 		
-		<!-- 로그인 -->
-		<div class="Proclogin">
-			<a href="${cp}/member/login" class="">로그인</a>
-			<!-- 멤버.op.gg가서 로그인하고 다시 op.gg로 돌아옴. 참고 -->
+			faq/피드백 버튼
+			<div>
+				<button class="">
+					<span class="hidden">Theme Button</span>
+				</button>
+				
+			</div> -->
+		
+			<!-- 다크모드 버튼
+			<div>
+				<button class="">
+					<span class="hidden">Theme Button</span>
+				</button>
+			</div>
+	 			-->		
+			<!-- 언어선택
+			<div class="">
+				<img alt="" src="*.jpg">
+				<div class="">
+					<label class="hidden" for="ko_KR">ko_KR</label>
+					<select id="ko_KR">
+						<option value="en_US" selected>English</option>
+						<option value="ko_KR" selected>한국어</option>
+						<option value="ja_JP" selected>日本語</option>
+					</select>
+				</div>	
+			</div> -->
+			
+			<!-- 로그인 -->
+			<div class="Proclogin">
+				<a href="${cp}/member/login" class="">로그인</a>
+				<!-- 멤버.op.gg가서 로그인하고 다시 op.gg로 돌아옴. 참고 -->
+			</div>
 		</div>
 	</div>
 	<!-- 메인탭 아래 보조 탭 -->
