@@ -58,6 +58,7 @@
 			<button class="">
 				<span class="hidden">Theme Button</span>
 			</button>
+			<!-- 버튼 클릭시 faq팝업 생성 자주묻는 질문 나오게, 마우스 호버시 살짝움직임 맨 아래 검색기능으로 자주묻는질문 검색, 문의하기 버튼 소환사아이디,지역 누르면 제목 이메일 문의내용 해서 문의하기 -->
 		</div>
 	
 		<!-- 다크모드 버튼 -->
@@ -65,6 +66,7 @@
 			<button class="">
 				<span class="hidden">Theme Button</span>
 			</button>
+			<!-- 버튼 클릭시 이미지변경, css로 배경 색 검은색으로 변경, png파일에 배경색 파란색이었다가 바뀜 전적검색 배경색이랑 폰트색 반전 인기글부분 글 제목색도 반전 전체 폰트 반전인듯-->
 		</div>
 		
 		<!-- 언어선택 -->
@@ -85,12 +87,14 @@
 			<a href="" class="">로그인</a>
 		</div>
 	</div>
+	<!-- 메인탭 아래 보조 탭 -->
 	<div class="css-4llake emmetr10">
 		<nav class="route-nav">
 			<ul class="route-list">
 				<li class="route-item">
 					<a href="/">
 						<div data-key="HOME" class="css-7rk75k emmetr11">홈</div>
+						<!-- data-key는 자바스크립트 사용자정의 데이터용. -->
 					</a>
 				</li>
 				<li class="route-item">
@@ -99,6 +103,7 @@
 					</a>
 				</li>
 			</ul>
+			<!-- 마우스 오버시 색진해짐, 언더라인 누르면 링크이동-->
 			<button class="">
 				<span class="logo"></span>
 				<span>13.18</span>
