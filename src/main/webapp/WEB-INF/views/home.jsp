@@ -17,11 +17,11 @@
 </head>
 <body>
 <header class="">
-	<div class="css-1kmtcjv.e1ua6u350">
+	<div class="header-rap">
 		<!-- 로고 -->
 		<div class = "css">
 			<a herf="" class = "logo">
-				<img alt="로고" src="*.jpg">
+				<img alt="로고" src="${cp}/resources/logo.jpg">
 			</a><!-- 로고 이미지 넣어야함. -->
 		</div>
 		
@@ -57,7 +57,7 @@
 			</button>
 		</div>
 	
-		<!-- faq/피드백 버튼
+		faq/피드백 버튼
 		<div>
 			<button class="">
 				<span class="hidden">Theme Button</span>
@@ -131,13 +131,11 @@
 			소환사검색
 		</div>
 	</div>
-	<%-- <hr>
-	<a href="${cp}/member/login">로그인</a>
-	<a href="${cp}/member/logout">로그아웃</a>
 	
-	<a href="${cp}/member/reg">회원가입</a>
-	
-	id:${id} , pw:${pw} --%>
+
+</div>
+
+<div class="footer">
 
 </div>
 </body>
