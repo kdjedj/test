@@ -84,7 +84,8 @@
 		
 		<!-- 로그인 -->
 		<div class="">
-			<a href="" class="">로그인</a>
+			<a href="https://member.op.gg/?redirect_url=https://www.op.gg/" class="">로그인</a>
+			<!-- 멤버.op.gg가서 로그인하고 다시 op.gg로 돌아옴. 참고 -->
 		</div>
 	</div>
 	<!-- 메인탭 아래 보조 탭 -->
