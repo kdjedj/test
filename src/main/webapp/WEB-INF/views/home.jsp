@@ -11,6 +11,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="${cp}/resources/reset.css">
+<link rel="stylesheet" type="text/css" href="${cp}/resources/main.css">
+
 </head>
 <body>
 <header class="">
@@ -31,6 +34,7 @@
 						<span>리그오브레전드</span>
 					</span>
 				</li>
+				<!-- 롤 제외 전부 주석
 				<li>
 					<span>
 						<img alt="tft아이콘" src="*jpg">
@@ -43,33 +47,32 @@
 						<span>오버워치2</span>
 					</span>
 				</li>
-			</ul>
+			</ul> -->
 		</nav>
 		
-		<!-- ...버튼 -->
+		<!--  ...버튼
 		<div>
 			<button class="">
 				<img src ="*.jpg" alt="more">
 			</button>
 		</div>
 	
-		<!-- faq/피드백 버튼 -->
+		<!-- faq/피드백 버튼
 		<div>
 			<button class="">
 				<span class="hidden">Theme Button</span>
 			</button>
-			<!-- 버튼 클릭시 faq팝업 생성 자주묻는 질문 나오게, 마우스 호버시 살짝움직임 맨 아래 검색기능으로 자주묻는질문 검색, 문의하기 버튼 소환사아이디,지역 누르면 제목 이메일 문의내용 해서 문의하기 -->
-		</div>
+			
+		</div> -->
 	
-		<!-- 다크모드 버튼 -->
+		<!-- 다크모드 버튼
 		<div>
 			<button class="">
 				<span class="hidden">Theme Button</span>
 			</button>
-			<!-- 버튼 클릭시 이미지변경, css로 배경 색 검은색으로 변경, png파일에 배경색 파란색이었다가 바뀜 전적검색 배경색이랑 폰트색 반전 인기글부분 글 제목색도 반전 전체 폰트 반전인듯-->
 		</div>
-		
-		<!-- 언어선택 -->
+ 			-->		
+		<!-- 언어선택
 		<div class="">
 			<img alt="" src="*.jpg">
 			<div class="">
@@ -80,52 +83,62 @@
 					<option value="ja_JP" selected>日本語</option>
 				</select>
 			</div>	
-		</div>
+		</div> -->
 		
 		<!-- 로그인 -->
-		<div class="">
-			<a href="https://member.op.gg/?redirect_url=https://www.op.gg/" class="">로그인</a>
+		<div class="Proclogin">
+			<a href="${cp}/member/login" class="">로그인</a>
 			<!-- 멤버.op.gg가서 로그인하고 다시 op.gg로 돌아옴. 참고 -->
 		</div>
 	</div>
 	<!-- 메인탭 아래 보조 탭 -->
 	<div class="css-4llake emmetr10">
-		<nav class="route-nav">
-			<ul class="route-list">
-				<li class="route-item">
-					<a href="/">
-						<div data-key="HOME" class="css-7rk75k emmetr11">홈</div>
+		<nav class="board-nav">
+			<ul class="boards">
+				<li class="board1">
+					<a href="${cp}/guest/getList?page=1">
+						<div data-key="HOME" class="css-7rk75k emmetr11">게시판1</div>
 						<!-- data-key는 자바스크립트 사용자정의 데이터용. -->
 					</a>
 				</li>
-				<li class="route-item">
-					<a href="/champions">
-						<div data-key="CHAMPION" class="css-q3uz41 emmetr11">챔피언 분석</div>
+				<li class="board2">
+					<a href="${cp}/guest/getList?page=1">
+						<div data-key="CHAMPION" class="css-q3uz41 emmetr11">게시판2</div>
+					</a>
+				</li>
+				<li class="board3">
+					<a href="${cp}/guest/getList?page=1">
+						<div data-key="CHAMPION" class="css-q3uz41 emmetr11">게시판3</div>
 					</a>
 				</li>
 			</ul>
-			<!-- 마우스 오버시 색진해짐, 언더라인 누르면 링크이동-->
-			<button class="">
+			<!-- 마우스 오버시 색진해짐, 언더라인 누르면 링크이동 <a href="${cp}/guest/getList?page=1">방명록</a>-->
+			<!--<button class="">
 				<span class="logo"></span>
 				<span>13.18</span>
 				"패치노트 보기"
-			</button>
+			</button>  -->
 		</nav>
 	</div>
 </header>
+<div class="container">
+	<!--  <P>  The time on the server is ${serverTime}. </P>-->
+	<div class="">
+		<div class = "logo">
+			<a><img alt="로고" src="https://ifh.cc/g/o5TO4s.png"></a>
+		</div>
+		<div class="" alt="전적검색">
+			소환사검색
+		</div>
+	</div>
+	<%-- <hr>
+	<a href="${cp}/member/login">로그인</a>
+	<a href="${cp}/member/logout">로그아웃</a>
+	
+	<a href="${cp}/member/reg">회원가입</a>
+	
+	id:${id} , pw:${pw} --%>
 
-<P>  The time on the server is ${serverTime}. </P>
-
-<a href="${cp}/guest/getList?page=1">방명록</a>
-
-<hr>
-<a href="${cp}/member/login">로그인</a>
-<a href="${cp}/member/logout">로그아웃</a>
-
-<a href="${cp}/member/reg">회원가입</a>
-
-id:${id} , pw:${pw}
-
-
+</div>
 </body>
 </html>
