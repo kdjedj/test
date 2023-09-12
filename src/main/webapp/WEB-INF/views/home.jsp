@@ -125,7 +125,7 @@
 </header>
 <div class="container">
 	<!--  <P>  The time on the server is ${serverTime}. </P>-->
-	<div class="">
+	<div class="search">
 		<div class = "logo">
 			<a><img alt="로고" src="${cp}/resources/Logo.png"></a>
 		</div>
