@@ -8,20 +8,22 @@ body {
 .header-rap {
 	width:1080px;
 	height:88px;
+	background-color:yellow;
 	
 }
 .tap1 {
 	width:1080px;
-	height:48px;
+	height:40px;
 	background-color:#bb35fb;
+	display:flex;
 }
 a .logo {
 	
 }
-nav {
-	width:1000px;
+.tap1 nav {
+	width:980px;
 	height:40px;
-	background-color:#bb35fb;
+	background-color:red;
 	/*187 53 251  */
 	display:flex;
 }
@@ -43,4 +45,21 @@ nav li img {
 nav li span {
 	font-size:12px;
 	margin-left:8px;
+}
+.Proclogin {
+	text-align:center;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+}
+.Proclogin a {
+	background-color:#ffd9fa;
+	font-size:12px;
+	color:white;
+	border-radius:4px;
+	height:20px;
+	text-align:center;
+	display:flex;
+	flex-direction: column;
+	justify-content:center;
 }
