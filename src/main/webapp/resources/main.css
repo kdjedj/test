@@ -11,7 +11,7 @@ body {
 	background-color:yellow;
 	
 }
-.tap1 {
+.main-tap {
 	width:1080px;
 	height:40px;
 	background-color:#bb35fb;
@@ -20,7 +20,7 @@ body {
 a .logo {
 	
 }
-.tap1 nav {
+.main-tap nav {
 	width:980px;
 	height:40px;
 	background-color:red;
@@ -31,7 +31,7 @@ nav span {
 	
 }
 nav li {
-	width:128px;
+	width:138px;
 	height:40px;
 	flex-basis:33%
 }
@@ -61,5 +61,22 @@ nav li span {
 	text-align:center;
 	display:flex;
 	flex-direction: column;
+	justify-content:center;
+}
+
+.sub-tap {
+	width:1080px;
+	height:48px;
+	background-color:blue;
+}
+.boards {
+	display:flex;
+	text-align:center;
+	justify-content:center;
+}
+
+.boards li {
+	display:flex;
+	flex-direction:column;
 	justify-content:center;
 }

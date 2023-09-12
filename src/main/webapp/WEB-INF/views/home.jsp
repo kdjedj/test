@@ -19,7 +19,7 @@
 <header class="">
 	<div class="header-rap">
 		<!-- 로고 -->
-		<div class = "tap1">
+		<div class = "main-tap">
 			<a herf="" class = "logo">
 				<img alt="로고" src="${cp}/resources/logo.jpg">
 			</a><!-- 로고 이미지 넣어야함. -->
@@ -91,35 +91,36 @@
 				<!-- 멤버.op.gg가서 로그인하고 다시 op.gg로 돌아옴. 참고 -->
 			</div>
 		</div>
-	</div>
-	<!-- 메인탭 아래 보조 탭 -->
-	<div class="sub-tap">
-		<nav class="board-nav">
-			<ul class="boards">
-				<li class="board1">
-					<a href="${cp}/guest/getList?page=1">
-						<div data-key="HOME" class="css-7rk75k emmetr11">게시판1</div>
-						<!-- data-key는 자바스크립트 사용자정의 데이터용. -->
-					</a>
-				</li>
-				<li class="board2">
-					<a href="${cp}/guest/getList?page=1">
-						<div data-key="CHAMPION" class="css-q3uz41 emmetr11">게시판2</div>
-					</a>
-				</li>
-				<li class="board3">
-					<a href="${cp}/guest/getList?page=1">
-						<div data-key="CHAMPION" class="css-q3uz41 emmetr11">게시판3</div>
-					</a>
-				</li>
-			</ul>
-			<!-- 마우스 오버시 색진해짐, 언더라인 누르면 링크이동 <a href="${cp}/guest/getList?page=1">방명록</a>-->
-			<!--<button class="">
-				<span class="logo"></span>
-				<span>13.18</span>
-				"패치노트 보기"
-			</button>  -->
-		</nav>
+	
+		<!-- 메인탭 아래 보조 탭 -->
+		<div class="sub-tap">
+			<nav class="board-nav">
+				<ul class="boards">
+					<li class="board1">
+						<a href="${cp}/guest/getList?page=1">
+							<div data-key="HOME" class="css-7rk75k emmetr11">게시판1</div>
+							<!-- data-key는 자바스크립트 사용자정의 데이터용. -->
+						</a>
+					</li>
+					<li class="board2">
+						<a href="${cp}/guest/getList?page=1">
+							<div data-key="CHAMPION" class="css-q3uz41 emmetr11">게시판2</div>
+						</a>
+					</li>
+					<li class="board3">
+						<a href="${cp}/guest/getList?page=1">
+							<div data-key="CHAMPION" class="css-q3uz41 emmetr11">게시판3</div>
+						</a>
+					</li>
+				</ul>
+				<!-- 마우스 오버시 색진해짐, 언더라인 누르면 링크이동 <a href="${cp}/guest/getList?page=1">방명록</a>-->
+				<!--<button class="">
+					<span class="logo"></span>
+					<span>13.18</span>
+					"패치노트 보기"
+				</button>  -->
+			</nav>
+		</div>
 	</div>
 </header>
 <div class="container">
