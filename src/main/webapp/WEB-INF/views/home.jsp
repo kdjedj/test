@@ -93,7 +93,7 @@
 		</div>
 	</div>
 	<!-- 메인탭 아래 보조 탭 -->
-	<div class="css-4llake emmetr10">
+	<div class="sub-tap">
 		<nav class="board-nav">
 			<ul class="boards">
 				<li class="board1">
