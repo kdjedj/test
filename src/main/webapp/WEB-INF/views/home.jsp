@@ -6,29 +6,28 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 2. 0을 위한 준비. el 태그로 가져올 수 있는데 이걸 더 짧게 찍기위해 변수 대입함.     -->    
 <c:set var="cp" value="${pageContext.request.contextPath}" />
+<%@include file="../views/main_header.jsp" %>
     
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-</head>
-<body>
-<h1>
-	Hello world!  
-</h1>
-
-<P>  The time on the server is ${serverTime}. </P>
-
-<a href="${cp}/guest/getList?page=1">방명록</a>
-
-<hr>
-<a href="${cp}/member/login">로그인</a>
-<a href="${cp}/member/logout">로그아웃</a>
-
-<a href="${cp}/member/reg">회원가입</a>
-
-id:${id} , pw:${pw}
+<link rel="stylesheet" type="text/css" href="${cp}/resources/reset.css">
+<link rel="stylesheet" type="text/css" href="${cp}/resources/main.css">
 
 
+<div class="container">
+	<!--  <P>  The time on the server is ${serverTime}. </P>-->
+	<div class="">
+		<div class = "logo">
+			<a><img alt="로고" src="https://ifh.cc/g/o5TO4s.png"></a>
+		</div>
+		<div class="" alt="전적검색">
+			소환사검색
+		</div>
+	</div>
+	
+
+</div>
+
+<div class="footer">
+
+</div>
 </body>
 </html>

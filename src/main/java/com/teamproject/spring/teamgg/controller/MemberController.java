@@ -48,4 +48,7 @@ public class MemberController {
 		s.invalidate();
 		return "redirect:/";
 	}
+	@RequestMapping("/Searching_User")
+	public void Searching_User() {
+	}
 }
