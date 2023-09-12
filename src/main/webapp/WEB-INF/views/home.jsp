@@ -20,9 +20,8 @@
 	<div class="header-rap">
 		<!-- 로고 -->
 		<div class = "main-tap">
-			<a herf="" class = "logo">
+			<a href="${cp}/" class = "logo">
 				<img alt="로고" src="${cp}/resources/Logo.png">
-			</a><!-- 로고 이미지 넣어야함. -->
 		
 		
 			<!-- 탭메뉴 -->
@@ -30,7 +29,7 @@
 				<ul>
 					<li>
 						<span>
-							<img alt="" src="*jpg">
+							<img alt="" src="*.jpg">
 							<span>리그오브레전드</span>
 						</span>
 					</li>
