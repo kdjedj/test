@@ -5,10 +5,16 @@ body {
 	font-family: Roboto_2d0052, Roboto_Fallback_2d0052, sans-serif, system-ui, sans-serif;
 	color:white;
 }
+.header{
+	display:flex;
+	justify-content: center;
+}
+
 .header-rap {
 	width:1080px;
 	height:88px;
 	background-color:yellow;
+	
 	
 }
 .main-tap {
@@ -18,7 +24,7 @@ body {
 	display:flex;
 }
 .main-tap .logo img{
-	background-color:#6a60a9;
+	background-color:#dedcee;
 	width:65px;
 	height:40px;
 }

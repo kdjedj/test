@@ -16,7 +16,7 @@
 
 </head>
 <body>
-<header class="">
+<header class="header">
 	<div class="header-rap">
 		<!-- 로고 -->
 		<div class = "main-tap">
