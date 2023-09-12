@@ -21,7 +21,7 @@
 		<!-- 로고 -->
 		<div class = "main-tap">
 			<a herf="" class = "logo">
-				<img alt="로고" src="${cp}/resources/logo.jpg">
+				<img alt="로고" src="${cp}/resources/Logo.png">
 			</a><!-- 로고 이미지 넣어야함. -->
 		
 		
@@ -127,13 +127,12 @@
 	<!--  <P>  The time on the server is ${serverTime}. </P>-->
 	<div class="">
 		<div class = "logo">
-			<a><img alt="로고" src="https://ifh.cc/g/o5TO4s.png"></a>
+			<a><img alt="로고" src="${cp}/resources/Logo.png"></a>
 		</div>
 		<div class="" alt="전적검색">
 			소환사검색
 		</div>
 	</div>
-	
 
 </div>
 

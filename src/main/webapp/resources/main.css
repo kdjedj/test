@@ -1,6 +1,6 @@
 @charset "UTF-8";
 body {
-	background-color:#ffd9fa; 
+	background-color:#dedcee; 
 	/* 255 217 250 */
 	font-family: Roboto_2d0052, Roboto_Fallback_2d0052, sans-serif, system-ui, sans-serif;
 	color:white;
@@ -14,16 +14,18 @@ body {
 .main-tap {
 	width:1080px;
 	height:40px;
-	background-color:#bb35fb;
+	background-color:#6a60a9;
 	display:flex;
 }
-a .logo {
-	
+.main-tap .logo img{
+	background-color:#6a60a9;
+	width:65px;
+	height:40px;
 }
 .main-tap nav {
-	width:980px;
+	width:950px;
 	height:40px;
-	background-color:red;
+	background-color:#6a60a9;
 	/*187 53 251  */
 	display:flex;
 }
@@ -47,17 +49,19 @@ nav li span {
 	margin-left:8px;
 }
 .Proclogin {
+	width:80px;
+	height:40px;
 	text-align:center;
 	display:flex;
 	align-items:center;
 	justify-content:center;
 }
 .Proclogin a {
-	background-color:#ffd9fa;
-	font-size:12px;
-	color:white;
+	background-color:#dedcee;
+	font-size:15px;
+	color:#6a60a9;
 	border-radius:4px;
-	height:20px;
+	height:30px;
 	text-align:center;
 	display:flex;
 	flex-direction: column;
@@ -67,7 +71,7 @@ nav li span {
 .sub-tap {
 	width:1080px;
 	height:48px;
-	background-color:blue;
+	background-color:#6a60a9;
 }
 .boards {
 	display:flex;
