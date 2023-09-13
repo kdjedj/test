@@ -26,8 +26,4 @@
 
 </div>
 
-<div class="footer">
-
-</div>
-</body>
-</html>
+<%@include file="../views/main_back.jsp"%>
