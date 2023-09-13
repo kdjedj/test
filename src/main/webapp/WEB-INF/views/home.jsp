@@ -24,7 +24,7 @@
 				<img alt="로고" src="${cp}/resources/Logo.png">
 			</a>
 		
-			<!-- 탭메뉴 -->
+			<!-- 게임탭메뉴 -->
 			<nav>
 				<ul>
 					<li>
@@ -35,16 +35,20 @@
 					</li>
 					<!-- 롤 제외 전부 주석
 					<li>
-						<span>
-							<img alt="tft아이콘" src="*jpg">
-							<span>전략적 팀 전투</span>
-						</span>
+						<a href="https://tft.op.gg">
+							<span>
+								<img alt="tft아이콘" src="*jpg">
+								<span>전략적 팀 전투</span>
+							</span>
+						</a>
 					</li>
 					<li>
-						<span>
-							<img alt="오버워치2아이콘" src="*jpg">
-							<span>오버워치2</span>
-						</span>
+						<a href="https://tft.op.gg">
+							<span>
+								<img alt="오버워치2아이콘" src="*jpg">
+								<span>오버워치2</span>
+							</span>
+						</a>
 					</li>
 				</ul> -->
 			</nav>
