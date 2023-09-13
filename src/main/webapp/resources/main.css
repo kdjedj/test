@@ -15,25 +15,28 @@ body {
 	height:88px;
 	background-color:yellow;
 	
-	
 }
-.main-tap {
+.main-tab {
 	width:1080px;
 	height:40px;
 	background-color:#6a60a9;
 	display:flex;
 }
-.main-tap .logo img{
+.main-tab .logo {
+	width:65px;
+	padding-left:10px;
+	
+}
+.main-tab .logo img{
 	background-color:#dedcee;
 	width:65px;
 	height:40px;
 }
-.main-tap nav {
+.main-tab nav {
 	width:950px;
 	height:40px;
 	background-color:#6a60a9;
 	/*187 53 251  */
-	display:flex;
 }
 nav span {
 	
@@ -74,7 +77,7 @@ nav li span {
 	justify-content:center;
 }
 
-.sub-tap {
+.sub-tab {
 	width:1080px;
 	height:48px;
 	background-color:#6a60a9;
