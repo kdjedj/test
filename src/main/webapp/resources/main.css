@@ -121,4 +121,5 @@ nav li span {
 	border-left:1px solid #dedcee;
 	display:flex;
 	flex-direction:column;
+	justify-content:center;
 }
