@@ -140,7 +140,7 @@
 						<label class="hidden" for="kr">kr</label>
 						<select id="kr">
 							<option value="na">NA</option>
-							<option value="kr">KR</option>
+							<option value="kr" selected>KR</option>
 							<option value="jp">JP</option>
 						</select>
 					</div>
@@ -152,7 +152,6 @@
 				<div class="under-bar"></div>
 				<!--클릭시 최근검색이랑 즐겨찾기 나오는거 구현해야하나  -->
 			</div>
-			
 		</div>
 	</div>
 
