@@ -16,21 +16,20 @@
 
 </head>
 <body>
-<header class="">
+<header class="header">
 	<div class="header-rap">
 		<!-- 로고 -->
-		<div class = "main-tap">
-			<a herf="" class = "logo">
-				<img alt="로고" src="${cp}/resources/logo.jpg">
-			</a><!-- 로고 이미지 넣어야함. -->
-		
+		<div class = "main-tab">
+			<a href="${cp}/" class = "logo">
+				<img alt="로고" src="${cp}/resources/Logo.png">
+			</a>
 		
 			<!-- 탭메뉴 -->
 			<nav>
 				<ul>
 					<li>
 						<span>
-							<img alt="" src="*jpg">
+							<img alt="" src="*.jpg">
 							<span>리그오브레전드</span>
 						</span>
 					</li>
@@ -93,7 +92,7 @@
 		</div>
 	
 		<!-- 메인탭 아래 보조 탭 -->
-		<div class="sub-tap">
+		<div class="sub-tab">
 			<nav class="board-nav">
 				<ul class="boards">
 					<li class="board1">
@@ -125,15 +124,32 @@
 </header>
 <div class="container">
 	<!--  <P>  The time on the server is ${serverTime}. </P>-->
-	<div class="">
+	<div class="middle">
 		<div class = "logo">
-			<a><img alt="로고" src="https://ifh.cc/g/o5TO4s.png"></a>
+			<a><img alt="로고" src="${cp}/resources/Logo.png"></a>
 		</div>
-		<div class="" alt="전적검색">
-			소환사검색
+		<div class="focusbox" alt="전적검색">
+			<form action="" class="region">
+				<div>
+					<small class="label">Region</small>
+					<div class="">
+						<label class="hidden" for="kr">kr</label>
+						<select id="kr">
+							<option value="na">NA</option>
+							<option value="kr">KR</option>
+							<option value="jp">JP</option>
+						</select>
+					</div>
+				</div>
+				<div>
+					<label for="serachHome" class="label">Search</label>
+					<input id="" name="search" autocomplete="off" type="text" placeholder="소환사명, 소환사명, ...">
+					<div class="under-bar"></div>
+					<!--클릭시 최근검색이랑 즐겨찾기 나오는거 구현해야하나  -->
+				</div>
+			</form>
 		</div>
 	</div>
-	
 
 </div>
 
