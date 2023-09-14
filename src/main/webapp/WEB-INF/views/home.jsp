@@ -145,13 +145,14 @@
 						</select>
 					</div>
 				</div>
-				<div>
-					<label for="serachHome" class="label">Search</label>
-					<input id="" name="search" autocomplete="off" type="text" placeholder="소환사명, 소환사명, ...">
-					<div class="under-bar"></div>
-					<!--클릭시 최근검색이랑 즐겨찾기 나오는거 구현해야하나  -->
-				</div>
 			</form>
+			<div class="searchbox">
+				<label for="serachHome" class="label">Search</label>
+				<input id="" name="search" autocomplete="off" type="text" placeholder="소환사명, 소환사명, ...">
+				<div class="under-bar"></div>
+				<!--클릭시 최근검색이랑 즐겨찾기 나오는거 구현해야하나  -->
+			</div>
+			
 		</div>
 	</div>
 
