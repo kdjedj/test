@@ -111,19 +111,19 @@ public class GuestController {
 		model.addAttribute("hasNext",hasNext);
 		model.addAttribute("prevPage",prevPage);
 		model.addAttribute("nextPage",nextPage);
-		model.addAttribute("list",service.getList(index));
+		model.addAttribute("mateList",service.getList(index));
 	}
 	
 	@GetMapping({"/read", "/modify"})
-	public void read(@RequestParam("bno") Long bno, Model model) {
-		log.info("컨트롤러 ==== 글번호 ==============="+bno);
-		model.addAttribute("read",service.read(bno));
+	public void read(@RequestParam("m_idx") Long m_idx, Model model) {
+		log.info("컨트롤러 ==== 글번호 ==============="+m_idx);
+		model.addAttribute("read",service.read(m_idx));
 	}
 	
 	@GetMapping("/del")
-	public String del(@RequestParam("bno") Long bno) {
-		log.info("컨트롤러 ==== 글번호 ==============="+bno);
-		service.del(bno);
+	public String del(@RequestParam("m_idx") Long m_idx) {
+		log.info("컨트롤러 ==== 글번호 ==============="+m_idx);
+		service.del(m_idx);
 		return "redirect:/guest/getList";	// 책 p.245 참고
 	}
 	

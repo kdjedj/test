@@ -21,19 +21,19 @@ public class GuestServiceImpl implements GuestService{
 	private GuestMapper mapper;	
 	
 	@Override
-	public List<GuestVO> getList(int page) {
+	public List<GuestVO> getList(int IndexNumber) {
 		log.info("비지니스 계층===========");
-		return mapper.getList(page);
+		return mapper.getList(IndexNumber);
 	}
 
 	@Override
-	public GuestVO read(long bno) {
-		return mapper.read(bno);
+	public GuestVO read(long m_idx) {
+		return mapper.read(m_idx);
 	}
 
 	@Override
-	public void del(long bno) {
-		mapper.del(bno);
+	public void del(long m_idx) {
+		mapper.del(m_idx);
 	}
 
 	@Override

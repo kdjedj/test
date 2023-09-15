@@ -9,8 +9,25 @@
 <!-- 왼쪽 영역 -->
           <div id="user_left_menu">           
                     <div id="login_box">
-                    <a herf="#"><div class="login_buttom">로그인</div></a>
-                    </div>      
+                    <a href="#"><div class="login_button">로그인</div></a>
+                    </div> 
+                    
+                    <div class="sidebar-content">
+                    	<div class="sidebar-menu">
+                    		<div class="sidebar-menu__title">커뮤니티</div>
+                    		<ul class="sidebar-menu__list">
+								<li class="sidebar-menu__item">
+								<a href="#">자유</a>
+								</li>
+								<li class="sidebar-menu__item">
+								<a href="#">팁과 노하우</a>
+								</li>
+								<li class="sidebar-menu__item">
+								<a href="#">유저 찾기</a>
+								</li>
+							</ul>
+                    	</div>
+                    </div>     
             </div> 
 
 
