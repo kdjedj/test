@@ -158,7 +158,9 @@
 </div>
 
 <div class="footer">
-
+	<div class="footer-rap">
+		
+	</div>
 </div>
 </body>
 </html>
