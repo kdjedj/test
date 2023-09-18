@@ -10,17 +10,27 @@
 <c:set var="cp" value="${pageContext.request.contextPath}" />
 <%@include file="../main_header.jsp" %>
     
-
+<div class="container">
 <div class="big_box">
 	<%@include file="../user_left_menu.jsp"%>
 	
-<div class="container">
-	<form action="${cp}/board/wirte" method="post">
+
 	<div class="read_box">
-	
-	
+		<form class="write_form" action="${cp}/board/mate_write" method="post">
+		<div class="read_top">
+			글제목 : <input name="m_title" placeholder="제목을 입력해주세요....">
+		</div>
+		
+		<div class="read_container">
+			글 내용 :
+			<textarea name="m_content" rows="10" cols="110" ></textarea>
+			<div class="viewer_bottom">
+			<input type="submit" value="글쓰기">
+			</div>
+		</div>
+		</form>
 	</div>
-	</form>
+	
 </div>
 </div>
 <%@include file="../main_back.jsp"%>

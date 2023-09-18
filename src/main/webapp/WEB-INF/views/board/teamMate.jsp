@@ -22,7 +22,7 @@
 			<div class="sub-header-info">
 			<h2 class="sub-headtitle">유저 찾기</h2>
 			<div class="write_button">
-				<a href="#">글쓰기</a>
+				<a href="${cp}/board/mate_write">글쓰기</a>
 			</div>
 			</div>
 			

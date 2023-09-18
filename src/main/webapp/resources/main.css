@@ -311,9 +311,16 @@ li>a{
 /* mate_write */
 /*===========================================================================  */
 
+form.write_form div.read_container{
+	width: 100%;
+    min-height: 500px;
+    box-sizing: border-box;
+    padding: 24px 16px;
+}
 
-
-
+form.write_form{
+	color: #7b858e;
+}
 
 
 
