@@ -39,7 +39,7 @@
 						<article class="article-list-item">
 							<div class="article-list-item__no"><span>${guest.m_idx }</span></div>
 							<div class="article-list-item__content">
-							<a href="${cp}/board/mate_read?m_idx=${guest.m_idx }"><span>${guest.m_title }</span></a>
+							<a href="${cp}/board/mate_read?m_idx=${guest.m_idx }&m_id=${login_on.m_id}&m_pw=${login_on.m_pw}"><span>${guest.m_title }</span></a>
 							<div class="article-list-item-meta">
 								<div class="article-list-item-meta__item"><span>${guest.m_date }</span></div>
 								<div class="article-list-item-meta__item"><span>${guest.m_writer }</span></div>

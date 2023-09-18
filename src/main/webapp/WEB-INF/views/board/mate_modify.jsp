@@ -16,26 +16,24 @@
 	
 
 	<div class="read_box">
+		<form class="write_form" action="${cp}/board/mate_modify?m_id=${idAndPw.m_id }&m_pw=${idAndPw.m_pw }" method="post">
 		<div class="read_top">
-			<div class="read_title"><h2>${read.m_title}</h2></div>
-			<div class="read_info">
-				<div class="article-list-item-meta__item">${read.m_writer }</div>
-				<div class="article-list-item-meta__item">${read.m_date }</div>
-				
-				<!-- 추천, 댓글 수(구현 한다면), 추천(구현한다면) -> read_info_right로 -->
-			</div>
+			글제목 : <input name="m_title" value="${read.m_title}">
+			<input name="m_writer" type="hidden" value="${read.m_writer }">
+			<input name="m_idx" type="hidden" value="${read.m_idx }">
+			
 		</div>
 		
 		<div class="read_container">
-			<div class="read_viewer">
-				${read.m_content }
-			</div>
+			글 내용 : 
+			<br>
+			<br>
+			<textarea class="write_text" name="m_content" rows="10" cols="110" >${read.m_content }</textarea>
 			<div class="viewer_bottom">
-				<a href="${cp}/board/del?m_idx=${read.m_idx}"><div class=function_button>삭제</div></a>
-				<a href="${cp}/board/mate_modify?m_idx=${read.m_idx}&m_id=${idAndPw.m_id }&m_pw=${idAndPw.m_pw}"><div class=function_button>수정</div></a>
+			<input type="submit" value="수정">
 			</div>
 		</div>
-		
+		</form>
 	</div>
 	
 </div>

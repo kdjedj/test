@@ -132,14 +132,21 @@ private GuestService service;
 	}
 	
 	@GetMapping({"/mate_read", "/mate_modify"})
-	public void mateRead(@RequestParam("m_idx") Long m_idx, Model model) {
+	public void mateRead(@RequestParam("m_idx") Long m_idx, Model model, MemberVO mv) {
+		
 		log.info("읽기 컨트롤러 ==== 글번호 ==============="+m_idx);
+		log.info("읽기 컨트롤러 ==== 글id ==============="+mv.getM_id());
+		log.info("읽기 컨트롤러 ==== 글pw ==============="+mv.getM_pw());
+
+		
 		model.addAttribute("read",service.read(m_idx));
+		model.addAttribute("idAndPw",mv);
 	}
 	
 	@GetMapping("/del")
 	public String del(@RequestParam("m_idx") Long m_idx) {
 		log.info("컨트롤러 ==== 글번호 ==============="+m_idx);
+
 		service.del(m_idx);
 		return "redirect:/board/teamMate";	// 책 p.245 참고
 	}
@@ -164,10 +171,14 @@ private GuestService service;
 		
 	}
 	
-	@PostMapping("/modify")
-	public String modify(GuestVO gvo) {
+	@PostMapping("/mate_modify")
+	public String modify(GuestVO gvo, MemberVO mv) {
+		log.info("수정 컨트롤러 ==== 글id ==============="+mv.getM_id());
+		log.info("수정 컨트롤러 ==== 글pw ==============="+mv.getM_pw());
+		log.info("수정 컨트롤러 ==== 글idx ==============="+gvo.getM_idx());
+		
 		service.modify(gvo);
-		return "redirect:/board/teamMate";
+		return "redirect:/board/teamMate?m_id="+mv.getM_id()+"&m_pw="+mv.getM_pw();
 	}
 	
 	@GetMapping("/login_admin")

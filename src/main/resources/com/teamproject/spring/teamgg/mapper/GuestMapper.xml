@@ -24,8 +24,7 @@
 	
 	<update id="modify">
 		update ${@com.teamproject.spring.teamgg.vo.GuestVO@TABLE_NAME_GUEST}
-		set m_content = #{m_content} and m_title=#{m_title} 
-		where m_idx = #{m_idx}
+		 set m_content = #{m_content}, m_title = #{m_title} where m_idx = #{m_idx}
 	</update>
 	
 	<select id="getTotalCount" resultType="int">
