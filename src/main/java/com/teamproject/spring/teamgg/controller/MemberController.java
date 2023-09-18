@@ -28,8 +28,8 @@ public class MemberController {
 		
 		
 		
-		System.out.println("==== id:"+m.getId());
-		System.out.println("==== pw:"+m.getPw());
+//		System.out.println("==== id:"+m.getId());
+//		System.out.println("==== pw:"+m.getPw());
 	}
 	@RequestMapping("/login")
 	public void login() {

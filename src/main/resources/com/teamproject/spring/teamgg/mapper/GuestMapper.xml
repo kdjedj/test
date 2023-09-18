@@ -29,4 +29,15 @@
 	<select id="getTotalCount" resultType="int">
 		SELECT count(*) from ${@com.teamproject.spring.teamgg.vo.GuestVO@TABLE_NAME_GUEST}
 	</select>
+	
+	<select id="login_count" resultType="int">
+		SELECT count(*) from GG_member
+		where m_id=#{m_id} and m_pw=#{m_pw}
+	</select>
+	
+	<select id="login_string" resultType="com.teamproject.spring.teamgg.vo.MbinfoVO">
+		SELECT * from GG_member
+		where m_id=#{m_id}
+	</select>
+	
 </mapper>

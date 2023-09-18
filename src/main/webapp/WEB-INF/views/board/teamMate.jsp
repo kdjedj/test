@@ -12,19 +12,7 @@
     
 
 
-<div class="container">
-	
-	<div class="top_part">
-		<div class = "logo_box">
-			<a><img id="logo" alt="로고" src="${cp}/resources/img/Logo.png"></a>
-		</div> 
-		<div class="search_box" alt="전적검색">
-			<form action="/board/searcing_user" method="post">
-			<input class="search_blank" name="search" placeholder="소환사 검색">
-			
-			</form>
-		</div>
-	</div>
+
 	<div class="big_box">
 	<%@include file="../user_left_menu.jsp"%>
 	
@@ -51,12 +39,15 @@
 						<article class="article-list-item">
 							<div class="article-list-item__no"><span>${guest.m_idx }</span></div>
 							<div class="article-list-item__content">
-							<a href="${cp}/board/read?=${guest.m_idx }"><span>${guest.m_title }</span></a>
+							<a href="${cp}/board/mate_read?m_idx=${guest.m_idx }"><span>${guest.m_title }</span></a>
 							<div class="article-list-item-meta">
 								<div class="article-list-item-meta__item"><span>${guest.m_date }</span></div>
 								<div class="article-list-item-meta__item"><span>${guest.m_writer }</span></div>
 							</div>
 							</div>
+							
+							
+							
 
 						</article>
 						</c:forEach>

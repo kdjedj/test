@@ -11,10 +11,16 @@
 <%@include file="../main_header.jsp" %>
     
 
-
+<div class="big_box">
+	<%@include file="../user_left_menu.jsp"%>
+	
 <div class="container">
+	<form action="${cp}/board/wirte" method="post">
+	<div class="read_box">
 	
 	
+	</div>
+	</form>
 </div>
-
+</div>
 <%@include file="../main_back.jsp"%>

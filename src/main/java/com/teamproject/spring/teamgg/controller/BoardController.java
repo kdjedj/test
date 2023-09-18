@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.teamproject.spring.teamgg.board.ConfigBoard;
 import com.teamproject.spring.teamgg.service.GuestService;
 import com.teamproject.spring.teamgg.vo.GuestVO;
+import com.teamproject.spring.teamgg.vo.MemberVO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -32,7 +33,13 @@ private GuestService service;
 
 	
 	@GetMapping("/teamMate")
-	public void teamMate(Model model, @RequestParam(value="Page", defaultValue="1") int page) {
+	public void teamMate(Model model, @RequestParam(value="Page", defaultValue="1") int page
+			, MemberVO mv) {  //MemberVO는 기본값 못만드나?
+		
+		//넘어온 로그인 값
+		log.info("teamMate 아이디 값 =========== "+mv.getM_id());
+		log.info("teamMate 패스워드 값 =========== "+mv.getM_pw());
+		
 		//넘어온 페이지 값으로 시작 인덱스 구하기
 		int index = service.getStartIndex(page);
 		
@@ -114,11 +121,19 @@ private GuestService service;
 		model.addAttribute("prevPage",prevPage);
 		model.addAttribute("nextPage",nextPage);
 		model.addAttribute("mateList",service.getList(index));
+		
+		if(service.login_count(mv)!=0) {
+			log.info("로그인 함수 실행됨");
+			model.addAttribute("login_on",service.login_string(mv));
+		}
+		
+		
+		
 	}
 	
-	@GetMapping({"/mateRead", "/modify"})
+	@GetMapping({"/mate_read", "/mate_modify"})
 	public void mateRead(@RequestParam("m_idx") Long m_idx, Model model) {
-		log.info("컨트롤러 ==== 글번호 ==============="+m_idx);
+		log.info("읽기 컨트롤러 ==== 글번호 ==============="+m_idx);
 		model.addAttribute("read",service.read(m_idx));
 	}
 	
@@ -145,4 +160,12 @@ private GuestService service;
 		service.modify(gvo);
 		return "redirect:/board/teamMate";
 	}
+	
+	@GetMapping("/login_admin")
+	public String login_admin(MemberVO mv) {
+		log.info("컨트롤러 ==== 글id ==============="+mv.getM_id());
+		log.info("컨트롤러 ==== 글pw ==============="+mv.getM_pw());
+		return "redirect:/board/teamMate?m_id="+mv.getM_id()+"&m_pw="+mv.getM_pw();	// 책 p.245 참고
+	}
+	
 }

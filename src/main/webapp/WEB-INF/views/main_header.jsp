@@ -99,18 +99,18 @@
 			<nav class="board-nav">
 				<ul class="boards">
 					<li class="board1">
-						<a href="${cp}/board/teamMate">
+						<a href="${cp}/board/teamMate?m_id=guest&m_pw=guest">
 							<div data-key="HOME" class="css-7rk75k emmetr11">게시판1</div>
 							<!-- data-key는 자바스크립트 사용자정의 데이터용. -->
 						</a>
 					</li>
 					<li class="board2">
-						<a href="${cp}/board/Searching_User">
+						<a href="${cp}/board/teamMate">
 							<div data-key="CHAMPION" class="css-q3uz41 emmetr11">게시판2</div>
 						</a>
 					</li>
 					<li class="board3">
-						<a href="${cp}/board/Searching_User">
+						<a href="${cp}/board/teamMate">
 							<div data-key="CHAMPION" class="css-q3uz41 emmetr11">게시판3</div>
 						</a>
 					</li>
@@ -122,6 +122,19 @@
 					"패치노트 보기"
 				</button>  -->
 			</nav>
+		</div>
+	</div>
+	<div class="container">
+	
+	<div class="top_part">
+		<div class = "logo_box">
+			<a><img id="logo" alt="로고" src="${cp}/resources/img/Logo.png"></a>
+		</div> 
+		<div class="search_box" alt="전적검색">
+			<form action="/board/searcing_user" method="post">
+			<input class="search_blank" name="search" placeholder="소환사 검색">
+			
+			</form>
 		</div>
 	</div>
 </header>
