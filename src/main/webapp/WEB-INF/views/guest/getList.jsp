@@ -15,13 +15,13 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%
+<%-- <%
 	Object o = request.getAttribute("list");
 	List<GuestVO> list = (List<GuestVO>)o; 
 	for(int i=0;i<list.size();i++){
 		Long bno = list.get(i).getBno();
 		String btext = list.get(i).getBtext();
-%>		
+%>	 
 		<%=bno %>	
 		<a href="read?bno=<%=bno%>">
 		<%=btext %>
@@ -35,7 +35,7 @@
 	}
 
 %>
-
+--%>
 <a href="${cp}/guest/write">새글 쓰기</a>
 
 <!-- 페이징 리스트 뿌리기 -->

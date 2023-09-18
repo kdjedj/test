@@ -17,7 +17,9 @@
 	</delete>
 		
 	<insert id="write">
-		insert into ${@com.teamproject.spring.teamgg.vo.GuestVO@TABLE_NAME_GUEST} (m_title, m_content) values (#{m_title}, #{m_content})
+		insert into ${@com.teamproject.spring.teamgg.vo.GuestVO@TABLE_NAME_GUEST} 
+		(m_title,  m_writer, m_content, m_date)
+		 values (#{m_title}, #{m_writer}, #{m_content}, now())
 	</insert>		
 	
 	<update id="modify">

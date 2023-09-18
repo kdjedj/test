@@ -145,13 +145,22 @@ private GuestService service;
 	}
 	
 	@PostMapping("/mate_write")
-	public String mate_write(GuestVO gvo) {
+	public String mate_write(GuestVO gvo, MemberVO mv) {
+		log.info("글쓰기 post컨트롤러 ==== 글쓴이 ==============="+gvo.getM_writer());
 		service.write(gvo);
-		return "redirect:/board/teamMate";	// 책 p.245 참고
+		return "redirect:/board/teamMate?m_id="+mv.getM_id()+"&m_pw="+mv.getM_pw();	// 책 p.245 참고
 	}
 	
-	@GetMapping("/mate_write")	// 책 p.239 /write 중복이지만 이건 글쓰기 화면을 위한 url 매핑
-	public void mate_write() {
+	@GetMapping("/mate_write")	// 
+	public void mate_write(Model model, @RequestParam("user") String user, MemberVO mv ) {
+		log.info("글쓰기 get컨트롤러 ==== 유저이름 ==============="+user);
+		log.info("글쓰기 get컨트롤러 ==== 유저id ==============="+mv.getM_id());
+		log.info("글쓰기 get컨트롤러 ==== 유저pw ==============="+mv.getM_pw());
+
+		
+		
+		model.addAttribute("user",user);
+		model.addAttribute("idAndPw",mv);
 		
 	}
 	

@@ -16,14 +16,18 @@
 	
 
 	<div class="read_box">
-		<form class="write_form" action="${cp}/board/mate_write" method="post">
+		<form class="write_form" action="${cp}/board/mate_write?m_id=${idAndPw.m_id }&m_pw=${idAndPw.m_pw }" method="post">
 		<div class="read_top">
 			글제목 : <input name="m_title" placeholder="제목을 입력해주세요....">
+			<input name="m_writer" type="hidden" value="${user }">
+			
 		</div>
 		
 		<div class="read_container">
-			글 내용 :
-			<textarea name="m_content" rows="10" cols="110" ></textarea>
+			글 내용 : 
+			<br>
+			<br>
+			<textarea class="write_text" name="m_content" rows="10" cols="110" ></textarea>
 			<div class="viewer_bottom">
 			<input type="submit" value="글쓰기">
 			</div>

@@ -16,7 +16,7 @@
                     </c:when>
                     <c:otherwise>
           			<div id="login_box">
-          			임시 로그인 ${login_on.m_id }님 환영합니다
+          			임시 로그인 ${login_on.m_user }님 환영합니다
           			
           			</div>
                     

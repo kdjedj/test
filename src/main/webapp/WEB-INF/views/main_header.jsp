@@ -8,7 +8,7 @@
 <c:set var="cp" value="${pageContext.request.contextPath}" />
     
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="${cp}/resources/reset.css?ver=<%=System.currentTimeMillis()%>">
@@ -124,6 +124,7 @@
 			</nav>
 		</div>
 	</div>
+	</header>
 	<div class="container">
 	
 	<div class="top_part">
@@ -137,4 +138,3 @@
 			</form>
 		</div>
 	</div>
-</header>

@@ -262,6 +262,7 @@ article.article-list-item span{
 #login_box{
 	padding: 8px 8px 16px;
 	/*  border-bottom: 1px solid #ebeef1;*/
+	color:black;
 }
 
 .login_button{
@@ -315,14 +316,18 @@ form.write_form div.read_container{
 	width: 100%;
     min-height: 500px;
     box-sizing: border-box;
-    padding: 24px 16px;
+    padding: 24px 20px;
 }
 
 form.write_form{
 	color: #7b858e;
 }
 
-
+.write_text{
+	min-width:100%;
+	min-height:400px;
+	font-size: 1.0em;
+}
 
 /*===========================================================================  */
 /* mate_read */
