@@ -25,7 +25,7 @@
 <a href="${cp}/member/login">로그인</a>
 <a href="${cp}/member/logout">로그아웃</a>
 
-<a href="${cp}/member/reg">회원가입</a>
+<a href="${cp}/member/register">회원가입</a>
 
 id:${id} , pw:${pw}
 

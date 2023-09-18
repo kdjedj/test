@@ -25,7 +25,7 @@
 		<%=bno %>	
 		<a href="read?bno=<%=bno%>">
 		<%=btext %>
-		<hr>
+		<br>
 		</a>	
 		<!-- <p>${list.get(i).getBno()}</p>
 		<p>${list.get(i).getBtext()}</p> -->
