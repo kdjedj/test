@@ -110,7 +110,7 @@ nav li span {
 .container{
 	width: 100%; max-width: 1200px;
 	display:block;
-	background-color:#c9fbff;
+	/* background-color:#c9fbff; */
 	margin-left:auto; margin-right:auto;
 }
 
@@ -128,10 +128,14 @@ nav li span {
 }
 .search_blank{
 	width:170px; height:35px;
-	border: 3.5px solid black;
+	border: 2.0px solid black;
 	border-radius:10px;
 }
 /* div.search_box, div.search_box */
+
+.post_content{
+	    box-shadow: 0 1px 3px 0 rgba(0,0,0,.15);
+}
 
 .content{
 	width:76%; min-width: 500px;
@@ -257,6 +261,7 @@ article.article-list-item span{
 	padding:8px;
 	position: sticky;
 	top: 0;
+	    box-shadow: 0 1px 3px 0 rgba(0,0,0,.15);
 }
 
 #login_box{
@@ -335,6 +340,8 @@ form.write_form{
 
 .read_box{
 	width:100%;
+	background-color:#fff;
+	margin-left:20px;
 }
 
 @media only screen and (min-width: 1024px){

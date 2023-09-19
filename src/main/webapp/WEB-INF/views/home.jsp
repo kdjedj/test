@@ -8,19 +8,19 @@
 <c:set var="cp" value="${pageContext.request.contextPath}" />
 <%@include file="../views/main_header.jsp" %>
     
-<link rel="stylesheet" type="text/css" href="${cp}/resources/reset.css">
+<%-- <link rel="stylesheet" type="text/css" href="${cp}/resources/reset.css">
 <link rel="stylesheet" type="text/css" href="${cp}/resources/main.css">
+ --%>
 
-
-<div class="container">
+<!-- <div class="container"> -->
 	<!--  <P>  The time on the server is ${serverTime}. </P>-->
 	<div class="">
 		<div class = "logo">
 			<a><img alt="로고" src="https://ifh.cc/g/o5TO4s.png"></a>
 		</div>
-		<div class="" alt="전적검색">
+		<!-- <div class="" alt="전적검색">
 			소환사검색
-		</div>
+		</div> -->
 	</div>
 	
 
