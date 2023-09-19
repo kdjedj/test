@@ -16,6 +16,7 @@
 
 </head>
 <body>
+<<<<<<< HEAD
 <header class="header">
 	<div class="header-rap">
 		<!-- 로고 -->
