@@ -19,6 +19,7 @@
 	<div class="middle">
 					<div>
 						<input id="search" name="search" autocomplete="off" type="text" placeholder="소환사 검색">
+						<p> cp값:${cp}</p>
 					</div>	
 	</div>
 	<div class="please">
@@ -29,6 +30,7 @@
 			<div id="boards_container">
 			</div>
 		</div>
+		
 		<div class="write">
 			<form action="${cp}/free/freeWrite" method="post" accept-charset="utf-8">
 <!-- 		    	<select name="category"> -->
@@ -44,13 +46,15 @@
 				<div class="content">
 			    <textarea rows="30" id="f_content" name="f_content" required></textarea><br>
 				</div>
-			
+			<p> cp값2:${cp}</p>
 		<div class="write_actions">
 			<div>
 			    <input type="submit" id="cancel" value="취소">
+			    <p> cp값3:${cp}</p>
 			</div>
 			<div>
 			    <input type="submit" id="publish" value="글쓰기">
+			    <p> cp값4:${cp}</p>
 			</div>
 		</div>
 			</form>

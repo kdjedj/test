@@ -115,13 +115,13 @@ public class FreeBoardController {
 	}
 	
 	@PostMapping("/freeWrite")        // todo: 리스트 말고 작성한 글 읽기 화면으로 리다이렉트하기
-	public String write(FreeBoardVo fvo, HttpSession session) {
+	public String write(FreeBoardVo fvo, HttpSession session, String f_title, String f_content) {
 		String f_writer = (String) session.getAttribute("m_id");
 	    if (f_writer == null) {
 	        return "redirect:/member/login";
 	    }
 	    fvo.setF_writer(f_writer);
-	    service.write(fvo, f_writer);
+	    service.write(fvo, f_writer, f_title, f_content);
 	    return "redirect:/free/freeList";
 	}
 	

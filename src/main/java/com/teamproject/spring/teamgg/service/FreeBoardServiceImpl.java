@@ -36,9 +36,9 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	}
 
 	@Override
-	public void write(FreeBoardVo fvo, String f_writer) {
+	public void write(FreeBoardVo fvo, String f_title, String f_writer, String f_content) {
 		fvo.setF_writer(f_writer);
-		mapper.freeWrite(fvo, f_writer);
+		mapper.freeWrite(fvo, f_title, f_writer, f_content);
 	}
 
 	@Override

@@ -6,7 +6,7 @@ public interface FreeBoardService {
 	public List<FreeBoardVo> getList(int page);
 	public FreeBoardVo read(long f_idx);
 	public void del(long f_idx);
-	public void write(FreeBoardVo fvo, String f_writer);
+	public void write(FreeBoardVo fvo, String f_title, String f_writer, String f_content);
 	public void modify(FreeBoardVo fvo, String f_writer);
 	
 	public int getStartIndex(int page);
