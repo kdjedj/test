@@ -4,12 +4,11 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.teamproject.spring.teamgg.mapper.FreeBoardMapper">
 	<select id="freeList" resultType="com.teamproject.spring.teamgg.vo.FreeBoardVo">
-		SELECT * from ${@com.teamproject.spring.teamgg.vo.FreeBoardVo@TABLE_NAME_FREE} limit #{page},30
+		SELECT * FROM ${@com.teamproject.spring.teamgg.vo.FreeBoardVo@TABLE_NAME_FREE} ORDER BY f_idx DESC LIMIT #{page},30
 	</select>
 	
 	<select id="freeRead" resultType="com.teamproject.spring.teamgg.vo.FreeBoardVo">
-<!-- 		select * from free_board where f_idx = #{f_idx} -->
-		select * from free_board order by f_idx desc;
+		select * from free_board where f_idx = #{f_idx}
 	</select>	
 	
 	<delete id="freeDel">
