@@ -9,33 +9,37 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>로그인</title>
-<link rel="stylesheet" href="${cp}/resources/Login.css" />
+<title>회원가입</title>
+<link rel="stylesheet" href="${cp}/resources/Singup.css" />
 </head>
 <body>
 	<div class="container">
-		<form action="${cp}/member/login" method="post">
+		<form action="${cp}/member/register" method="post">
 			<div class="container">
 				<h1>
 					<a href="main.jsp" id="logo">로고자리</a>
 				</h1>
 			</div>
-			<h1>로그인</h1>
+			<h1>회원가입</h1>
 			<div class="form-control">
-				<input type="text" name="m_id" id="m_id" required /> <label>ID</label>
+				<input type="text" id="m_id" name="m_id" required> <label>ID</label>
 			</div>
 			<div class="form-control">
-				<input type="password" name="m_pw" id="m_pw" required /> <label>Password</label>
+				<input type="password" id="m_pw" name="m_pw" required> <label>Password</label>
 			</div>
-			<input type="submit" class="btn" value="로그인">
-			<p class="text">
-				계정이 없나요? <a href="singup.jsp">회원가입</a>
-			</p>
+			<div class="form-control">
+				<input type="text" id="m_user" name="m_user" required> <label>Nickname</label>
+			</div>
+			<div class="form-control">
+				<input type="text" id="m_email" name="m_email" required> <label>Email</label>
+			</div>
+			<input type="submit" class="btn" value="회원가입">
+			<button class="btn" type="reset">리셋</button>
+			<div style="text-align: center;">
+				<span id="clock" style="color: gray; font-size: 60px;"></span> <span
+					id="apm" style="color: gray; font-size: 30px;"></span>
+			</div>
 		</form>
-		<div style="text-align: center;">
-			<span id="clock" style="color: gray; font-size: 60px;"></span> <span
-				id="apm" style="color: gray; font-size: 30px;"></span>
-		</div>
 	</div>
 	<script src="${cp}/resources/popword.js"></script>
 	<script src="${cp}/resources/time.js"></script>

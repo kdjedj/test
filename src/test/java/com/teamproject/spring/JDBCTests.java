@@ -13,7 +13,6 @@ public class JDBCTests {
 	
 	static {
 		try {
-//			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -24,7 +23,6 @@ public class JDBCTests {
 	public void testConnection() {
 		try(Connection con =
 				DriverManager.getConnection(
-//							"jdbc:oracle:thin:@localhost:1521:ORCL",
 							"jdbc:mysql://localhost:3306/my_cat",
 							"root",
 							"root")){
