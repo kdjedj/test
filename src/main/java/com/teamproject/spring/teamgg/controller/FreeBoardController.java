@@ -1,5 +1,7 @@
 package com.teamproject.spring.teamgg.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.teamproject.spring.teamgg.board.ConfigBoard;
 import com.teamproject.spring.teamgg.service.FreeBoardService;
 import com.teamproject.spring.teamgg.vo.FreeBoardVo;
+import com.teamproject.spring.teamgg.vo.MemberVO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -19,11 +22,12 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 @Controller
 public class FreeBoardController {
-	private FreeBoardService service; 
+	private FreeBoardService service;
 	
 	// 리스트
 	@GetMapping("/freeList")
-	public void list(Model model, @RequestParam("page") int page) {
+	public void list(Model model, @RequestParam(value="page", defaultValue="1")
+				int page, MemberVO mv) {
 		System.out.println("====== 자유게시판 리스트");
 		
 //		 ========= 페이징 =========
@@ -82,6 +86,7 @@ public class FreeBoardController {
 		model.addAttribute("prevPage",prevPage);
 		model.addAttribute("nextPage",nextPage);
 		model.addAttribute("list",service.getList(index));
+		
 	}
 	
 	@GetMapping({"/freeRead", "/freeModify"})
@@ -91,24 +96,43 @@ public class FreeBoardController {
 	}
 	
 	@GetMapping("/freeDel")
-	public String del(@RequestParam("f_idx") Long f_idx) {
-		service.del(f_idx);
-		return "redirect:/free/freeList?page=1";
+	public String del(@RequestParam("f_idx") Long f_idx, HttpSession session) {
+		String loggedInNickname = (String) session.getAttribute("m_user");
+		String authorNickname = service.getAuthorNickname(f_idx);
+		if (loggedInNickname != null && loggedInNickname.equals(authorNickname)) {
+	        service.del(f_idx);
+	    }
+		return "redirect:/free/freeList";
 	}
 	
 	@GetMapping("/freeWrite") // view
-	public void write() {
+	public String write(HttpSession session) {
+		String f_writer = (String) session.getAttribute("m_id");
+	    if (f_writer == null) {
+	        return "redirect:/member/login";
+	    }
+	    return "/free/freeWrite";
 	}
 	
 	@PostMapping("/freeWrite")        // todo: 리스트 말고 작성한 글 읽기 화면으로 리다이렉트하기
-	public String write(FreeBoardVo fvo) {
-		service.write(fvo);
-		return "redirect:/free/freeList?page=1";
+	public String write(FreeBoardVo fvo, HttpSession session) {
+		String f_writer = (String) session.getAttribute("m_id");
+	    if (f_writer == null) {
+	        return "redirect:/member/login";
+	    }
+	    fvo.setF_writer(f_writer);
+	    service.write(fvo, f_writer);
+	    return "redirect:/free/freeList";
 	}
 	
 	@PostMapping("/freeModify")           // todo: 리스트 말고 작성한 글 읽기 화면으로 리다이렉트하기
-	public String modify(FreeBoardVo fvo) {
-		service.modify(fvo);
-		return "redirect:/free/freeList?page=1";
+	public String modify(FreeBoardVo fvo, HttpSession session) {
+		String f_writer = (String) session.getAttribute("m_id");
+	    if (f_writer == null) {
+	        return "redirect:/member/login";
+	    }
+	    fvo.setF_writer(f_writer);
+	    service.modify(fvo, f_writer);
+	    return "redirect:/free/freeList";
 	}
 }

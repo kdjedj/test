@@ -13,9 +13,10 @@
 	
 	<delete id="freeDel">
 		delete from free_board where f_idx = #{f_idx}
+		and f_writer = #{f_writer}
 	</delete>
 		
-	<insert id="freeWrite">
+	<insert id="freeWrite" parameterType="com.teamproject.spring.teamgg.vo.FreeBoardVo">
 		insert into free_board(f_title, f_writer, f_content, f_date)
     	values (#{f_title}, #{f_writer}, #{f_content}, now())
 	</insert>		
@@ -24,7 +25,7 @@
 		update free_board
 		set f_title = #{f_title},
 			f_content = #{f_content}
-		where f_idx = #{f_idx}
+		where f_idx = #{f_idx} and f_writer = #{f_writer}
 	</update>
 	
 	<select id="getTotalCount" resultType="int">

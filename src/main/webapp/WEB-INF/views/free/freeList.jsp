@@ -25,10 +25,10 @@
 		</div>
 		<div class="headTab">
 				<div class="headTop">
-				유저명/로그인
+				<a href="${cp}/member/login">유저명/로그인</a>
 				</div>
 				<div class="boards_head">
-						<a href="${cp}/free/freeList?page=1">자유게시판
+						<a href="${cp}/free/freeList">자유게시판
 <!-- 						<div data-key="HOME" class="css-7rk75k emmetr11">자유게시판</div> -->
 							<!-- data-key는 자바스크립트 사용자정의 데이터용. -->
 						</a> 게시판 2 게시판 3

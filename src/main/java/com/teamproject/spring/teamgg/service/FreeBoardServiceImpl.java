@@ -36,14 +36,16 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	}
 
 	@Override
-	public void write(FreeBoardVo fvo) {
-		mapper.freeWrite(fvo);
+	public void write(FreeBoardVo fvo, String f_writer) {
+		fvo.setF_writer(f_writer);
+		mapper.freeWrite(fvo, f_writer);
 	}
 
 	@Override
-	public void modify(FreeBoardVo fvo) {
-		mapper.freeModify(fvo);
-	}
+    public void modify(FreeBoardVo fvo, String f_writer) {
+        fvo.setF_writer(f_writer);
+        mapper.freeModify(fvo, f_writer);
+    }
 
 	@Override
 	public int getStartIndex(int page) {
@@ -81,6 +83,11 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 		}		
 		return totalBlock;
 	}
+	
+	@Override
+	public String getAuthorNickname(long f_idx) {
+        return mapper.getAuthorNickname(f_idx);
+    }
 }
 
 
