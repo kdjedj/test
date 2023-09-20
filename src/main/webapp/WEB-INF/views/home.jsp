@@ -6,7 +6,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 2. 0을 위한 준비. el 태그로 가져올 수 있는데 이걸 더 짧게 찍기위해 변수 대입함.     -->    
 <c:set var="cp" value="${pageContext.request.contextPath}" />
-<%@include file="../views/main_header.jsp" %>
     
 <!DOCTYPE html>
 <html>
@@ -50,8 +49,8 @@
 								<span>오버워치2</span>
 							</span>
 						</a>
-					</li>
-				</ul> -->
+					</li> -->
+				</ul>
 			</nav>
 			
 			<!--  ...버튼
@@ -102,8 +101,7 @@
 				<ul class="boards">
 					<li class="board1">
 						<a href="${cp}/free/freeList?page=1">
-							<div data-key="HOME" class="css-7rk75k emmetr11">자유게시판</div>
-							<!-- data-key는 자바스크립트 사용자정의 데이터용. -->
+							자유게시판
 						</a>
 					</li>
 					<li class="board2">

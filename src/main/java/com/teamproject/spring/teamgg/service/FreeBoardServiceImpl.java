@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.teamproject.spring.teamgg.board.ConfigBoard;
-import com.teamproject.spring.teamgg.mapper.BoardMapper;
+import com.teamproject.spring.teamgg.mapper.FreeBoardMapper;
 import com.teamproject.spring.teamgg.vo.FreeBoardVo;
 
 import lombok.Setter;
@@ -18,7 +18,7 @@ import lombok.extern.log4j.Log4j;
 public class FreeBoardServiceImpl implements FreeBoardService{
 
 	@Setter(onMethod_ = @Autowired)
-	private BoardMapper mapper;	
+	private FreeBoardMapper mapper;	
 	
 	@Override
 	public List<FreeBoardVo> getList(int page) {

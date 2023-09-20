@@ -93,7 +93,7 @@ public class FreeBoardController {
 	@GetMapping("/freeDel")
 	public String del(@RequestParam("f_idx") Long f_idx) {
 		service.del(f_idx);
-		return "redirect:/free/freeList";
+		return "redirect:/free/freeList?page=1";
 	}
 	
 	@GetMapping("/freeWrite") // view
@@ -103,12 +103,12 @@ public class FreeBoardController {
 	@PostMapping("/freeWrite")        // todo: 리스트 말고 작성한 글 읽기 화면으로 리다이렉트하기
 	public String write(FreeBoardVo fvo) {
 		service.write(fvo);
-		return "redirect:/free/freeList";
+		return "redirect:/free/freeList?page=1";
 	}
 	
 	@PostMapping("/freeModify")           // todo: 리스트 말고 작성한 글 읽기 화면으로 리다이렉트하기
 	public String modify(FreeBoardVo fvo) {
 		service.modify(fvo);
-		return "redirect:/free/freeList";
+		return "redirect:/free/freeList?page=1";
 	}
 }

@@ -4,11 +4,11 @@ import java.util.List;
 
 import com.teamproject.spring.teamgg.vo.FreeBoardVo;
 
-public interface BoardMapper {
+public interface FreeBoardMapper {
 	public List<FreeBoardVo> freeList(int page);
 	public FreeBoardVo freeRead(long f_idx);
 	public void freeDel(long f_idx);
-	public void freeWrite(FreeBoardVo gvo);
-	public void freeModify(FreeBoardVo gvo);
+	public void freeWrite(FreeBoardVo fvo);
+	public void freeModify(FreeBoardVo fvo);
 	public int getTotalCount();
 }
