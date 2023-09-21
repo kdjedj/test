@@ -12,7 +12,8 @@
 	</select>	
 	
 	<delete id="freeDel">
-		delete from free_board where f_idx = #{f_idx}
+		delete from free_board
+		where f_idx = #{f_idx}
 		and f_writer = #{f_writer}
 	</delete>
 		
