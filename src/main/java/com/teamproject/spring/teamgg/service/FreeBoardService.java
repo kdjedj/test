@@ -7,7 +7,7 @@ public interface FreeBoardService {
 	public FreeBoardVo read(long f_idx);
 	public void del(long f_idx);
 	public void write(FreeBoardVo fvo);
-	public void modify(FreeBoardVo fvo, String f_writer);
+	public void modify(FreeBoardVo fvo);
 	
 	public int getStartIndex(int page);
 	public int getTotalCount();

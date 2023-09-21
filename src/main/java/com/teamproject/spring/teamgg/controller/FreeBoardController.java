@@ -132,7 +132,8 @@ public class FreeBoardController {
 	        return "redirect:/member/login";
 	    }
 	    fvo.setF_writer(f_writer);
-	    service.modify(fvo, f_writer);
+	    log.info("Modify method called with fvo: " + fvo + ", f_writer: " + f_writer);
+	    service.modify(fvo);
 	    return "redirect:/free/freeList";
 	}
 }
