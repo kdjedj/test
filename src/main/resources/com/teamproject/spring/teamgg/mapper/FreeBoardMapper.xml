@@ -31,4 +31,10 @@
 	<select id="getTotalCount" resultType="int">
 		SELECT count(*) from ${@com.teamproject.spring.teamgg.vo.FreeBoardVo@TABLE_NAME_FREE}
 	</select>
+	
+	<select id="getAuthorId" parameterType="long" resultType="string">
+    	select f_writer
+    	from free_board
+    	where f_idx = #{f_idx}
+	</select>
 </mapper>

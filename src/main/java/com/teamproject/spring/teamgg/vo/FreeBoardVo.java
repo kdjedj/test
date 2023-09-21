@@ -14,7 +14,7 @@ public class FreeBoardVo {
 	private String f_writer;
 	private String f_content;
 	private Date f_date;
-	private String userId;
+//	private String userId;
 	
 	
 	//게터, 게터함수, 게터메소드

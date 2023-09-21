@@ -97,9 +97,9 @@ public class FreeBoardController {
 	
 	@GetMapping("/freeDel")
 	public String del(@RequestParam("f_idx") Long f_idx, HttpSession session) {
-		String loggedInNickname = (String) session.getAttribute("m_user");
-		String authorNickname = service.getAuthorNickname(f_idx);
-		if (loggedInNickname != null && loggedInNickname.equals(authorNickname)) {
+		String loggedInId = (String) session.getAttribute("m_id");
+		String authorId = service.getAuthorId(f_idx);
+		if (loggedInId != null && loggedInId.equals(authorId)) {
 	        service.del(f_idx);
 	    }
 		return "redirect:/free/freeList";
@@ -121,7 +121,7 @@ public class FreeBoardController {
 	        return "redirect:/member/login";
 	    }
 	    fvo.setF_writer(f_writer);
-	    service.write(fvo, f_writer);
+	    service.write(fvo);
 	    return "redirect:/free/freeList";
 	}
 	
@@ -132,7 +132,7 @@ public class FreeBoardController {
 	        return "redirect:/member/login";
 	    }
 	    fvo.setF_writer(f_writer);
-	    service.modify(fvo, f_writer);
+	    service.modify(fvo);
 	    return "redirect:/free/freeList";
 	}
 }

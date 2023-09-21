@@ -14,11 +14,11 @@
 </head>
 <body>
 <%@include file="free_header.jsp" %>
-<%
-	FreeBoardVo read = (FreeBoardVo)request.getAttribute("freeRead");
-	long f_idx = read.getF_idx();
-	String f_content = read.getF_content();
-%>	
+<%-- <% --%>
+<!-- 	FreeBoardVo read = (FreeBoardVo)request.getAttribute("freeRead"); -->
+<!-- 	long f_idx = read.getF_idx(); -->
+<!-- 	String f_content = read.getF_content(); -->
+<!-- %>	 -->
 
 <div class="board_wrap">
 	<div class="middle">
@@ -26,33 +26,41 @@
 						<input id="search" name="search" autocomplete="off" type="text" placeholder="소환사 검색">
 					</div>	
 	</div>
-	
-	<div class="container">
+	<div class="write_container">
 		<div class="sideMenu">
 			<div id="profileBox">
 			</div>
 			<div id="boards_container">
 			</div>
 		</div>
-		<div class="modify">
-
-글번호:<%=f_idx %><br>
-글내용:	
-
-	<form action="${cp}/free/freeModify" method="post">
-		<input type="hidden" name='f_idx' value='<%=f_idx %>' >
-		
-		<label for="f_title">제목: </label>
-	    <input type="text" name="f_title" required><br>
-	
-	    <label for="f_content">내용: </label>
-	    <textarea rows="3" name="f_content" required></textarea><br>
-    
-		<input type="submit" value="수정하기">
-	</form>
+		<div class="write">
+			<form action="${cp}/free/freeWrite" method="post" accept-charset="utf-8">
+<!-- 		    	<select name="category"> -->
+<!-- 			    <option value="">게시판 선택</option> -->
+<!-- 			    <option value="자유">자유</option> -->
+<!-- 			    <option value="정보">정보</option> -->
+<!-- 			    <option value="유저 찾기">유저 찾기</option> -->
+<!-- 				</select> -->
+				<div class="title">
+			    <input type="text" id="f_title" name="f_title" placeholder="제목" required><br>
+				</div>
+				
+				<div class="content">
+			    <textarea rows="30" id="f_content" name="f_content" required></textarea><br>
+				</div>
+			
+		<div class="write_actions">
+			<div>
+			    <input type="submit" id="cancel" value="취소">
+			</div>
+			<div>
+			    <input type="submit" id="publish" value="글쓰기">
+			</div>
 		</div>
-	</div>
+			</form>
+		</div>
 
+	</div>
 	<div class=bottom>
 	바텀
 	</div>

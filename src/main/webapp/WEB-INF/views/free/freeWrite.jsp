@@ -15,13 +15,22 @@
 <body>
 <%@include file="free_header.jsp" %>
 
+<%
+HttpSession sessionobj = request.getSession();
+String m_id = (String) session.getAttribute("m_id");
+
+if (m_id != null) {
+	System.out.println("로그인 돼있음 : " + m_id);
+} else {
+    System.out.println("로그인 안돼있음");
+} %>
+
 <div class="board_wrap">
 	<div class="middle">
 					<div>
 						<input id="search" name="search" autocomplete="off" type="text" placeholder="소환사 검색">
 					</div>	
 	</div>
-	<div class="please">
 	<div class="write_container">
 		<div class="sideMenu">
 			<div id="profileBox">
@@ -57,7 +66,6 @@
 		</div>
 		
 	</div>
-</div>
 	<div class=bottom>
 	바텀
 	</div>
