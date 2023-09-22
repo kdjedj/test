@@ -28,7 +28,7 @@
 			</div>
 			<input type="submit" class="btn" value="로그인">
 			<p class="text">
-				계정이 없나요? <a href="singup.jsp">회원가입</a>
+				계정이 없나요? <a href="${cp}/member/register">회원가입</a>
 			</p>
 		</form>
 		<div style="text-align: center;">

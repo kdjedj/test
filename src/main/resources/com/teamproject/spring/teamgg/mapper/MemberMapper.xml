@@ -10,8 +10,7 @@
 		, m_pw
 		, m_user
 		, m_email
-		,
-		m_date)
+		, m_date)
 		VALUES( #{m_id}
 		, #{m_pw}
 		, #{m_user}
