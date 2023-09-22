@@ -1,4 +1,4 @@
-<%@page import="com.teamproject.spring.teamgg.vo.FreeBoardVo"%>
+<%@page import="com.teamproject.spring.teamgg.vo.TipBoardVo"%>
 <%@page import="java.sql.Date"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -12,14 +12,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="${cp}/resources/free/freeList.css">
+<link rel="stylesheet" type="text/css" href="${cp}/resources/tip/tipList.css">
 </head>
 <body>
 
 <div class="head">
 		<div class="logoBox">	
 			<a href="${cp}/">
-				<img class="logo" alt="로고" src="${cp}/resources/free/img/LOGO_small_2.png">
+				<img class="logo" alt="로고" src="${cp}/resources/tip/img/LOGO_small_2.png">
 			</a>
 		</div>
 		<div class="headTab">
@@ -28,7 +28,7 @@
 				<a href="${cp}/member/login">로그인</a>
 				</div>
 				<div class="boards_head">
-						<a href="${cp}/free/freeList">자유게시판</a>
+						<a href="${cp}/tip/freeList">자유게시판</a>
 						<a href="${cp}/tip/tipList">정보게시판</a>
 						<a href="${cp}/mate/mateList">유저찾기게시판</a>
 				</div>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.teamproject.spring.teamgg.mapper.TipBoardMapper">
+	<select id="tipList" resultType="com.teamproject.spring.teamgg.vo.TipBoardVo">
+		SELECT * FROM ${@com.teamproject.spring.teamgg.vo.TipBoardVo@TABLE_NAME_TIP}
+		ORDER BY t_idx DESC LIMIT #{page},30
+	</select>
+	
+	<select id="tipRead" resultType="com.teamproject.spring.teamgg.vo.TipBoardVo">
+		select * from tip_board where t_idx = #{t_idx}
+	</select>	
+	
+	<delete id="tipDel">
+		delete from tip_board where t_idx = #{t_idx}
+	</delete>
+		
+	<insert id="tipWrite" parameterType="com.teamproject.spring.teamgg.vo.TipBoardVo">
+		insert into tip_board(t_title, t_writer, t_content, t_date)
+    	values (#{t_title}, #{t_writer}, #{t_content}, now())
+	</insert>		
+	
+	<update id="tipModify">
+		update tip_board
+		set t_title = #{t_title},
+			t_content = #{t_content}
+		where t_idx = #{t_idx} and t_writer = #{t_writer}
+	</update>
+	
+	<select id="getTotalCount" resultType="int">
+		SELECT count(*) from ${@com.teamproject.spring.teamgg.vo.TipBoardVo@TABLE_NAME_TIP}
+	</select>
+	
+	<select id="getAuthorId" parameterType="long" resultType="string">
+    	select t_writer
+    	from tip_board
+    	where t_idx = #{t_idx}
+	</select>
+</mapper>

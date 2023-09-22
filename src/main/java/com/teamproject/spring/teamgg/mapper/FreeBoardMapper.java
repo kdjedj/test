@@ -2,8 +2,6 @@ package com.teamproject.spring.teamgg.mapper;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.teamproject.spring.teamgg.vo.FreeBoardVo;
 
 public interface FreeBoardMapper {

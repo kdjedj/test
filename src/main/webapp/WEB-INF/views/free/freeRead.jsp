@@ -55,6 +55,7 @@
 		
 			<div class="read_actions">
 				<a href="${cp}/free/freeList">리스트</a>
+<<<<<<< HEAD
 				<a href="${cp}/free/freeModify?f_idx=${f_idx}">수정</a>
 				<a href="${cp}/free/freeDel?f_idx=${f_idx}">삭제</a>
 <%-- 				<c:if test="${userId eq f_writer}"> --%>
@@ -70,6 +71,10 @@
 <%-- 				        <a href="${cp}/free/freeModify?f_idx=${f_idx}">수정</a> --%>
 <%-- 				        <a href="${cp}/free/freeDel?f_idx=${f_idx}">삭제</a> --%>
 <%-- 				</c:if> --%>
+=======
+				<a href="${cp}/free/freeModify?f_idx=<%=f_idx%>">수정</a>
+				<a href="${cp}/free/freeDel?f_idx=<%=f_idx%>">삭제</a>
+>>>>>>> 81c7c252bbab1384b7a7a3521c406f20d3b5d865
 			</div>
 
 		</div>
