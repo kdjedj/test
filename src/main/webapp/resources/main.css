@@ -129,6 +129,10 @@ nav li span {
 	flex-direction:column;
 	justify-content:center;
 }
+.footer {
+	display:flex;
+	justify-content:center;
+}
 .footer-rap{
 	width:1080px;
 	height:400px;
