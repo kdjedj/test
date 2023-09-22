@@ -90,8 +90,11 @@
 			
 			<!-- 로그인 -->
 			<div class="Proclogin">
-				<a href="${cp}/member/login" class="">로그인</a>
-				<!-- 멤버.op.gg가서 로그인하고 다시 op.gg로 돌아옴. 참고 -->
+				<% if (session.getAttribute("m_id") != null) { %>
+       				 <a href="${cp}/member/logout" class="">로그아웃</a>
+			    <% } else { %>
+			    	 <a href="${cp}/member/login" class="">로그인</a>
+			    <% } %>
 			</div>
 		</div>
 	
