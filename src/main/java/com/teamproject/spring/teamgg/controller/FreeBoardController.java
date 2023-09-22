@@ -89,19 +89,19 @@ public class FreeBoardController {
 		
 	}
 	
-	@GetMapping({"/freeRead", "/freeModify"})
+	@GetMapping("/freeRead")
 	public void read(@RequestParam("f_idx") Long f_idx, Model model) {
 		System.out.println("====== 읽기, 수정 (" + f_idx + ")");
 		model.addAttribute("freeRead",service.read(f_idx));
 	}
-	
+
 	@GetMapping("/freeDel")
 	public String del(@RequestParam("f_idx") Long f_idx, HttpSession session) {
-		String loggedInId = (String) session.getAttribute("m_id");
-		String authorId = service.getAuthorId(f_idx);
-		if (loggedInId != null && loggedInId.equals(authorId)) {
+		String f_writer = (String) session.getAttribute("m_id");
+		if (f_writer == null) {
+			return "redirect:/member/login";
+		}
 	        service.del(f_idx);
-	    }
 		return "redirect:/free/freeList";
 	}
 	
@@ -125,6 +125,16 @@ public class FreeBoardController {
 	    return "redirect:/free/freeList";
 	}
 	
+	@GetMapping("/freeModify")
+	public String modify(@RequestParam("f_idx") Long f_idx, Model model, HttpSession session) {
+		String f_writer = (String) session.getAttribute("m_id");
+		if (f_writer == null) {
+			return "redirect:/member/login";
+		}
+		model.addAttribute("freeRead", service.read(f_idx));
+		return "/free/freeModify";
+	}
+	
 	@PostMapping("/freeModify")           // todo: 리스트 말고 작성한 글 읽기 화면으로 리다이렉트하기
 	public String modify(FreeBoardVo fvo, HttpSession session) {
 		String f_writer = (String) session.getAttribute("m_id");
@@ -132,6 +142,7 @@ public class FreeBoardController {
 	        return "redirect:/member/login";
 	    }
 	    fvo.setF_writer(f_writer);
+	    log.info("======modify fvo: "+fvo+", f_writer: " + f_writer);
 	    service.modify(fvo);
 	    return "redirect:/free/freeList";
 	}

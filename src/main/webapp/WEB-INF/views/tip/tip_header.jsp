@@ -28,7 +28,7 @@
 				<a href="${cp}/member/login">로그인</a>
 				</div>
 				<div class="boards_head">
-						<a href="${cp}/tip/freeList">자유게시판</a>
+						<a href="${cp}/free/freeList">자유게시판</a>
 						<a href="${cp}/tip/tipList">정보게시판</a>
 						<a href="${cp}/mate/mateList">유저찾기게시판</a>
 				</div>

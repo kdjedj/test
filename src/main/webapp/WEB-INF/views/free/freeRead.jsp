@@ -22,9 +22,6 @@
 	String f_title = read.getF_title();	
 	String f_content = read.getF_content();
 	Date f_date = read.getF_date();
-	
-	HttpSession sessionobj = request.getSession();
-	String userId = (String) session.getAttribute("m_id");
 %>	
 
 <div class="board_wrap">
@@ -48,33 +45,12 @@
 			</div>
 			<div class="content">
 <%=f_content %>
-<br>
-<p>userId: <%= userId %></p>
-<p>f_writer: <%=f_writer %></p>
 			</div>
 		
 			<div class="read_actions">
 				<a href="${cp}/free/freeList">리스트</a>
-<<<<<<< HEAD
-				<a href="${cp}/free/freeModify?f_idx=${f_idx}">수정</a>
-				<a href="${cp}/free/freeDel?f_idx=${f_idx}">삭제</a>
-<%-- 				<c:if test="${userId eq f_writer}"> --%>
-<!--             <h2>유저 동일</h2>  -->
-<%--                     <a href="${cp}/free/freeModify?f_idx=${f_idx}">수정</a> --%>
-<%--                     <a href="${cp}/free/freeDel?f_idx=${f_idx}">삭제</a> --%>
-<%--             </c:if> --%>
-<%--             <c:if test="${userId eq f_writer}">  --%>
-<!--                <h2>유저 불일치</h2>  -->
-<%--                </c:if> --%>
-<!-- 				if문 동작안함지금 -->
-<%-- 				<c:if test="${sessionScope.m_id eq f_writer}"> --%>
-<%-- 				        <a href="${cp}/free/freeModify?f_idx=${f_idx}">수정</a> --%>
-<%-- 				        <a href="${cp}/free/freeDel?f_idx=${f_idx}">삭제</a> --%>
-<%-- 				</c:if> --%>
-=======
 				<a href="${cp}/free/freeModify?f_idx=<%=f_idx%>">수정</a>
 				<a href="${cp}/free/freeDel?f_idx=<%=f_idx%>">삭제</a>
->>>>>>> 81c7c252bbab1384b7a7a3521c406f20d3b5d865
 			</div>
 
 		</div>
