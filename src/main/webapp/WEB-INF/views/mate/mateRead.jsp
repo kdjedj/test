@@ -1,4 +1,4 @@
-<%@page import="com.teamproject.spring.teamgg.vo.FreeBoardVo"%>
+<%@page import="com.teamproject.spring.teamgg.vo.MateBoardVo"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="java.sql.Date"%>
@@ -10,18 +10,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="${cp}/resources/free/freeList.css">
-<link rel="stylesheet" type="text/css" href="${cp}/resources/free/freeRead.css">
+<link rel="stylesheet" type="text/css" href="${cp}/resources/mate/mateList.css">
+<link rel="stylesheet" type="text/css" href="${cp}/resources/mate/mateRead.css">
 </head>
 <body>
-<%@include file="free_header.jsp" %>
+<%@include file="mate_header.jsp" %>
 <%
-	FreeBoardVo read = (FreeBoardVo)request.getAttribute("freeRead");
-	Long f_idx = read.getF_idx();
-	String f_writer = read.getF_writer();
-	String f_title = read.getF_title();	
-	String f_content = read.getF_content();
-	Date f_date = read.getF_date();
+	MateBoardVo read = (MateBoardVo)request.getAttribute("mateRead");
+	Long m_idx = read.getM_idx();
+	String m_writer = read.getM_writer();
+	String m_title = read.getM_title();	
+	String m_content = read.getM_content();
+	Date m_date = read.getM_date();
 %>	
 
 <div class="board_wrap">
@@ -40,17 +40,17 @@
 		</div>
 		<div class="read">
 			<div class="read_head">
-<h1> <%=f_title %> </h1>
-<%= f_date %> <%=f_writer %>
+<h1> <%=m_title %> </h1>
+<%= m_date %> <%=m_writer %>
 			</div>
 			<div class="content">
-<%=f_content %>
+<%=m_content %>
 			</div>
 		
 			<div class="read_actions">
-				<a href="${cp}/free/freeList">리스트</a>
-				<a href="${cp}/free/freeModify?f_idx=<%=f_idx%>">수정</a>
-				<a href="${cp}/free/freeDel?f_idx=<%=f_idx%>">삭제</a>
+				<a href="${cp}/mate/mateList">리스트</a>
+				<a href="${cp}/mate/mateModify?m_idx=<%=m_idx%>">수정</a>
+				<a href="${cp}/mate/mateDel?m_idx=<%=m_idx%>">삭제</a>
 			</div>
 
 		</div>

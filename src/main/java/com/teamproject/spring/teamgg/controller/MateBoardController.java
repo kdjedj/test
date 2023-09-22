@@ -10,25 +10,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.teamproject.spring.teamgg.board.ConfigBoard;
-import com.teamproject.spring.teamgg.service.FreeBoardService;
-import com.teamproject.spring.teamgg.vo.FreeBoardVo;
+import com.teamproject.spring.teamgg.service.MateBoardService;
+import com.teamproject.spring.teamgg.vo.MateBoardVo;
 import com.teamproject.spring.teamgg.vo.MemberVO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
-@RequestMapping("/free/*")
+@RequestMapping("/mate/*")
 @AllArgsConstructor
 @Controller
-public class FreeBoardController {
-	private FreeBoardService service;
+public class MateBoardController {
+	private MateBoardService service;
 	
 	// 리스트
-	@GetMapping("/freeList")
+	@GetMapping("/mateList")
 	public void list(Model model, @RequestParam(value="page", defaultValue="1")
 				int page, MemberVO mv) {
-		System.out.println("====== 자유게시판 리스트");
+		System.out.println("====== 유저찾기게시판 리스트");
 		
 //		 ========= 페이징 =========
 		// 시작 인덱스
@@ -89,61 +89,61 @@ public class FreeBoardController {
 		
 	}
 	
-	@GetMapping("/freeRead")
-	public void read(@RequestParam("f_idx") Long f_idx, Model model) {
-		System.out.println("====== 읽기, 수정 (" + f_idx + ")");
-		model.addAttribute("freeRead",service.read(f_idx));
+	@GetMapping("/mateRead")
+	public void read(@RequestParam("m_idx") Long m_idx, Model model) {
+		System.out.println("====== 읽기, 수정 (" + m_idx + ")");
+		model.addAttribute("mateRead",service.read(m_idx));
 	}
 
-	@GetMapping("/freeDel")
-	public String del(@RequestParam("f_idx") Long f_idx, HttpSession session) {
-		String f_writer = (String) session.getAttribute("m_id");
-		if (f_writer == null) {
+	@GetMapping("/mateDel")
+	public String del(@RequestParam("m_idx") Long m_idx, HttpSession session) {
+		String m_writer = (String) session.getAttribute("m_id");
+		if (m_writer == null) {
 			return "redirect:/member/login";
 		}
-	        service.del(f_idx);
-		return "redirect:/free/freeList";
+	        service.del(m_idx);
+		return "redirect:/mate/mateList";
 	}
 	
-	@GetMapping("/freeWrite") // view
+	@GetMapping("/mateWrite") // view
 	public String write(HttpSession session) {
-		String f_writer = (String) session.getAttribute("m_id");
-	    if (f_writer == null) {
+		String m_writer = (String) session.getAttribute("m_id");
+	    if (m_writer == null) {
 	        return "redirect:/member/login";
 	    }
-	    return "/free/freeWrite";
+	    return "/mate/mateWrite";
 	}
 	
-	@PostMapping("/freeWrite")        // todo: 리스트 말고 작성한 글 읽기 화면으로 리다이렉트하기
-	public String write(FreeBoardVo fvo, HttpSession session) {
-		String f_writer = (String) session.getAttribute("m_id");
-	    if (f_writer == null) {
+	@PostMapping("/mateWrite")        // todo: 리스트 말고 작성한 글 읽기 화면으로 리다이렉트하기
+	public String write(MateBoardVo mvo, HttpSession session) {
+		String m_writer = (String) session.getAttribute("m_id");
+	    if (m_writer == null) {
 	        return "redirect:/member/login";
 	    }
-	    fvo.setF_writer(f_writer);
-	    service.write(fvo);
-	    return "redirect:/free/freeList";
+	    mvo.setM_writer(m_writer);
+	    service.write(mvo);
+	    return "redirect:/mate/mateList";
 	}
 	
-	@GetMapping("/freeModify")
-	public String modify(@RequestParam("f_idx") Long f_idx, Model model, HttpSession session) {
-		String f_writer = (String) session.getAttribute("m_id");
-		if (f_writer == null) {
+	@GetMapping("/mateModify")
+	public String modify(@RequestParam("m_idx") Long m_idx, Model model, HttpSession session) {
+		String m_writer = (String) session.getAttribute("m_id");
+		if (m_writer == null) {
 			return "redirect:/member/login";
 		}
-		model.addAttribute("freeRead", service.read(f_idx));
-		return "/free/freeModify";
+		model.addAttribute("mateRead", service.read(m_idx));
+		return "/mate/mateModify";
 	}
 	
-	@PostMapping("/freeModify")           // todo: 리스트 말고 작성한 글 읽기 화면으로 리다이렉트하기
-	public String modify(FreeBoardVo fvo, HttpSession session) {
-		String f_writer = (String) session.getAttribute("m_id");
-	    if (f_writer == null) {
+	@PostMapping("/mateModify")           // todo: 리스트 말고 작성한 글 읽기 화면으로 리다이렉트하기
+	public String modify(MateBoardVo mvo, HttpSession session) {
+		String m_writer = (String) session.getAttribute("m_id");
+	    if (m_writer == null) {
 	        return "redirect:/member/login";
 	    }
-	    fvo.setF_writer(f_writer);
-	    log.info("======modify fvo: "+fvo+", f_writer: " + f_writer);
-	    service.modify(fvo);
-	    return "redirect:/free/freeList";
+	    mvo.setM_writer(m_writer);
+	    log.info("======modify mvo: "+mvo+", m_writer: " + m_writer);
+	    service.modify(mvo);
+	    return "redirect:/mate/mateList";
 	}
 }

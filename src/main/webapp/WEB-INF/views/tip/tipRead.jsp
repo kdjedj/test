@@ -1,4 +1,4 @@
-<%@page import="com.teamproject.spring.teamgg.vo.FreeBoardVo"%>
+<%@page import="com.teamproject.spring.teamgg.vo.TipBoardVo"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="java.sql.Date"%>
@@ -10,18 +10,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="${cp}/resources/free/freeList.css">
-<link rel="stylesheet" type="text/css" href="${cp}/resources/free/freeRead.css">
+<link rel="stylesheet" type="text/css" href="${cp}/resources/tip/tipList.css">
+<link rel="stylesheet" type="text/css" href="${cp}/resources/tip/tipRead.css">
 </head>
 <body>
-<%@include file="free_header.jsp" %>
+<%@include file="tip_header.jsp" %>
 <%
-	FreeBoardVo read = (FreeBoardVo)request.getAttribute("freeRead");
-	Long f_idx = read.getF_idx();
-	String f_writer = read.getF_writer();
-	String f_title = read.getF_title();	
-	String f_content = read.getF_content();
-	Date f_date = read.getF_date();
+	TipBoardVo read = (TipBoardVo)request.getAttribute("tipRead");
+	Long t_idx = read.getT_idx();
+	String t_writer = read.getT_writer();
+	String t_title = read.getT_title();	
+	String t_content = read.getT_content();
+	Date t_date = read.getT_date();
 %>	
 
 <div class="board_wrap">
@@ -40,17 +40,17 @@
 		</div>
 		<div class="read">
 			<div class="read_head">
-<h1> <%=f_title %> </h1>
-<%= f_date %> <%=f_writer %>
+<h1> <%=t_title %> </h1>
+<%= t_date %> <%=t_writer %>
 			</div>
 			<div class="content">
-<%=f_content %>
+<%=t_content %>
 			</div>
 		
 			<div class="read_actions">
-				<a href="${cp}/free/freeList">리스트</a>
-				<a href="${cp}/free/freeModify?f_idx=<%=f_idx%>">수정</a>
-				<a href="${cp}/free/freeDel?f_idx=<%=f_idx%>">삭제</a>
+				<a href="${cp}/tip/tipList">리스트</a>
+				<a href="${cp}/tip/tipModify?t_idx=<%=t_idx%>">수정</a>
+				<a href="${cp}/tip/tipDel?t_idx=<%=t_idx%>">삭제</a>
 			</div>
 
 		</div>

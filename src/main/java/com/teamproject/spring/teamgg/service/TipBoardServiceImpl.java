@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.teamproject.spring.teamgg.board.ConfigBoard;
-import com.teamproject.spring.teamgg.mapper.FreeBoardMapper;
-import com.teamproject.spring.teamgg.vo.FreeBoardVo;
+import com.teamproject.spring.teamgg.mapper.TipBoardMapper;
+import com.teamproject.spring.teamgg.vo.TipBoardVo;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -15,34 +15,34 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @Service
 //@AllArgsConstructor
-public class FreeBoardServiceImpl implements FreeBoardService{
+public class TipBoardServiceImpl implements TipBoardService{
 
 	@Setter(onMethod_ = @Autowired)
-	private FreeBoardMapper mapper;	
+	private TipBoardMapper mapper;	
 	
 	@Override
-	public List<FreeBoardVo> getList(int page) {
-		return mapper.freeList(page);
+	public List<TipBoardVo> getList(int page) {
+		return mapper.tipList(page);
 	}
 
 	@Override
-	public FreeBoardVo read(long f_idx) {
-		return mapper.freeRead(f_idx);
+	public TipBoardVo read(long t_idx) {
+		return mapper.tipRead(t_idx);
 	}
 
 	@Override
-	public void del(long f_idx) {
-		mapper.freeDel(f_idx);
+	public void del(long t_idx) {
+		mapper.tipDel(t_idx);
 	}
 
 	@Override
-	public void write(FreeBoardVo fvo) {
-		mapper.freeWrite(fvo);
+	public void write(TipBoardVo tvo) {
+		mapper.tipWrite(tvo);
 	}
 
 	@Override
-    public void modify(FreeBoardVo fvo) {
-        mapper.freeModify(fvo);
+    public void modify(TipBoardVo tvo) {
+        mapper.tipModify(tvo);
     }
 
 	@Override
@@ -83,8 +83,8 @@ public class FreeBoardServiceImpl implements FreeBoardService{
 	}
 	
 	@Override
-	public String getAuthorNickname(long f_idx) {
-        return mapper.getAuthorNickname(f_idx);
+	public String getAuthorNickname(long t_idx) {
+        return mapper.getAuthorNickname(t_idx);
     }
 }
 

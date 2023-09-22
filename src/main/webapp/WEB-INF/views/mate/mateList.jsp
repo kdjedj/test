@@ -1,4 +1,4 @@
-<%@page import="com.teamproject.spring.teamgg.vo.FreeBoardVo"%>
+<%@page import="com.teamproject.spring.teamgg.vo.MateBoardVo"%>
 <%@page import="java.sql.Date"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -12,14 +12,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="${cp}/resources/free/freeList.css">
+<link rel="stylesheet" type="text/css" href="${cp}/resources/mate/mateList.css">
 </head>
 <body>
 
 	<div class="head">
 		<div class="logoBox">	
 			<a href="${cp}/">
-				<img class="logo" alt="로고" src="${cp}/resources/free/img/LOGO_small_2.png">
+				<img class="logo" alt="로고" src="${cp}/resources/mate/img/LOGO_small_2.png">
 			</a>
 		</div>
 		<div class="headTab">
@@ -52,23 +52,23 @@
 		</div>
 		<div class="list">
 			<div class="list_head">
-				<h1> 자유 </h1>
-				<button type="button" id="write" title="글쓰기" onclick="location.href='freeWrite'">글쓰기</button>
+				<h1> 유저찾기 </h1>
+				<button type="button" id="write" title="글쓰기" onclick="location.href='mateWrite'">글쓰기</button>
 			</div>
 <%
 	Object o = request.getAttribute("list");
-	List<FreeBoardVo> list = (List<FreeBoardVo>) o; 
+	List<MateBoardVo> list = (List<MateBoardVo>) o; 
 	for(int i=0;i<list.size();i++){
-		Long f_idx = list.get(i).getF_idx();
-		String f_title = list.get(i).getF_title();
-		Date f_date = list.get(i).getF_date();
-		String f_writer = list.get(i).getF_writer();
+		Long m_idx = list.get(i).getM_idx();
+		String m_title = list.get(i).getM_title();
+		Date m_date = list.get(i).getM_date();
+		String m_writer = list.get(i).getM_writer();
 %>	
 			<ul class="post">
-            	<li class="posts w500"><%=f_idx%></li>
-            	<li class="posts w2500"><a href="freeRead?f_idx=<%=f_idx%>"><%=f_title %></a></li>
-            	<li class="posts"><%=f_date%></li>
-            	<li class="posts"><%=f_writer%></li>
+            	<li class="posts w500"><%=m_idx%></li>
+            	<li class="posts w2500"><a href="mateRead?m_idx=<%=m_idx%>"><%=m_title %></a></li>
+            	<li class="posts"><%=m_date%></li>
+            	<li class="posts"><%=m_writer%></li>
 			</ul>
 <%
 	}
@@ -76,7 +76,7 @@
 			<div class="paging">
 				<c:choose>
 				    <c:when test="${hasPrev == true}">
-				        [<a href="${cp}/free/freeList?page=${prevPage}"><b>이전</b></a>]
+				        [<a href="${cp}/mate/mateList?page=${prevPage}"><b>이전</b></a>]
 				    </c:when>
 				    <c:otherwise>
 				        [이전]
@@ -84,12 +84,12 @@
 				</c:choose>
 				
 				<c:forEach var="p" begin="${blockStartNo}" end="${blockEndNo}">
-					[<a href="${cp}/free/freeList?page=${p}">${p}</a>]
+					[<a href="${cp}/mate/mateList?page=${p}">${p}</a>]
 				</c:forEach>
 				
 				<c:choose>
 					<c:when test="${hasNext == true }">
-						[<a href="${cp}/free/freeList?page=${nextPage}"><b>다음</b></a>]
+						[<a href="${cp}/mate/mateList?page=${nextPage}"><b>다음</b></a>]
 						</c:when>
 						<c:otherwise>
 							[다음]

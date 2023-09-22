@@ -10,25 +10,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.teamproject.spring.teamgg.board.ConfigBoard;
-import com.teamproject.spring.teamgg.service.FreeBoardService;
-import com.teamproject.spring.teamgg.vo.FreeBoardVo;
+import com.teamproject.spring.teamgg.service.TipBoardService;
+import com.teamproject.spring.teamgg.vo.TipBoardVo;
 import com.teamproject.spring.teamgg.vo.MemberVO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
-@RequestMapping("/free/*")
+@RequestMapping("/tip/*")
 @AllArgsConstructor
 @Controller
-public class FreeBoardController {
-	private FreeBoardService service;
+public class TipBoardController {
+	private TipBoardService service;
 	
 	// 리스트
-	@GetMapping("/freeList")
+	@GetMapping("/tipList")
 	public void list(Model model, @RequestParam(value="page", defaultValue="1")
 				int page, MemberVO mv) {
-		System.out.println("====== 자유게시판 리스트");
+		System.out.println("====== 정보게시판 리스트");
 		
 //		 ========= 페이징 =========
 		// 시작 인덱스
@@ -89,61 +89,61 @@ public class FreeBoardController {
 		
 	}
 	
-	@GetMapping("/freeRead")
-	public void read(@RequestParam("f_idx") Long f_idx, Model model) {
-		System.out.println("====== 읽기, 수정 (" + f_idx + ")");
-		model.addAttribute("freeRead",service.read(f_idx));
+	@GetMapping("/tipRead")
+	public void read(@RequestParam("t_idx") Long t_idx, Model model) {
+		System.out.println("====== 읽기, 수정 (" + t_idx + ")");
+		model.addAttribute("tipRead",service.read(t_idx));
 	}
 
-	@GetMapping("/freeDel")
-	public String del(@RequestParam("f_idx") Long f_idx, HttpSession session) {
-		String f_writer = (String) session.getAttribute("m_id");
-		if (f_writer == null) {
+	@GetMapping("/tipDel")
+	public String del(@RequestParam("t_idx") Long t_idx, HttpSession session) {
+		String t_writer = (String) session.getAttribute("m_id");
+		if (t_writer == null) {
 			return "redirect:/member/login";
 		}
-	        service.del(f_idx);
-		return "redirect:/free/freeList";
+	        service.del(t_idx);
+		return "redirect:/tip/tipList";
 	}
 	
-	@GetMapping("/freeWrite") // view
+	@GetMapping("/tipWrite") // view
 	public String write(HttpSession session) {
-		String f_writer = (String) session.getAttribute("m_id");
-	    if (f_writer == null) {
+		String t_writer = (String) session.getAttribute("m_id");
+	    if (t_writer == null) {
 	        return "redirect:/member/login";
 	    }
-	    return "/free/freeWrite";
+	    return "/tip/tipWrite";
 	}
 	
-	@PostMapping("/freeWrite")        // todo: 리스트 말고 작성한 글 읽기 화면으로 리다이렉트하기
-	public String write(FreeBoardVo fvo, HttpSession session) {
-		String f_writer = (String) session.getAttribute("m_id");
-	    if (f_writer == null) {
+	@PostMapping("/tipWrite")        // todo: 리스트 말고 작성한 글 읽기 화면으로 리다이렉트하기
+	public String write(TipBoardVo tvo, HttpSession session) {
+		String t_writer = (String) session.getAttribute("m_id");
+	    if (t_writer == null) {
 	        return "redirect:/member/login";
 	    }
-	    fvo.setF_writer(f_writer);
-	    service.write(fvo);
-	    return "redirect:/free/freeList";
+	    tvo.setT_writer(t_writer);
+	    service.write(tvo);
+	    return "redirect:/tip/tipList";
 	}
 	
-	@GetMapping("/freeModify")
-	public String modify(@RequestParam("f_idx") Long f_idx, Model model, HttpSession session) {
-		String f_writer = (String) session.getAttribute("m_id");
-		if (f_writer == null) {
+	@GetMapping("/tipModify")
+	public String modify(@RequestParam("t_idx") Long t_idx, Model model, HttpSession session) {
+		String t_writer = (String) session.getAttribute("m_id");
+		if (t_writer == null) {
 			return "redirect:/member/login";
 		}
-		model.addAttribute("freeRead", service.read(f_idx));
-		return "/free/freeModify";
+		model.addAttribute("tipRead", service.read(t_idx));
+		return "/tip/tipModify";
 	}
 	
-	@PostMapping("/freeModify")           // todo: 리스트 말고 작성한 글 읽기 화면으로 리다이렉트하기
-	public String modify(FreeBoardVo fvo, HttpSession session) {
-		String f_writer = (String) session.getAttribute("m_id");
-	    if (f_writer == null) {
+	@PostMapping("/tipModify")           // todo: 리스트 말고 작성한 글 읽기 화면으로 리다이렉트하기
+	public String modify(TipBoardVo tvo, HttpSession session) {
+		String t_writer = (String) session.getAttribute("m_id");
+	    if (t_writer == null) {
 	        return "redirect:/member/login";
 	    }
-	    fvo.setF_writer(f_writer);
-	    log.info("======modify fvo: "+fvo+", f_writer: " + f_writer);
-	    service.modify(fvo);
-	    return "redirect:/free/freeList";
+	    tvo.setT_writer(t_writer);
+	    log.info("======modify fvo: "+tvo+", t_writer: " + t_writer);
+	    service.modify(tvo);
+	    return "redirect:/tip/tipList";
 	}
 }

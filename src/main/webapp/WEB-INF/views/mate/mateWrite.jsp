@@ -1,5 +1,5 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.teamproject.spring.teamgg.vo.FreeBoardVo"%>
+<%@page import="com.teamproject.spring.teamgg.vo.MateBoardVo"%>
 <%@page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="cp" value="${pageContext.request.contextPath}" />
@@ -9,11 +9,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="${cp}/resources/free/freeList.css">
-<link rel="stylesheet" type="text/css" href="${cp}/resources/free/freeWrite.css">
+<link rel="stylesheet" type="text/css" href="${cp}/resources/mate/mateList.css">
+<link rel="stylesheet" type="text/css" href="${cp}/resources/mate/mateWrite.css">
 </head>
 <body>
-<%@include file="free_header.jsp" %>
+<%@include file="mate_header.jsp" %>
 
 <div class="board_wrap">
 	<div class="middle">
@@ -29,7 +29,7 @@
 			</div>
 		</div>
 		<div class="write">
-			<form action="${cp}/free/freeWrite" method="post" accept-charset="utf-8">
+			<form action="${cp}/mate/mateWrite" method="post" accept-charset="utf-8">
 <!-- 		    	<select name="category"> -->
 <!-- 			    <option value="">게시판 선택</option> -->
 <!-- 			    <option value="자유">자유</option> -->
@@ -37,11 +37,11 @@
 <!-- 			    <option value="유저 찾기">유저 찾기</option> -->
 <!-- 				</select> -->
 				<div class="title">
-			    <input type="text" id="f_title" name="f_title" placeholder="제목" required><br>
+			    <input type="text" id="m_title" name="m_title" placeholder="제목" required><br>
 				</div>
 				
 				<div class="content">
-			    <textarea rows="30" id="f_content" name="f_content" required></textarea><br>
+			    <textarea rows="30" id="m_content" name="m_content" required></textarea><br>
 				</div>
 			
 		<div class="write_actions">

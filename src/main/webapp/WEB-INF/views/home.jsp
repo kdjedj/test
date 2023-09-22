@@ -105,18 +105,18 @@
 			<nav class="board-nav">
 				<ul class="boards">
 					<li class="board1">
-						<a href="${cp}/free/freeList?page=1">
+						<a href="${cp}/free/freeList">
 							자유게시판
 						</a>
 					</li>
 					<li class="board2">
-						<a href="${cp}/guest/getList?page=1">
-							<div data-key="CHAMPION" class="css-q3uz41 emmetr11">게시판2</div>
+						<a href="${cp}/tip/tipList">
+							정보게시판
 						</a>
 					</li>
 					<li class="board3">
-						<a href="${cp}/guest/getList?page=1">
-							<div data-key="CHAMPION" class="css-q3uz41 emmetr11">게시판3</div>
+						<a href="${cp}/mate/mateList">
+							유저찾기게시판
 						</a>
 					</li>
 				</ul>

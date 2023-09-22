@@ -4,7 +4,8 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.teamproject.spring.teamgg.mapper.FreeBoardMapper">
 	<select id="freeList" resultType="com.teamproject.spring.teamgg.vo.FreeBoardVo">
-		SELECT * FROM ${@com.teamproject.spring.teamgg.vo.FreeBoardVo@TABLE_NAME_FREE} ORDER BY f_idx DESC LIMIT #{page},30
+		SELECT * FROM ${@com.teamproject.spring.teamgg.vo.FreeBoardVo@TABLE_NAME_FREE}
+		ORDER BY f_idx DESC LIMIT #{page},30
 	</select>
 	
 	<select id="freeRead" resultType="com.teamproject.spring.teamgg.vo.FreeBoardVo">
@@ -13,7 +14,6 @@
 	
 	<delete id="freeDel">
 		delete from free_board where f_idx = #{f_idx}
-		and f_writer = #{f_writer}
 	</delete>
 		
 	<insert id="freeWrite" parameterType="com.teamproject.spring.teamgg.vo.FreeBoardVo">
@@ -30,5 +30,11 @@
 	
 	<select id="getTotalCount" resultType="int">
 		SELECT count(*) from ${@com.teamproject.spring.teamgg.vo.FreeBoardVo@TABLE_NAME_FREE}
+	</select>
+	
+	<select id="getAuthorId" parameterType="long" resultType="string">
+    	select f_writer
+    	from free_board
+    	where f_idx = #{f_idx}
 	</select>
 </mapper>
