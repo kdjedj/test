@@ -6,8 +6,8 @@
 }
 
 body {
-	background-color: #303238;
-	color: #fff;
+	background-color: rgb(106, 96, 169);
+	color: rgb(222, 220, 238);
 	font-family: 'Muli', sans-serif;
 	display: flex;
 	flex-direction: column;
@@ -20,8 +20,9 @@ body {
 
 .container {
 	background-color: rgba(0, 0, 0, 0.4);
-	padding: 20px 40px;
-	border-radius: 5px;
+	padding: 20px 30px;
+	border-radius: 60px;
+	text-align: center;
 }
 
 .container h1 {
@@ -38,12 +39,13 @@ body {
 	cursor: pointer;
 	display: inline-block;
 	width: 100%;
-	background: lightblue;
+	background: rgb(222, 220, 238);
 	padding: 15px;
 	font-family: inherit;
 	font-size: 16px;
 	border: 0;
-	border-radius: 5px;
+	border-radius: 40px;
+	margin-bottom: 10px;
 }
 
 .btn:focus {
@@ -98,4 +100,9 @@ body {
 	{
 	color: lightblue;
 	transform: translateY(-30px);
+}
+
+#logoimg {
+	height: 100px;
+	width: 240px;
 }
