@@ -131,10 +131,11 @@
 		<div class = "logo_box">
 			<a><img id="logo" alt="로고" src="${cp}/resources/img/Logo.png"></a>
 		</div> 
+			<form action="${cp}/board/searcing_player" method="post">
 		<div class="search_box" alt="전적검색">
-			<form action="/board/searcing_user" method="post">
-			<input class="search_blank" name="search" placeholder="소환사 검색">
-			
-			</form>
+			<input class="search_blank" name="userName" placeholder="소환사 검색">
+			<button type=submit>.GG</button>
 		</div>
+			</form>
+		<a href="${cp}/board/searching_player?userName=hideonbush"><div class="function_button">페이커</div></a>
 	</div>

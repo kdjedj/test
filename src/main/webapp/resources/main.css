@@ -3,7 +3,7 @@ body {
 	background-color:#ffd9fa; 
 	/* 255 217 250 */
 	font-family: Roboto_2d0052, Roboto_Fallback_2d0052, sans-serif, system-ui, sans-serif;
-	color:white;
+	/* color:white; */
 	
 }
 #mainHeader{
@@ -98,6 +98,9 @@ nav li span {
 	justify-content:center;
 }
 
+
+
+
 /*===========================================================================  */
 /* user_board part */
 /*===========================================================================  */
@@ -108,10 +111,15 @@ nav li span {
 }
 
 .container{
-	width: 100%; max-width: 1200px;
-	display:block;
-	/* background-color:#c9fbff; */
-	margin-left:auto; margin-right:auto;
+	 width: 100%;
+    /* max-width: 1200px; */
+    display: block;
+    background-color: #fff;
+    /* margin-left: auto; */
+    /* border-radius: 10px; */
+    border: none;
+    /* display: flex;*/
+padding: 32px 16px;
 }
 
 .top_part{
@@ -122,15 +130,38 @@ nav li span {
 	background-color:#bfc6ff;
 }
 .search_box{
-	position:relative;
-	left:600px;
-	top:90px;
+position: relative;
+    left: 600px;
+    top: 90px;
+    display: flex;
+    border: 2px solid black;
+    border-radius: 11px;
+    background-color: #fff;
+    padding: 5px 5px 0px;
 }
 .search_blank{
-	width:170px; height:35px;
-	border: 2.0px solid black;
-	border-radius:10px;
+	    width: 170px;
+    height: 35px;
+    /* border: 2px solid black; */
+    /* border-radius: 10px; */
+    border: none;
 }
+
+div.search_box button{
+	    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 75px;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #ffffff;
+    margin-left: 20px;
+    color: #cb78fd;
+    font-size: 1.5em;
+    font-family: 'Black Han Sans', sans-serif;
+    border: none
+}
+
 /* div.search_box, div.search_box */
 
 .post_content{
@@ -428,10 +459,198 @@ div.read_info div.article-list-item-meta__item{
 }
 
 
+/*===========================================================================  */
+/* seaching user */
+/*===========================================================================  */
+
+.title_content{
+	    margin-left: auto;
+    margin-right: auto;
+    max-width: 1200px;
+    /* background-color: #fff; */
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+    
+}
+
+.user_content{
+	    margin-right: auto;
+    /* margin-left: auto; */
+    float: left;
+    display: flex;
+}
+
+}
+
+.info{
+	.
+}
+
+.subBanner{
+	.
+}
+
+.user-logo-box{
+	/* width: 200px;
+	height: 200px;
+	background-color: #f2c7ff; */
+}
+
+.user-logo{
+	width: 200px;
+	height: 200px;
+}
+
+.info-item-name h2{
+	font-family:'Malgun Gothic';
+	font-size: 2em;
+	font-weight: 400;
+	
+	
+}
 
 
 
+/*========================  ALL CONTAINER  =========================  */
+
+.all_container{
+	
+	width: 100%; max-width: 1200px; min-width: 1200px;
+    display: block;
+    background-color: #ffdcdc;
+    border: none;
+    /* padding: 32px 16px; */
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+.info{
+	margin-left:20px;
+}
+
+.prev_rank{
+	margin-top:8px;
+	
+}
 
 
 
+.content-container{
+	display: inline-block;
+	width: 
+}
 
+.tier-and-prevplayer{
+	  /*   background-color: aqua; */
+    display: inline-block;
+    width: 302px;
+}
+
+.tier-box{
+	
+}
+
+.rank{
+	margin-bottom: 18px;
+    background-color: aqua;
+    border-radius: 100px;
+    padding: 20px 30px;
+}
+
+.rank-header{
+	
+}
+
+.rank-content{
+	
+}
+
+.tier-picture{
+	
+}
+
+.tier-info{
+	
+}
+
+.tier{
+	
+}
+
+.lp{
+	
+}
+
+.lose-win-ratio{
+	
+}
+
+.lose-win{
+	
+}
+
+.latio{
+	
+}
+
+
+
+.queue_content{
+	display: inline-block;
+    width: 740px;
+    margin-top: 8px;
+    margin-left: 8px;
+    font-size: 12px;
+    vertical-align: top;
+}
+
+.queue_type_select{
+	    display: flex;
+    position: relative;
+    padding: 4px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom: 1px solid;
+    background-color: #fff;
+}
+
+.queue_type_select>ul{
+	list-style: none;
+	display: flex;
+	justify-content: space-between;
+	height:28px;
+	margin: 0px;
+	/* background-color: gold; */
+}
+
+.queue_type_select_button{
+	display: block;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-weight: normal;
+    font-size: 14px;
+    text-decoration: none;
+    background: #FFF;
+    background-color: var(--gray0);
+    box-sizing: border-box;
+    height: 28px;
+    border: none;
+}
+
+.queue_type_select>ul>li{
+	margin-left: 4px;
+    vertical-align: top;
+}
+
+.info-addition{
+	display: flex;
+    text-align: left;
+    background-color: #fff;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    padding: 8px 12px;
+    box-sizing: border-box;
+}

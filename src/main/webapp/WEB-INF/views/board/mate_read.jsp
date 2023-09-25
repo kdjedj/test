@@ -15,7 +15,7 @@
 	<%@include file="../user_left_menu.jsp"%>
 	
 
-	<div class="read_box">
+ 	<div class="read_box">
 		<div class="read_top">
 			<div class="read_title"><h2>${read.m_title}</h2></div>
 			<div class="read_info">
@@ -36,7 +36,7 @@
 			</div>
 		</div>
 		
-	</div>
+	</div> 
 	
 </div>
 </div>
