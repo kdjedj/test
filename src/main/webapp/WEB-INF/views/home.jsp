@@ -103,19 +103,19 @@
 			<nav class="board-nav">
 				<ul class="boards">
 					<li class="board1">
-						<a href="${cp}/guest/getList?page=1">
-							<div data-key="HOME" class="css-7rk75k emmetr11">게시판1</div>
+						<a href="${cp}/free/freeList">
+							<div data-key="HOME" class="css-7rk75k emmetr11">자유게시판</div>
 							<!-- data-key는 자바스크립트 사용자정의 데이터용. -->
 						</a>
 					</li>
 					<li class="board2">
-						<a href="${cp}/guest/getList?page=1">
-							<div data-key="CHAMPION" class="css-q3uz41 emmetr11">게시판2</div>
+						<a href="${cp}/tip/tipList">
+							<div data-key="CHAMPION" class="css-q3uz41 emmetr11">정보게시판</div>
 						</a>
 					</li>
 					<li class="board3">
-						<a href="${cp}/guest/getList?page=1">
-							<div data-key="CHAMPION" class="css-q3uz41 emmetr11">게시판3</div>
+						<a href="${cp}/mate/mateList">
+							<div data-key="CHAMPION" class="css-q3uz41 emmetr11">유저찾기게시판</div>
 						</a>
 					</li>
 				</ul>
