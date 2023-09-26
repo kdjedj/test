@@ -1,6 +1,8 @@
 package com.teamproject.spring.teamgg.vo;
 
-import java.sql.Date;
+import java.util.Date;
+
+import com.teamproject.spring.teamgg.board.TimeFormatter;
 
 import lombok.Data;
 
@@ -12,5 +14,11 @@ public class FreeBoardVo {
 	private String f_title;
 	private String f_writer;
 	private String f_content;
-	private Date f_date;
+	private Long writeIdx;
+	
+	private String f_date;
+
+	public void setF_date(Date f_date) {
+		this.f_date = TimeFormatter.calculateTime(f_date);
+	}	
 }

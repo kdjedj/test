@@ -1,6 +1,8 @@
 package com.teamproject.spring.teamgg.vo;
 
-import java.sql.Date;
+import java.util.Date;
+
+import com.teamproject.spring.teamgg.board.TimeFormatter;
 
 import lombok.Data;
 
@@ -12,5 +14,11 @@ public class MateBoardVo {
 	private String m_title;
 	private String m_writer;
 	private String m_content;
-	private Date m_date;
+	private Long writeIdx;
+	
+	private String m_date;
+
+	public void setM_date(Date m_date) {
+		this.m_date = TimeFormatter.calculateTime(m_date);
+	}	
 }
