@@ -26,7 +26,6 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 @Controller
 public class GuestController {
-		
 	private GuestService service;
 	
 	@GetMapping("/getList")

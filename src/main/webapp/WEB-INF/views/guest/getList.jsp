@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>op.gg</title>
 </head>
 <body>
 <%
@@ -25,7 +25,7 @@
 		<%=bno %>	
 		<a href="read?bno=<%=bno%>">
 		<%=btext %>
-		<hr>
+		<br>
 		</a>	
 		<!-- <p>${list.get(i).getBno()}</p>
 		<p>${list.get(i).getBtext()}</p> -->

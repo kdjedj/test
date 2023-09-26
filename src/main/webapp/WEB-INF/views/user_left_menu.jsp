@@ -4,21 +4,14 @@
 <!-- 1. 0을 위한 준비. jstl core 태그 선언     -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 2. 0을 위한 준비. el 태그로 가져올 수 있는데 이걸 더 짧게 찍기위해 변수 대입함.     -->    
-<c:set var="cp" value="${pageContext.request.contextPath}" />    
+<c:set var="cp" value="${pageContext.request.contextPath}" />  
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<!-- 왼쪽 영역 -->
+          <div id="user_left_menu">           
+                    <div id="login_box">
+                    <a herf="#"><div class="login_buttom">로그인</div></a>
+                    </div>      
+            </div> 
 
-<form action="${cp}/member/regProc">
-	<input name="id" placeholder="가입하실 아이디 입력">
-	<input name="pw" placeholder="가입하실 아이디의 암호 입력">
-	<input type="submit">
-</form>
 
-</body>
-</html>
+
