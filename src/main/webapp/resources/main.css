@@ -654,3 +654,144 @@ div.read_info div.article-list-item-meta__item{
     padding: 8px 12px;
     box-sizing: border-box;
 }
+
+.stat{
+	
+}
+
+.win-lose{
+	
+}
+
+.kda{
+	
+}
+
+.chart{
+	
+}
+
+.champions{
+	
+}
+
+.title-cham{
+	
+}
+
+
+
+.queue_content{
+	margin-top:8px;
+}
+
+.win_box{
+	display: flex;
+    height: 96px;
+    border-radius: 4px;
+    border-left-width: 6px;
+    border-left-style: solid;
+    border-color: #0084ff;
+    background-color: #a1d1ff;
+}
+
+.content_box{
+	 display: flex;
+    flex-direction: column;
+    height: 100%;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+}
+
+.gameBox{
+	display: flex;
+    height: 96px;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 0px 8px 0px 12px;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+}
+
+.game{
+	    width: 108px;
+    color: var(--gray500);
+    line-height: 16px;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+}
+
+.gameType{
+	font-weight: bold;
+    color: #0084ff;
+}
+
+.bar{
+	    width: 48px;
+    height: 1px;
+    margin: 8px 0px 4px;
+    background-color: #346b9e;
+}
+
+.result{
+	font-weight: bold;
+}
+
+.flexBox{
+	display: flex;
+}
+
+
+.champion{
+	display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.icon img{
+	width: 48px; height: 48px
+}
+
+.kda{
+	
+}
+
+.k-d-a{
+	
+}
+
+.ratio{
+	
+}
+
+.items{
+	display: flex;
+}
+
+.items ul{
+	display: flex;
+}
+
+.item_box{
+	position: relative;
+}
+
+.item_box img{
+	width:22px; height: 22px;
+}
+
+.none_item{
+		width:22px; height: 22px;
+   	 background-color: #a3b5d1;
+
+}
+
+.participants{
+	display: flex;
+}
+
+

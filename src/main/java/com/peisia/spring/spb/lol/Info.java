@@ -10,5 +10,6 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Info {
 	public String gameType;
+	public String gameMode;
 	public ArrayList<Participants> participants;
 }
