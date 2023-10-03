@@ -103,7 +103,7 @@
 				<div class="k-d-a">
 						<span>${liv.wins }</span>
 						&nbsp;/&nbsp;
-						<span class="d">${liv.wins }</span>
+						<span class="d">${liv.losses }</span>
 						&nbsp;/&nbsp;
 						<span>승률</span>
 						</div>
@@ -136,8 +136,8 @@
 		</div>
 		<div class="queue_content">
 			 <c:forEach var="pi" items="${L_Api }" begin="0" step="1" end="1">
-				<%--<c:choose></c:choose> 잊지말고 otherwise문 뒤에 붙이기
-				<c:when test="${player_info.win==true }"> --%>
+				<c:choose>
+				<c:when test="${pi.mainUser.win==true }">
 				<!-- <li> -->
 					<div class="win_box">
 						<div class="content_box">
@@ -146,6 +146,204 @@
 									<div class="gameType">${pi.gameMode }</div>
 									<div class="bar"></div>
 									<div class="result">승리</div>
+								</div>
+								<div class="info">
+									<div class="flexBox">
+										<div class="champion">
+											<div class="icon">
+												<a href="#" >
+												<img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/champion/${pi.mainUser.championName }.png" alt="챔피언그림"><span></span>
+												</a>
+											</div>
+											<!-- <div class="spells"></div>
+											<div class="runes"></div> -->
+										</div>
+										<div class="kda">
+											<div class="k-d-a">
+											<span>${pi.mainUser.kills }</span>
+											&nbsp; / &nbsp;
+											<span class="d">${pi.mainUser.deaths }</span>
+											&nbsp; / &nbsp;
+											<span>${pi.mainUser.assists }</span>
+											</div>
+											<div class="ratio"></div>
+										</div>
+										<!-- 나중에 킬관여 등 정보 관리 -->
+										
+									</div>
+									
+									<div class="flexBox">
+										<div class="items">
+											<ul>
+												<li>
+												<c:choose>
+													<c:when test="${pi.mainUser.item0 == null || pi.mainUser.item0 == 0} ">
+													<div class="item_box">
+														<div class="none_item"></div>
+														${pi.mainUser.item0 }
+														</div>	
+													</c:when>
+													<c:otherwise>
+													<div class="item_box">
+															<img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/${pi.mainUser.item0 }.png" alt="#">
+														</div>
+													
+													</c:otherwise>
+												</c:choose>
+												</li>													
+																								
+												<li>
+												<c:choose>
+													<c:when test="${pi.mainUser.item1 == null || pi.mainUser.item1 == 0} ">
+													<div class="item_box">
+														<div class="none_item"></div>
+														${pi.mainUser.item1 }
+														</div>	
+													</c:when>
+													<c:otherwise>
+													<div class="item_box">
+															<img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/${pi.mainUser.item1 }.png" alt="#">
+														</div>
+													
+													</c:otherwise>
+												</c:choose>
+												</li>													
+																								
+												<li>
+												<c:choose>
+													<c:when test="${pi.mainUser.item2 == null || pi.mainUser.item2 == 0} ">
+													<div class="item_box">
+														<div class="none_item"></div>
+														${pi.mainUser.item2 }
+														</div>	
+													</c:when>
+													<c:otherwise>
+													<div class="item_box">
+															<img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/${pi.mainUser.item2 }.png" alt="#">
+														</div>
+													
+													</c:otherwise>
+												</c:choose>
+												</li>													
+																								
+												<li>
+												<c:choose>
+													<c:when test="${pi.mainUser.item3 == null || pi.mainUser.item3 == 0 || pi.mainUser.item3 =='#'} ">
+													<div class="item_box">
+														<div class="none_item"></div>
+														${pi.mainUser.item3 }
+														
+														</div>	
+													</c:when>
+													<c:otherwise>
+													<div class="item_box">
+															<img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/${pi.mainUser.item3 }.png" alt="#">
+														</div>
+													
+													</c:otherwise>
+												</c:choose>
+												</li>													
+																								
+												<li>
+												<c:choose>
+													<c:when test="${pi.mainUser.item4 == null || pi.mainUser.item4 == 0} ">
+													<div class="item_box">
+														<div class="none_item"></div>
+														${pi.mainUser.item4 }
+														</div>	
+													</c:when>
+													<c:otherwise>
+													<div class="item_box">
+															<img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/${pi.mainUser.item4 }.png" alt="#">
+														</div>
+													
+													</c:otherwise>
+												</c:choose>
+												</li>													
+																								
+												<li>
+												<c:choose>
+													<c:when test="${pi.mainUser.item5 == null || pi.mainUser.item5 == 0} ">
+													<div class="item_box">
+														<div class="none_item"></div>
+														${pi.mainUser.item5 }
+														</div>	
+													</c:when>
+													<c:otherwise>
+													<div class="item_box">
+															<img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/${pi.mainUser.item5 }.png" alt="#">
+														</div>
+													
+													</c:otherwise>
+												</c:choose>
+												</li>													
+																								
+											</ul>
+											<div class="ward">
+												<c:choose>
+													<c:when test="${pi.mainUser.item6 == null || pi.mainUser.item6 == 0} ">
+													<div class="item_box">
+														<div class="none_item"></div>
+														${pi.mainUser.item6 }
+														</div>	
+													</c:when>
+													<c:otherwise>
+													<div class="item_box">
+															<img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/${pi.mainUser.item6 }.png" alt="#">
+														</div>
+													
+													</c:otherwise>
+												</c:choose>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="participants">
+									<ul>
+										  <c:forEach var="player" items="${pi.participants }" begin="0" step="1" end="4">
+											<li class="player_list">
+												<div class="icon">
+												<a href="#">
+												<img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/champion/${player.championName }.png"><span></span>
+												</a>
+												</div>
+												<div class="name"><a href="${cp}/board/searching_player?userName=${player.summonerName }">${player.summonerName }</a></div>
+											</li>
+										</c:forEach> 
+									</ul>
+									<ul>
+										  <c:forEach var="player" items="${pi.participants }" begin="5" step="1" end="9">
+											<li class="player_list">
+												<div class="icon">
+												<a href="#">
+												<img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/champion/${player.championName }.png"><span></span>
+												</a>
+												</div>
+												<div class="name"><a href="${cp}/board/searching_player?userName=${player.summonerName }">${player.summonerName }</a></div>
+											</li>
+										</c:forEach> 
+									</ul>
+									
+								
+								</div>
+							</div>
+						</div>
+						<!-- 나중에 버튼 활성화 -->
+					</div>
+			<!--	</li>  -->
+				
+				</c:when>
+				
+				
+
+				<c:otherwise>
+				<div class="lose_box">
+						<div class="content_box">
+							<div class="gameBox">
+								<div class="game">
+									<div class="gameType">${pi.gameMode }</div>
+									<div class="bar"></div>
+									<div class="result">패배</div>
 								</div>
 								<div class="info">
 									<div class="flexBox">
@@ -177,116 +375,121 @@
 											<ul>
 												<li>
 												<c:choose>
-													<c:when test="${pi.mainUser.item0 != '' || pi.mainUser.item0 !=null} ">
-														<div class="item_box">
-															<img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/${pi.mainUser.item0 }.png" alt="#">
-														
-														</div>
-													</c:when>
-													<c:otherwise>
-													<div class="item_box">
-														<div class="none_item">no</div>
-														</div>
-													</c:otherwise>
-												</c:choose>
-												</li>												
-												<li>
-												<c:choose>
-													<c:when test="${pi.mainUser.item0 != ''} ">
-														<div class="item_box">
-															<img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/${pi.mainUser.item0 }.png" alt="#">
-														</div>
-													</c:when>
-													<c:otherwise>
+													<c:when test="${pi.mainUser.item0 == null || pi.mainUser.item0 == 0} ">
 													<div class="item_box">
 														<div class="none_item"></div>
+														${pi.mainUser.item0 }
+														</div>	
+													</c:when>
+													<c:otherwise>
+													<div class="item_box">
+															<img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/${pi.mainUser.item0 }.png" alt="#">
 														</div>
+													
 													</c:otherwise>
 												</c:choose>
-												</li>
+												</li>													
 																								
 												<li>
-														<div class="item_box">
-															<img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/${pi.mainUser.item1 }.png" alt="#">
+												<c:choose>
+													<c:when test="${pi.mainUser.item1 == null || pi.mainUser.item1 == 0} ">
+													<div class="item_box">
+														<div class="none_item"></div>
 														${pi.mainUser.item1 }
-														</div>
-														<c:if test="${pi.mainUser.item1 == null}">
-														
+														</div>	
+													</c:when>
+													<c:otherwise>
 													<div class="item_box">
-														<div class="none_item"></div>
+															<img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/${pi.mainUser.item1 }.png" alt="#">
 														</div>
-														</c:if>
-												</li>
+													
+													</c:otherwise>
+												</c:choose>
+												</li>													
 																								
 												<li>
 												<c:choose>
-													<c:when test="${pi.mainUser.item2 == ''} ">
-														<div class="item_box">
+													<c:when test="${pi.mainUser.item2 == null || pi.mainUser.item2 == 0} ">
+													<div class="item_box">
+														<div class="none_item"></div>
+														${pi.mainUser.item2 }
+														</div>	
+													</c:when>
+													<c:otherwise>
+													<div class="item_box">
 															<img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/${pi.mainUser.item2 }.png" alt="#">
 														</div>
+													
+													</c:otherwise>
+												</c:choose>
+												</li>													
+																								
+												<li>
+												<c:choose>
+													<c:when test="${pi.mainUser.item3 == null || pi.mainUser.item3 == 0 || pi.mainUser.item3 =='#'} ">
+													<div class="item_box">
+														<div class="none_item"></div>
+														${pi.mainUser.item3 }
+														
+														</div>	
 													</c:when>
 													<c:otherwise>
 													<div class="item_box">
-														<div class="none_item"></div>
-														</div>
-													</c:otherwise>
-												</c:choose>
-												</li>												
-												<li>
-												<c:choose>
-													<c:when test="${pi.mainUser.item3 != null} ">
-														<div class="item_box">
 															<img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/${pi.mainUser.item3 }.png" alt="#">
 														</div>
+													
+													</c:otherwise>
+												</c:choose>
+												</li>													
+																								
+												<li>
+												<c:choose>
+													<c:when test="${pi.mainUser.item4 == null || pi.mainUser.item4 == 0} ">
+													<div class="item_box">
+														<div class="none_item"></div>
+														${pi.mainUser.item4 }
+														</div>	
 													</c:when>
 													<c:otherwise>
 													<div class="item_box">
-														<div class="none_item"></div>
-														</div>
-													</c:otherwise>
-												</c:choose>
-												</li>												
-												<li>
-												<c:choose>
-													<c:when test="${pi.mainUser.item4 != null} ">
-														<div class="item_box">
 															<img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/${pi.mainUser.item4 }.png" alt="#">
 														</div>
-													</c:when>
-													<c:otherwise>
-													<div class="item_box">
-														<div class="none_item"></div>
-														</div>
+													
 													</c:otherwise>
 												</c:choose>
-												</li>												
+												</li>													
+																								
 												<li>
 												<c:choose>
-													<c:when test="${pi.mainUser.item5 != null} ">
-														<div class="item_box">
-															<img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/${pi.mainUser.item5 }.png" alt="#">
-														</div>
+													<c:when test="${pi.mainUser.item5 == null || pi.mainUser.item5 == 0} ">
+													<div class="item_box">
+														<div class="none_item"></div>
+														${pi.mainUser.item5 }
+														</div>	
 													</c:when>
 													<c:otherwise>
 													<div class="item_box">
-														<div class="none_item"></div>
+															<img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/${pi.mainUser.item5 }.png" alt="#">
 														</div>
+													
 													</c:otherwise>
 												</c:choose>
-												</li>												
+												</li>													
 																								
 											</ul>
 											<div class="ward">
 												<c:choose>
-													<c:when test="${pi.mainUser.item6 != null} ">
-														<div class="item_box">
-															<img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/${pi.mainUser.item6 }.png" alt="#">
-														</div>
+													<c:when test="${pi.mainUser.item6 == null || pi.mainUser.item6 == 0} ">
+													<div class="item_box">
+														<div class="none_item"></div>
+														${pi.mainUser.item6 }
+														</div>	
 													</c:when>
 													<c:otherwise>
 													<div class="item_box">
-														<div class="none_item"></div>
+															<img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/${pi.mainUser.item6 }.png" alt="#">
 														</div>
+													
 													</c:otherwise>
 												</c:choose>
 											</div>
@@ -296,16 +499,24 @@
 								<div class="participants">
 									<ul>
 										  <c:forEach var="player" items="${pi.participants }" begin="0" step="1" end="4">
-											<li>
-												<div class="icon"></div>
+											<li class="player_list">
+												<div class="icon">
+												<a href="#">
+												<img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/champion/${player.championName }.png"><span></span>
+												</a>
+												</div>
 												<div class="name"><a href="${cp}/board/searching_player?userName=${player.summonerName }">${player.summonerName }</a></div>
 											</li>
 										</c:forEach> 
 									</ul>
 									<ul>
 										  <c:forEach var="player" items="${pi.participants }" begin="5" step="1" end="9">
-											<li>
-												<div class="icon"></div>
+											<li class="player_list">
+												<div class="icon">
+												<a href="#">
+												<img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/champion/${player.championName }.png"><span></span>
+												</a>
+												</div>
 												<div class="name"><a href="${cp}/board/searching_player?userName=${player.summonerName }">${player.summonerName }</a></div>
 											</li>
 										</c:forEach> 
@@ -319,11 +530,8 @@
 					</div>
 			<!--	</li>  -->
 				
-				<%-- </c:when>
-				<c:otherwise>
-				
 				</c:otherwise>
-				 --%>
+			 </c:choose>
 			</c:forEach> 
 		</div>
 		

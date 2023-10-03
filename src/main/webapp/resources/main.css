@@ -695,6 +695,18 @@ div.read_info div.article-list-item-meta__item{
     background-color: #a1d1ff;
 }
 
+.lose_box{
+	display: flex;
+    height: 96px;
+    border-radius: 4px;
+    border-left-width: 6px;
+    border-left-style: solid;
+    border-color: #ff5454;
+    background-color: #ffc8c8;
+}
+
+
+
 .content_box{
 	 display: flex;
     flex-direction: column;
@@ -725,9 +737,14 @@ div.read_info div.article-list-item-meta__item{
     justify-content: center;
 }
 
-.gameType{
+.win_box div.gameType{
 	font-weight: bold;
     color: #0084ff;
+}
+
+.lose_box div.gameType{
+	font-weight: bold;
+    color: #ff0000;
 }
 
 .bar{
@@ -745,6 +762,13 @@ div.read_info div.article-list-item-meta__item{
 	display: flex;
 }
 
+.flexBox:nth-of-type(2){
+	display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-top: 8px;
+
+}
 
 .champion{
 	display: flex;
@@ -752,16 +776,55 @@ div.read_info div.article-list-item-meta__item{
     align-items: center;
 }
 
+.icon{
+	    display: inline-block;
+    vertical-align: middle;
+    margin-right: 4px;
+}
+
+.champion div.icon a{
+	width: 48px; height: 48px;
+}
+
 .icon img{
-	width: 48px; height: 48px
+	width: 48px; height: 48px;
+	display: block;
+	border-radius: 50%;
+}
+
+.icon span{
+	width: 5px; height: 5px;
+	color: #fff;
+ background-color: #2e2e2e;
+ 
+	
 }
 
 .kda{
-	
+	display: flex;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+    width: 107px;
+    padding-right: 12px;
+    margin-left: 12px;
+
 }
 
 .k-d-a{
-	
+	line-height: 22px;
+    font-size: 15px;
+    color: var(--gray400);
+    font-family: Roboto, sans-serif;
+}
+
+.k-d-a .d{
+	color:red;
+}
+
+.k-d-a span{
+	   font-weight: bold;
+    color: black;
 }
 
 .ratio{
@@ -782,16 +845,52 @@ div.read_info div.article-list-item-meta__item{
 
 .item_box img{
 	width:22px; height: 22px;
+	border-radius: 10px;
 }
 
 .none_item{
 		width:22px; height: 22px;
    	 background-color: #a3b5d1;
-
+	border-radius: 10px;
 }
 
 .participants{
 	display: flex;
+}
+
+.participants ul:first-child{
+	margin-right: 8px;
+}
+
+.participants>ul>li>div.icon img{
+	width:16px; height:16px;
+	border-radius:4px;
+}
+
+.player_list{
+	    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    width: 88px;
+    height: 18px;
+    text-align: left;
+    white-space: nowrap;
+
+}
+
+.name{
+	display: inline-block;
+    max-width: 60px;
+    vertical-align: middle;
+}
+
+.name a{
+	font-size: 12px;
+    color: inherit;
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 

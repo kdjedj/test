@@ -345,6 +345,8 @@ private GuestService service;
 			}
 			Lol_api l = new Lol_api(player_info, gameMode, mainUser);
 			xx.add(l);
+			
+//			System.out.println("4번째 아이템 고유 번호 "+ mainUser.item3);
 //			String playeritem= player_info.get(2).item1;//성공적으로 받아옴
 			
 	//		log.info("==== json ==== 플레이어2 아이템 고윳값 번호 : "+playeritem);
