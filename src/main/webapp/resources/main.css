@@ -685,6 +685,13 @@ div.read_info div.article-list-item-meta__item{
 	margin-top:8px;
 }
 
+.queue_content>li{
+ list-style: none;
+	position: relative;
+    margin-bottom: 8px;
+
+}
+
 .win_box{
 	display: flex;
     height: 96px;
@@ -784,21 +791,34 @@ div.read_info div.article-list-item-meta__item{
 
 .champion div.icon a{
 	width: 48px; height: 48px;
+	position: relative;
+    display: block;
 }
 
 .icon img{
-	width: 48px; height: 48px;
+	width: 48px; height: 48px; 
 	display: block;
 	border-radius: 50%;
 }
 
-.icon span{
-	width: 5px; height: 5px;
-	color: #fff;
- background-color: #2e2e2e;
- 
-	
+span.chamlv{
+	position: absolute;
+    right: 0px;
+    bottom: 0px;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    font-size: 11px;
+    border-radius: 50%;
+    color: rgb(255, 255, 255);
+    background: rgb(32, 45, 55);
+    font-family: Roboto, sans-serif;
 }
+
 
 .kda{
 	display: flex;
@@ -839,19 +859,55 @@ div.read_info div.article-list-item-meta__item{
 	display: flex;
 }
 
+.win_box .flexBox:nth-of-type(2) .items li{
+	width: 22px;
+    height: 22px;
+    margin-left: 2px;
+    background-color: #66b2fc;
+    border-radius: 4px;
+}
+
+.win_box .flexBox:nth-of-type(2) .items li:nth-of-type(1){
+	width: 22px;
+    height: 22px;
+  /*   margin-left: 2px; */
+    background-color: #66b2fc;
+    border-radius: 4px;
+}
+
+.lose_box .flexBox:nth-of-type(2) .items li{
+	width: 22px;
+    height: 22px;
+    margin-left: 2px;
+    background-color: #ff7a7a;
+    border-radius: 4px;
+}
+
+.lose_box .flexBox:nth-of-type(2) .items li:nth-of-type(1){
+	width: 22px;
+    height: 22px;
+  /*   margin-left: 2px; */
+    background-color: #ff7a7a;
+    border-radius: 4px;
+}
+
 .item_box{
 	position: relative;
 }
 
 .item_box img{
 	width:22px; height: 22px;
-	border-radius: 10px;
+	border-radius: 7px;
 }
 
 .none_item{
 		width:22px; height: 22px;
    	 background-color: #a3b5d1;
 	border-radius: 10px;
+}
+
+.ward{
+	margin-left: 2px;
 }
 
 .participants{

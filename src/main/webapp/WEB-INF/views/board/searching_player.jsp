@@ -101,9 +101,9 @@
 			<div class="stat">
 				<div class="win-lose">
 				<div class="k-d-a">
-						<span>${liv.wins }</span>
+						<span>${liv.wins } 승</span>
 						&nbsp;/&nbsp;
-						<span class="d">${liv.losses }</span>
+						<span class="d">${liv.losses } 패</span>
 						&nbsp;/&nbsp;
 						<span>승률</span>
 						</div>
@@ -138,7 +138,7 @@
 			 <c:forEach var="pi" items="${L_Api }" begin="0" step="1" end="1">
 				<c:choose>
 				<c:when test="${pi.mainUser.win==true }">
-				<!-- <li> -->
+				 <li> 
 					<div class="win_box">
 						<div class="content_box">
 							<div class="gameBox">
@@ -152,7 +152,7 @@
 										<div class="champion">
 											<div class="icon">
 												<a href="#" >
-												<img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/champion/${pi.mainUser.championName }.png" alt="챔피언그림"><span></span>
+												<img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/champion/${pi.mainUser.championName }.png" alt="챔피언그림"><span class="chamlv">${pi.mainUser.champLevel }</span>
 												</a>
 											</div>
 											<!-- <div class="spells"></div>
@@ -161,9 +161,9 @@
 										<div class="kda">
 											<div class="k-d-a">
 											<span>${pi.mainUser.kills }</span>
-											&nbsp; / &nbsp;
+											 / 
 											<span class="d">${pi.mainUser.deaths }</span>
-											&nbsp; / &nbsp;
+											 / 
 											<span>${pi.mainUser.assists }</span>
 											</div>
 											<div class="ratio"></div>
@@ -330,13 +330,14 @@
 						</div>
 						<!-- 나중에 버튼 활성화 -->
 					</div>
-			<!--	</li>  -->
+				</li>  
 				
 				</c:when>
 				
 				
 
 				<c:otherwise>
+				<li>
 				<div class="lose_box">
 						<div class="content_box">
 							<div class="gameBox">
@@ -350,7 +351,7 @@
 										<div class="champion">
 											<div class="icon">
 												<a href="#">
-												<img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/champion/${pi.mainUser.championName }.png" alt="챔피언그림"><span></span>
+												<img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/champion/${pi.mainUser.championName }.png" alt="챔피언그림"><span class="chamlv">${pi.mainUser.champLevel }</span>
 												</a>
 											</div>
 											<!-- <div class="spells"></div>
@@ -359,9 +360,9 @@
 										<div class="kda">
 											<div class="k-d-a">
 											<span>${pi.mainUser.kills }</span>
-											&nbsp; / &nbsp;
+											 / 
 											<span class="d">${pi.mainUser.deaths }</span>
-											&nbsp; / &nbsp;
+											 / 
 											<span>${pi.mainUser.assists }</span>
 											</div>
 											<div class="ratio"></div>
@@ -528,7 +529,7 @@
 						</div>
 						<!-- 나중에 버튼 활성화 -->
 					</div>
-			<!--	</li>  -->
+				</li> 
 				
 				</c:otherwise>
 			 </c:choose>
