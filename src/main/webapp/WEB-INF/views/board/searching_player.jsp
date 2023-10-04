@@ -77,7 +77,7 @@
 		</div>
 	
 	</div>
-	<div class="queue_content">
+	<div class="queue_content_box">
 		<div class="queue_type_select">
 			<ul>
 				<li>
@@ -135,7 +135,7 @@
 			</div>
 		</div>
 		<div class="queue_content">
-			 <c:forEach var="pi" items="${L_Api }" begin="0" step="1" end="1">
+			 <c:forEach var="pi" items="${L_Api }" begin="0" step="1" end="19">
 				<c:choose>
 				<c:when test="${pi.mainUser.win==true }">
 				 <li> 

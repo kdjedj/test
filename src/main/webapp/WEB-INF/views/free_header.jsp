@@ -13,7 +13,7 @@
 <meta charset="UTF-8">
 <!-- my css -->
 <link rel="stylesheet" type="text/css" href="${cp}/resources/reset.css?ver=<%=System.currentTimeMillis()%>">
-<link rel="stylesheet" type="text/css" href="${cp}/resources/main.css?ver=<%=System.currentTimeMillis()%>">
+<link rel="stylesheet" type="text/css" href="${cp}/resources/searchingPage.css?ver=<%=System.currentTimeMillis()%>">
 
 <link rel="stylesheet" type="text/css" href="${cp}/resources/freeList.css?ver=<%=System.currentTimeMillis()%>">
 <script src="${cp}/resources/free/a.css?ver=${ts}"></script>

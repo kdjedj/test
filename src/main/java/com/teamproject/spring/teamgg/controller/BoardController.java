@@ -213,41 +213,89 @@ private GuestService service;
 	public void searching_player(@RequestParam("userName") String userName, HttpServletRequest request, Model model) {
 	//// 우리나라 공공 api ////			
 		//인코딩 인증키			
+		String SurmmonerName = userName.replaceAll(" ", "%20");
 		String API_KEY = "RGAPI-0092f94c-82f2-4df3-ad25-ac35254f878e";
 				
-		String API_URL = "https://kr.api.riotgames.com/lol/summoner/v4"
-				+ "/summoners/by-name/"
-				+ userName
-				+ "?api_key=" + API_KEY; 
-				
-//				* 주의 * https 아님 http 임. https 는 인증관련 복잡한 처리를 해야함.	
+//		String API_URL = "https://kr.api.riotgames.com/lol/summoner/v4"
+//				+ "/summoners/by-name/"
+//				+ SurmmonerName
+//				+ "?api_key=" + API_KEY; 
+//				
+////				* 주의 * https 아님 http 임. https 는 인증관련 복잡한 처리를 해야함.	
 		RestTemplate restTemplate = new RestTemplate();			
-					
-		//// **** 중요 **** uri			
-		URI uri = null; //java.net.URI 임포트 하셈			
-		try {			
-			uri = new URI(API_URL);		
-		} catch (URISyntaxException e) {			
-			e.printStackTrace();		
-		}	
+//					
+//		//// **** 중요 **** uri			
+//		URI uri = null; //java.net.URI 임포트 하셈			
+//		try {			
+//			uri = new URI(API_URL);		
+//		} catch (URISyntaxException e) {			
+//			e.printStackTrace();		
+//		}	
+//		
+////		String s = restTemplate.getForObject(uri, String.class); //
+////		log.info("====== 로그인 정보 잘 나오나?? "+s);
+//		
+//		BasisicLoginVo bc = restTemplate.getForObject(uri, BasisicLoginVo.class); // 자기 클래스로 바꾸시오..
+////		log.info("==== json ==== : 유저이름? : "+bc.name);
+//		String accountId = bc.accountId;
+//		String id = bc.id;
+//		String puuid = bc.puuid;
+//		System.out.println("1번 puuid값 : "+puuid);
+////		String ddara = String.format("==== json ==== : 해당 검색 유저의 이름은 %s 입니다. 계정 id값은 %s 입니다", bc.name, accountId);
+////		log.info(ddara);
+//	
 		
-//		String s = restTemplate.getForObject(uri, String.class); //
-//		log.info("====== 로그인 정보 잘 나오나?? "+s);
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		BufferedReader br = null;
 		
-		BasisicLoginVo bc = restTemplate.getForObject(uri, BasisicLoginVo.class); // 자기 클래스로 바꾸시오..
-//		log.info("==== json ==== : 유저이름? : "+bc.name);
-		String accountId = bc.accountId;
-		String id = bc.id;
-		String puuid = bc.puuid;
-		System.out.println("1번 puuid값 : "+puuid);
-//		String ddara = String.format("==== json ==== : 해당 검색 유저의 이름은 %s 입니다. 계정 id값은 %s 입니다", bc.name, accountId);
-//		log.info(ddara);
+		Summoner temp= null;
+		try{            
+			String urlstr = "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/"+
+					SurmmonerName+"?api_key="+API_KEY;
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+			urlconnection.setRequestMethod("GET");
+			br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(),"UTF-8")); // 여기에 문자열을 받아와라.
+			String result = "";
+			String line;
+			while((line = br.readLine()) != null) { // 그 받아온 문자열을 계속 br에서 줄단위로 받고 출력하겠다.
+				result = result + line;
+			}
+			JsonParser jsonParser = new JsonParser();
+			JsonObject k = (JsonObject) jsonParser.parse(result);
+			String name_a = k.get("name").getAsString();
+			log.info("==== json ==== : 해당 유저 이름은 무엇인가요? : "+name_a);
+			String puuid_a = k.get("puuid").getAsString();
+//			if(puuid_a.equals(puuid)) {
+//				System.out.println("두 값이 같음");
+//			} else {
+//				System.out.println("아예 두값이 틀림");
+//			}
+//			System.out.println("2번 puuid값 : " + puuid_a);
+			Double profileIconId = k.get("profileIconId").getAsDouble();
+			int profileIconId_int = (int)Math.ceil((double) profileIconId);
+//			log.info("==== json ==== : 해당 유저 아이콘 번호 무엇인가요? : "+profileIconId_int);
+
+			Double summonerLevel_a = k.get("summonerLevel").getAsDouble();
+			Double revisionDate_a = k.get("revisionDate").getAsDouble();
+			String id_a = k.get("id").getAsString();
+			String accountId_a = k.get("accountId").getAsString();
+
+			temp = new Summoner(profileIconId_int,name_a,puuid_a,summonerLevel_a,revisionDate_a,id_a,accountId_a);
+			
+//			String ddaratest = String.format("==== json ==== : 소환사의 프로필사진 코드는 %s이고, 이름은 %s, 공용id는 %s, 레벨은 %s,"
+//					+ " 리비젼데이트는 %s이며, 아이디는 %s, 계정 고유 아이디는 %s입니다 ", 
+//					profileIconId, bc.name, puuid_a, summonerLevel_a, revisionDate_a, id_a,accountId_a);
+//			log.info(ddaratest);
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		
 	
-	
-		
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		String INFO_API_URL = "https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/"
-				+ id
+				+ temp.getId()
 				+ "?api_key=" + API_KEY; 
 		
 //				* 주의 * https 아님 http 임. https 는 인증관련 복잡한 처리를 해야함.	
@@ -282,21 +330,22 @@ private GuestService service;
 		
 		Double winper_rate = (double)(wins/(wins+losses));
 		Double winper = Math.round(winper_rate * 10.0) / 10.0;
-//		log.info("========승률" + winper);
-		String ddaralol = String.format("==== json ==== : 본 통계는 %s를 기반으로 만들어졌습니다"
-				+ "해당 유저의 티어는 %s이며, 랭크는%s , %s번 이겼고, %s번 져서 리그포인트는 %s점 입니다", queueType, tier, rank
-				,wins, losses, leaguePoints);
+		log.info("========승률" + winper);
+//		String ddaralol = String.format("==== json ==== : 본 통계는 %s를 기반으로 만들어졌습니다"
+//				+ "해당 유저의 티어는 %s이며, 랭크는%s , %s번 이겼고, %s번 져서 리그포인트는 %s점 입니다", queueType, tier, rank
+//				,wins, losses, leaguePoints);
 //		log.info(ddaralol);
 		
 //		log.info("==== json ==== : 해당 유저 랭크는? : "+rank);
 		LoginInfoVo = new LoginInfoVo(queueType, tier, rank, leaguePoints, wins, losses, winper);
 
 		
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 		
 			
 			String urlstr1 = "https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/"
-					+ bc.puuid
+					+ temp.getPuuid()
 					+ "/ids?start=0&count=20&api_key="+API_KEY;
 			URI gr_uri = null; //java.net.URI 임포트 하셈			
 			try {			
@@ -337,8 +386,9 @@ private GuestService service;
 			
 			List<Participants> player_info = (List<Participants>)testbc.info.participants;// 게임데이타 받아오기
 			Participants mainUser = null;
+			
 			for(int i=0; i<player_info.size(); i++) {
-				if(player_info.get(i).puuid.equals(puuid)) {
+				if(player_info.get(i).puuid.equals(temp.getPuuid())) {
 					mainUser = player_info.get(i);
 //				System.out.println("이 값이 나오냐 안나오냐"+mainUser.deaths);
 				}
@@ -364,56 +414,12 @@ private GuestService service;
 //			
 //			log.info("==== json ==== 플레이어 id 값 : "+participants);
 //		}
-//		
+		
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		// match 정보 받아오기 
 		
-		BufferedReader br = null;
-		
-		Summoner temp= null;
-		try{            
-			String urlstr = "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/"+
-					userName+"?api_key="+API_KEY;
-			URL url = new URL(urlstr);
-			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
-			urlconnection.setRequestMethod("GET");
-			br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(),"UTF-8")); // 여기에 문자열을 받아와라.
-			String result = "";
-			String line;
-			while((line = br.readLine()) != null) { // 그 받아온 문자열을 계속 br에서 줄단위로 받고 출력하겠다.
-				result = result + line;
-			}
-			JsonParser jsonParser = new JsonParser();
-			JsonObject k = (JsonObject) jsonParser.parse(result);
-			String name_a = k.get("name").getAsString();
-//			log.info("==== json ==== : 해당 유저 이름은 무엇인가요? : "+name_a);
-			String puuid_a = k.get("puuid").getAsString();
-			if(puuid_a.equals(puuid)) {
-				System.out.println("두 값이 같음");
-			} else {
-				System.out.println("아예 두값이 틀림");
-			}
-//			System.out.println("2번 puuid값 : " + puuid_a);
-			Double profileIconId = k.get("profileIconId").getAsDouble();
-			int profileIconId_int = (int)Math.ceil((double) profileIconId);
-//			log.info("==== json ==== : 해당 유저 아이콘 번호 무엇인가요? : "+profileIconId_int);
-
-			Double summonerLevel_a = k.get("summonerLevel").getAsDouble();
-			Double revisionDate_a = k.get("revisionDate").getAsDouble();
-			String id_a = k.get("id").getAsString();
-			String accountId_a = k.get("accountId").getAsString();
-
-			temp = new Summoner(profileIconId_int,bc.name,puuid_a,summonerLevel_a,revisionDate_a,id_a,accountId_a);
-			
-//			String ddaratest = String.format("==== json ==== : 소환사의 프로필사진 코드는 %s이고, 이름은 %s, 공용id는 %s, 레벨은 %s,"
-//					+ " 리비젼데이트는 %s이며, 아이디는 %s, 계정 고유 아이디는 %s입니다 ", 
-//					profileIconId, bc.name, puuid_a, summonerLevel_a, revisionDate_a, id_a,accountId_a);
-//			log.info(ddaratest);
-		}catch(Exception e){
-			System.out.println(e.getMessage());
-		}
-		
-		
+	
 		
 		
 
