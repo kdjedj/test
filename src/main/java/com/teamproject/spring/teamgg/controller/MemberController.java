@@ -91,6 +91,7 @@ public class MemberController {
 		mv.addObject("href", "/teamgg");
 		return mv;
 	}
+
 	@RequestMapping("/Searching_User")
 	public void Searching_User() {
 	}
