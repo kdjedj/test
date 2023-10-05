@@ -14,7 +14,6 @@
 <link rel="stylesheet" type="text/css" href="${cp}/resources/reset.css">
 <link rel="stylesheet" type="text/css" href="${cp}/resources/main.css">
 
-
 </head>
 <body>
 <header class="header">
@@ -30,7 +29,7 @@
 				<ul>
 					<li>
 						<span>
-							<img alt="" src="*.jpg">
+							<img alt="" src="#">
 							<span>리그오브레전드</span>
 						</span>
 					</li>

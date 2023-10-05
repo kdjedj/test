@@ -270,7 +270,6 @@
 																			src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/${pi.mainUser.item5 }.png"
 																			alt="#">
 																	</div>
-														${pi.mainUser.item5 }
 													</c:otherwise>
 															</c:choose></li>
 
@@ -289,7 +288,6 @@
 																		src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/item/${pi.mainUser.item6 }.png"
 																		alt="#">
 																</div>
-													${pi.mainUser.item6}
 													</c:otherwise>
 														</c:choose>
 													</div>

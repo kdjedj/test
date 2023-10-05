@@ -1,15 +1,14 @@
 @charset "UTF-8";
 body {
-	background-color:#ffd9fa; 
+	background-color:#dedcee; 
 	/* 255 217 250 */
 	font-family: Roboto_2d0052, Roboto_Fallback_2d0052, sans-serif, system-ui, sans-serif;
-	/* color:white; */
+    color:white;
 	
 }
-#mainHeader{
-/* width:1000px; height:300px;  
-	margin-left:auto; margin-right:auto;*/
-	text-align: center;
+.header{
+   display:flex;
+   justify-content: center;
 }
 
 .header-rap {
@@ -25,14 +24,15 @@ body {
    display:flex;
 }
 
-#logo {
-	width: 300px; height: 100px;
+.main-tab .logo {
+    width:65px;
+    padding-left:10px;
+
 }
-.logo_box {
-	width: 200px; height: 60px;
-	position:relative;
-	left:-10px;
-	top:40px;
+.main-tab .logo img{
+    background-color:#dedcee;
+    width:65px;
+    height:40px;
 }
 .main-tab nav {
    width:950px;
@@ -108,18 +108,34 @@ nav li span {
 
 }
 
-.container{
-	 width: 100%;
-    /* max-width: 1200px; */
-    display: block;
-    background-color: #fff;
-    /* margin-left: auto; */
-    /* border-radius: 10px; */
-    border: none;
-    /* display: flex;*/
-padding: 32px 16px;
+.container {
+   width:100%;
+   display:flex;
+   align-items:center;
+   justify-content:center;
 }
 
+.middle {
+   display:flex;
+   flex-direction:column;
+   align-items:center;
+}
+.focusbox {
+   width:800px;
+   height:50px;
+   background-color:white;
+   border-radius:30px;
+   color:#dedcee;
+   display:flex;
+}
+.region {
+   padding-left:30px;
+   display:flex;
+   justify-content:center;
+   align-items:center;
+   
+   
+}
 .top_part{
 	width:100%; 
 	max-width: 1200px; min-width: 500px;
@@ -127,15 +143,13 @@ padding: 32px 16px;
 	display:flex;
 	background-color:#bfc6ff;
 }
-.search_box{
-position: relative;
-    left: 600px;
-    top: 90px;
-    display: flex;
-    border: 2px solid black;
-    border-radius: 11px;
-    background-color: #fff;
-    padding: 5px 5px 0px;
+.searchbox{
+   width:480px;
+   margin-left:30px;
+   border-left:1px solid #dedcee;
+   display:flex;
+   flex-direction:column;
+   justify-content:center;
 }
 .search_blank{
 	    width: 170px;
