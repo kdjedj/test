@@ -114,7 +114,7 @@ public class FreeBoardController {
 	    return "/free/freeWrite";
 	}
 	
-	@PostMapping("/freeWrite")        // todo: 리스트 말고 작성한 글 읽기 화면으로 리다이렉트하기
+	@PostMapping("/freeWrite")
 	public String write(FreeBoardVo fvo, HttpSession session) {
 		String f_writer = (String) session.getAttribute("m_id");
 	    if (f_writer == null) {
@@ -122,7 +122,13 @@ public class FreeBoardController {
 	    }
 	    fvo.setF_writer(f_writer);
 	    service.write(fvo);
-	    return "redirect:/free/freeList";
+//	    작성 완료된 글번호로 이동
+	    Long writeIdx = fvo.getWriteIdx();
+	    if (writeIdx != null) {
+	        return "redirect:/free/freeRead?f_idx=" + writeIdx;
+	    } else {
+	        return "redirect:/errorPage";
+	    }
 	}
 	
 	@GetMapping("/freeModify")
@@ -135,15 +141,20 @@ public class FreeBoardController {
 		return "/free/freeModify";
 	}
 	
-	@PostMapping("/freeModify")           // todo: 리스트 말고 작성한 글 읽기 화면으로 리다이렉트하기
+	@PostMapping("/freeModify")
 	public String modify(FreeBoardVo fvo, HttpSession session) {
 		String f_writer = (String) session.getAttribute("m_id");
 	    if (f_writer == null) {
 	        return "redirect:/member/login";
 	    }
 	    fvo.setF_writer(f_writer);
-	    log.info("======modify fvo: "+fvo+", f_writer: " + f_writer);
-	    service.modify(fvo);
-	    return "redirect:/free/freeList";
+	    service.write(fvo);
+//	    작성 완료된 글번호로 이동
+	    Long writeIdx = fvo.getWriteIdx();
+	    if (writeIdx != null) {
+	        return "redirect:/free/freeRead?f_idx=" + writeIdx;
+	    } else {
+	        return "redirect:/errorPage";
+	    }
 	}
 }

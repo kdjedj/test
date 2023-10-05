@@ -24,13 +24,20 @@
 		</div>
 		<div class="headTab">
 				<div class="headTop">
-				유저명
-				<a href="${cp}/member/login">로그인</a>
+				<div class="Proclogin">
+				<% if (session.getAttribute("m_id") != null) { %>
+       				 <a href="${cp}/member/logout" class="">로그아웃</a>
+			    <% } else { %>
+			    	 <a href="${cp}/member/login" class="">로그인</a>
+			    <% } %>
+			</div>
 				</div>
-				<div class="boards_head">
-						<a href="${cp}/free/freeList">자유게시판</a>
-						<a href="${cp}/tip/tipList">정보게시판</a>
-						<a href="${cp}/mate/mateList">유저찾기게시판</a>
+				<div class="headBot">
+					<div class="boards_head">
+							<a href="${cp}/free/freeList">자유게시판</a>
+							<a href="${cp}/tip/tipList">정보게시판</a>
+							<a href="${cp}/mate/mateList">유저찾기게시판</a>
+					</div>
 				</div>
 		</div>
 	</div>
@@ -61,7 +68,7 @@
 	for(int i=0;i<list.size();i++){
 		Long m_idx = list.get(i).getM_idx();
 		String m_title = list.get(i).getM_title();
-		Date m_date = list.get(i).getM_date();
+		String m_date = list.get(i).getM_date();
 		String m_writer = list.get(i).getM_writer();
 %>	
 			<ul class="post">

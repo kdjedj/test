@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.teamproject.spring.teamgg.board.ConfigBoard;
 import com.teamproject.spring.teamgg.service.MateBoardService;
+import com.teamproject.spring.teamgg.vo.FreeBoardVo;
 import com.teamproject.spring.teamgg.vo.MateBoardVo;
 import com.teamproject.spring.teamgg.vo.MemberVO;
 
@@ -114,7 +115,7 @@ public class MateBoardController {
 	    return "/mate/mateWrite";
 	}
 	
-	@PostMapping("/mateWrite")        // todo: 리스트 말고 작성한 글 읽기 화면으로 리다이렉트하기
+	@PostMapping("/mateWrite")
 	public String write(MateBoardVo mvo, HttpSession session) {
 		String m_writer = (String) session.getAttribute("m_id");
 	    if (m_writer == null) {
@@ -122,7 +123,13 @@ public class MateBoardController {
 	    }
 	    mvo.setM_writer(m_writer);
 	    service.write(mvo);
-	    return "redirect:/mate/mateList";
+//	    작성 완료된 글번호로 이동
+	    Long writeIdx = mvo.getWriteIdx();
+	    if (writeIdx != null) {
+	        return "redirect:/mate/mateRead?m_idx=" + writeIdx;
+	    } else {
+	        return "redirect:/errorPage";
+	    }
 	}
 	
 	@GetMapping("/mateModify")
@@ -135,15 +142,20 @@ public class MateBoardController {
 		return "/mate/mateModify";
 	}
 	
-	@PostMapping("/mateModify")           // todo: 리스트 말고 작성한 글 읽기 화면으로 리다이렉트하기
+	@PostMapping("/mateModify")
 	public String modify(MateBoardVo mvo, HttpSession session) {
 		String m_writer = (String) session.getAttribute("m_id");
 	    if (m_writer == null) {
 	        return "redirect:/member/login";
 	    }
 	    mvo.setM_writer(m_writer);
-	    log.info("======modify mvo: "+mvo+", m_writer: " + m_writer);
-	    service.modify(mvo);
-	    return "redirect:/mate/mateList";
+	    service.write(mvo);
+//	    작성 완료된 글번호로 이동
+	    Long writeIdx = mvo.getWriteIdx();
+	    if (writeIdx != null) {
+	        return "redirect:/mate/mateRead?m_idx=" + writeIdx;
+	    } else {
+	        return "redirect:/errorPage";
+	    }
 	}
 }
