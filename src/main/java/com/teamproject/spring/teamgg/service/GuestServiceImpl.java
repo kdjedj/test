@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import com.teamproject.spring.teamgg.board.ConfigBoard;
 import com.teamproject.spring.teamgg.mapper.GuestMapper;
 import com.teamproject.spring.teamgg.vo.GuestVO;
+import com.teamproject.spring.teamgg.vo.MbinfoVO;
+import com.teamproject.spring.teamgg.vo.MemberVO;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -21,19 +23,20 @@ public class GuestServiceImpl implements GuestService{
 	private GuestMapper mapper;	
 	
 	@Override
-	public List<GuestVO> getList(int page) {
+	public List<GuestVO> getList(int IndexNumber) {
 		log.info("비지니스 계층===========");
-		return mapper.getList(page);
+		return mapper.getList(IndexNumber);
 	}
 
 	@Override
-	public GuestVO read(long bno) {
-		return mapper.read(bno);
+	public GuestVO read(long m_idx) {
+		log.info("읽기 컨트롤러에서 넘어온 값==========="+m_idx);
+		return mapper.read(m_idx);
 	}
 
 	@Override
-	public void del(long bno) {
-		mapper.del(bno);
+	public void del(long m_idx) {
+		mapper.del(m_idx);
 	}
 
 	@Override
@@ -82,6 +85,40 @@ public class GuestServiceImpl implements GuestService{
 		}		
 		return totalBlock;
 	}
+	
+	
+	@Override
+	public int login_count(MemberVO mv) {
+		int loginNumber = mapper.login_count(mv);
+		
+		log.info("로그인 카운트==========="+loginNumber);
+		return loginNumber;
+	}
+	
+	
+	
+	@Override
+	public MbinfoVO login_string(MemberVO mv) {
+		log.info("게스트 서비스 함수 실행됨===========");
+		return mapper.login_string(mv);
+	}
+//		@Override
+//		public MbinfoVO login_string(MemberVO mv) {
+//			
+//			int loginOk=login_count(mv);
+//			if(loginOk==0) {
+//				return "no id";
+//			} else {
+//				return mapper.login_string(mv);
+//			}
+//			
+//			
+		
+	
+	
+	
+	
+	
 }
 
 

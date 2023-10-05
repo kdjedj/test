@@ -9,7 +9,7 @@
 </head>
 <body>
 	여기 진짜오나???
-	
+<%-- 	
 <%
 	GuestVO read = (GuestVO)request.getAttribute("read");
 	long bno = read.getBno();
@@ -22,7 +22,7 @@
 	<form action="/guest/modify" method="post">
 		<input type="hidden" name='bno' value='<%=bno %>' >
 		<textarea name='btext'>
-			<%=btext %>
+			<%=btext %> --%>
 		</textarea>
 		<input type="submit" value="수정하기">
 	</form>
