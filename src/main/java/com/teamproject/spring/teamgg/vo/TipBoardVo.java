@@ -1,6 +1,8 @@
 package com.teamproject.spring.teamgg.vo;
 
-import java.sql.Date;
+import java.util.Date;
+
+import com.teamproject.spring.teamgg.board.TimeFormatter;
 
 import lombok.Data;
 
@@ -12,5 +14,11 @@ public class TipBoardVo {
 	private String t_title;
 	private String t_writer;
 	private String t_content;
-	private Date t_date;
+	private Long writeIdx;
+	
+	private String t_date;
+
+	public void setT_date(Date t_date) {
+		this.t_date = TimeFormatter.calculateTime(t_date);
+	}	
 }

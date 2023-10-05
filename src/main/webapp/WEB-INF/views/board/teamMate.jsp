@@ -12,19 +12,7 @@
     
 
 
-<div class="container">
-	
-	<div class="top_part">
-		<div class = "logo_box">
-			<a><img id="logo" alt="로고" src="${cp}/resources/img/LOGO_small.png"></a>
-		</div> 
-		<div class="search_box" alt="전적검색">
-			<form action="/board/searcing_user" method="post">
-			<input class="search_blank" name="search" placeholder="소환사 검색">
-			
-			</form>
-		</div>
-	</div>
+
 	<div class="big_box">
 	<%@include file="../user_left_menu.jsp"%>
 	
@@ -34,7 +22,7 @@
 			<div class="sub-header-info">
 			<h2 class="sub-headtitle">유저 찾기</h2>
 			<div class="write_button">
-				<a href="#">글쓰기</a>
+				<a href="${cp}/board/mate_write?user=${login_on.m_user }&m_id=${login_on.m_id}&m_pw=${login_on.m_pw}">글쓰기</a>
 			</div>
 			</div>
 			
@@ -46,8 +34,25 @@
 				</ul>
 			</div>
 		</div>
+		<section class="post_content">
+		<c:forEach var="guest" items="${mateList}">
+						<article class="article-list-item">
+							<div class="article-list-item__no"><span>${guest.m_idx }</span></div>
+							<div class="article-list-item__content">
+							<a href="${cp}/board/mate_read?m_idx=${guest.m_idx }&m_id=${login_on.m_id}&m_pw=${login_on.m_pw}"><span>${guest.m_title }</span></a>
+							<div class="article-list-item-meta">
+								<div class="article-list-item-meta__item"><span>${guest.m_date }</span></div>
+								<div class="article-list-item-meta__item"><span>${guest.m_writer }</span></div>
+							</div>
+							</div>
+							
+							
+							
+
+						</article>
+						</c:forEach>
+		</section>
 	</div>
-</div>
 </div>
 
 <%@include file="../main_back.jsp"%>

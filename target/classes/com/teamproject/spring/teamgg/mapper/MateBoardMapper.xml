@@ -16,7 +16,8 @@
 		delete from mate_board where m_idx = #{m_idx}
 	</delete>
 		
-	<insert id="mateWrite" parameterType="com.teamproject.spring.teamgg.vo.MateBoardVo">
+	<insert id="mateWrite" parameterType="com.teamproject.spring.teamgg.vo.MateBoardVo"
+	useGeneratedKeys="true" keyProperty="writeIdx">
 		insert into mate_board(m_title, m_writer, m_content, m_date)
     	values (#{m_title}, #{m_writer}, #{m_content}, now())
 	</insert>		
