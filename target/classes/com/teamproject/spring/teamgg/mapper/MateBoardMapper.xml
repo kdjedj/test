@@ -18,24 +18,18 @@
 		
 	<insert id="mateWrite" parameterType="com.teamproject.spring.teamgg.vo.MateBoardVo"
 	useGeneratedKeys="true" keyProperty="writeIdx">
-		insert into mate_board(m_title, m_writer, m_content, m_date)
-    	values (#{m_title}, #{m_writer}, #{m_content}, now())
+		insert into mate_board(m_title, m_id, m_user, m_content, m_date)
+    	values (#{m_title}, #{m_id}, #{m_user}, #{m_content}, now())
 	</insert>		
 	
 	<update id="mateModify">
 		update mate_board
 		set m_title = #{m_title},
 			m_content = #{m_content}
-		where m_idx = #{m_idx} and m_writer = #{m_writer}
+		where m_idx = #{m_idx} and m_id = #{m_id}
 	</update>
 	
 	<select id="getTotalCount" resultType="int">
 		SELECT count(*) from ${@com.teamproject.spring.teamgg.vo.MateBoardVo@TABLE_NAME_MATE}
-	</select>
-	
-	<select id="getAuthorId" parameterType="long" resultType="string">
-    	select m_writer
-    	from mate_board
-    	where m_idx = #{m_idx}
 	</select>
 </mapper>

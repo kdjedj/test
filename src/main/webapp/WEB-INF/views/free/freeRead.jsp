@@ -18,7 +18,8 @@
 <%
 	FreeBoardVo read = (FreeBoardVo)request.getAttribute("freeRead");
 	Long f_idx = read.getF_idx();
-	String f_writer = read.getF_writer();
+	String f_id = read.getF_id();
+	String f_user = read.getF_user();
 	String f_title = read.getF_title();	
 	String f_content = read.getF_content();
 	String f_date = read.getF_date();
@@ -41,7 +42,7 @@
 		<div class="read">
 			<div class="read_head">
 <h1> <%=f_title %> </h1>
-<%= f_date %> <%=f_writer %>
+<%= f_date %> <%=f_user %>
 			</div>
 			<div class="content">
 <%=f_content %>

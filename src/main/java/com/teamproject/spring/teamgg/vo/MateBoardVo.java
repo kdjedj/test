@@ -12,7 +12,8 @@ public class MateBoardVo {
 	public final static String TABLE_NAME_MATE = "mate_board";
 	private Long m_idx;
 	private String m_title;
-	private String m_writer;
+	private String m_id;
+	private String m_user;
 	private String m_content;
 	private Long writeIdx;
 	

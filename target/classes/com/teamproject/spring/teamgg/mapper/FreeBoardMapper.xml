@@ -18,24 +18,18 @@
 		
 	<insert id="freeWrite" parameterType="com.teamproject.spring.teamgg.vo.FreeBoardVo"
 	useGeneratedKeys="true" keyProperty="writeIdx">
-		insert into free_board(f_title, f_writer, f_content, f_date)
-    	values (#{f_title}, #{f_writer}, #{f_content}, now())
+		insert into free_board(f_title, f_id, f_user, f_content, f_date)
+    	values (#{f_title}, #{f_id}, #{f_user}, #{f_content}, now())
 	</insert>		
 	
 	<update id="freeModify">
 		update free_board
 		set f_title = #{f_title},
 			f_content = #{f_content}
-		where f_idx = #{f_idx} and f_writer = #{f_writer}
+		where f_idx = #{f_idx} and f_id = #{f_id}
 	</update>
 	
 	<select id="getTotalCount" resultType="int">
 		SELECT count(*) from ${@com.teamproject.spring.teamgg.vo.FreeBoardVo@TABLE_NAME_FREE}
-	</select>
-	
-	<select id="getAuthorId" parameterType="long" resultType="string">
-    	select f_writer
-    	from free_board
-    	where f_idx = #{f_idx}
 	</select>
 </mapper>

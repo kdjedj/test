@@ -98,18 +98,22 @@ public class MateBoardController {
 
 	@GetMapping("/mateDel")
 	public String del(@RequestParam("m_idx") Long m_idx, HttpSession session) {
-		String m_writer = (String) session.getAttribute("m_id");
-		if (m_writer == null) {
+		String m_id = (String) session.getAttribute("m_id");
+		if (m_id == null) {
 			return "redirect:/member/login";
 		}
+	    MateBoardVo originPost = service.read(m_idx);
+	    if (!m_id.equals(originPost.getM_id())) {
+	        return "redirect:/errorPage";
+	    }
 	        service.del(m_idx);
 		return "redirect:/mate/mateList";
 	}
 	
 	@GetMapping("/mateWrite") // view
 	public String write(HttpSession session) {
-		String m_writer = (String) session.getAttribute("m_id");
-	    if (m_writer == null) {
+		String m_id = (String) session.getAttribute("m_id");
+	    if (m_id == null) {
 	        return "redirect:/member/login";
 	    }
 	    return "/mate/mateWrite";
@@ -117,11 +121,13 @@ public class MateBoardController {
 	
 	@PostMapping("/mateWrite")
 	public String write(MateBoardVo mvo, HttpSession session) {
-		String m_writer = (String) session.getAttribute("m_id");
-	    if (m_writer == null) {
+		String m_id = (String) session.getAttribute("m_id");
+		String m_user = (String) session.getAttribute("m_user");
+	    if (m_id == null) {
 	        return "redirect:/member/login";
 	    }
-	    mvo.setM_writer(m_writer);
+	    mvo.setM_id(m_id);
+	    mvo.setM_user(m_user);
 	    service.write(mvo);
 //	    작성 완료된 글번호로 이동
 	    Long writeIdx = mvo.getWriteIdx();
@@ -134,24 +140,39 @@ public class MateBoardController {
 	
 	@GetMapping("/mateModify")
 	public String modify(@RequestParam("m_idx") Long m_idx, Model model, HttpSession session) {
-		String m_writer = (String) session.getAttribute("m_id");
-		if (m_writer == null) {
+		String m_id = (String) session.getAttribute("m_id");
+		if (m_id == null) {
 			return "redirect:/member/login";
 		}
+		
+	    MateBoardVo originPost = service.read(m_idx);
+	    if (!m_id.equals(originPost.getM_id())) {
+	        return "redirect:/errorPage";
+	    }
+	    
 		model.addAttribute("mateRead", service.read(m_idx));
 		return "/mate/mateModify";
 	}
 	
 	@PostMapping("/mateModify")
 	public String modify(MateBoardVo mvo, HttpSession session) {
-		String m_writer = (String) session.getAttribute("m_id");
-	    if (m_writer == null) {
+		String m_id = (String) session.getAttribute("m_id");
+	    if (m_id == null) {
 	        return "redirect:/member/login";
 	    }
-	    mvo.setM_writer(m_writer);
-	    service.write(mvo);
+	    
+	    MateBoardVo originPost = service.read(mvo.getM_idx());
+
+	    if (!m_id.equals(originPost.getM_id())) {
+	        return "redirect:/errorPage";
+	    }
+
+	    originPost.setM_title(mvo.getM_title());
+	    originPost.setM_content(mvo.getM_content());
+	    service.modify(originPost);
+
 //	    작성 완료된 글번호로 이동
-	    Long writeIdx = mvo.getWriteIdx();
+	    Long writeIdx = originPost.getM_idx();
 	    if (writeIdx != null) {
 	        return "redirect:/mate/mateRead?m_idx=" + writeIdx;
 	    } else {

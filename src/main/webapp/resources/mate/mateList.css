@@ -53,6 +53,13 @@ body {
 	padding-right: 10px;
 }
 
+.userName {
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	height:40px;
+}
+
 .Proclogin {
    width:80px;
    height:40px;

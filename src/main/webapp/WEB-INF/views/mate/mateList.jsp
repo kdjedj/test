@@ -16,6 +16,8 @@
 </head>
 <body>
 
+<c:set var="userName" value="${sessionScope.m_user}" />
+
 	<div class="head">
 		<div class="logoBox">	
 			<a href="${cp}/">
@@ -24,13 +26,18 @@
 		</div>
 		<div class="headTab">
 				<div class="headTop">
-				<div class="Proclogin">
-				<% if (session.getAttribute("m_id") != null) { %>
-       				 <a href="${cp}/member/logout" class="">로그아웃</a>
-			    <% } else { %>
-			    	 <a href="${cp}/member/login" class="">로그인</a>
-			    <% } %>
-			</div>
+					<div class="userName">
+						<c:if test="${not empty userName}">
+		      			<p>${userName}</p>
+		    			</c:if>
+					</div>
+					<div class="Proclogin">
+						<% if (session.getAttribute("m_id") != null) { %>
+		       				 <a href="${cp}/member/logout" class="">로그아웃</a>
+					    <% } else { %>
+					    	 <a href="${cp}/member/login" class="">로그인</a>
+					    <% } %>
+					</div>
 				</div>
 				<div class="headBot">
 					<div class="boards_head">
@@ -66,12 +73,13 @@
 	<c:set var="m_idx" value="${item.m_idx}"/>
 	<c:set var="m_title" value="${item.m_title}"/>
 	<c:set var="m_date" value="${item.m_date}"/>
-	<c:set var="m_writer" value="${item.m_writer}"/>
+	<c:set var="m_id" value="${item.m_id}"/>
+	<c:set var="m_user" value="${item.m_user}"/>
 			<ul class="post">
             	<li class="posts w500">${item.m_idx}</li>
             	<li class="posts w2500"><a href="mateRead?m_idx=${item.m_idx}">${item.m_title}</a></li>
             	<li class="posts">${item.m_date}</li>
-            	<li class="posts">${item.m_writer}</li>
+            	<li class="posts">${item.m_user}</li>
 			</ul>
 </c:forEach>
 			<div class="paging">

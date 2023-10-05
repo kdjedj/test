@@ -18,7 +18,8 @@
 <%
 	TipBoardVo read = (TipBoardVo)request.getAttribute("tipRead");
 	Long t_idx = read.getT_idx();
-	String t_writer = read.getT_writer();
+	String t_id = read.getT_id();
+	String t_user = read.getT_user();
 	String t_title = read.getT_title();	
 	String t_content = read.getT_content();
 	String t_date = read.getT_date();
@@ -41,7 +42,7 @@
 		<div class="read">
 			<div class="read_head">
 <h1> <%=t_title %> </h1>
-<%= t_date %> <%=t_writer %>
+<%= t_date %> <%=t_user %>
 			</div>
 			<div class="content">
 <%=t_content %>

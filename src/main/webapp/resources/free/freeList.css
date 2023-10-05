@@ -48,9 +48,17 @@ body {
 
 .headTop{
 	height: 50%;
+	display: flex;
 	float: right;
 	line-height: 40px;
 	padding-right: 10px;
+}
+
+.userName {
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	height:40px;
 }
 
 .Proclogin {

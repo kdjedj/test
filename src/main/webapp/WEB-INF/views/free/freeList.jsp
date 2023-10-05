@@ -16,6 +16,8 @@
 </head>
 <body>
 
+<c:set var="userName" value="${sessionScope.m_user}" />
+
 	<div class="head">
 		<div class="logoBox">	
 			<a href="${cp}/">
@@ -24,13 +26,18 @@
 		</div>
 		<div class="headTab">
 				<div class="headTop">
-				<div class="Proclogin">
-				<% if (session.getAttribute("m_id") != null) { %>
-       				 <a href="${cp}/member/logout" class="">로그아웃</a>
-			    <% } else { %>
-			    	 <a href="${cp}/member/login" class="">로그인</a>
-			    <% } %>
-			</div>
+					<div class="userName">
+						<c:if test="${not empty userName}">
+		      			<p>${userName}</p>
+		    			</c:if>
+					</div>
+					<div class="Proclogin">
+						<% if (session.getAttribute("m_id") != null) { %>
+		       				 <a href="${cp}/member/logout" class="">로그아웃</a>
+					    <% } else { %>
+					    	 <a href="${cp}/member/login" class="">로그인</a>
+					    <% } %>
+					</div>
 				</div>
 				<div class="headBot">
 					<div class="boards_head">
@@ -63,15 +70,16 @@
 				<button type="button" id="write" title="글쓰기" onclick="location.href='freeWrite'">글쓰기</button>
 			</div>
 <c:forEach var="item" items="${list}">
-    <c:set var="f_idx" value="${f_idx}" />
-    <c:set var="f_title" value="${f_title}" />
-    <c:set var="f_date" value="${f_date}" />
-    <c:set var="f_writer" value="${f_writer}" />
+    <c:set var="f_idx" value="${item.f_idx}" />
+    <c:set var="f_title" value="${item.f_title}" />
+    <c:set var="f_date" value="${item.f_date}" />
+    <c:set var="f_id" value="${item.f_id}" />
+    <c:set var="f_user" value="${item.f_user}" />
 			<ul class="post">
             	<li class="posts w500">${item.f_idx}</li>
             	<li class="posts w2500"><a href="freeRead?f_idx=${item.f_idx}">${item.f_title}</a></li>
             	<li class="posts">${item.f_date}</li>
-            	<li class="posts">${item.f_writer}</li>
+            	<li class="posts">${item.f_user}</li>
 			</ul>
 </c:forEach>
 			<div class="paging">

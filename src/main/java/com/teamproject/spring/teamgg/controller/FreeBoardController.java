@@ -97,18 +97,22 @@ public class FreeBoardController {
 
 	@GetMapping("/freeDel")
 	public String del(@RequestParam("f_idx") Long f_idx, HttpSession session) {
-		String f_writer = (String) session.getAttribute("m_id");
-		if (f_writer == null) {
+		String f_id = (String) session.getAttribute("m_id");
+		if (f_id == null) {
 			return "redirect:/member/login";
 		}
+	    FreeBoardVo originPost = service.read(f_idx);
+	    if (!f_id.equals(originPost.getF_id())) {
+	        return "redirect:/errorPage";
+	    }
 	        service.del(f_idx);
 		return "redirect:/free/freeList";
 	}
 	
 	@GetMapping("/freeWrite") // view
 	public String write(HttpSession session) {
-		String f_writer = (String) session.getAttribute("m_id");
-	    if (f_writer == null) {
+		String f_id = (String) session.getAttribute("m_id");
+	    if (f_id == null) {
 	        return "redirect:/member/login";
 	    }
 	    return "/free/freeWrite";
@@ -116,11 +120,13 @@ public class FreeBoardController {
 	
 	@PostMapping("/freeWrite")
 	public String write(FreeBoardVo fvo, HttpSession session) {
-		String f_writer = (String) session.getAttribute("m_id");
-	    if (f_writer == null) {
+		String f_id = (String) session.getAttribute("m_id");
+		String f_user = (String) session.getAttribute("m_user");
+	    if (f_id == null) {
 	        return "redirect:/member/login";
 	    }
-	    fvo.setF_writer(f_writer);
+	    fvo.setF_id(f_id);
+	    fvo.setF_user(f_user);
 	    service.write(fvo);
 //	    작성 완료된 글번호로 이동
 	    Long writeIdx = fvo.getWriteIdx();
@@ -133,24 +139,39 @@ public class FreeBoardController {
 	
 	@GetMapping("/freeModify")
 	public String modify(@RequestParam("f_idx") Long f_idx, Model model, HttpSession session) {
-		String f_writer = (String) session.getAttribute("m_id");
-		if (f_writer == null) {
+		String f_id = (String) session.getAttribute("m_id");
+		if (f_id == null) {
 			return "redirect:/member/login";
 		}
+		
+	    FreeBoardVo originPost = service.read(f_idx);
+	    if (!f_id.equals(originPost.getF_id())) {
+	        return "redirect:/errorPage";
+	    }
+	    
 		model.addAttribute("freeRead", service.read(f_idx));
 		return "/free/freeModify";
 	}
 	
 	@PostMapping("/freeModify")
 	public String modify(FreeBoardVo fvo, HttpSession session) {
-		String f_writer = (String) session.getAttribute("m_id");
-	    if (f_writer == null) {
+		String f_id = (String) session.getAttribute("m_id");
+	    if (f_id == null) {
 	        return "redirect:/member/login";
 	    }
-	    fvo.setF_writer(f_writer);
-	    service.write(fvo);
-//	    작성 완료된 글번호로 이동
-	    Long writeIdx = fvo.getWriteIdx();
+	    
+	    FreeBoardVo originPost = service.read(fvo.getF_idx());
+
+	    if (!f_id.equals(originPost.getF_id())) {
+	        return "redirect:/errorPage";
+	    }
+
+	    originPost.setF_title(fvo.getF_title());
+	    originPost.setF_content(fvo.getF_content());
+	    service.modify(originPost);
+
+	    // 작성 완료된 글번호로 이동
+	    Long writeIdx = originPost.getF_idx();
 	    if (writeIdx != null) {
 	        return "redirect:/free/freeRead?f_idx=" + writeIdx;
 	    } else {

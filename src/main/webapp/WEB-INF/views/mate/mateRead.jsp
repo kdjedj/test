@@ -18,7 +18,8 @@
 <%
 	MateBoardVo read = (MateBoardVo)request.getAttribute("mateRead");
 	Long m_idx = read.getM_idx();
-	String m_writer = read.getM_writer();
+	String m_id = read.getM_id();
+	String m_user = read.getM_user();
 	String m_title = read.getM_title();	
 	String m_content = read.getM_content();
 	String m_date = read.getM_date();
@@ -41,7 +42,7 @@
 		<div class="read">
 			<div class="read_head">
 <h1> <%=m_title %> </h1>
-<%= m_date %> <%=m_writer %>
+<%= m_date %> <%=m_user %>
 			</div>
 			<div class="content">
 <%=m_content %>

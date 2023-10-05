@@ -98,18 +98,22 @@ public class TipBoardController {
 
 	@GetMapping("/tipDel")
 	public String del(@RequestParam("t_idx") Long t_idx, HttpSession session) {
-		String t_writer = (String) session.getAttribute("m_id");
-		if (t_writer == null) {
+		String t_id = (String) session.getAttribute("m_id");
+		if (t_id == null) {
 			return "redirect:/member/login";
 		}
+	    TipBoardVo originPost = service.read(t_idx);
+	    if (!t_id.equals(originPost.getT_id())) {
+	        return "redirect:/errorPage";
+	    }
 	        service.del(t_idx);
 		return "redirect:/tip/tipList";
 	}
 	
 	@GetMapping("/tipWrite") // view
 	public String write(HttpSession session) {
-		String t_writer = (String) session.getAttribute("m_id");
-	    if (t_writer == null) {
+		String t_id = (String) session.getAttribute("m_id");
+	    if (t_id == null) {
 	        return "redirect:/member/login";
 	    }
 	    return "/tip/tipWrite";
@@ -117,11 +121,13 @@ public class TipBoardController {
 	
 	@PostMapping("/tipWrite")
 	public String write(TipBoardVo tvo, HttpSession session) {
-		String t_writer = (String) session.getAttribute("m_id");
-	    if (t_writer == null) {
+		String t_id = (String) session.getAttribute("m_id");
+		String t_user = (String) session.getAttribute("m_user");
+	    if (t_id == null) {
 	        return "redirect:/member/login";
 	    }
-	    tvo.setT_writer(t_writer);
+	    tvo.setT_id(t_id);
+	    tvo.setT_user(t_user);
 	    service.write(tvo);
 //	    작성 완료된 글번호로 이동
 	    Long writeIdx = tvo.getWriteIdx();
@@ -134,24 +140,39 @@ public class TipBoardController {
 	
 	@GetMapping("/tipModify")
 	public String modify(@RequestParam("t_idx") Long t_idx, Model model, HttpSession session) {
-		String t_writer = (String) session.getAttribute("m_id");
-		if (t_writer == null) {
+		String t_id = (String) session.getAttribute("m_id");
+		if (t_id == null) {
 			return "redirect:/member/login";
 		}
+		
+	    TipBoardVo originPost = service.read(t_idx);
+	    if (!t_id.equals(originPost.getT_id())) {
+	        return "redirect:/errorPage";
+	    }
+		
 		model.addAttribute("tipRead", service.read(t_idx));
 		return "/tip/tipModify";
 	}
 	
 	@PostMapping("/tipModify")
 	public String modify(TipBoardVo tvo, HttpSession session) {
-		String t_writer = (String) session.getAttribute("m_id");
-	    if (t_writer == null) {
+		String t_id = (String) session.getAttribute("m_id");
+	    if (t_id == null) {
 	        return "redirect:/member/login";
 	    }
-	    tvo.setT_writer(t_writer);
-	    service.write(tvo);
+
+	    TipBoardVo originPost = service.read(tvo.getT_idx());
+
+	    if (!t_id.equals(originPost.getT_id())) {
+	        return "redirect:/errorPage";
+	    }
+
+	    originPost.setT_title(tvo.getT_title());
+	    originPost.setT_content(tvo.getT_content());
+	    service.modify(originPost);
+
 //	    작성 완료된 글번호로 이동
-	    Long writeIdx = tvo.getWriteIdx();
+	    Long writeIdx = originPost.getT_idx();
 	    if (writeIdx != null) {
 	        return "redirect:/tip/tipRead?t_idx=" + writeIdx;
 	    } else {

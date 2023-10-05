@@ -16,6 +16,8 @@
 </head>
 <body>
 
+<c:set var="userName" value="${sessionScope.m_user}" />
+
 <div class="head">
 		<div class="logoBox">	
 			<a href="${cp}/">
@@ -24,13 +26,18 @@
 		</div>
 		<div class="headTab">
 				<div class="headTop">
-				<div class="Proclogin">
-				<% if (session.getAttribute("m_id") != null) { %>
-       				 <a href="${cp}/member/logout" class="">로그아웃</a>
-			    <% } else { %>
-			    	 <a href="${cp}/member/login" class="">로그인</a>
-			    <% } %>
-			</div>
+					<div class="userName">
+						<c:if test="${not empty userName}">
+		      			<p>${userName}</p>
+		    			</c:if>
+					</div>
+					<div class="Proclogin">
+						<% if (session.getAttribute("m_id") != null) { %>
+		       				 <a href="${cp}/member/logout" class="">로그아웃</a>
+					    <% } else { %>
+					    	 <a href="${cp}/member/login" class="">로그인</a>
+					    <% } %>
+					</div>
 				</div>
 				<div class="headBot">
 					<div class="boards_head">

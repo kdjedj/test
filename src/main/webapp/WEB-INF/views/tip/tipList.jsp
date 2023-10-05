@@ -16,6 +16,8 @@
 </head>
 <body>
 
+<c:set var="userName" value="${sessionScope.m_user}" />
+
 	<div class="head">
 		<div class="logoBox">	
 			<a href="${cp}/">
@@ -24,13 +26,18 @@
 		</div>
 		<div class="headTab">
 				<div class="headTop">
-				<div class="Proclogin">
-				<% if (session.getAttribute("m_id") != null) { %>
-       				 <a href="${cp}/member/logout" class="">로그아웃</a>
-			    <% } else { %>
-			    	 <a href="${cp}/member/login" class="">로그인</a>
-			    <% } %>
-			</div>
+					<div class="userName">
+						<c:if test="${not empty userName}">
+		      			<p>${userName}</p>
+		    			</c:if>
+					</div>
+					<div class="Proclogin">
+						<% if (session.getAttribute("m_id") != null) { %>
+		       				 <a href="${cp}/member/logout" class="">로그아웃</a>
+					    <% } else { %>
+					    	 <a href="${cp}/member/login" class="">로그인</a>
+					    <% } %>
+					</div>
 				</div>
 				<div class="headBot">
 					<div class="boards_head">
@@ -66,12 +73,13 @@
 	<c:set var="t_idx" value="${item.t_idx}"/>
 	<c:set var="t_title" value="${item.t_title}"/>
 	<c:set var="t_date" value="${item.t_date}"/>
-	<c:set var="t_writer" value="${item.t_writer}"/>
+	<c:set var="t_id" value="${item.t_id}"/>
+	<c:set var="t_user" value="${item.t_user}"/>
 			<ul class="post">
             	<li class="posts w500">${item.t_idx}</li>
             	<li class="posts w2500"><a href="tipRead?t_idx=${item.t_idx}">${item.t_title}</a></li>
             	<li class="posts">${item.t_date}</li>
-            	<li class="posts">${item.t_writer}</li>
+            	<li class="posts">${item.t_user}</li>
 			</ul>
 </c:forEach>
 			<div class="paging">

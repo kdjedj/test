@@ -12,7 +12,8 @@ public class FreeBoardVo {
 	public final static String TABLE_NAME_FREE = "free_board";
 	private Long f_idx;
 	private String f_title;
-	private String f_writer;
+	private String f_id;
+	private String f_user;
 	private String f_content;
 	private Long writeIdx;
 	
