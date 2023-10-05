@@ -208,6 +208,21 @@
     <artifactId>spring-boot-starter-web</artifactId>
 	</dependency>  -->
 
+
+
+		<!-- ////////////////// security 추가 ////////////////////// -->
+<!-- 		<dependency> -->
+<!--         	<groupId>org.springframework.boot</groupId> -->
+<!--         	<artifactId>spring-boot-starter-security</artifactId> -->
+<!--         	<version>2.5.4</version> 버전을 수동으로 지정 -->
+<!--     	</dependency> -->
+    	
+<!--     	<dependency> -->
+<!--         	<groupId>org.springframework.boot</groupId> -->
+<!--         	<artifactId>spring-boot-starter-security</artifactId> -->
+<!--         	<version>2.5.4</version> 버전을 수동으로 지정 -->
+<!--    		</dependency> -->
+    
 	</dependencies>
 	
 	<build>

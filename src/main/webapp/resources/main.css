@@ -1,101 +1,99 @@
 @charset "UTF-8";
 body {
-	background-color:#ffd9fa; 
+	background-color:#dedcee; 
 	/* 255 217 250 */
 	font-family: Roboto_2d0052, Roboto_Fallback_2d0052, sans-serif, system-ui, sans-serif;
-	/* color:white; */
+    color:white;
 	
 }
-#mainHeader{
-/* width:1000px; height:300px;  
-	margin-left:auto; margin-right:auto;*/
-	text-align: center;
+.header{
+   display:flex;
+   justify-content: center;
 }
-
-
 
 .header-rap {
-	width:1080px;
-	height:88px;
-	background-color:yellow;
-	margin-left:auto; margin-right:auto;
-	
+   width:1080px;
+   height:88px;
+   background-color:yellow;
+   
 }
-.main-tap {
-	width:1080px;
-	height:40px;
-	background-color:#bb35fb;
-	display:flex;
+.main-tab {
+   width:1080px;
+   height:40px;
+   background-color:#6a60a9;
+   display:flex;
 }
 
-#logo {
-	width: 300px; height: 100px;
+.main-tab .logo {
+    width:65px;
+    padding-left:10px;
+
 }
-.logo_box {
-	width: 200px; height: 60px;
-	position:relative;
-	left:-10px;
-	top:40px;
+.main-tab .logo img{
+    background-color:#dedcee;
+    width:65px;
+    height:40px;
 }
-.main-tap nav {
-	width:980px;
-	height:40px;
-	background-color:red;
-	/*187 53 251  */
-	display:flex;
+.main-tab nav {
+   width:950px;
+   height:40px;
+   background-color:#6a60a9;
+   /*187 53 251  */
 }
 nav span {
-	
+   
 }
 nav li {
-	width:138px;
-	height:40px;
-	flex-basis:33%
+   width:138px;
+   height:40px;
+   flex-basis:33%
 }
 nav li img {
-	width: 24px;
-	height:24px;
-	border:0px;
-	vertival-align:middle;
-	max-width:100%;
+   width: 24px;
+   height:24px;
+   border:0px;
+   vertival-align:middle;
+   max-width:100%;
 }
 nav li span {
-	font-size:12px;
-	margin-left:8px;
+   font-size:12px;
+   margin-left:8px;
 }
 .Proclogin {
-	text-align:center;
-	display:flex;
-	align-items:center;
-	justify-content:center;
+   width:80px;
+   height:40px;
+   text-align:center;
+   display:flex;
+   align-items:center;
+   justify-content:center;
 }
 .Proclogin a {
-	background-color:#ffd9fa;
-	font-size:12px;
-	color:white;
-	border-radius:4px;
-	height:20px;
-	text-align:center;
-	display:flex;
-	flex-direction: column;
-	justify-content:center;
+   background-color:#dedcee;
+   font-size:15px;
+   color:#6a60a9;
+   border-radius:4px;
+   height:30px;
+   text-align:center;
+   display:flex;
+   flex-direction: column;
+   justify-content:center;
 }
 
-.sub-tap {
-	width:1080px;
-	height:48px;
-	background-color:blue;
+.sub-tab {
+   width:1080px;
+   height:48px;
+   background-color:#6a60a9;
 }
 .boards {
-	display:flex;
-	text-align:center;
-	justify-content:center;
+   display:flex;
+   text-align:center;
+   justify-content:center;
 }
 
 .boards li {
-	display:flex;
-	flex-direction:column;
-	justify-content:center;
+   display:flex;
+   flex-direction:column;
+   justify-content:center;
 }
 
 
@@ -110,18 +108,34 @@ nav li span {
 
 }
 
-.container{
-	 width: 100%;
-    /* max-width: 1200px; */
-    display: block;
-    background-color: #fff;
-    /* margin-left: auto; */
-    /* border-radius: 10px; */
-    border: none;
-    /* display: flex;*/
-padding: 32px 16px;
+.container {
+   width:100%;
+   display:flex;
+   align-items:center;
+   justify-content:center;
 }
 
+.middle {
+   display:flex;
+   flex-direction:column;
+   align-items:center;
+}
+.focusbox {
+   width:800px;
+   height:50px;
+   background-color:white;
+   border-radius:30px;
+   color:#dedcee;
+   display:flex;
+}
+.region {
+   padding-left:30px;
+   display:flex;
+   justify-content:center;
+   align-items:center;
+   
+   
+}
 .top_part{
 	width:100%; 
 	max-width: 1200px; min-width: 500px;
@@ -129,15 +143,13 @@ padding: 32px 16px;
 	display:flex;
 	background-color:#bfc6ff;
 }
-.search_box{
-position: relative;
-    left: 600px;
-    top: 90px;
-    display: flex;
-    border: 2px solid black;
-    border-radius: 11px;
-    background-color: #fff;
-    padding: 5px 5px 0px;
+.searchbox{
+   width:480px;
+   margin-left:30px;
+   border-left:1px solid #dedcee;
+   display:flex;
+   flex-direction:column;
+   justify-content:center;
 }
 .search_blank{
 	    width: 170px;
@@ -460,3 +472,14 @@ div.read_info div.article-list-item-meta__item{
 
 
 
+
+.footer {
+   display:flex;
+   justify-content:center;
+}
+.footer-rap{
+   width:1080px;
+   height:400px;
+   background-color:gray;
+   opacity:0.25;
+}
