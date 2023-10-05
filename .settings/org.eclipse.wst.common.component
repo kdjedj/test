@@ -1,89 +1,51 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
-<<<<<<< HEAD
-                	
-=======
                     	
     
->>>>>>> d34de7f66dd15d035e93527c8aeeb36696bc2c05
     
     
     
     <wb-module deploy-name="teamgg-1.0.0-BUILD-SNAPSHOT">
-<<<<<<< HEAD
-                                        
-=======
                                                 
         
->>>>>>> d34de7f66dd15d035e93527c8aeeb36696bc2c05
         
         
         
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
-<<<<<<< HEAD
-                                		
-=======
                                         		
         
->>>>>>> d34de7f66dd15d035e93527c8aeeb36696bc2c05
         
         
         
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
-<<<<<<< HEAD
-                                		
-=======
                                         		
         
->>>>>>> d34de7f66dd15d035e93527c8aeeb36696bc2c05
         
         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
-<<<<<<< HEAD
-                                		
-=======
                                         		
         
->>>>>>> d34de7f66dd15d035e93527c8aeeb36696bc2c05
         
         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-<<<<<<< HEAD
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
-                                		
-=======
-                
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/.apt_generated"/>
-        <wb-resource deploy-path="/WEB-INF/classes" source-path="/target/generated-sources/annotations"/>
                                         		
         
->>>>>>> d34de7f66dd15d035e93527c8aeeb36696bc2c05
         
         
         
         <property name="java-output-path" value="target/classes"/>
-<<<<<<< HEAD
-                
-        <property name="context-root" value="teamgg"/>
-                                	
-=======
                         
         
         <property name="context-root" value="teamgg"/>
                                         	
     
->>>>>>> d34de7f66dd15d035e93527c8aeeb36696bc2c05
     
     
     
     </wb-module>
-<<<<<<< HEAD
-                
-=======
                     
 
->>>>>>> d34de7f66dd15d035e93527c8aeeb36696bc2c05
 
 
 
