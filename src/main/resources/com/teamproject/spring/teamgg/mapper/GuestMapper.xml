@@ -5,28 +5,40 @@
 <mapper namespace="com.teamproject.spring.teamgg.mapper.GuestMapper">
 	<select id="getList" resultType="com.teamproject.spring.teamgg.vo.GuestVO">
 <!-- 		SELECT * from tbl_guest -->
-		SELECT * from ${@com.teamproject.spring.teamgg.vo.GuestVO@TABLE_NAME_GUEST} limit #{page},3
+		SELECT * from ${@com.teamproject.spring.teamgg.vo.GuestVO@TABLE_NAME_GUEST} limit #{IndexNumber},30
 	</select>
 	
 	<select id="read" resultType="com.teamproject.spring.teamgg.vo.GuestVO">
-		select * from tbl_guest where bno = #{bno}
+		select * from ${@com.teamproject.spring.teamgg.vo.GuestVO@TABLE_NAME_GUEST} where m_idx = #{m_idx}
 	</select>	
 	
 	<delete id="del">
-		delete from tbl_guest where bno = #{bno}
+		delete from ${@com.teamproject.spring.teamgg.vo.GuestVO@TABLE_NAME_GUEST} where m_idx = #{m_idx}
 	</delete>
 		
 	<insert id="write">
-		insert into tbl_guest (btext) values (#{btext})
+		insert into ${@com.teamproject.spring.teamgg.vo.GuestVO@TABLE_NAME_GUEST} 
+		(m_title,  m_writer, m_content, m_date)
+		 values (#{m_title}, #{m_writer}, #{m_content}, now())
 	</insert>		
 	
 	<update id="modify">
-		update tbl_guest
-		set btext = #{btext}
-		where bno = #{bno}
+		update ${@com.teamproject.spring.teamgg.vo.GuestVO@TABLE_NAME_GUEST}
+		 set m_content = #{m_content}, m_title = #{m_title} where m_idx = #{m_idx}
 	</update>
 	
 	<select id="getTotalCount" resultType="int">
 		SELECT count(*) from ${@com.teamproject.spring.teamgg.vo.GuestVO@TABLE_NAME_GUEST}
 	</select>
+	
+	<select id="login_count" resultType="int">
+		SELECT count(*) from GG_member
+		where m_id=#{m_id} and m_pw=#{m_pw}
+	</select>
+	
+	<select id="login_string" resultType="com.teamproject.spring.teamgg.vo.MbinfoVO">
+		SELECT * from GG_member
+		where m_id=#{m_id}
+	</select>
+	
 </mapper>

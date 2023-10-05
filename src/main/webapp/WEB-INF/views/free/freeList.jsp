@@ -24,14 +24,13 @@
 		</div>
 		<div class="headTab">
 				<div class="headTop">
-					<div class="Proclogin">
-					    <c:if test="${not empty sessionScope.m_id}">
-					        <a href="${cp}/member/logout" class="">로그아웃</a>
-					    </c:if>
-					    <c:if test="${empty sessionScope.m_id}">
-					        <a href="${cp}/member/login" class="">로그인</a>
-					    </c:if>
-					</div>
+				<div class="Proclogin">
+				<% if (session.getAttribute("m_id") != null) { %>
+       				 <a href="${cp}/member/logout" class="">로그아웃</a>
+			    <% } else { %>
+			    	 <a href="${cp}/member/login" class="">로그인</a>
+			    <% } %>
+			</div>
 				</div>
 				<div class="headBot">
 					<div class="boards_head">
