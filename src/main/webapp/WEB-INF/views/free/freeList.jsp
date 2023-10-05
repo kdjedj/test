@@ -24,13 +24,14 @@
 		</div>
 		<div class="headTab">
 				<div class="headTop">
-				<div class="Proclogin">
-				<% if (session.getAttribute("m_id") != null) { %>
-       				 <a href="${cp}/member/logout" class="">로그아웃</a>
-			    <% } else { %>
-			    	 <a href="${cp}/member/login" class="">로그인</a>
-			    <% } %>
-			</div>
+					<div class="Proclogin">
+					    <c:if test="${not empty sessionScope.m_id}">
+					        <a href="${cp}/member/logout" class="">로그아웃</a>
+					    </c:if>
+					    <c:if test="${empty sessionScope.m_id}">
+					        <a href="${cp}/member/login" class="">로그인</a>
+					    </c:if>
+					</div>
 				</div>
 				<div class="headBot">
 					<div class="boards_head">
@@ -62,24 +63,18 @@
 				<h1> 자유 </h1>
 				<button type="button" id="write" title="글쓰기" onclick="location.href='freeWrite'">글쓰기</button>
 			</div>
-<%
-	Object o = request.getAttribute("list");
-	List<FreeBoardVo> list = (List<FreeBoardVo>) o; 
-	for(int i=0;i<list.size();i++){
-		Long f_idx = list.get(i).getF_idx();
-		String f_title = list.get(i).getF_title();
-		String f_date = list.get(i).getF_date();
-		String f_writer = list.get(i).getF_writer();
-%>	
+<c:forEach var="item" items="${list}">
+    <c:set var="f_idx" value="${f_idx}" />
+    <c:set var="f_title" value="${f_title}" />
+    <c:set var="f_date" value="${f_date}" />
+    <c:set var="f_writer" value="${f_writer}" />
 			<ul class="post">
-            	<li class="posts w500"><%=f_idx%></li>
-            	<li class="posts w2500"><a href="freeRead?f_idx=<%=f_idx%>"><%=f_title %></a></li>
-            	<li class="posts"><%=f_date%></li>
-            	<li class="posts"><%=f_writer%></li>
+            	<li class="posts w500">${item.f_idx}</li>
+            	<li class="posts w2500"><a href="freeRead?f_idx=${item.f_idx}">${item.f_title}</a></li>
+            	<li class="posts">${item.f_date}</li>
+            	<li class="posts">${item.f_writer}</li>
 			</ul>
-<%
-	}
-%>
+</c:forEach>
 			<div class="paging">
 				<c:choose>
 				    <c:when test="${hasPrev == true}">

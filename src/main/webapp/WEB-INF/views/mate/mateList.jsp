@@ -24,13 +24,14 @@
 		</div>
 		<div class="headTab">
 				<div class="headTop">
-				<div class="Proclogin">
-				<% if (session.getAttribute("m_id") != null) { %>
-       				 <a href="${cp}/member/logout" class="">로그아웃</a>
-			    <% } else { %>
-			    	 <a href="${cp}/member/login" class="">로그인</a>
-			    <% } %>
-			</div>
+					<div class="Proclogin">
+					    <c:if test="${not empty sessionScope.m_id}">
+					        <a href="${cp}/member/logout" class="">로그아웃</a>
+					    </c:if>
+					    <c:if test="${empty sessionScope.m_id}">
+					        <a href="${cp}/member/login" class="">로그인</a>
+					    </c:if>
+					</div>
 				</div>
 				<div class="headBot">
 					<div class="boards_head">
@@ -62,24 +63,18 @@
 				<h1> 유저찾기 </h1>
 				<button type="button" id="write" title="글쓰기" onclick="location.href='mateWrite'">글쓰기</button>
 			</div>
-<%
-	Object o = request.getAttribute("list");
-	List<MateBoardVo> list = (List<MateBoardVo>) o; 
-	for(int i=0;i<list.size();i++){
-		Long m_idx = list.get(i).getM_idx();
-		String m_title = list.get(i).getM_title();
-		String m_date = list.get(i).getM_date();
-		String m_writer = list.get(i).getM_writer();
-%>	
+<c:forEach var="item" items="${list}">
+	<c:set var="m_idx" value="${item.m_idx}"/>
+	<c:set var="m_title" value="${item.m_title}"/>
+	<c:set var="m_date" value="${item.m_date}"/>
+	<c:set var="m_writer" value="${item.m_writer}"/>
 			<ul class="post">
-            	<li class="posts w500"><%=m_idx%></li>
-            	<li class="posts w2500"><a href="mateRead?m_idx=<%=m_idx%>"><%=m_title %></a></li>
-            	<li class="posts"><%=m_date%></li>
-            	<li class="posts"><%=m_writer%></li>
+            	<li class="posts w500">${item.m_idx}</li>
+            	<li class="posts w2500"><a href="mateRead?m_idx=${item.m_idx}">${item.m_title}</a></li>
+            	<li class="posts">${item.m_date}</li>
+            	<li class="posts">${item.m_writer}</li>
 			</ul>
-<%
-	}
-%>
+</c:forEach>
 			<div class="paging">
 				<c:choose>
 				    <c:when test="${hasPrev == true}">
