@@ -1,7 +1,10 @@
 $(document).ready(function() {
   const mainTabs = $('.main-tab ul li');
   const subTabs = $('.sub-tab');
-
+  const underBox = $('.searchbox');
+  const underBar = $('.under-bar');
+  
+  //상단탭 클릭시 해당탭&하단탭 색상변경
   mainTabs.on('click', function() {
     console.log('클릭 이벤트 발생!'); // 디버깅용 로그
     
@@ -21,10 +24,20 @@ $(document).ready(function() {
     $(this).find('span').css('font-weight', 'bold');
   });
   
-  const underBox = $('.searchbox');
-  const underBar = $('.under-bar');
+
+  
+  //검색창 클릭시 서치패널 보이게
   underBox.on('click', function() {
-  	console.log('클릭 이벤트 발생!'); // 디버깅용 로그
+  
   	underBar.children('.search-panel').css('display', 'block');
+    
+    // 다른 곳을 클릭해도 서치 패널이 바로 닫히지 않도록
+    event.stopPropagation();
+  	
   	});
+  	
+  	//서치패널 숨기기
+  	$(document).on('click', function() {
+    underBar.children('.search-panel').css('display', 'none');
+  });
 });

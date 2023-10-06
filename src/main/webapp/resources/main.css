@@ -165,6 +165,7 @@ nav li span {
     height:200px;
     border-radius: 0px 0px 4px 4px;
     overflow: hidden;
+    background-color:white;
 }
 .recent-search{
 	width:100px;
