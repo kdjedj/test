@@ -13,7 +13,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="${cp}/resources/reset.css">
 <link rel="stylesheet" type="text/css" href="${cp}/resources/main.css">
-
+<script type="text/javascript" src="${cp}/resources/t.js"></script>
 </head>
 <body>
 <header class="header">
