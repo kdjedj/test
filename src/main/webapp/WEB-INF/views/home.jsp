@@ -152,7 +152,12 @@
 			<div class="searchbox">
 				<label for="serachHome" class="label">Search</label><!-- 이부분 클릭해도 텍스트써지게 javascript -->
 				<input id="" name="search" autocomplete="off" type="text" placeholder="소환사명, 소환사명, ...">
-				<div class="under-bar"></div>
+				<div class="under-bar">
+					<div class="search-panel">
+						<div class="recent-search"></div>
+						<div class="bookmarks"></div>
+					</div>
+				</div>
 				<!--클릭시 최근검색이랑 즐겨찾기 나오는거 구현해야하나  -->
 			</div>
 		</div>

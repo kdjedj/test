@@ -20,4 +20,11 @@ $(document).ready(function() {
     // 선택한 main-tab의 span 스타일 변경
     $(this).find('span').css('font-weight', 'bold');
   });
+  
+  const underBox = $('.searchbox');
+  const underBar = $('.under-bar');
+  underBox.on('click', function() {
+  	console.log('클릭 이벤트 발생!'); // 디버깅용 로그
+  	underBar.children('.search-panel').css('display', 'block');
+  	});
 });
