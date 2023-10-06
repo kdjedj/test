@@ -12,9 +12,9 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" type="text/css" href="${cp}/resources/reset.css">
-<link rel="stylesheet" type="text/css" href="${cp}/resources/main.css">
-<script type="text/javascript" src="${cp}/resources/t.js"></script>
+<link rel="stylesheet" type="text/css" href="${cp}/resources/reset.css?ver=<%= System.currentTimeMillis() %>">
+<link rel="stylesheet" type="text/css" href="${cp}/resources/main.css?ver=<%= System.currentTimeMillis() %>">
+<script type="text/javascript" src="${cp}/resources/t.js?ver=<%= System.currentTimeMillis() %>"></script>
 </head>
 <body>
 <header class="header">
