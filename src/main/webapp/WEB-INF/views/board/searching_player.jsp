@@ -49,7 +49,7 @@
 					<div class="rank-header">솔로랭크</div>
 					<div class=rank-content>
 						<div class="tier-picture">
-							<img src="${cp }/resources/img/${liv.tier }" alt="${liv.tier }">
+							<img src="${cp }/resources/tier/${liv.tier }.png" alt="${liv.tier }">
 						</div>
 						<div class="tier-info">
 							<div class=tier>
@@ -110,7 +110,7 @@
 				<div class="win-lose">
 					<div class="k-d-a">
 						<span>${liv.wins } 승</span> &nbsp;/&nbsp; <span class="d">${liv.losses }
-							패</span> &nbsp;/&nbsp; <span>승률</span>
+							패</span> &nbsp;/&nbsp; <span>${liv.win_per }%</span>
 					</div>
 				</div>
 				<div class="kda">
@@ -137,9 +137,9 @@
 			</div>
 		</div>
 		<div class="queue_content">
-			<c:forEach var="pi" items="${L_Api }" begin="0" step="1" end="19">
+			<c:forEach var="pi" items="${L_Api}" begin="0" step="1" end="9">
 				<c:choose>
-					<c:when test="${pi.mainUser.win==true }">
+					<c:when test="${pi.mainUser.win==true}">
 						<li>
 							<div class="win_box">
 								<div class="content_box">
@@ -158,17 +158,35 @@
 															alt="챔피언그림"><span class="chamlv">${pi.mainUser.champLevel }</span>
 														</a>
 													</div>
-													<!-- <div class="spells"></div>
-											<div class="runes"></div> -->
+													 <div class="spells">
+													 	<div class="spell1">
+													 		<img src="https://ddragon.leagueoflegends.com/cdn/13.18.1/img/spell/${pi.spellId1 }.png" 
+													 		 width="22px" height="22px">
+													 	</div>
+													 	<div class="spell2">
+													 		<img src="https://ddragon.leagueoflegends.com/cdn/13.18.1/img/spell/${pi.spellId2 }.png"
+													 		 width="22px" height="22px">
+													 	</div>
+													 	
+													 </div>
+											<div class="runes"></div>
 												</div>
 												<div class="kda">
 													<div class="k-d-a">
 														<span>${pi.mainUser.kills }</span> / <span class="d">${pi.mainUser.deaths }</span>
 														/ <span>${pi.mainUser.assists }</span>
 													</div>
-													<div class="ratio"></div>
+													<div class="ratio">${pi.aver }:1 평점</div>
 												</div>
-												<!-- 나중에 킬관여 등 정보 관리 -->
+												
+												<div class="stats">
+													<div class="p-kill">
+														<span>킬관여${pi.killsRate }%</span>
+													</div>
+													<div class="cs">
+														<span>Cs ${pi.cs }</span>
+													</div>
+												</div>
 
 											</div>
 
@@ -178,8 +196,8 @@
 														<li><c:choose>
 																<c:when test="${pi.mainUser.item0 eq '0'}">
 																	<div class="item_box">
-																		<div class="none_item"></div>
-																		${pi.mainUser.item0}
+																		<%-- <div class="none_item"></div>
+																		${pi.mainUser.item0} --%>
 																	</div>
 																</c:when>
 																<c:otherwise>
@@ -194,8 +212,8 @@
 														<li><c:choose>
 																<c:when test="${pi.mainUser.item1 eq '0'}">
 																	<div class="item_box">
-																		<div class="none_item"></div>
-																		${pi.mainUser.item1 }
+																		<%-- <div class="none_item"></div>
+																		${pi.mainUser.item1 } --%>
 																	</div>
 																</c:when>
 																<c:otherwise>
@@ -225,8 +243,8 @@
 														<li><c:choose>
 																<c:when test="${pi.mainUser.item3 eq '0'}">
 																	<div class="item_box">
-																		<div class="none_item"></div>
-																		${pi.mainUser.item3 }
+																		<%-- <div class="none_item"></div>
+																		${pi.mainUser.item3 } --%>
 
 																	</div>
 																</c:when>
@@ -243,8 +261,8 @@
 														<li><c:choose>
 																<c:when test="${pi.mainUser.item4 eq '0'}">
 																	<div class="item_box">
-																		<div class="none_item"></div>
-																		${pi.mainUser.item4 }
+																		<%-- <div class="none_item"></div>
+																		${pi.mainUser.item4 } --%>
 																	</div>
 																</c:when>
 																<c:otherwise>
@@ -260,8 +278,8 @@
 														<li><c:choose>
 																<c:when test="${pi.mainUser.item5 eq '0'}">
 																	<div class="item_box">
-																		<div class="none_item"></div>
-																		${pi.mainUser.item5 }
+																		<%-- <div class="none_item"></div>
+																		${pi.mainUser.item5 } --%>
 																	</div>
 																</c:when>
 																<c:otherwise>
@@ -278,8 +296,8 @@
 														<c:choose>
 															<c:when test="${pi.mainUser.item6 eq '0'}">
 																<div class="item_box">
-																	<div class="none_item"></div>
-																	${pi.mainUser.item6}
+																	<%-- <div class="none_item"></div>
+																	${pi.mainUser.item6} --%>
 																</div>
 															</c:when>
 															<c:otherwise>
@@ -367,7 +385,7 @@
 														<span>${pi.mainUser.kills }</span> / <span class="d">${pi.mainUser.deaths }</span>
 														/ <span>${pi.mainUser.assists }</span>
 													</div>
-													<div class="ratio"></div>
+													<div class="ratio">${pi.aver }:1 평점</div>
 												</div>
 												<!-- 나중에 킬관여 등 정보 관리 -->
 
@@ -379,8 +397,8 @@
 														<li><c:choose>
 																<c:when test="${pi.mainUser.item0 eq '0'}">
 																	<div class="item_box">
-																		<div class="none_item"></div>
-																		${pi.mainUser.item0 }
+																		<%-- <div class="none_item"></div>
+																		${pi.mainUser.item0 } --%>
 																	</div>
 																</c:when>
 																<c:otherwise>
@@ -396,8 +414,8 @@
 														<li><c:choose>
 																<c:when test="${pi.mainUser.item1 eq '0'}">
 																	<div class="item_box">
-																		<div class="none_item"></div>
-																		${pi.mainUser.item1 }
+																		<%-- <div class="none_item"></div>
+																		${pi.mainUser.item1 } --%>
 																	</div>
 																</c:when>
 																<c:otherwise>
@@ -413,8 +431,8 @@
 														<li><c:choose>
 																<c:when test="${pi.mainUser.item2 eq '0'}">
 																	<div class="item_box">
-																		<div class="none_item"></div>
-																		${pi.mainUser.item2 }
+																		<%-- <div class="none_item"></div>
+																		${pi.mainUser.item2 } --%>
 																	</div>
 																</c:when>
 																<c:otherwise>
@@ -430,8 +448,8 @@
 														<li><c:choose>
 																<c:when test="${pi.mainUser.item3 eq '0'}">
 																	<div class="item_box">
-																		<div class="none_item"></div>
-																		${pi.mainUser.item3 }
+																		<%-- <div class="none_item"></div>
+																		${pi.mainUser.item3 } --%>
 
 																	</div>
 																</c:when>
@@ -448,8 +466,8 @@
 														<li><c:choose>
 																<c:when test="${pi.mainUser.item4 eq '0'}">
 																	<div class="item_box">
-																		<div class="none_item"></div>
-																		${pi.mainUser.item4 }
+																		<%-- <div class="none_item"></div>
+																		${pi.mainUser.item4 } --%>
 																	</div>
 																</c:when>
 																<c:otherwise>
@@ -465,7 +483,7 @@
 														<li><c:choose>
 																<c:when test="${pi.mainUser.item5 eq '0'}">
 																	<div class="item_box">
-																		<div class="none_item"></div>
+																		<!-- <div class="none_item"></div> -->
 																	</div>
 																</c:when>
 																<c:otherwise>
@@ -482,8 +500,8 @@
 														<c:choose>
 															<c:when test="${pi.mainUser.item6 eq '0'}">
 																<div class="item_box">
-																	<div class="none_item"></div>
-																	${pi.mainUser.item6 }
+																	<%-- <div class="none_item"></div>
+																	${pi.mainUser.item6 } --%>
 																</div>
 															</c:when>
 															<c:otherwise>

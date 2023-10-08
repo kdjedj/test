@@ -121,7 +121,8 @@ padding: 32px 16px;
 	
 }
 
-.tier-picture{
+.tier-picture img{
+	/* width:72px; */
 	
 }
 
@@ -356,6 +357,11 @@ padding: 32px 16px;
 	border-radius: 50%;
 }
 
+.spells img {
+	display: block;
+	border-radius:4px;
+}
+
 span.chamlv{
 	position: absolute;
     right: 0px;
@@ -403,8 +409,40 @@ span.chamlv{
 }
 
 .ratio{
+	line-height: 16px;
+	color:#758592;
+}
+
+.flexBox:nth-of-type(1)>div.stats::before{
+	content: "";
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 1px;
+    height: 100%;
+    background-color: #c2c2c2;
+}
+
+.stats{
+	position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 140px;
+    color: #758592;
+    padding-left: 8px;
+    font-size: 11px;
+}
+
+.p-kill span{
+	color: red;
+}
+
+.cs{
 	
 }
+
+
 
 .items{
 	display: flex;
@@ -464,6 +502,15 @@ span.chamlv{
 .ward{
 	margin-left: 2px;
 }
+
+.ward img{
+	border-radius: 50%;
+}
+
+
+
+
+
 
 .participants{
 	display: flex;

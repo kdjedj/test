@@ -11,8 +11,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="${cp}/resources/reset.css">
-<link rel="stylesheet" type="text/css" href="${cp}/resources/main.css">
+<link rel="stylesheet" type="text/css" href="${cp}/resources/reset.css?ver=<%=System.currentTimeMillis()%>">
+<link rel="stylesheet" type="text/css" href="${cp}/resources/main.css?ver=<%=System.currentTimeMillis()%>">
 
 </head>
 <body>
@@ -154,6 +154,7 @@
 				<input id="" name="search" autocomplete="off" type="text" placeholder="소환사명, 소환사명, ...">
 				<div class="under-bar"></div>
 				<!--클릭시 최근검색이랑 즐겨찾기 나오는거 구현해야하나  -->
+				<a href="${cp}/board/searching_player?userName=hideonbush">페이커</a>
 			</div>
 		</div>
 	</div>

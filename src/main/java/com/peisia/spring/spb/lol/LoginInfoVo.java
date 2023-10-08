@@ -20,9 +20,10 @@ public Integer losses;
 //public Boolean freshBlood;
 //public Boolean hotStreak;
 
-public Double win_per;
+public String win_per;
 
-	public LoginInfoVo(String queueType, String tier, String rank, Integer leaguePoints, Integer wins, Integer losses, Double win_per) {
+
+	public LoginInfoVo(String queueType, String tier, String rank, Integer leaguePoints, Integer wins, Integer losses, String win_per) {
 		this.queueType = queueType;
 		this.tier = tier;
 		this.rank = rank;

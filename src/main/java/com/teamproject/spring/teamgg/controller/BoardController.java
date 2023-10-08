@@ -328,9 +328,11 @@ private GuestService service;
 //		System.out.println("자료형 확인:"+lolbc.get(0).get("losses").getClass().getName());
 		Integer losses = (Integer)lolbc.get(0).get("losses");
 		
-		Double winper_rate = (double)(wins/(wins+losses));
-		Double winper = Math.round(winper_rate * 10.0) / 10.0;
-		log.info("========승률" + winper);
+		int winlose = wins+losses;
+		double rate = (double)(wins%(wins+losses));
+		double winper_rate = ((double)((double)wins/((double)wins+(double)losses)))*100;
+		String winper = String.format("%.2f", winper_rate);
+//		log.info("========승률" + winper);
 //		String ddaralol = String.format("==== json ==== : 본 통계는 %s를 기반으로 만들어졌습니다"
 //				+ "해당 유저의 티어는 %s이며, 랭크는%s , %s번 이겼고, %s번 져서 리그포인트는 %s점 입니다", queueType, tier, rank
 //				,wins, losses, leaguePoints);
@@ -342,11 +344,11 @@ private GuestService service;
 		
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-		
+		//나중에 카운트 20으로 바꾸기
 			
 			String urlstr1 = "https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/"
 					+ temp.getPuuid()
-					+ "/ids?start=0&count=20&api_key="+API_KEY;
+					+ "/ids?start=0&count=9&api_key="+API_KEY;
 			URI gr_uri = null; //java.net.URI 임포트 하셈			
 			try {			
 				gr_uri = new URI(urlstr1);		
@@ -383,17 +385,113 @@ private GuestService service;
 			String gameMode = (String)testbc.info.gameMode;
 			
 			
-			
+			//각 수치에 대한 객체 선언 - 꼭 괄호 바깥에서 선언*
 			List<Participants> player_info = (List<Participants>)testbc.info.participants;// 게임데이타 받아오기
 			Participants mainUser = null;
+			String aver = "";
+			double totalkills_ais = 0.0;
+			Integer cs = 0; 
+			String spellId1 = null;
+			String spellId2 = null;
+			
 			
 			for(int i=0; i<player_info.size(); i++) {
+				if(player_info.get(i).win==true) {
+					totalkills_ais += (double)player_info.get(i).kills;
+					
+				}
 				if(player_info.get(i).puuid.equals(temp.getPuuid())) {
 					mainUser = player_info.get(i);
-//				System.out.println("이 값이 나오냐 안나오냐"+mainUser.deaths);
+					//spell
+					
+					System.out.println("===============================");
+					//cs
+					cs = mainUser.totalMinionsKilled + mainUser.totalEnemyJungleMinionsKilled;
+					//평점
+					aver = String.format("%.2f", 
+							((double)((double)mainUser.kills+(double)mainUser.assists)/(double)mainUser.deaths)
+							);
+						if(aver.equals("Infinity")) {
+							aver="Perfact";
+						}
+//				System.out.println("이 값이 나오냐 안나오냐 : "+aver);
 				}
+				
 			}
-			Lol_api l = new Lol_api(player_info, gameMode, mainUser);
+			//킬 관여율
+//			System.out.println("전체 킬 수는 : "+totalkills_ais);
+			String killsRate = String.format("%.0f",((double)(((double)mainUser.assists + (double)mainUser.kills)/totalkills_ais))*100);
+//			System.out.println("킬 관여율은 : "+killsRate);
+			
+			//스펠 체크	
+			try{            
+				String urlstr = "https://ddragon.leagueoflegends.com/cdn/11.3.1/data/en_US/summoner.json";
+				URL url = new URL(urlstr);
+				HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+				urlconnection.setRequestMethod("GET");
+				br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(),"UTF-8")); // 여기에 문자열을 받아와라.
+				String result = "";
+				String line;
+				while((line = br.readLine()) != null) { // 그 받아온 문자열을 계속 br에서 줄단위로 받고 출력하겠다.
+					result = result + line;
+				}
+				JsonParser parser = new JsonParser();
+				JsonObject jsonObject = parser.parse(result).getAsJsonObject();
+
+		        // 찾고자 하는 "key" 값
+		        String spell1 = mainUser.summoner1Id; // 예를 들어 "1"이라고 가정합니다.
+		        String spell2 = mainUser.summoner2Id; // 예를 들어 "1"이라고 가정합니다.
+
+		        // "data" 객체 내에서 "key" 속성이 일치하는 객체를 찾고 "id" 값을 추출
+		        
+		        JsonObject dataObject = jsonObject.getAsJsonObject("data");
+
+		        for (String key : dataObject.keySet()) {
+		            if (dataObject.has(key)) {
+		                JsonObject innerObject = dataObject.getAsJsonObject(key);
+		                String innerKey = innerObject.get("key").getAsString();
+
+		                if (innerKey.equals(spell1)) {
+		                    spellId1 = innerObject.get("id").getAsString();
+		                    break; // 일치하는 "key"를 찾으면 루프를 종료합니다.
+		                }
+		            }
+		        }
+		        
+		        for (String key : dataObject.keySet()) {
+		        	if (dataObject.has(key)) {
+		        		JsonObject innerObject = dataObject.getAsJsonObject(key);
+		        		String innerKey = innerObject.get("key").getAsString();
+		        		
+		        		if (innerKey.equals(spell2)) {
+		        			spellId2 = innerObject.get("id").getAsString();
+		        			break; // 일치하는 "key"를 찾으면 루프를 종료합니다.
+		        		}
+		        	}
+		        }
+
+//		        if (spellId1 != null) {
+//		            System.out.println("key이 " + spell1 + "에 대한 id 값: " + spellId1);
+//		        } else {
+//		            System.out.println("일치하는 key를 찾을 수 없습니다.");
+//		        }
+//		        
+//		        if (spellId2 != null) {
+//		        	System.out.println("key이 " + spell2 + "에 대한 id 값: " + spellId2);
+//		        } else {
+//		        	System.out.println("일치하는 key를 찾을 수 없습니다.");
+//		        }
+//		    
+		
+			
+				
+			}catch(Exception e){
+				System.out.println(e.getMessage());
+			}
+			
+			
+			
+			Lol_api l = new Lol_api(player_info, gameMode, mainUser, aver, killsRate, cs, spellId1, spellId2);
 			xx.add(l);
 			
 //			System.out.println("4번째 아이템 고유 번호 "+ mainUser.item3);
@@ -405,6 +503,12 @@ private GuestService service;
 	//		for(int i=0; i<=6; i++) {
 	//			System.out.println("자료형 확인:"+testbc.info.participants.get(i).item0.getClass().getName());
 	//		}
+			
+					
+			
+			
+			
+			
 		}
 //		System.out.println("xx 사이즈 : " + xx.size());
 //		System.out.println("값 잘나오나 >? : "+ xx.get(0).getParticipants().get(0).item0);
@@ -423,6 +527,8 @@ private GuestService service;
 		
 		
 
+		
+	
 		log.info("===================통과선=====================");
 
 		
