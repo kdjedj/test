@@ -167,10 +167,24 @@ nav li span {
     overflow: hidden;
     background-color:white;
 }
+.panel-rap{
+	display:flex;
+	flex-wrap: wrap;
+}
 .recent-search{
-	width:100px;
-	height:100px;
+	width:50%;
+	height:40px;
 	background-color:red;
+}
+.bookmarks{
+	width:50%;
+	height:40px;
+	background-color:yellow;
+}
+.cookies{
+	width:100%;
+	height:40px;
+	background-color:black;
 }
 .search_blank{
 	    width: 170px;
