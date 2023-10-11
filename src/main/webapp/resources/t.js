@@ -4,6 +4,7 @@ $(document).ready(function() {
   const underBox = $('.searchbox');
   const underBar = $('.under-bar');
   const searchInput = $('#searchInput'); // 검색어 입력 필드 선택
+  var MAX_SEARCH_HISTORY = 5; // 최대 검색어 개수
 
   // 쿠키를 읽어와서 검색어 입력 필드에 설정
   searchInput.val(getCookie('searchHistory'));
@@ -38,17 +39,34 @@ $(document).ready(function() {
     if (searchHistory) {
       var searchList = searchHistory.split(','); // 쿠키에서 검색어 목록 가져오기
       var cookiesList = $('.cookies'); // 쿠키 목록 요소 선택
+
+      // 새로운 검색어 추가
+      var searchQuery = ''; // 새로운 검색어 대신 사용할 검색어 변수를 설정하세요
+
+      // 중복 검사 및 새로운 검색어 추가
+      if (searchQuery && searchList.indexOf(searchQuery) === -1) {
+        searchList.push(searchQuery);
+
+        // 최대 개수를 초과하는 경우 가장 오래된(첫 번째) 검색어 삭제
+        if (searchList.length > MAX_SEARCH_HISTORY) {
+          searchList.shift();
+        }
+
+        // 검색어 목록을 쿠키에 저장 (쉼표로 구분하여 저장)
+        setCookie('searchHistory', searchList.join(','), 30); // 쿠키 유효기간 30일
+      }
+
+      // li 엘리먼트 동적으로 생성 및 추가
+      cookiesList.empty();
       for (var i = 0; i < searchList.length; i++) {
         var query = searchList[i];
-        if (query && !cookiesList.find('li:contains(' + query + ')').length) {
-          var li = $('<li>' + query + '</li>');
-          li.on('click', function() { // 클릭 이벤트 핸들러 추가
-            var searchQuery = $(this).text();
-            var searchUrl = '/teamgg/board/searching_player?userName=' + encodeURIComponent(searchQuery);
-            window.location.href = searchUrl;
-          });
-          cookiesList.append(li);
-        }
+        var li = $('<li>' + query + '</li>');
+        li.on('click', function() { // 클릭 이벤트 핸들러 추가
+          var searchQuery = $(this).text();
+          var searchUrl = '/teamgg/board/searching_player?userName=' + encodeURIComponent(searchQuery);
+          window.location.href = searchUrl;
+        });
+        cookiesList.append(li);
       }
     }
   });
@@ -66,13 +84,10 @@ $(document).ready(function() {
       date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
       expires = "; expires=" + date.toUTCString();
     }
-    // 현재 쿠키 값을 가져와서 새로운 검색어 추가
-    var existingValue = getCookie(name);
-    if (existingValue) {
-      value = existingValue + ',' + value;
-    }
+    // 쿠키 설정
     document.cookie = name + "=" + value + expires + "; path=/";
   }
+
   // 쿠키를 읽는 함수
   function getCookie(name) {
     var nameEQ = name + "=";
@@ -93,7 +108,21 @@ $(document).ready(function() {
   $('#searchButton').on('click', function() {
     var searchQuery = $('input[name="search"]').val();
     if (searchQuery) {
-      setCookie('searchHistory', searchQuery, 30); // 쿠키에 검색어를 저장, 30은 쿠키 유효기간 (일)
+      var searchHistory = getCookie('searchHistory');
+      var searchList = searchHistory ? searchHistory.split(',') : [];
+
+      // 중복 검사 및 새로운 검색어 추가
+      if (searchQuery && searchList.indexOf(searchQuery) === -1) {
+        searchList.push(searchQuery);
+
+        // 최대 개수를 초과하는 경우 가장 오래된(첫 번째) 검색어 삭제
+        if (searchList.length > MAX_SEARCH_HISTORY) {
+          searchList.shift();
+        }
+
+        // 검색어 목록을 쿠키에 저장 (쉼표로 구분하여 저장)
+        setCookie('searchHistory', searchList.join(','), 30); // 쿠키 유효기간 30일
+      }
 
       var searchUrl = '/teamgg/board/searching_player?userName=' + encodeURIComponent(searchQuery);
       window.location.href = searchUrl;
