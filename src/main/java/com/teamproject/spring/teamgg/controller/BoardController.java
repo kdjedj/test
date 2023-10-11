@@ -7,6 +7,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,8 +23,8 @@ import org.springframework.web.client.RestTemplate;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.peisia.spring.spb.lol.BasisicLoginVo;
 import com.peisia.spring.spb.lol.Cat;
+import com.peisia.spring.spb.lol.GradeInfo;
 import com.peisia.spring.spb.lol.LoginInfoVo;
 import com.peisia.spring.spb.lol.Lol_api;
 import com.peisia.spring.spb.lol.Participants;
@@ -358,8 +359,12 @@ private GuestService service;
 			List<String> grbc = restTemplate.getForObject(gr_uri, List.class); 
 			String grbc1 = (String)grbc.get(0);
 			System.out.println(grbc1);
-		
+			
+		//플레이어 데이터 수집
 		ArrayList<Lol_api> xx = new ArrayList<Lol_api>();
+//		ArrayList<Map<String, GradeInfo>> cg = new ArrayList<>();// 게임 수 승패휫수 한번에 구하기
+		Map<String, GradeInfo> cg = new HashMap<>();// 게임 수 승패휫수 한번에 구하기
+//		Map<String, Integer> cg = new HashMap<>();
 		for(String matid : grbc) {
 			// 아래 해당 사항들 배열로 만드어야함
 			String TEST_URL = "https://asia.api.riotgames.com/lol/match/v5/matches/"
@@ -393,30 +398,50 @@ private GuestService service;
 			Integer cs = 0; 
 			String spellId1 = null;
 			String spellId2 = null;
-			
+//			Map<String, Integer> grade = new HashMap<>();
+//			GradeInfo chankey = cg.get(mainUser.championName); 
+			double averValue = 0.0;
 			
 			for(int i=0; i<player_info.size(); i++) {
-				if(player_info.get(i).win==true) {
+				if(player_info.get(i).win==true) { //그냥 이긴팀 킬수 누적
 					totalkills_ais += (double)player_info.get(i).kills;
 					
 				}
 				if(player_info.get(i).puuid.equals(temp.getPuuid())) {
 					mainUser = player_info.get(i);
-					//spell
 					
-					System.out.println("===============================");
 					//cs
 					cs = mainUser.totalMinionsKilled + mainUser.totalEnemyJungleMinionsKilled;
 					//평점
 					aver = String.format("%.2f", 
 							((double)((double)mainUser.kills+(double)mainUser.assists)/(double)mainUser.deaths)
 							);
+					averValue = Double.parseDouble(aver);
+					//최근 플레이한 챔피언 평점 or 최근 플레이한 챔피언
+//					cg.put(mainUser.championName, cg.getOrDefault(mainUser.championName, 0) + 1);
+					
+					if(cg.get(mainUser.championName) == null) {
+						cg.put(mainUser.championName, new GradeInfo(mainUser.championName, 0.0, 0.0, 0, 0.0));
+					} else {
+						cg.get(mainUser.championName).chamGames =+ 1;
+						cg.get(mainUser.championName).grade =+ averValue;
+						if(mainUser.win == true) {
+							cg.get(mainUser.championName).chamWins =+ 1.0;
+						} else {
+							cg.get(mainUser.championName).chamLosses =+ 1.0;
+						}
+					}
+//					cg.put(mainUser.championName, cg.get(0).(mainUser.championName, 0) + 1);
+
+					//spell
+					
+//					System.out.println("===============================");
+					
 						if(aver.equals("Infinity")) {
 							aver="Perfact";
 						}
 //				System.out.println("이 값이 나오냐 안나오냐 : "+aver);
 				}
-				
 			}
 			//킬 관여율
 //			System.out.println("전체 킬 수는 : "+totalkills_ais);
@@ -510,6 +535,19 @@ private GuestService service;
 			
 			
 		}
+		
+		
+		
+	       // 빈도수가 가장 높은 3챔피언 찾기
+//        List<Map.Entry<String, Integer>> sortedCg = new ArrayList<>(cg.entrySet());
+//        sortedCg.sort((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()));
+        
+        System.out.println("가장 많이 나타나는 3가지 챔피언 :");
+//        for (int i = 0; i < Math.min(3, sortedCg.size()); i++) {
+//            System.out.println(sortedCg.get(i).getKey() + ": " + sortedCg.get(i).getValue() + "번 경기함");
+//        }
+    
+		
 //		System.out.println("xx 사이즈 : " + xx.size());
 //		System.out.println("값 잘나오나 >? : "+ xx.get(0).getParticipants().get(0).item0);
 //		System.out.println("1경기 5번째 플레이어 네임 >? : "+ xx.get(0).getParticipants().get(5).summonerName);
