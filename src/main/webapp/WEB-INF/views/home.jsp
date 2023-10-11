@@ -157,7 +157,8 @@
 						<div class="panel-rap">
 							<div class="recent-search"></div>
 							<div class="bookmarks"></div>
-							<div class="cookies"></div>
+							<ul class="cookies">
+							</ul>
 						</div>
 					</div>
 				</div>
