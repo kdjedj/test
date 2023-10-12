@@ -60,7 +60,9 @@ $(document).ready(function() {
       cookiesList.empty();
       for (var i = 0; i < searchList.length; i++) {
         var query = searchList[i];
-        var li = $('<li>' + query + '</li>');
+        var selectElement = document.getElementById('kr');
+        var selectedRegion = selectElement.value;
+        var li = $('<li>' + '<span class="test">' + selectedRegion + '</span>' + query + '</li>'); //span으로 region 붙이기 추가상태
         li.on('click', function() { // 클릭 이벤트 핸들러 추가
           var searchQuery = $(this).text();
           var searchUrl = '/teamgg/board/searching_player?userName=' + encodeURIComponent(searchQuery);
