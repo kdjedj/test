@@ -11,5 +11,6 @@ import lombok.Data;
 public class Info {
 	public String gameType;
 	public String gameMode;
+	public Integer gameDuration;
 	public ArrayList<Participants> participants;
 }

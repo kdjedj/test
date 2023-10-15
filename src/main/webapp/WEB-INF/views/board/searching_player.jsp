@@ -125,19 +125,64 @@
 			</div>
 
 			<div class="champions">
-				<div class="title-cham">
+				<div class="title">플레이한 챔피언</div>
 					<ul>
+						<c:forEach var="cg" items="${top3cham }" begin="0" step="1" end="2">
 						<li>
-							<div class="">해당 챔피언 게임 정보</div>
+							<img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/champion/${cg.chamName }.png" alt="${cg.chamName }">
+							<div class="win-lose">
+								<div class style="position:relative;display: inline;">
+									<c:choose>
+										<c:when test="${cg.winRate eq '100' }">
+											<span style="color:#D31A45;">${cg.winRate }%</span>
+										</c:when>
+										<c:otherwise>
+										<span>${cg.winRate }%</span>
+										</c:otherwise>
+									</c:choose>
+								</div>
+								(${cg.chamWins }승 ${cg.chamLosses }패)
+							</div>
+							<div class="aver">
+								<c:choose>
+										<c:when test="${cg.grade == Infinity}">
+											<span class="per">Perfect 평점</span>
+										</c:when>
+										<c:when test="${cg.grade >= 5.0}">
+											<span class="per">${cg.grade } 평점</span>
+										</c:when>
+										<c:when test="${cg.grade >= 3.0}">
+											<span class="gd">${cg.grade } 평점</span>
+										</c:when>
+										<c:otherwise>
+										<span>${cg.grade } 평점</span>
+										</c:otherwise>
+								</c:choose>
+								
+							</div>
 						</li>
-						<li></li>
-						<li></li>
+						</c:forEach>
 					</ul>
-				</div>
 			</div>
+			
+			 <div class="positions">
+				<div class="title">선호 포지션 (랭크)</div>
+				<ul>
+					<c:forEach var="pos" items="${positions }" begin="0" step="1" end="4" >
+						<li>
+							<div class="bar">
+								<div class="gauge" style="height: ${pos.gauge}%;"></div>
+							</div>
+							<div class="positionLogo">
+								<img src="${cp }/resources/position/${pos.position }.png" alt="${pos.position }">
+							</div>
+						</li>
+					</c:forEach>
+				</ul>
+			</div> 
 		</div>
 		<div class="queue_content">
-			<c:forEach var="pi" items="${L_Api}" begin="0" step="1" end="9">
+			<c:forEach var="pi" items="${L_Api}" begin="0" step="1" end="${endNum}">
 				<c:choose>
 					<c:when test="${pi.mainUser.win==true}">
 						<li>

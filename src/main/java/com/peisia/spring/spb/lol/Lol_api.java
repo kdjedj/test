@@ -7,6 +7,8 @@ import lombok.Data;
 public class Lol_api {
 	List<Participants> participants;
 	String gameMode;
+	Integer timemin;
+	Integer timesec;
 	Participants mainUser;
 	String aver;
 	String killsRate;
@@ -16,17 +18,18 @@ public class Lol_api {
 	
 	
 	public Lol_api(List<Participants> participants, String gameMode
-			, Participants mainUser, String aver, String killsRate,
+			, Integer timemin, Integer timesec, Participants mainUser, String aver, String killsRate,
 			Integer cs, String spellId1, String spellId2) {
 		this.participants = participants;
 		this.gameMode = gameMode;
+		this.timemin = timemin; 
+		this.timesec = timesec; 
 		this.mainUser = mainUser;
 		this.aver = aver;
 		this.killsRate= killsRate;
 		this.cs = cs;
 		this.spellId1 = spellId1;
 		this.spellId2 = spellId2;
-		
 	}
 	
 	

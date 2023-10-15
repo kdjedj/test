@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.text.Position;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +29,7 @@ import com.peisia.spring.spb.lol.GradeInfo;
 import com.peisia.spring.spb.lol.LoginInfoVo;
 import com.peisia.spring.spb.lol.Lol_api;
 import com.peisia.spring.spb.lol.Participants;
+import com.peisia.spring.spb.lol.Positions;
 import com.peisia.spring.spb.lol.Summoner;
 import com.teamproject.spring.teamgg.board.ConfigBoard;
 import com.teamproject.spring.teamgg.service.GuestService;
@@ -313,11 +315,21 @@ private GuestService service;
 	///	log.info("====== 유저 정보 잘 나오나?? "+b);
 		
 		LoginInfoVo LoginInfoVo = null;
+		String tier = "";
+		String rank = "";
+		String queueType ="";
 		List<Map<String, Object>> lolbc = restTemplate.getForObject(lol_uri, List.class); // 자기 클래스로 바꾸시오..
 	//	log.info("==== json ==== : 해당 유저 티어는? : "+lolbc.get(0).get("tier"));
-		String queueType = (String)lolbc.get(0).get("queueType");
-    	String tier = (String)lolbc.get(0).get("tier");
-		String rank = (String)lolbc.get(0).get("rank");
+		if(lolbc.get(0).get("tier").equals("")||lolbc.get(0).get("tier").equals(null)) {
+			queueType ="no search";
+			 tier = "Unranked";
+			 rank = "no search";
+		} else {
+			queueType = (String)lolbc.get(0).get("queueType");
+			 tier = (String)lolbc.get(0).get("tier");
+			 rank = (String)lolbc.get(0).get("rank");
+		}
+    	
 //		System.out.println("자료형 확인:"+lolbc.get(0).get("leaguePoints").getClass().getName());
 
 		Integer leaguePoints = (Integer)lolbc.get(0).get("leaguePoints");
@@ -338,18 +350,24 @@ private GuestService service;
 //				+ "해당 유저의 티어는 %s이며, 랭크는%s , %s번 이겼고, %s번 져서 리그포인트는 %s점 입니다", queueType, tier, rank
 //				,wins, losses, leaguePoints);
 //		log.info(ddaralol);
-		
-//		log.info("==== json ==== : 해당 유저 랭크는? : "+rank);
 		LoginInfoVo = new LoginInfoVo(queueType, tier, rank, leaguePoints, wins, losses, winper);
+//		log.info("==== json ==== : 해당 유저 랭크는? : "+rank);
+
 
 		
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 		//나중에 카운트 20으로 바꾸기
 			
+			int endNum = 9;
+			int countNum = 0;
+			int rankGames = 0;
 			String urlstr1 = "https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/"
 					+ temp.getPuuid()
-					+ "/ids?start=0&count=9&api_key="+API_KEY;
+					+ "/ids?start=0&count="+endNum+"&api_key="+API_KEY;
+			
+			countNum = endNum + 1;
+			System.out.println("현재 countNum 값 : "+countNum);
 			URI gr_uri = null; //java.net.URI 임포트 하셈			
 			try {			
 				gr_uri = new URI(urlstr1);		
@@ -364,6 +382,7 @@ private GuestService service;
 		ArrayList<Lol_api> xx = new ArrayList<Lol_api>();
 //		ArrayList<Map<String, GradeInfo>> cg = new ArrayList<>();// 게임 수 승패휫수 한번에 구하기
 		Map<String, GradeInfo> cg = new HashMap<>();// 게임 수 승패휫수 한번에 구하기
+		Map<String, Positions> positions = new HashMap<>();
 //		Map<String, Integer> cg = new HashMap<>();
 		for(String matid : grbc) {
 			// 아래 해당 사항들 배열로 만드어야함
@@ -388,7 +407,10 @@ private GuestService service;
 //			log.info("==== json ==== 아이템 고윳값 번호 : "+item0);
 			//위는 거의 확인용
 			String gameMode = (String)testbc.info.gameMode;
-			
+			Integer gameDuration = (Integer)testbc.info.gameDuration;
+			Integer timemin = gameDuration/60;
+			Integer timesec = gameDuration%60;
+			System.out.println(timemin+"분 " +timesec+"초");
 			
 			//각 수치에 대한 객체 선언 - 꼭 괄호 바깥에서 선언*
 			List<Participants> player_info = (List<Participants>)testbc.info.participants;// 게임데이타 받아오기
@@ -416,30 +438,77 @@ private GuestService service;
 					aver = String.format("%.2f", 
 							((double)((double)mainUser.kills+(double)mainUser.assists)/(double)mainUser.deaths)
 							);
-					averValue = Double.parseDouble(aver);
+					
 					//최근 플레이한 챔피언 평점 or 최근 플레이한 챔피언
 //					cg.put(mainUser.championName, cg.getOrDefault(mainUser.championName, 0) + 1);
 					
+				
+					
+					
 					if(cg.get(mainUser.championName) == null) {
-						cg.put(mainUser.championName, new GradeInfo(mainUser.championName, 0.0, 0.0, 0, 0.0));
-					} else {
-						cg.get(mainUser.championName).chamGames =+ 1;
-						cg.get(mainUser.championName).grade =+ averValue;
+//						System.out.println("해당 챔피언 테이블이 없어서 한번 만들음");
+						cg.put(mainUser.championName, new GradeInfo(
+								mainUser.championName, 
+								0, 
+								0, 
+								1, 
+								0, 
+								0,
+								0.0,
+								""
+								));
+						cg.get(mainUser.championName).killsAndais =cg.get(mainUser.championName).killsAndais + mainUser.kills;
+						cg.get(mainUser.championName).deaths =cg.get(mainUser.championName).deaths + mainUser.deaths;
 						if(mainUser.win == true) {
-							cg.get(mainUser.championName).chamWins =+ 1.0;
+							cg.get(mainUser.championName).chamWins =cg.get(mainUser.championName).chamWins + 1;
+//							System.out.println("누적 승리수" + mainUser.championName+ " : " + cg.get(mainUser.championName).chamWins);
 						} else {
-							cg.get(mainUser.championName).chamLosses =+ 1.0;
+							cg.get(mainUser.championName).chamLosses =cg.get(mainUser.championName).chamLosses + 1;
+//							System.out.println("누적 패배수" + mainUser.championName+ " : " + cg.get(mainUser.championName).chamLosses);
 						}
-					}
+					} 
+						cg.get(mainUser.championName).chamGames =cg.get(mainUser.championName).chamGames + 1;
+//						System.out.println("누적 판수" + mainUser.championName+ " : " + cg.get(mainUser.championName).chamGames);
+						cg.get(mainUser.championName).killsAndais =cg.get(mainUser.championName).killsAndais + (mainUser.kills+mainUser.assists);
+						cg.get(mainUser.championName).deaths =cg.get(mainUser.championName).deaths + mainUser.deaths;
+//						if(aver.equals("Infinity")) {
+//							break;
+//						} else {
+//							averValue = Double.parseDouble(aver);
+//							cg.get(mainUser.championName).grade =+ averValue;
+//						}
+//						
+//						System.out.println("이번 평점은 : " + cg.get(mainUser.championName).grade);
+						if(mainUser.win == true) {
+							cg.get(mainUser.championName).chamWins =cg.get(mainUser.championName).chamWins + 1;
+//							System.out.println("누적 승리수" + mainUser.championName+ " : " + cg.get(mainUser.championName).chamWins);
+						} else {
+							cg.get(mainUser.championName).chamLosses =cg.get(mainUser.championName).chamLosses + 1;
+//							System.out.println("누적 패배수" + mainUser.championName+ " : " + cg.get(mainUser.championName).chamLosses);
+						}
+					
 //					cg.put(mainUser.championName, cg.get(0).(mainUser.championName, 0) + 1);
-
-					//spell
+					//포지션별 횟수 구하기
+					if(gameMode.equals("CLASSIC")) {
+						rankGames += 1;
 					
-//					System.out.println("===============================");
-					
-						if(aver.equals("Infinity")) {
-							aver="Perfact";
+						if(positions.get(mainUser.individualPosition) == null) {
+							System.out.println("포지션 테이블이 없어서 한번 만들음");
+							positions.put(mainUser.individualPosition, new Positions(
+									mainUser.individualPosition,
+									0
+									));
+							positions.get(mainUser.individualPosition).times = positions.get(mainUser.individualPosition).times + 1;
+						} else {
+							positions.get(mainUser.individualPosition).times = positions.get(mainUser.individualPosition).times + 1;;
 						}
+						
+						}
+
+					
+					System.out.println("===============================");
+					
+						
 //				System.out.println("이 값이 나오냐 안나오냐 : "+aver);
 				}
 			}
@@ -514,9 +583,12 @@ private GuestService service;
 				System.out.println(e.getMessage());
 			}
 			
+			//퍼펙트에 대한 처리
+			if(aver.equals("Infinity")) {
+				aver="Perfact";
+			}
 			
-			
-			Lol_api l = new Lol_api(player_info, gameMode, mainUser, aver, killsRate, cs, spellId1, spellId2);
+			Lol_api l = new Lol_api(player_info, gameMode, timemin, timesec, mainUser, aver, killsRate, cs, spellId1, spellId2);
 			xx.add(l);
 			
 //			System.out.println("4번째 아이템 고유 번호 "+ mainUser.item3);
@@ -529,24 +601,116 @@ private GuestService service;
 	//			System.out.println("자료형 확인:"+testbc.info.participants.get(i).item0.getClass().getName());
 	//		}
 			
-					
-			
-			
-			
-			
 		}
 		
+
+//				log.info("==== json ==== 몇게임 했는지  : "+cg.get(0).chamGames);
+//				log.info("==== json ==== 평점의 총합 : "+cg.get(0).grade);
+	
+//		log.info("==== json ==== 평점의 총합 : "+cg.get("Sylas").grade);
+//		log.info("==== json ==== 몇게임 했는지 : "+cg.get("Sylas").chamGames);
+//		log.info("==== json ==== 얼마나 이겼는지 : "+cg.get("Sylas").chamWins);
 		
+		List<GradeInfo> top3cham = new ArrayList<>();
+		// 각 키에 대해 작업
+        for (String key : cg.keySet()) {
+            GradeInfo cham = cg.get(key);
+            top3cham.add(cham); // 모든 CustomClass 객체를 목록에 추가합니다.
+        }
+
+        // 오름차순으로 정렬
+        top3cham.sort((cham1, cham2) -> Integer.compare(cham2.chamGames, cham1.chamGames));
+
+//		System.out.println("탑 1위 챔피언은 ? : " + top3cham.get(0).chamName);
+//		System.out.println("탑 1위 챔피언 경기수는? : " + top3cham.get(0).chamGames);
+//		System.out.println("탑 1위 챔피언 도합 킬과 어시는? : " + top3cham.get(0).killsAndais);
+//		System.out.println("탑 1위 챔피언 도합 데스는? : " + top3cham.get(0).deaths);
+//		System.out.println("===============================");
+//		System.out.println("탑 2위 챔피언은 ? : " + top3cham.get(1).chamName);
+//		System.out.println("탑 2위 챔피언 경기수는? : " + top3cham.get(1).chamGames);
+//		System.out.println("탑 2위 챔피언 도합 킬과 어시는? : " + top3cham.get(1).killsAndais);
+//		System.out.println("탑 2위 챔피언 도합 데스는? : " + top3cham.get(1).deaths);
+//		System.out.println("===============================");
+//		System.out.println("탑 3위 챔피언은 ? : " + top3cham.get(2).chamName);
+//		System.out.println("탑 3위 챔피언 경기수는? : " + top3cham.get(2).chamGames);
+//		System.out.println("탑 3위 챔피언 도합 킬과 어시는? : " + top3cham.get(2).killsAndais);
+//		System.out.println("탑 3위 챔피언 도합 데스는? : " + top3cham.get(2).deaths);
+//		System.out.println("===============================");
+		String strGrade = "";
+		for(int i=0; i<top3cham.size(); i++) {
+			
+		 strGrade = String.format("%.2f",
+				 ((double)top3cham.get(i).killsAndais/(double)top3cham.get(i).deaths)
+				 );
+		 top3cham.get(i).grade = Double.parseDouble(strGrade);
+
+//		 System.out.println(top3cham.get(i).chamName + " 의 평점은 : " +top3cham.get(i).grade);
+		 
+		 if(top3cham.get(i).chamWins==0) {
+			 top3cham.get(i).winRate = "0"; 
+		 }else if(top3cham.get(i).chamLosses==0) {
+			 top3cham.get(i).winRate = "100"; 
+		 } else {
+			 top3cham.get(i).winRate = String.format("%.0f",
+					 ((double)(top3cham.get(i).chamWins)/(double)(top3cham.get(i).chamWins+top3cham.get(i).chamLosses))*100
+					 );
+//			 System.out.println(top3cham.get(i).chamName + " 의 승률은 : " +top3cham.get(i).winRate);
+		 	}
+		 
+		}
 		
-	       // 빈도수가 가장 높은 3챔피언 찾기
-//        List<Map.Entry<String, Integer>> sortedCg = new ArrayList<>(cg.entrySet());
-//        sortedCg.sort((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()));
+	// 포지션 쌓인걸 바탕으로 List<>생성	
+//		List<Integer> positionN = new ArrayList<>();
+//		for(int i=0; i<5; i++) {
+//			positionN.add(i, 0);
+//		}
+		List<Positions> positionN = new ArrayList<>();
+		positionN.add(new Positions("TOP", ""));
+		positionN.add(new Positions("JUNGLE", ""));
+		positionN.add(new Positions("MIDDLE", ""));
+		positionN.add(new Positions("BOTTOM", ""));
+		positionN.add(new Positions("SURPORT", ""));
+		System.out.println("포지션 리스트 사이즈는? : " +positionN.size());
+		// 포지션 키값 리스트에 옮기기
+        for (String key : positions.keySet()) {
+        	System.out.println("각각 " + positions.get(key).position+ "이 있음");
+        	for(int i = 0; i<positionN.size(); i++) {
+        		if(key.equals(positionN.get(i).position)) {
+        			if(positions.get(key).times!=0) {
+        				System.out.println("현재 rankGames 값 : "+rankGames);
+        			positionN.get(i).gauge = String.format("%.4f",((double)positions.get(key).times/(double)rankGames)*100); 
+        			System.out.println(positionN.get(i).position+"의 포지션에 값이 들어감 : " +positionN.get(i).gauge);
+        			} 
+        		}
         
-        System.out.println("가장 많이 나타나는 3가지 챔피언 :");
-//        for (int i = 0; i < Math.min(3, sortedCg.size()); i++) {
-//            System.out.println(sortedCg.get(i).getKey() + ": " + sortedCg.get(i).getValue() + "번 경기함");
+        	}
+        	
+        }
+        //빈 문자열이 있는 곳 채우기
+        for(int i=0; i<positionN.size(); i++) {
+        	if(positionN.get(i).gauge.equals("")) {
+        		positionN.get(i).gauge = "0";
+        	}
+    		System.out.println("포지션 " +positionN.get(i).position+ "에 " +positionN.get(i).gauge+"의 값이 들어있음");
+        }
+        
+//        // 각 키에 대해 작업
+//        for (String key : positions.keySet()) {
+//        	System.out.println("각각 " + positions.get(key).position+ "이 있음");
+//        	for(int i = 0; i<positionN.size(); i++) {
+//        		if(key.equals(positionN.get(i).position)) {
+//        			positionN.get(i).times = positions.get(key).times;
+//        			System.out.println(positionN.get(i).position+"의 포지션에 값이 들어감 : " +positionN.get(i).times);
+//        		}
+//        	}
+//        	
 //        }
-    
+//        
+        
+        //포지션 값 확인
+//        for(int i=0; i< positionN.size(); i++) {
+//        	System.out.println("리스트에 " + positionN.get(i).position+ "을 "+positionN.get(i).times+"번 씩함");
+//        }
 		
 //		System.out.println("xx 사이즈 : " + xx.size());
 //		System.out.println("값 잘나오나 >? : "+ xx.get(0).getParticipants().get(0).item0);
@@ -570,11 +734,13 @@ private GuestService service;
 		log.info("===================통과선=====================");
 
 		
+ 		model.addAttribute("endNum", endNum);
+ 		model.addAttribute("positions", positionN);
  		model.addAttribute("summoner", temp);
+ 		model.addAttribute("top3cham", top3cham);
  		model.addAttribute("liv", LoginInfoVo);
  		model.addAttribute("L_Api", xx);
 		model.addAttribute("profile_img", "http://ddragon.leagueoflegends.com/cdn/13.18.1/img/profileicon/"+temp.getProfileIconId()+".png");
-	//	model.addAttribute("Item_imgURL", "https://ddragon.leagueoflegends.com/cdn/13.18.1/img/item/"++".png");
 	
 		
 		
