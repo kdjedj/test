@@ -13,7 +13,7 @@ $(document).ready(function() {
 
   // 상단탭 클릭시 해당탭&하단탭 색상변경
   mainTabs.on('click', function() {
-    console.log('클릭 이벤트 발생!'); // 디버깅용 로그
+    //console.log('클릭 이벤트 발생!'); // 디버깅용 로그
 
     // 모든 main-tab의 li 배경색 초기화
     mainTabs.css('background-color', 'initial');
@@ -39,9 +39,9 @@ $(document).ready(function() {
     event.stopPropagation();
 	// 리전 업데이트
     selectedRegion = $('#kr').val();
-    console.log('셀렉트리전테스트:' + selectedRegion);
+    //console.log('셀렉트리전테스트:' + selectedRegion);
     var searchHistory = getCookie('searchHistory');
-    console.log(searchHistory);
+    //console.log(searchHistory);
     if (searchHistory) {
       var searchList = searchHistory.split(','); // 쿠키에서 검색어 목록 가져오기
       var cookiesList = $('.cookies'); // 쿠키 목록 요소 선택
@@ -52,7 +52,7 @@ $(document).ready(function() {
         var region = searchData[0]; // 리전
         var query = searchData[1]; // 검색어
         
-        console.log('리전테스트:'+searchData[0]);
+        //console.log('리전테스트:'+searchData[0]);
         var li = $('<li>' + '<span class="test">' + region + '</span>' + query + '</li>');
         li.on('click', function() {
           var searchQuery = $(this).text();
