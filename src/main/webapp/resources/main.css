@@ -111,6 +111,25 @@ nav li span {
     text-transform: uppercase;
     margin-right: 17px;
 }
+
+/* 기본 스타일 - 빈 별 */
+.favorite-summoner-label {
+  width: 20px; /* 별표의 너비 */
+  height: 20px; /* 별표의 높이 */
+  background-image: url('/teamgg/resources/empty-star.png'); /* 빈 별표 이미지 */
+  background-size:cover;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* 노란 별 스타일 */
+.yellow-star {
+  background: url('/teamgg/resources/yellow-star.png'); /* 노란 별표 이미지 */
+}
+/* 체크박스 숨김 스타일 */
+.hidden {
+  display: none;
+}
 /*===========================================================================  */
 /* user_board part */
 /*===========================================================================  */
