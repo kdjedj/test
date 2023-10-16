@@ -9,6 +9,8 @@ $(document).ready(function() {
   // 쿠키를 읽어와서 검색어 입력 필드에 설정
   searchInput.val(getCookie('searchHistory'));
 
+  var selectedRegion = "kr"; // 기본 리전 설정 (kr, na, jp 등)
+
   // 상단탭 클릭시 해당탭&하단탭 색상변경
   mainTabs.on('click', function() {
     console.log('클릭 이벤트 발생!'); // 디버깅용 로그
@@ -27,43 +29,32 @@ $(document).ready(function() {
 
     // 선택한 main-tab의 span 스타일 변경
     $(this).find('span').css('font-weight', 'bold');
+    
+    
   });
 
   // 검색창 클릭 시 서치패널 보이게
   underBox.on('click', function(event) {
     underBar.children('.search-panel').css('display', 'block');
     event.stopPropagation();
-
-    // 쿠키에서 검색어 목록을 읽어온 후 li 엘리먼트를 동적으로 생성 및 추가
+	// 리전 업데이트
+    selectedRegion = $('#kr').val();
+    console.log('셀렉트리전테스트:' + selectedRegion);
     var searchHistory = getCookie('searchHistory');
+    console.log(searchHistory);
     if (searchHistory) {
       var searchList = searchHistory.split(','); // 쿠키에서 검색어 목록 가져오기
       var cookiesList = $('.cookies'); // 쿠키 목록 요소 선택
 
-      // 새로운 검색어 추가
-      var searchQuery = ''; // 새로운 검색어 대신 사용할 검색어 변수를 설정하세요
-
-      // 중복 검사 및 새로운 검색어 추가
-      if (searchQuery && searchList.indexOf(searchQuery) === -1) {
-        searchList.push(searchQuery);
-
-        // 최대 개수를 초과하는 경우 가장 오래된(첫 번째) 검색어 삭제
-        if (searchList.length > MAX_SEARCH_HISTORY) {
-          searchList.shift();
-        }
-
-        // 검색어 목록을 쿠키에 저장 (쉼표로 구분하여 저장)
-        setCookie('searchHistory', searchList.join(','), 30); // 쿠키 유효기간 30일
-      }
-
-      // li 엘리먼트 동적으로 생성 및 추가
       cookiesList.empty();
       for (var i = 0; i < searchList.length; i++) {
-        var query = searchList[i];
-        var selectElement = document.getElementById('kr');
-        var selectedRegion = selectElement.value;
-        var li = $('<li>' + '<span class="test">' + selectedRegion + '</span>' + query + '</li>'); //span으로 region 붙이기 추가상태
-        li.on('click', function() { // 클릭 이벤트 핸들러 추가
+        var searchData = searchList[i].split(':');
+        var region = searchData[0]; // 리전
+        var query = searchData[1]; // 검색어
+        
+        console.log('리전테스트:'+searchData[0]);
+        var li = $('<li>' + '<span class="test">' + region + '</span>' + query + '</li>');
+        li.on('click', function() {
           var searchQuery = $(this).text();
           var searchUrl = '/teamgg/board/searching_player?userName=' + encodeURIComponent(searchQuery);
           window.location.href = searchUrl;
@@ -114,8 +105,8 @@ $(document).ready(function() {
       var searchList = searchHistory ? searchHistory.split(',') : [];
 
       // 중복 검사 및 새로운 검색어 추가
-      if (searchQuery && searchList.indexOf(searchQuery) === -1) {
-        searchList.push(searchQuery);
+      if (searchQuery && searchList.indexOf(selectedRegion + ':' + searchQuery) === -1) {
+        searchList.push(selectedRegion + ':' + searchQuery);
 
         // 최대 개수를 초과하는 경우 가장 오래된(첫 번째) 검색어 삭제
         if (searchList.length > MAX_SEARCH_HISTORY) {
