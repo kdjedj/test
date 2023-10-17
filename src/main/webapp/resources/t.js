@@ -32,6 +32,7 @@ $(document).ready(function() {
     
     
   });
+  
 
   // 검색창 클릭 시 서치패널 보이게
   underBox.on('click', function(event) {
@@ -46,57 +47,67 @@ $(document).ready(function() {
       var searchList = searchHistory.split(','); // 쿠키에서 검색어 목록 가져오기
       var cookiesList = $('.cookies'); // 쿠키 목록 요소 선택
       cookiesList.empty();
-      var id = 0; // 아이템 ID 초기화
-      for (var i = 0; i < searchList.length; i++) {
+      for (let i = 0; i < searchList.length; i++) {
         var searchData = searchList[i].split(':');
         var region = searchData[0]; // 리전
         var query = searchData[1]; // 검색어
+        var k;
         
-        //console.log('리전테스트:'+searchData[0]);
         
-
-		// 아이템을 생성하고 이벤트를 연결할 때마다 ID를 증가시킴
-		var li = $('<li>' +
-		  '<span class="test">' + region + '</span>' +
-		  '<span class="summoner">' + query + '</span>' +
-		  '<input class="hidden" type="checkbox" id="fav_' + id + '">' +
-		  '<label class="favorite-summoner-label" for="fav_' + id + '"></label>' +
-		  '<span class="fav-label">즐겨찾기</span>' +
-		  '</li');
-		  
-		// 해당 체크박스와 레이블에 대한 이벤트 처리
-		var checkbox = li.find('input[type="checkbox"]');
-		var label = li.find('label.favorite-summoner-label');
-		
-		label.on('click', function() {
-			// 체크박스 상태 변경
-  			var checkbox = $(this).prev('input[type="checkbox"]');
-    		checkbox.prop('checked', !checkbox.prop('checked'));
-		});
-		
-		
-		checkbox.on('change', function() {
-		  if ($(this).is(':checked')) {
-		    // 체크박스가 선택되었을 때, 노란 별로 변경
-		    var label = $(this).next('label.favorite-summoner-label');
-      		label.addClass('yellow-star');
-		  } else {
-		    // 체크박스가 선택 해제되었을 때, 빈 별로 변경
-		    var label = $(this).next('label.favorite-summoner-label');
-     		label.removeClass('yellow-star');
-		  }
-		});
-
-		id++; // 다음 아이템을 위한 ID 증가
+        
+        
+        
+        // 아이템을 생성하고 이벤트를 연결할 때마다 ID를 증가시킴
+        var li = $('<li>' +
+  '<span class="test">' + region + '</span>' +
+  '<span class="summoner">' + query + '</span>' +
+  '<div class="favorite-summoner-chk">' + 
+    '<input type="checkbox" id="fav_' + i +'" class="checkBox">' +
+    '<label for="fav_' + i +' " class="favorite-summoner-list"></label>' +
+  '</div>' +
+  '</li>');
+		// li 요소의 click 이벤트 핸들러에서 이벤트 중지
+    li.on('click', function(event) {
+        event.stopPropagation();
+    });
+        
+        
+        
+	   
+        //소환사명 누르면 전적검색이동        
         li.find('.summoner').on('click', function() {
           var searchQuery = $(this).text();
           var searchUrl = '/teamgg/board/searching_player?userName=' + encodeURIComponent(searchQuery);
           window.location.href = searchUrl;
         });
+        
+        
+        
+		// 아이템 클릭 이벤트 핸들러
+		li.on('click', function(event) {
+		    event.stopPropagation();
+		    
+		    // 체크박스 상태 변경
+		    var checkbox = $(this).find('input[type="checkbox"]');
+		    checkbox.prop('checked', !checkbox.prop('checked'));
+		    
+		    // 체크박스의 상태에 따라 클래스 추가/제거
+		    var label = $(this).find('label');
+		    if (checkbox.prop('checked')) {
+		        label.addClass('yellow-star');
+		    } else {
+		        label.removeClass('yellow-star');
+		    }
+		});
+	
+	
         cookiesList.append(li);
-      }
-    }
-  });
+      }//for
+    }//if
+  });//underBox
+  
+
+
 
   // 서치패널 숨기기
   $(document).on('click', function() {
@@ -157,9 +168,12 @@ $(document).ready(function() {
   });
 
   // 기존 쿠키 목록에서 li 요소를 클릭하면 검색 페이지로 이동
-  $('.cookies li').on('click', function() {
+  $('.summoner').on('click', function() {
     var searchQuery = $(this).text();
     var searchUrl = '/teamgg/board/searching_player?userName=' + encodeURIComponent(searchQuery);
     window.location.href = searchUrl;
   });
 });
+
+function x() {
+}

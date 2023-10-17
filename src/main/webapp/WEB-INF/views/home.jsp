@@ -150,12 +150,13 @@
 				</div>
 			</form>
 			<div class="searchbox">
-				<label for="serachHome" class="label">Search</label>
-				<input id="" name="search" autocomplete="off" type="text" placeholder="소환사명, 소환사명, ...">
+				<label for="searchHome" class="label">Search</label>
+				<input id="searchHome" name="search" autocomplete="off" type="text" placeholder="소환사명, 소환사명, ...">
 				<div class="under-bar">
 					<div class="search-panel">
 						<div class="panel-rap">
-							<div class="recent-search">최근검색</div>
+							<div class="recent-search favorite-summoner-list" id="test-button_0">최근검색</div>
+							<div class="recent-search favorite-summoner-list" id="test-button_1">최근검색</div>
 							<div class="bookmarks">즐겨찾기</div>
 							<ul class="cookies">
 							</ul>
@@ -177,9 +178,9 @@
 	date : <%=session.getAttribute("m_date")%><br>
 	role : <%=session.getAttribute("m_role")%><br>
 
-<div class="footer">
+<!-- <div class="footer">
 	<div class="footer-rap">
 	</div>
-</div>
+</div> -->
 </body>
 </html>

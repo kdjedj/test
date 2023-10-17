@@ -113,7 +113,7 @@ nav li span {
 }
 
 /* 기본 스타일 - 빈 별 */
-.favorite-summoner-label {
+.favorite-summoner-list {
   width: 20px; /* 별표의 너비 */
   height: 20px; /* 별표의 높이 */
   background-image: url('/teamgg/resources/empty-star.png'); /* 빈 별표 이미지 */
@@ -124,11 +124,16 @@ nav li span {
 
 /* 노란 별 스타일 */
 .yellow-star {
-  background: url('/teamgg/resources/yellow-star.png'); /* 노란 별표 이미지 */
+  width: 20px; /* 별표의 너비 */
+  height: 20px; /* 별표의 높이 */
+  background-image : url('/teamgg/resources/yellow-star.png'); /* 노란 별표 이미지 */
+  background-size:cover;
+  display: inline-block;
+  cursor: pointer;
 }
 /* 체크박스 숨김 스타일 */
-.hidden {
-  display: none;
+.checkBox {
+	display:none;
 }
 /*===========================================================================  */
 /* user_board part */
