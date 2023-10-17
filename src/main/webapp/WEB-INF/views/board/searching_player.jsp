@@ -65,7 +65,7 @@
 				</div>
 
 				 <div class="rank">
-					<div class="rank-header">승률</div>
+					<div class="rank-header">전체 승률</div>
 					<div class=rank-content>
 						<div class="rank_winRate">${liv.win_per }%</div>
 					<%--	<div class="tier-info">
@@ -112,8 +112,7 @@
 			<div class="stat">
 				<div class="win-lose">
 					<div class="k-d-a">
-						${gameInfo.gg.chamGames }전 /${gameInfo.gg.chamWins } 승 / ${gameInfo.gg.chamLosses }
-							패 
+						${gameInfo.gg.chamGames }전 / ${gameInfo.gg.chamWins }승 / ${gameInfo.gg.chamLosses }패 
 					</div>
 				</div>
 				<div class="kda">

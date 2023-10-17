@@ -162,7 +162,7 @@ padding: 32px 16px;
 }
 
 .lose-win-ratio{
-	    margin-left: 22px;
+	    margin-left: 20px;
 	    padding-top: 15px;
 }
 
@@ -301,6 +301,10 @@ padding: 32px 16px;
 	position: relative;
     width: 88px;
     height: 88px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 2em;
 }
 
 .stat div.win-lose div.k-d-a{
