@@ -155,8 +155,7 @@
 				<div class="under-bar">
 					<div class="search-panel">
 						<div class="panel-rap">
-							<div class="recent-search favorite-summoner-list" id="test-button_0">최근검색</div>
-							<div class="recent-search favorite-summoner-list" id="test-button_1">최근검색</div>
+							<div class="recent-search">최근검색</div>
 							<div class="bookmarks">즐겨찾기</div>
 							<ul class="cookies">
 							</ul>
