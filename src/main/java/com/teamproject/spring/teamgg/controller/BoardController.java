@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.swing.text.Position;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +24,7 @@ import org.springframework.web.client.RestTemplate;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.peisia.spring.spb.lol.Cat;
+import com.peisia.spring.spb.lol.GameInfo;
 import com.peisia.spring.spb.lol.GradeInfo;
 import com.peisia.spring.spb.lol.LoginInfoVo;
 import com.peisia.spring.spb.lol.Lol_api;
@@ -318,31 +318,33 @@ private GuestService service;
 		String tier = "";
 		String rank = "";
 		String queueType ="";
+		Integer leaguePoints = 0;
+		Integer wins = 0;
+		Integer losses = 0;
 		List<Map<String, Object>> lolbc = restTemplate.getForObject(lol_uri, List.class); // 자기 클래스로 바꾸시오..
 	//	log.info("==== json ==== : 해당 유저 티어는? : "+lolbc.get(0).get("tier"));
-		if(lolbc.get(0).get("tier").equals("")||lolbc.get(0).get("tier").equals(null)) {
+		if(lolbc.size()==0) {
 			queueType ="no search";
 			 tier = "Unranked";
 			 rank = "no search";
+			 wins = 0;
+			 losses = 0;
 		} else {
 			queueType = (String)lolbc.get(0).get("queueType");
 			 tier = (String)lolbc.get(0).get("tier");
 			 rank = (String)lolbc.get(0).get("rank");
+			 leaguePoints = (Integer)lolbc.get(0).get("leaguePoints");
+			 wins = (Integer)lolbc.get(0).get("wins");
+			 losses = (Integer)lolbc.get(0).get("losses");
 		}
     	
 //		System.out.println("자료형 확인:"+lolbc.get(0).get("leaguePoints").getClass().getName());
-
-		Integer leaguePoints = (Integer)lolbc.get(0).get("leaguePoints");
 //		log.info("==== json ==== : 해당 유저 리그포인트는? : "+leaguePoints);
-		
 //		System.out.println("자료형 확인:"+lolbc.get(0).get("wins").getClass().getName());
-		Integer wins = (Integer)lolbc.get(0).get("wins");
-
 //		System.out.println("자료형 확인:"+lolbc.get(0).get("losses").getClass().getName());
-		Integer losses = (Integer)lolbc.get(0).get("losses");
 		
 		int winlose = wins+losses;
-		double rate = (double)(wins%(wins+losses));
+//		double rate = (double)(wins%(wins+losses));
 		double winper_rate = ((double)((double)wins/((double)wins+(double)losses)))*100;
 		String winper = String.format("%.2f", winper_rate);
 //		log.info("========승률" + winper);
@@ -381,9 +383,15 @@ private GuestService service;
 		//플레이어 데이터 수집
 		ArrayList<Lol_api> xx = new ArrayList<Lol_api>();
 //		ArrayList<Map<String, GradeInfo>> cg = new ArrayList<>();// 게임 수 승패휫수 한번에 구하기
-		Map<String, GradeInfo> cg = new HashMap<>();// 게임 수 승패휫수 한번에 구하기
+		Map<String, GradeInfo> cg = new HashMap<>();// 챔피언당 게임 수 승패휫수 한번에 구하기
+		GradeInfo mg = new GradeInfo(0,0,0,"","","","","","");// 챔피언당 게임 수 승패휫수 한번에 구하기
 		Map<String, Positions> positions = new HashMap<>();
 //		Map<String, Integer> cg = new HashMap<>();
+		Integer mainKills = 0;	
+		Integer mainAsis = 0;	
+		Integer mainDeaths = 0;	
+		Integer totalkills = 0;
+		Integer utotalkills = 0;
 		for(String matid : grbc) {
 			// 아래 해당 사항들 배열로 만드어야함
 			String TEST_URL = "https://asia.api.riotgames.com/lol/match/v5/matches/"
@@ -416,7 +424,7 @@ private GuestService service;
 			List<Participants> player_info = (List<Participants>)testbc.info.participants;// 게임데이타 받아오기
 			Participants mainUser = null;
 			String aver = "";
-			double totalkills_ais = 0.0;
+			
 			Integer cs = 0; 
 			String spellId1 = null;
 			String spellId2 = null;
@@ -425,12 +433,21 @@ private GuestService service;
 			double averValue = 0.0;
 			
 			for(int i=0; i<player_info.size(); i++) {
-				if(player_info.get(i).win==true) { //그냥 이긴팀 킬수 누적
-					totalkills_ais += (double)player_info.get(i).kills;
-					
-				}
+				
 				if(player_info.get(i).puuid.equals(temp.getPuuid())) {
 					mainUser = player_info.get(i);
+					
+					utotalkills += mainUser.assists + mainUser.kills;
+					
+					//해당유저 모든 챔피언 평점(kda와 숭패 휫수)
+					mainKills =mainKills+ mainUser.kills;
+					mainAsis =mainAsis+ mainUser.assists;
+					mainDeaths =mainDeaths+ mainUser.deaths;
+					if(mainUser.win==true) {
+						mg.chamWins = mg.chamWins + 1;
+					} else {
+						mg.chamLosses = mg.chamLosses + 1;
+					}
 					
 					//cs
 					cs = mainUser.totalMinionsKilled + mainUser.totalEnemyJungleMinionsKilled;
@@ -457,7 +474,7 @@ private GuestService service;
 								0.0,
 								""
 								));
-						cg.get(mainUser.championName).killsAndais =cg.get(mainUser.championName).killsAndais + mainUser.kills;
+						cg.get(mainUser.championName).killsAndais =cg.get(mainUser.championName).killsAndais + mainUser.kills + mainUser.assists;
 						cg.get(mainUser.championName).deaths =cg.get(mainUser.championName).deaths + mainUser.deaths;
 						if(mainUser.win == true) {
 							cg.get(mainUser.championName).chamWins =cg.get(mainUser.championName).chamWins + 1;
@@ -504,17 +521,26 @@ private GuestService service;
 						}
 						
 						}
-
 					
-					System.out.println("===============================");
+					
+					
+					System.out.println("=============== 경계선 ===============");
 					
 						
 //				System.out.println("이 값이 나오냐 안나오냐 : "+aver);
 				}
 			}
+			//
+			for(int i=0; i<player_info.size(); i++) {
+				if(player_info.get(i).win==mainUser.win) { //그냥 이긴팀 킬수 누적
+					totalkills += player_info.get(i).kills;
+					
+				}
+			}
+			
 			//킬 관여율
 //			System.out.println("전체 킬 수는 : "+totalkills_ais);
-			String killsRate = String.format("%.0f",((double)(((double)mainUser.assists + (double)mainUser.kills)/totalkills_ais))*100);
+			String killsRate = String.format("%.0f",((double)(((double)mainUser.assists + (double)mainUser.kills)/(double)totalkills))*100);
 //			System.out.println("킬 관여율은 : "+killsRate);
 			
 			//스펠 체크	
@@ -673,11 +699,11 @@ private GuestService service;
 		System.out.println("포지션 리스트 사이즈는? : " +positionN.size());
 		// 포지션 키값 리스트에 옮기기
         for (String key : positions.keySet()) {
-        	System.out.println("각각 " + positions.get(key).position+ "이 있음");
+//        	System.out.println("각각 " + positions.get(key).position+ "이 있음");
         	for(int i = 0; i<positionN.size(); i++) {
         		if(key.equals(positionN.get(i).position)) {
         			if(positions.get(key).times!=0) {
-        				System.out.println("현재 rankGames 값 : "+rankGames);
+//        				System.out.println("현재 rankGames 값 : "+rankGames);
         			positionN.get(i).gauge = String.format("%.4f",((double)positions.get(key).times/(double)rankGames)*100); 
         			System.out.println(positionN.get(i).position+"의 포지션에 값이 들어감 : " +positionN.get(i).gauge);
         			} 
@@ -691,8 +717,20 @@ private GuestService service;
         	if(positionN.get(i).gauge.equals("")) {
         		positionN.get(i).gauge = "0";
         	}
-    		System.out.println("포지션 " +positionN.get(i).position+ "에 " +positionN.get(i).gauge+"의 값이 들어있음");
+//    		System.out.println("포지션 " +positionN.get(i).position+ "에 " +positionN.get(i).gauge+"의 값이 들어있음");
         }
+        
+        //해당유저 평균 게임 정보
+        
+        mg.chamGames = mg.chamWins + mg.chamLosses;
+        System.out.println("총 게임수 : " +mg.chamGames+"번, 도합 킬 수 : "+mainKills+ "번, 도합 데스 수 : "+mainDeaths+ "번, 도합 어시 수 : "+mainAsis+"번");
+        mg.killGrade = String.format("%.1f",(double)mainKills/(double)(mg.chamWins+mg.chamLosses));
+        mg.asiGrade = String.format("%.1f",(double)mainAsis/(double)(mg.chamWins+mg.chamLosses));
+        mg.deathGrade = String.format("%.1f",(double)mainDeaths/(double)(mg.chamWins+mg.chamLosses));
+        mg.gradestr = String.format("%.2f",(double)(mainKills+ mainAsis)/(double)mainDeaths);
+        mg.winRate = String.format("%.0f",((double)mg.chamWins/(double)mg.chamGames)*100);
+        mg.killRate = String.format("%.0f",((double)utotalkills/(double)totalkills)*100);
+        GameInfo gg = new GameInfo(mg, endNum); // 게임 기본 정보 넘기기
         
 //        // 각 키에 대해 작업
 //        for (String key : positions.keySet()) {
@@ -734,7 +772,7 @@ private GuestService service;
 		log.info("===================통과선=====================");
 
 		
- 		model.addAttribute("endNum", endNum);
+ 		model.addAttribute("gameInfo", gg);
  		model.addAttribute("positions", positionN);
  		model.addAttribute("summoner", temp);
  		model.addAttribute("top3cham", top3cham);

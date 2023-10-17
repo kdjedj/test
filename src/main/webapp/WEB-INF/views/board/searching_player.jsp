@@ -55,7 +55,7 @@
 							<div class=tier>
 								<h2>${liv.tier }</h2>
 							</div>
-							<div class=lp>lp</div>
+							<div class=lp>${liv.leaguePoints} lp</div>
 						</div>
 						<div class="lose-win-ratio">
 							<div class="lose-win"></div>
@@ -64,22 +64,25 @@
 					</div>
 				</div>
 
-				<div class="rank">
-					<div class="rank-header">자유랭크</div>
+				 <div class="rank">
+					<div class="rank-header">승률</div>
 					<div class=rank-content>
-						<div class="tier-picture"></div>
-						<div class="tier-info">
-							<div class=tier>
-								<h2>tier</h2>
+						<div class="rank_winRate">${liv.win_per }%</div>
+					<%--	<div class="tier-info">
+							 <div class=tier>
+								<h2>${liv.wins }</h2>
 							</div>
-							<div class=lp>lp</div>
-						</div>
+							<div class=lp>${liv.losses }</div> 
+						</div>--%>
 						<div class="lose-win-ratio">
-							<div class="lose-win"></div>
+							<div class="allgame">${liv.wins+liv.losses }전</div>
+							<div class="lose-win">
+								<span>${liv.wins }승</span> &nbsp;/&nbsp; <span class="d">${liv.losses }패</span>
+							</div>
 							<div class="latio"></div>
 						</div>
 					</div>
-				</div>
+				</div> 
 
 			</div>
 		</div>
@@ -109,17 +112,30 @@
 			<div class="stat">
 				<div class="win-lose">
 					<div class="k-d-a">
-						<span>${liv.wins } 승</span> &nbsp;/&nbsp; <span class="d">${liv.losses }
-							패</span> &nbsp;/&nbsp; <span>${liv.win_per }%</span>
+						${gameInfo.gg.chamGames }전 /${gameInfo.gg.chamWins } 승 / ${gameInfo.gg.chamLosses }
+							패 
 					</div>
 				</div>
 				<div class="kda">
-					<div class="chart">차트 넣고</div>
+					<div class="chart">
+						${gameInfo.gg.winRate }%
+						<%-- <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
+						         <defs>
+						            <linearGradient id="GradientColor">
+						               <stop offset="0%" stop-color="#e91e63" />
+						               <stop offset="100%" stop-color="#673ab7" />
+						            </linearGradient>
+						         </defs>
+						         <circle cx="80" cy="80" r="70" stroke-linecap="round" />
+					   </svg> --%>
+					</div>
 					<div class="info">
 						<div class="k-d-a">
-							<span>평균킬</span> &nbsp;/&nbsp; <span class="d">평균 데스</span>
-							&nbsp;/&nbsp; <span>평균 어시</span>
+							${gameInfo.gg.killGrade } / <span class="d">${gameInfo.gg.deathGrade }</span>
+							/ ${gameInfo.gg.asiGrade }
 						</div>
+						<div class="ratio">${gameInfo.gg.gradestr }:1</div>
+						<div class="kill_per">킬관여 ${gameInfo.gg.killRate }%</div>
 					</div>
 				</div>
 			</div>
@@ -174,7 +190,7 @@
 								<div class="gauge" style="height: ${pos.gauge}%;"></div>
 							</div>
 							<div class="positionLogo">
-								<img src="${cp }/resources/position/${pos.position }.png" alt="${pos.position }">
+								<img src="${cp }/resources/position/${pos.position }.png" alt="${pos.position }" style="width:16px;">
 							</div>
 						</li>
 					</c:forEach>
@@ -182,7 +198,7 @@
 			</div> 
 		</div>
 		<div class="queue_content">
-			<c:forEach var="pi" items="${L_Api}" begin="0" step="1" end="${endNum}">
+			<c:forEach var="pi" items="${L_Api}" begin="0" step="1" end="${gameInfo.en}"><%--  ${}로 부를때는 반드시 GameInfo클래스 맴버변수 이름으로 불러야한다 --%>
 				<c:choose>
 					<c:when test="${pi.mainUser.win==true}">
 						<li>
@@ -193,6 +209,7 @@
 											<div class="gameType">${pi.gameMode }</div>
 											<div class="bar"></div>
 											<div class="result">승리</div>
+											<div class="length">${pi.timemin }분 ${pi.timesec }초</div>
 										</div>
 										<div class="info">
 											<div class="flexBox">
@@ -395,7 +412,9 @@
 										</div>
 									</div>
 								</div>
-								<!-- 나중에 버튼 활성화 -->
+								<div class="teamInfo">
+									
+								</div>
 							</div>
 						</li>
 

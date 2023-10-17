@@ -70,14 +70,14 @@ padding: 32px 16px;
 .all_container{
 	
 	width: 100%; max-width: 1200px; min-width: 1200px;
-    display: block;
-    background-color: #ffdcdc;
+    display: flex;
+   /* background-color: #ffdcdc;
+     padding: 32px 16px; */
     border: none;
-    /* padding: 32px 16px; */
     margin-top: 10px;
     margin-left: auto;
     margin-right: auto;
-    
+    position: relative;
 }
 
 .info{
@@ -97,9 +97,12 @@ padding: 32px 16px;
 }
 
 .tier-and-prevplayer{
-	  /*   background-color: aqua; */
+	    /* background-color: aqua; */
     display: inline-block;
     width: 302px;
+    position: sticky;
+    top: 100px;
+    margin-top: 8px;
 }
 
 .tier-box{
@@ -108,16 +111,33 @@ padding: 32px 16px;
 
 .rank{
 	margin-bottom: 18px;
-    background-color: aqua;
-    border-radius: 100px;
-    padding: 20px 30px;
+    background-color: #fff;
+    border-radius: 73px;
+    padding: 23px 32px 12px;
 }
 
 .rank-header{
-	
+	padding-bottom: 8px;
+    border-bottom: 1px solid #758592;
 }
 
 .rank-content{
+	    display: flex;
+    margin-top: 16px;
+}
+
+.rank_winRate{
+	padding: 28px 13px;
+    background-color: #ededed;
+    border-radius: 50%;
+    font-size: 1.4em;
+    font-weight: 700;
+}
+
+.tier-picture{
+	 padding: 8px 6px 5px;
+    background-color: #ededed;
+    border-radius: 50%;
 	
 }
 
@@ -127,23 +147,40 @@ padding: 32px 16px;
 }
 
 .tier-info{
-	
+	    margin-left: 15px;
 }
 
 .tier{
-	
+	    font-size: 1.3em;
+    font-weight: 700;
+    font-family: 'Malgun Gothic';
 }
 
 .lp{
-	
+	    margin-top: 12px;
+    font-size: 1.2em;
 }
 
 .lose-win-ratio{
+	    margin-left: 22px;
+	    padding-top: 15px;
+}
+
+.lose-win-ratio .lose-win span{
 	
 }
 
-.lose-win{
+.lose-win-ratio .lose-win .d{
 	
+}
+
+.allgame{
+	font-size: 1.1em;
+    color: #9AA4AF;
+}
+
+.lose-win{
+	    margin-top: 7px;
 }
 
 .latio{
@@ -180,6 +217,7 @@ padding: 32px 16px;
 	line-height: 16px;
     font-size: 12px;
     color: #758592;
+    text-align: center;
 }
 
 .champions ul{
@@ -249,7 +287,41 @@ padding: 32px 16px;
 }
 
 .stat{
-	
+	width: 222px;
+}
+
+.stat .kda{
+	display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.stat .kda .chart{
+	position: relative;
+    width: 88px;
+    height: 88px;
+}
+
+.stat div.win-lose div.k-d-a{
+	color:#9AA4AF;
+}
+
+.stat div.ratio{
+	margin-top: 2px;
+    line-height: 26px;
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--gray900);
+    font-family: Roboto, sans-serif;
+}
+
+.stat div.kill_per{
+	    line-height: 16px;
+    margin-top: 2px;
+    font-size: 0.8em;
+    color: #D31A45;
+    font-weight: 600;
 }
 
 .win-lose{
@@ -385,7 +457,7 @@ div.bar div.gauge{
 
 .game{
 	    width: 108px;
-    color: var(--gray500);
+    color: #758592;
     line-height: 16px;
     display: flex;
     flex-direction: column;
@@ -430,6 +502,7 @@ div.game div.bar{
 	display: flex;
     -webkit-box-align: center;
     align-items: center;
+    margin-right: 8px;
 }
 
 .icon{
@@ -474,7 +547,7 @@ span.chamlv{
 }
 
 
-.kda{
+.gameBox .champion .kda{
 	display: flex;
     flex-direction: column;
     -webkit-box-pack: center;
@@ -488,7 +561,7 @@ span.chamlv{
 .k-d-a{
 	line-height: 22px;
     font-size: 15px;
-    color: var(--gray400);
+/*     color: var(--gray400); */
     font-family: Roboto, sans-serif;
 }
 
