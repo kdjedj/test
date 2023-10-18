@@ -16,7 +16,7 @@
 <link rel="stylesheet" type="text/css" href="${cp}/resources/searchingPage.css?ver=<%=System.currentTimeMillis()%>">
 
 <link rel="stylesheet" type="text/css" href="${cp}/resources/freeList.css?ver=<%=System.currentTimeMillis()%>">
-<script src="${cp}/resources/free/a.css?ver=${ts}"></script>
+<script src="${cp}/resources/searchingPage.js?ver=<%=System.currentTimeMillis()%>"></script>
 </head>
 <body>
 

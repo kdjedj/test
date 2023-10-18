@@ -92,19 +92,19 @@
 		<div class="queue_type_select">
 			<ul>
 				<li>
-					<button class="queue_type_select_button" value="TOTAL">전체</button>
+					<button class="queue_type_select_button" id="total" value="TOTAL">전체</button>
 				</li>
 
 				<li>
-					<button class="queue_type_select_button" value="SOLORANKED">솔로랭크</button>
+					<button class="queue_type_select_button" id="soloRank" value="SOLORANKED">솔로랭크</button>
 				</li>
 
-				<li>
+				<!-- <li>
 					<button class="queue_type_select_button" value="FLEXRANKED">자유랭크</button>
-				</li>
+				</li> -->
 
 				<li>
-					<button class="queue_type_select_button" value="TOTAL">큐타입</button>
+					<button class="queue_type_select_button" id="normalGame" value="TOTAL">일반 게임</button>
 				</li>
 			</ul>
 		</div>
