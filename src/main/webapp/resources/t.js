@@ -3,18 +3,16 @@ $(document).ready(function() {
   const subTabs = $('.sub-tab');
   const underBox = $('.searchbox');
   const underBar = $('.under-bar');
-  const searchInput = $('#searchInput'); // 검색어 입력 필드 선택
+  const searchInput = $('#searchHome'); // 검색어 입력 필드 선택
   var MAX_SEARCH_HISTORY = 5; // 최대 검색어 개수
 
   // 쿠키를 읽어와서 검색어 입력 필드에 설정
   searchInput.val(getCookie('searchHistory'));
 
   var selectedRegion = "kr"; // 기본 리전 설정 (kr, na, jp 등)
-
+  var li;
   // 상단탭 클릭시 해당탭&하단탭 색상변경
   mainTabs.on('click', function() {
-    //console.log('클릭 이벤트 발생!'); // 디버깅용 로그
-
     // 모든 main-tab의 li 배경색 초기화
     mainTabs.css('background-color', 'initial');
 
@@ -29,89 +27,102 @@ $(document).ready(function() {
 
     // 선택한 main-tab의 span 스타일 변경
     $(this).find('span').css('font-weight', 'bold');
-    
-    
   });
-  
+function updateStarColor(label, checkbox) {
+  // 체크박스 상태 변경
+  checkbox.prop('checked', !checkbox.prop('checked'));
 
+  // 별 색깔 클래스 추가/제거
+  if (checkbox.prop('checked')) {
+    label.addClass('yellow-star');
+  } else {
+    label.removeClass('yellow-star');
+  }
+
+  // 즐겨찾기 업데이트
+  updateFavorites();
+}
   // 검색창 클릭 시 서치패널 보이게
   underBox.on('click', function(event) {
+  console.log('검색창클릭')
     underBar.children('.search-panel').css('display', 'block');
     event.stopPropagation();
-	// 리전 업데이트
+	// 서치패널 내에서 별 색깔을 변경할 요소를 찾아서 처리합니다.
+    var label = $(event.target).closest('.favorite-summoner-list');
+
+    if (label.length > 0) {
+      // 별 색깔을 변경
+      updateStarColor(label.siblings('input[type="checkbox"]'), label);
+      var summonerName = label.siblings('.summoner').text();
+      updateFavorites(summonerName); // searchQuery를 전달
+    }
+    // 리전 업데이트
     selectedRegion = $('#kr').val();
-    //console.log('셀렉트리전테스트:' + selectedRegion);
+
     var searchHistory = getCookie('searchHistory');
-    //console.log(searchHistory);
     if (searchHistory) {
       var searchList = searchHistory.split(','); // 쿠키에서 검색어 목록 가져오기
       var cookiesList = $('.cookies'); // 쿠키 목록 요소 선택
       cookiesList.empty();
+      
+      li=null
       for (let i = 0; i < searchList.length; i++) {
         var searchData = searchList[i].split(':');
         var region = searchData[0]; // 리전
         var query = searchData[1]; // 검색어
-        var k;
-        
-        
-        
-        
-        
+		var favoriteClass = searchData[2] || ''; // 쿠키에서 가져온 클래스 (또는 빈 문자열)
+		
         // 아이템을 생성하고 이벤트를 연결할 때마다 ID를 증가시킴
-        var li = $('<li>' +
-  '<span class="test">' + region + '</span>' +
-  '<span class="summoner">' + query + '</span>' +
-  '<div class="favorite-summoner-chk">' + 
-    '<input type="checkbox" id="fav_' + i +'" class="checkBox">' +
-    '<label for="fav_' + i +' " class="favorite-summoner-list"></label>' +
-  '</div>' +
-  '</li>');
-		// li 요소의 click 이벤트 핸들러에서 이벤트 중지
-    li.on('click', function(event) {
-        event.stopPropagation();
-    });
-        
-        
-        
-	   
-        //소환사명 누르면 전적검색이동        
-        li.find('.summoner').on('click', function() {
+        li = $('<li>' +
+          '<span class="test">' + region + '</span>' +
+          '<span class="summoner">' + query + '</span>' +
+          '<div class="favorite-summoner-chk">' +
+          '<input type="checkbox" id="fav_' + i +'" class="checkBox">' +
+          '<label for="fav_' + i +' " class="favorite-summoner-list ' + favoriteClass + '"></label>' +
+          '</div>' +
+          '</li>');
+
+        // li 요소의 click 이벤트 핸들러에서 이벤트 중지
+        li.on('click', function(event) {
+          event.stopPropagation();
+          
+        });
+		
+        // 소환사명 누르면 전적검색 이동
+        li.find('.summoner').on('click', function(event) {
           var searchQuery = $(this).text();
           var searchUrl = '/teamgg/board/searching_player?userName=' + encodeURIComponent(searchQuery);
           window.location.href = searchUrl;
         });
-        
-        
-        
-		// 아이템 클릭 이벤트 핸들러
-		li.on('click', function(event) {
-		    event.stopPropagation();
-		    
-		    // 체크박스 상태 변경
-		    var checkbox = $(this).find('input[type="checkbox"]');
-		    checkbox.prop('checked', !checkbox.prop('checked'));
-		    
-		    // 체크박스의 상태에 따라 클래스 추가/제거
-		    var label = $(this).find('label');
-		    if (checkbox.prop('checked')) {
-		        label.addClass('yellow-star');
-		    } else {
-		        label.removeClass('yellow-star');
-		    }
-		});
-	
-	
+
+        // 아이템 클릭 이벤트 핸들러
+        li.find('label').on('click', function(event) {
+          event.stopPropagation();
+		  updateStarColor($(this), $(this).siblings('input[type="checkbox"]'));
+          
+
+          // 즐겨찾기 업데이트
+          updateFavorites();
+          
+        });
+// 페이지 로드 시 초기화 함수 호출
+		initialize();
+		console.log("Initialize function called")
         cookiesList.append(li);
-      }//for
-    }//if
-  });//underBox
-  
-
-
-
+        initialize();
+		
+      }
+    }
+  });
+// 서치패널 클릭 시 이벤트 중단
+underBar.children('.search-panel').on('click', function(event) {
+  event.stopPropagation();
+});
   // 서치패널 숨기기
   $(document).on('click', function() {
     underBar.children('.search-panel').css('display', 'none');
+    // 노란별 상태 업데이트
+    updateFavorites();
   });
 
   // 쿠키를 설정하는 함수 (쿠키는 쉼표로 구분하여 저장)
@@ -119,7 +130,7 @@ $(document).ready(function() {
     var expires = "";
     if (days) {
       var date = new Date();
-      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000)); //30일 설정
       expires = "; expires=" + date.toUTCString();
     }
     // 쿠키 설정
@@ -167,13 +178,75 @@ $(document).ready(function() {
     }
   });
 
-  // 기존 쿠키 목록에서 li 요소를 클릭하면 검색 페이지로 이동
-  $('.summoner').on('click', function() {
-    var searchQuery = $(this).text();
-    var searchUrl = '/teamgg/board/searching_player?userName=' + encodeURIComponent(searchQuery);
-    window.location.href = searchUrl;
-  });
-});
-
-function x() {
+  // 즐겨찾기 업데이트 함수
+  function updateFavorites(searchQuery) {
+  console.log("updateFavorites called")
+  
+    var favorites = [];
+    $('.checkBox').each(function(index) {
+      if ($(this).prop('checked')) {
+        var selectedRegion = getSelectedRegion(searchQuery);
+        var summonerName  = $(this).parent().siblings('.summoner').text();
+        var labelClasses = $(this).siblings('label').hasClass('yellow-star') ? 'yellow-star' : '';
+      	favorites.push(selectedRegion + ':' + summonerName + ':' + labelClasses);
+      	console.log('summonerName:', summonerName);
+        
+      	
+      	
+    }
+    });
+    setCookie('favorites', favorites.join(','), 30);
+  }
+// 서치히스토리의 리전값을 가져오는 함수
+function getSelectedRegion(summonerName) {
+  var searchHistory = getCookie('searchHistory');
+  var matchingRegions = [];
+  if (searchHistory) {
+    var searchList = searchHistory.split(',');
+    for (var i = 0; i < searchList.length; i++) {
+      var searchData = searchList[i].split(':');
+      var region = searchData[0];
+      var query = searchData[1];
+      
+      console.log('query:', query);
+      if (query === summonerName) {
+        return region; // 서머너 이름이 일치하는 경우 해당 리전을 반환
+      }
+    }
+  }
+  // 일치하는 서머너 이름이 없으면 기본 리전을 반환
+  return "오류"; // 기본 리전 설정 (kr, na, jp 등)
 }
+  // 초기화 함수
+  function initialize() {
+    var favoriteData = getCookie('favorites');
+    if (favoriteData) {
+      var favorites = favoriteData.split(',');
+      favorites.forEach(function(favorite) {
+        var searchData = favorite.split(':');
+        var region = searchData[0];
+        var query = searchData[1];
+        var labelClasses = searchData[2];
+       // li 요소에 해당하는 모든 li 요소를 선택
+      var matchingLiElements = $('.cookies li').filter(function() {
+        return $(this).find('.summoner').text() === query;
+      });
+
+      matchingLiElements.each(function() {
+        var li = $(this);
+        var checkbox = li.find('.checkBox');
+        var label = li.find('label');
+
+        // 클래스 추가
+        label.addClass(labelClasses);
+
+        // 체크박스 상태 업데이트
+        if (labelClasses.includes('yellow-star')) {
+          checkbox.prop('checked', true);
+        }
+      });
+    });
+  }
+}
+
+});
