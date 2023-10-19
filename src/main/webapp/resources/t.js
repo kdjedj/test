@@ -4,6 +4,8 @@ $(document).ready(function() {
   const underBox = $('.searchbox');
   const underBar = $('.under-bar');
   const searchInput = $('#searchHome'); // 검색어 입력 필드 선택
+  const bookMarks = $('.bookmarks');
+  const recentSearch= $('.recent-search');
   var MAX_SEARCH_HISTORY = 5; // 최대 검색어 개수
 
   // 쿠키를 읽어와서 검색어 입력 필드에 설정
@@ -41,9 +43,15 @@ function updateStarColor(label, checkbox) {
 	  // 즐겨찾기 업데이트
 	  updateFavorites();
 }
+// 최근검색&즐겨찾기 탭전환 함수
+function switchToRecent() {
+  $('.cookies').removeClass('bookmarks').addClass('recent');
+}
   // 검색창 클릭 시 서치패널 보이게
   underBox.on('click', function(event) {
   console.log('검색창클릭')
+  	switchToRecent()
+  	
     underBar.children('.search-panel').css('display', 'block');
     event.stopPropagation();
 	// 서치패널 내에서 별 색깔을 변경할 요소를 찾아서 처리합니다.
@@ -98,21 +106,131 @@ function updateStarColor(label, checkbox) {
         li.find('label').on('click', function(event) {
           event.stopPropagation();
 		  updateStarColor($(this), $(this).siblings('input[type="checkbox"]'));
-          
 
           // 즐겨찾기 업데이트
           updateFavorites();
           
+          
         });
-// 페이지 로드 시 초기화 함수 호출
+		// 페이지 로드 시 초기화 함수 호출
 		initialize();
 		console.log("Initialize function called")
         cookiesList.append(li);
         initialize();
 		
-      }
-    }
-  });
+		
+		
+      } // for
+    } //searchHistory if
+    
+    
+	bookMarks.on("click", function(){
+	  // 즐겨찾기 탭을 클릭했을 때 수행할 작업
+	  console.log('즐겨찾기 탭 클릭');
+	  var cookiesList = $('.cookies'); // 여기에서 변수를 정의합니다.
+	  cookiesList.removeClass('recent').addClass('bookmarks');
+	  
+	  var favorites = getCookie('favorites');
+	  if (favorites) {
+	    var favoritesList = favorites.split(','); // 쿠키에서 검색어 목록 가져오기
+	    cookiesList.empty();
+	    
+	    for (let i = 0; i < favoritesList.length; i++) {
+	      var favoritesData = favoritesList[i].split(':');
+	      var region = favoritesData[0]; // 리전
+	      var query = favoritesData[1]; // 검색어
+	      
+	      // 아이템을 생성하고 이벤트를 연결할 때마다 ID를 증가시킴
+	      var li = $('<li>' +
+	        '<span class="test">' + region + '</span>' +
+	        '<span class="summoner">' + query + '</span>' +
+	        '</li>');
+	        
+	        initialize();
+	        console.log("Initialize function called")
+	        cookiesList.append(li);
+	        initialize();
+	    }
+	  } else {
+	    // 쿠키에 데이터가 없을 때 빈 li 요소를 추가
+	    var li = $('<li>' +
+	      '<span class="test">즐겨찾기를 등록해보세요</span>' +
+	      '<span class="summoner"></span>' +
+	      '</li>');
+	      
+	    cookiesList.empty().append(li);
+	  }
+	});
+		
+		
+	recentSearch.on("click", function(){
+	  switchToRecent();
+	  var searchHistory = getCookie('searchHistory');
+	  function switchToRecent() {
+	  $('.cookies').removeClass('bookmarks').addClass('recent');
+	  }
+	
+	  if (searchHistory) {
+	      var searchList = searchHistory.split(','); // 쿠키에서 검색어 목록 가져오기
+	      var cookiesList = $('.cookies'); // 쿠키 목록 요소 선택
+	      cookiesList.empty();
+	      
+	      li=null
+	      for (let i = 0; i < searchList.length; i++) {
+	        var searchData = searchList[i].split(':');
+	        var region = searchData[0]; // 리전
+	        var query = searchData[1]; // 검색어
+			var favoriteClass = searchData[2] || ''; // 쿠키에서 가져온 클래스 (또는 빈 문자열)
+			
+	        // 아이템을 생성하고 이벤트를 연결할 때마다 ID를 증가시킴
+	        li = $('<li>' +
+	          '<span class="test">' + region + '</span>' +
+	          '<span class="summoner">' + query + '</span>' +
+	          '<div class="favorite-summoner-chk">' +
+		          '<input type="checkbox" id="fav_' + i +'" class="checkBox">' +
+		          '<label for="fav_' + i +' " class="favorite-summoner-list ' + favoriteClass + '"></label>' +
+	          '</div>' +
+	          '</li>');
+	
+	        // li 요소의 click 이벤트 핸들러에서 이벤트 중지
+	        li.on('click', function(event) {
+	          event.stopPropagation();
+	          
+	        });
+			
+	        // 소환사명 누르면 전적검색 이동
+	        li.find('.summoner').on('click', function(event) {
+	          var searchQuery = $(this).text();
+	          var searchUrl = '/teamgg/board/searching_player?userName=' + encodeURIComponent(searchQuery);
+	          window.location.href = searchUrl;
+	        });
+	
+	        // 아이템 클릭 이벤트 핸들러
+	        li.find('label').on('click', function(event) {
+	          event.stopPropagation();
+			  updateStarColor($(this), $(this).siblings('input[type="checkbox"]'));
+	
+	          // 즐겨찾기 업데이트
+	          updateFavorites();
+	          
+	          
+	        });
+			// 페이지 로드 시 초기화 함수 호출
+			initialize();
+			console.log("Initialize function called")
+	        cookiesList.append(li);
+	        initialize();
+			
+			
+			
+	      } // for
+	    } //searchHistory if
+
+	    console.log('최근검색 탭 클릭');
+		});
+  });// 검색창 클릭 시 서치패널 보이게
+  
+  
 // 서치패널 클릭 시 이벤트 중단
 underBar.children('.search-panel').on('click', function(event) {
   event.stopPropagation();
