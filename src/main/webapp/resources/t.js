@@ -185,12 +185,10 @@ underBar.children('.search-panel').on('click', function(event) {
       if ($(this).prop('checked')) {
         var summonerName = $(this).siblings('label').parent().siblings('.summoner').text();
         var selectedRegion = getSelectedRegion(summonerName);
-        console.log('셀렉티드리젼:' + selectedRegion);
         var label = $(this).siblings('label');
         var favoritesummonerName = label.parent().siblings('.summoner').text();
         var labelClasses = $(this).siblings('label').hasClass('yellow-star') ? 'yellow-star' : '';
       	favorites.push(selectedRegion + ':' + favoritesummonerName + ':' + labelClasses);
-      	console.log('favoritesummonerName:', favoritesummonerName);
 	    }
     });
     setCookie('favorites', favorites.join(','), 30);
@@ -203,9 +201,7 @@ function getSelectedRegion(summonerName) {
       var searchData = searchList[i].split(':');
       var region = searchData[0];
       var query = searchData[1].trim();
-      console.log('서머너네임:' + summonerName);
       if (query === summonerName) {
-        console.log('return region1:' + region);
         return region; // 서머너 이름이 일치하는 경우 해당 리전을 반환
       }
     }
