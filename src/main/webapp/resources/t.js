@@ -3,7 +3,7 @@ $(document).ready(function() {
   const subTabs = $('.sub-tab');
   const underBox = $('.searchbox');
   const underBar = $('.under-bar');
-  const searchInput = $('#searchHome'); // 검색어 입력 필드 선택
+  const searchInput = $('#searchInput'); // 검색어 입력 필드 선택
   const bookMarks = $('.bookmarks');
   const recentSearch= $('.recent-search');
   var MAX_SEARCH_HISTORY = 5; // 최대 검색어 개수
@@ -46,6 +46,8 @@ function updateStarColor(label, checkbox) {
 // 최근검색&즐겨찾기 탭전환 함수
 function switchToRecent() {
   $('.cookies').removeClass('bookmarks').addClass('recent');
+  $('.recent-search').addClass('pick');
+  $('.bookmarks').removeClass('pick');
 }
   // 검색창 클릭 시 서치패널 보이게
   underBox.on('click', function(event) {
@@ -129,6 +131,8 @@ function switchToRecent() {
 	  console.log('즐겨찾기 탭 클릭');
 	  var cookiesList = $('.cookies'); // 여기에서 변수를 정의합니다.
 	  cookiesList.removeClass('recent').addClass('bookmarks');
+	  $('.bookmarks').addClass('pick');
+	  $('.recent-search').removeClass('pick');
 	  
 	  var favorites = getCookie('favorites');
 	  if (favorites) {
@@ -165,6 +169,8 @@ function switchToRecent() {
 		
 	recentSearch.on("click", function(){
 	  switchToRecent();
+  	  $('.recent-search').addClass('pick');
+	  $('.bookmarks').removeClass('pick');
 	  var searchHistory = getCookie('searchHistory');
 	  function switchToRecent() {
 	  $('.cookies').removeClass('bookmarks').addClass('recent');
