@@ -38,9 +38,8 @@ function updateStarColor(label, checkbox) {
   } else {
     label.removeClass('yellow-star');
   }
-
-  // 즐겨찾기 업데이트
-  updateFavorites();
+	  // 즐겨찾기 업데이트
+	  updateFavorites();
 }
   // 검색창 클릭 시 서치패널 보이게
   underBox.on('click', function(event) {
@@ -53,7 +52,7 @@ function updateStarColor(label, checkbox) {
     if (label.length > 0) {
       // 별 색깔을 변경
       updateStarColor(label.siblings('input[type="checkbox"]'), label);
-      var summonerName = label.siblings('.summoner').text();
+      var summonerName = label.parent().siblings('.summoner').text();
       updateFavorites(summonerName); // searchQuery를 전달
     }
     // 리전 업데이트
@@ -77,8 +76,8 @@ function updateStarColor(label, checkbox) {
           '<span class="test">' + region + '</span>' +
           '<span class="summoner">' + query + '</span>' +
           '<div class="favorite-summoner-chk">' +
-          '<input type="checkbox" id="fav_' + i +'" class="checkBox">' +
-          '<label for="fav_' + i +' " class="favorite-summoner-list ' + favoriteClass + '"></label>' +
+	          '<input type="checkbox" id="fav_' + i +'" class="checkBox">' +
+	          '<label for="fav_' + i +' " class="favorite-summoner-list ' + favoriteClass + '"></label>' +
           '</div>' +
           '</li>');
 
@@ -122,7 +121,6 @@ underBar.children('.search-panel').on('click', function(event) {
   $(document).on('click', function() {
     underBar.children('.search-panel').css('display', 'none');
     // 노란별 상태 업데이트
-    updateFavorites();
   });
 
   // 쿠키를 설정하는 함수 (쿠키는 쉼표로 구분하여 저장)
@@ -179,43 +177,41 @@ underBar.children('.search-panel').on('click', function(event) {
   });
 
   // 즐겨찾기 업데이트 함수
-  function updateFavorites(searchQuery) {
-  console.log("updateFavorites called")
-  
+  function updateFavorites() {
+  	console.log("updateFavorites called")
+  	
     var favorites = [];
     $('.checkBox').each(function(index) {
       if ($(this).prop('checked')) {
-        var selectedRegion = getSelectedRegion(searchQuery);
-        var summonerName  = $(this).parent().siblings('.summoner').text();
+        var summonerName = $(this).siblings('label').parent().siblings('.summoner').text();
+        var selectedRegion = getSelectedRegion(summonerName);
+        console.log('셀렉티드리젼:' + selectedRegion);
+        var label = $(this).siblings('label');
+        var favoritesummonerName = label.parent().siblings('.summoner').text();
         var labelClasses = $(this).siblings('label').hasClass('yellow-star') ? 'yellow-star' : '';
-      	favorites.push(selectedRegion + ':' + summonerName + ':' + labelClasses);
-      	console.log('summonerName:', summonerName);
-        
-      	
-      	
-    }
+      	favorites.push(selectedRegion + ':' + favoritesummonerName + ':' + labelClasses);
+      	console.log('favoritesummonerName:', favoritesummonerName);
+	    }
     });
     setCookie('favorites', favorites.join(','), 30);
   }
-// 서치히스토리의 리전값을 가져오는 함수
 function getSelectedRegion(summonerName) {
   var searchHistory = getCookie('searchHistory');
-  var matchingRegions = [];
   if (searchHistory) {
     var searchList = searchHistory.split(',');
     for (var i = 0; i < searchList.length; i++) {
       var searchData = searchList[i].split(':');
       var region = searchData[0];
-      var query = searchData[1];
-      
-      console.log('query:', query);
+      var query = searchData[1].trim();
+      console.log('서머너네임:' + summonerName);
       if (query === summonerName) {
+        console.log('return region1:' + region);
         return region; // 서머너 이름이 일치하는 경우 해당 리전을 반환
       }
     }
   }
-  // 일치하는 서머너 이름이 없으면 기본 리전을 반환
-  return "오류"; // 기본 리전 설정 (kr, na, jp 등)
+  return "오류";
+  
 }
   // 초기화 함수
   function initialize() {
