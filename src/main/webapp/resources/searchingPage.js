@@ -9,6 +9,17 @@ $(document).ready(function() {
     const soloRank =$('#soloRank');
     const normalGame =$('#normalGame');
     
+    $('.addInfoBtn').click(function() {
+      // 클릭된 버튼의 부모 div에서 데이터를 가져옵니다.
+      var $div = $(this).closest('.addBtnDiv');
+      var $parents = $div.parent().parent();
+      // 예: 해당 div의 배경색을 변경합니다.
+     // $div.children('add_info').css('display', 'block');
+     $parents.find('.addInfo').toggleClass('hidden');
+      $(this).toggleClass('rotated');
+     
+  });
+
     //경기 버튼 색깔 입히기
     total.on('click', function(){
         console.log('버튼 클릭함');
@@ -19,6 +30,8 @@ $(document).ready(function() {
         $(this).css('background-color','#9759ff');
         soloRank.css('background-color', '#fff');
         normalGame.css('background-color', '#fff');
+
+        
 
         //코드를 추가하게 만들기
 

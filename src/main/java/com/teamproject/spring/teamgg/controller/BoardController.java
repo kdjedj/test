@@ -392,6 +392,7 @@ private GuestService service;
 		Integer mainDeaths = 0;	
 		Integer totalkills = 0;
 		Integer utotalkills = 0;
+		String gameMode = "";
 		for(String matid : grbc) {
 			// 아래 해당 사항들 배열로 만드어야함
 			String TEST_URL = "https://asia.api.riotgames.com/lol/match/v5/matches/"
@@ -414,7 +415,20 @@ private GuestService service;
 //			String item0 = testbc.info.participants.get(0).item0;
 //			log.info("==== json ==== 아이템 고윳값 번호 : "+item0);
 			//위는 거의 확인용
-			String gameMode = (String)testbc.info.gameMode;
+			String gameModeEn = (String)testbc.info.gameMode;
+			Integer queueId = (Integer)testbc.info.queueId;
+			if(queueId==420) {//switch로 해도됨
+				gameMode = "솔랭";
+			} else if(queueId==430) {
+				gameMode = "일반";
+			} else if(queueId==450) {
+				gameMode = "무작위 총력전";
+			} else if(queueId==1700) {
+				gameMode = "아레나";
+			} else {
+				gameMode = queueId+"";
+			}
+			
 			Integer gameDuration = (Integer)testbc.info.gameDuration;
 			Integer timemin = gameDuration/60;
 			Integer timesec = gameDuration%60;
@@ -430,7 +444,6 @@ private GuestService service;
 			String spellId2 = null;
 //			Map<String, Integer> grade = new HashMap<>();
 //			GradeInfo chankey = cg.get(mainUser.championName); 
-			double averValue = 0.0;
 			
 			for(int i=0; i<player_info.size(); i++) {
 				
@@ -529,10 +542,11 @@ private GuestService service;
 						
 //				System.out.println("이 값이 나오냐 안나오냐 : "+aver);
 				}
+				System.out.println("각 챔피언당 가한 데미지는 " +player_info.get(i).totalDamageDealtToChampions+"이고, 받은 데미지는"+player_info.get(i).totalDamageTaken+"이다");
 			}
 			//
 			for(int i=0; i<player_info.size(); i++) {
-				if(player_info.get(i).win==mainUser.win) { //그냥 이긴팀 킬수 누적
+				if(player_info.get(i).win==mainUser.win) { 
 					totalkills += player_info.get(i).kills;
 					
 				}

@@ -28,8 +28,8 @@ public class Participants {
     public Integer totalEnemyJungleMinionsKilled;
     public Integer totalMinionsKilled;
     public String individualPosition;
-
-    	
+    public Integer totalDamageDealtToChampions;
+    public Integer totalDamageTaken;
     }
     
     

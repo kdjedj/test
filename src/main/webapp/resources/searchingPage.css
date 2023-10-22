@@ -562,7 +562,7 @@ span.chamlv{
 
 }
 
-.k-d-a{
+.flexbox .k-d-a{
 	line-height: 22px;
     font-size: 15px;
 /*     color: var(--gray400); */
@@ -706,13 +706,13 @@ span.chamlv{
 
 }
 
-.name{
+.player_list .name{
 	display: inline-block;
     max-width: 60px;
     vertical-align: middle;
 }
 
-.name a{
+.player_list .name a{
 	font-size: 12px;
     color: inherit;
     display: block;
@@ -720,4 +720,269 @@ span.chamlv{
     white-space: nowrap;
     overflow: hidden;
 }
+
+.addBtnDiv{
+	    background-color: mediumpurple;
+    display: flex;
+    flex-direction: column-reverse;
+    padding-bottom: 10px;
+}
+
+.addInfoBtn{
+	width: 24px;
+    height: 16px;
+    background-color: mediumpurple;
+    border: none;
+    padding: 4px 4px 0px;
+    border-radius: 50%;
+}
+
+.addInfo{
+	    margin-top: 8px;
+}
+
+.addInfo table:nth-of-type(1){
+	border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.addInfo table{
+	border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.addInfo thead th:nth-of-type(1){
+	padding-left: 15px;
+    text-align: left;
+}
+
+.addInfo thead th{
+	height: 32px;
+    color: #9AA4AF;
+    font-size: 12px;
+    font-weight: normal;
+    text-align: center;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #6e6e6e;
+    vertical-align: middle;
+}
+
+.addInfoBtn img {
+    width: 15px;
+}
+
+.back_color{
+	width: 100%;
+    table-layout: fixed;
+    background-color: #fff;
+}
+
+.userWin span{
+	font-size: 12px;
+    color: #4171D6;
+}
+
+.userLose span{
+	font-size: 12px;
+    color: #D31A45;
+}
+
+.result{
+	margin-right: 4px;
+    font-weight: bold;
+}
+
+td{
+	padding: 4px 0px 7px;
+    vertical-align: middle;
+}
+
+tr.mainPlayer td{
+	
+}
+
+td.champion{
+	padding-left: 10px;
+    padding-right: 4px;
+}
+
+td.champion a{
+	position: relative;
+    display: block;
+}
+
+
+td.champion div{
+	    width: 32px;
+}
+
+td.champion a div img{
+display: block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+td.champion a div span{
+	position: absolute;
+    left: -3px;
+    bottom: -4px;
+    width: 15px;
+    height: 15px;
+    background: rgb(32, 45, 55);
+    border-radius: 50%;
+    color: rgb(255, 255, 255);
+    font-size: 10px;
+    text-align: center;
+    line-height: 15px;
+    font-family: Roboto, sans-serif;
+}
+
+.blue tbody{
+	background-color: #ECF2FF;
+    border-top: 1px solid rgb(213, 227, 255);
+    border-right-color: rgb(213, 227, 255);
+    border-bottom-color: rgb(213, 227, 255);
+    border-left-color: rgb(213, 227, 255);
+}
+
+.red tbody{
+	background-color: #FFF1F3;
+    border-top: 1px solid rgb(255, 216, 217);
+    border-right-color: rgb(255, 216, 217);
+    border-bottom-color: rgb(255, 216, 217);
+    border-left-color: rgb(255, 216, 217);
+}
+
+td.spells{
+	
+}
+
+td.spells div{
+	
+}
+
+td.name {
+	padding-left: 5px;
+     white-space: nowrap;
+    text-overflow: ellipsis;
+     overflow: hidden;
+}
+
+td.name a{
+	line-height: 16px;
+    color: black;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+td.kda{
+	text-align: center;
+    white-space: nowrap;
+    font-family: Roboto, sans-serif;
+}
+
+td.kda .k-d-a{
+	    color: #758592;
+    line-height: 14px;
+    font-size: 11px;
+}
+
+td.kda .killRate{
+	
+}
+
+td.damage{
+	    font-family: Roboto, sans-serif;
+}
+
+td.damage div{
+	    display:flex;
+	    justify-content: space-around;
+}
+
+td.damage>div:first-child{
+	
+}
+
+
+td.damage .dealt{
+	
+}
+
+td.damage .progress{
+	
+}
+
+td.damage .progress .fill{
+	
+}
+
+td.damage .taken {
+	
+}
+
+td.damage .progress_taken{
+	
+}
+
+td.damage .progress_taken .fill{
+	
+}
+
+td.cs{
+	text-align: center;
+    color: #758592;
+    font-size: 11px;
+}
+
+td.cs div{
+	
+}
+
+td.items{
+	
+}
+
+td.items .item_box{
+	text-align: center;
+    font-size: 0px;
+}
+
+td.items li{
+	display: inline-block;
+    width: 22px;
+    height: 22px;
+    margin-left: 1px;
+    vertical-align: middle;
+}
+
+.blue td.items .item_box{
+	    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    background-color: #B3CDFF;
+}
+
+.red td.items .item_box{
+	    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    background-color: #FFBAC3;
+}
+
+/*===========================================================================  */
+/* etc function */
+/*===========================================================================  */
+
+.hidden{
+	display: none;
+}
+
+.rotated{
+	transform: rotate(180deg);
+    transition: transform 1s;
+}
+
 
