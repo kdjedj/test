@@ -10,23 +10,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.teamproject.spring.teamgg.board.ConfigBoard;
-import com.teamproject.spring.teamgg.service.MateBoardService;
-import com.teamproject.spring.teamgg.vo.FreeBoardVo;
-import com.teamproject.spring.teamgg.vo.MateBoardVo;
+import com.teamproject.spring.teamgg.service.CompBoardService;
+import com.teamproject.spring.teamgg.vo.CompBoardVo;
 import com.teamproject.spring.teamgg.vo.MemberVO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
-@RequestMapping("/mate/*")
+@RequestMapping("/comp/*")
 @AllArgsConstructor
 @Controller
-public class MateBoardController {
-	private MateBoardService service;
+public class CompBoardController {
+	private CompBoardService service;
 	
 	// 리스트
-	@GetMapping("/mateList")
+	@GetMapping("/compList")
 	public void list(Model model, @RequestParam(value="page", defaultValue="1")
 				int page, MemberVO mv) {
 		System.out.println("====== 유저찾기게시판 리스트");
@@ -90,91 +89,91 @@ public class MateBoardController {
 		
 	}
 	
-	@GetMapping("/mateRead")
-	public void read(@RequestParam("m_idx") Long m_idx, Model model) {
-		System.out.println("====== 읽기, 수정 (" + m_idx + ")");
-		model.addAttribute("mateRead",service.read(m_idx));
+	@GetMapping("/compRead")
+	public void read(@RequestParam("c_idx") Long c_idx, Model model) {
+		System.out.println("====== 읽기, 수정 (" + c_idx + ")");
+		model.addAttribute("compRead",service.read(c_idx));
 	}
 
-	@GetMapping("/mateDel")
-	public String del(@RequestParam("m_idx") Long m_idx, HttpSession session) {
-		String m_id = (String) session.getAttribute("m_id");
-		if (m_id == null) {
+	@GetMapping("/compDel")
+	public String del(@RequestParam("c_idx") Long c_idx, HttpSession session) {
+		String c_id = (String) session.getAttribute("m_id");
+		if (c_id == null) {
 			return "redirect:/member/login";
 		}
-	    MateBoardVo originPost = service.read(m_idx);
-	    if (!m_id.equals(originPost.getM_id())) {
+	    CompBoardVo originPost = service.read(c_idx);
+	    if (!c_id.equals(originPost.getC_id())) {
 	        return "redirect:/errorPage";
 	    }
-	        service.del(m_idx);
-		return "redirect:/mate/mateList";
+	        service.del(c_idx);
+		return "redirect:/comp/compList";
 	}
 	
-	@GetMapping("/mateWrite") // view
+	@GetMapping("/compWrite") // view
 	public String write(HttpSession session) {
-		String m_id = (String) session.getAttribute("m_id");
-	    if (m_id == null) {
+		String c_id = (String) session.getAttribute("m_id");
+	    if (c_id == null) {
 	        return "redirect:/member/login";
 	    }
-	    return "/mate/mateWrite";
+	    return "/comp/compWrite";
 	}
 	
-	@PostMapping("/mateWrite")
-	public String write(MateBoardVo mvo, HttpSession session) {
-		String m_id = (String) session.getAttribute("m_id");
-		String m_user = (String) session.getAttribute("m_user");
-	    if (m_id == null) {
+	@PostMapping("/compWrite")
+	public String write(CompBoardVo cvo, HttpSession session) {
+		String c_id = (String) session.getAttribute("m_id");
+		String c_user = (String) session.getAttribute("m_user");
+	    if (c_id == null) {
 	        return "redirect:/member/login";
 	    }
-	    mvo.setM_id(m_id);
-	    mvo.setM_user(m_user);
-	    service.write(mvo);
+	    cvo.setC_id(c_id);
+	    cvo.setC_user(c_user);
+	    service.write(cvo);
 //	    작성 완료된 글번호로 이동
-	    Long writeIdx = mvo.getWriteIdx();
+	    Long writeIdx = cvo.getWriteIdx();
 	    if (writeIdx != null) {
-	        return "redirect:/mate/mateRead?m_idx=" + writeIdx;
+	        return "redirect:/comp/compRead?c_idx=" + writeIdx;
 	    } else {
 	        return "redirect:/errorPage";
 	    }
 	}
 	
-	@GetMapping("/mateModify")
-	public String modify(@RequestParam("m_idx") Long m_idx, Model model, HttpSession session) {
-		String m_id = (String) session.getAttribute("m_id");
-		if (m_id == null) {
+	@GetMapping("/compModify")
+	public String modify(@RequestParam("c_idx") Long c_idx, Model model, HttpSession session) {
+		String c_id = (String) session.getAttribute("m_id");
+		if (c_id == null) {
 			return "redirect:/member/login";
 		}
 		
-	    MateBoardVo originPost = service.read(m_idx);
-	    if (!m_id.equals(originPost.getM_id())) {
+	    CompBoardVo originPost = service.read(c_idx);
+	    if (!c_id.equals(originPost.getC_id())) {
 	        return "redirect:/errorPage";
 	    }
 	    
-		model.addAttribute("mateRead", service.read(m_idx));
-		return "/mate/mateModify";
+		model.addAttribute("compRead", service.read(c_idx));
+		return "/comp/compModify";
 	}
 	
-	@PostMapping("/mateModify")
-	public String modify(MateBoardVo mvo, HttpSession session) {
-		String m_id = (String) session.getAttribute("m_id");
-	    if (m_id == null) {
+	@PostMapping("/compModify")
+	public String modify(CompBoardVo cvo, HttpSession session) {
+		String c_id = (String) session.getAttribute("m_id");
+	    if (c_id == null) {
 	        return "redirect:/member/login";
 	    }
 	    
-	    MateBoardVo originPost = service.read(mvo.getM_idx());
+	    CompBoardVo originPost = service.read(cvo.getC_idx());
 
-	    if (!m_id.equals(originPost.getM_id())) {
+	    if (!c_id.equals(originPost.getC_id())) {
 	        return "redirect:/errorPage";
 	    }
 
-	    originPost.setM_title(mvo.getM_title());
-	    originPost.setM_content(mvo.getM_content());
+	    originPost.setC_title(cvo.getC_title());
+	    originPost.setC_content(cvo.getC_content());
 	    service.modify(originPost);
 
 //	    작성 완료된 글번호로 이동
-	    Long writeIdx = originPost.getM_idx();
+	    Long writeIdx = originPost.getC_idx();
 	    if (writeIdx != null) {
-	        return "redirect:/mate/mateRead?m_idx=" + writeIdx;
+	        return "redirect:/comp/compRead?c_idx=" + writeIdx;
 	    } else {
 	        return "redirect:/errorPage";
 	    }

@@ -114,7 +114,7 @@
 						</a>
 					</li>
 					<li class="board3">
-						<a href="${cp}/mate/mateList">
+						<a href="${cp}/comp/compList">
 							<div data-key="CHAMPION" class="css-q3uz41 emmetr11">유저찾기게시판</div>
 						</a>
 					</li>

@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.teamproject.spring.teamgg.board.ConfigBoard;
-import com.teamproject.spring.teamgg.mapper.MateBoardMapper;
-import com.teamproject.spring.teamgg.vo.MateBoardVo;
+import com.teamproject.spring.teamgg.mapper.CompBoardMapper;
+import com.teamproject.spring.teamgg.vo.CompBoardVo;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -15,34 +15,34 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @Service
 //@AllArgsConstructor
-public class MateBoardServiceImpl implements MateBoardService{
+public class CompBoardServiceImpl implements CompBoardService{
 
 	@Setter(onMethod_ = @Autowired)
-	private MateBoardMapper mapper;	
+	private CompBoardMapper mapper;	
 	
 	@Override
-	public List<MateBoardVo> getList(int page) {
-		return mapper.mateList(page);
+	public List<CompBoardVo> getList(int page) {
+		return mapper.compList(page);
 	}
 
 	@Override
-	public MateBoardVo read(long m_idx) {
-		return mapper.mateRead(m_idx);
+	public CompBoardVo read(long c_idx) {
+		return mapper.compRead(c_idx);
 	}
 
 	@Override
-	public void del(long m_idx) {
-		mapper.mateDel(m_idx);
+	public void del(long c_idx) {
+		mapper.compDel(c_idx);
 	}
 
 	@Override
-	public void write(MateBoardVo mvo) {
-		mapper.mateWrite(mvo);
+	public void write(CompBoardVo cvo) {
+		mapper.compWrite(cvo);
 	}
 
 	@Override
-    public void modify(MateBoardVo mvo) {
-        mapper.mateModify(mvo);
+    public void modify(CompBoardVo cvo) {
+        mapper.compModify(cvo);
     }
 
 	@Override
@@ -83,8 +83,8 @@ public class MateBoardServiceImpl implements MateBoardService{
 	}
 	
 	@Override
-	public String getAuthorNickname(long m_idx) {
-        return mapper.getAuthorNickname(m_idx);
+	public String getAuthorNickname(long c_idx) {
+        return mapper.getAuthorNickname(c_idx);
     }
 }
 

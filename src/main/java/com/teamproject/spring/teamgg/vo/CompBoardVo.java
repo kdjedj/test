@@ -8,18 +8,18 @@ import lombok.Data;
 
 
 @Data
-public class MateBoardVo {
-	public final static String TABLE_NAME_MATE = "mate_board";
-	private Long m_idx;
-	private String m_title;
-	private String m_id;
-	private String m_user;
-	private String m_content;
+public class CompBoardVo {
+	public final static String TABLE_NAME_COMP = "comp_board";
+	private Long c_idx;
+	private String c_title;
+	private String c_id;
+	private String c_user;
+	private String c_content;
 	private Long writeIdx;
 	
-	private String m_date;
+	private String c_date;
 
-	public void setM_date(Date m_date) {
-		this.m_date = TimeFormatter.calculateTime(m_date);
+	public void setC_date(Date c_date) {
+		this.c_date = TimeFormatter.calculateTime(c_date);
 	}	
 }

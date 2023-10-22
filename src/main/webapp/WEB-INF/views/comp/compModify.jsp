@@ -1,5 +1,5 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.teamproject.spring.teamgg.vo.MateBoardVo"%>
+<%@page import="com.teamproject.spring.teamgg.vo.CompBoardVo"%>
 <%@page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="cp" value="${pageContext.request.contextPath}" />
@@ -9,15 +9,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="${cp}/resources/mate/mateList.css">
-<link rel="stylesheet" type="text/css" href="${cp}/resources/mate/mateWrite.css">
+<link rel="stylesheet" type="text/css" href="${cp}/resources/comp/compList.css">
+<link rel="stylesheet" type="text/css" href="${cp}/resources/comp/compWrite.css">
 </head>
 <body>
-<%@include file="mate_header.jsp" %>
+<%@include file="comp_header.jsp" %>
 <%
-	MateBoardVo read = (MateBoardVo)request.getAttribute("mateRead");
-	long m_idx = read.getM_idx();
-	String m_content = read.getM_content();
+	CompBoardVo read = (CompBoardVo)request.getAttribute("compRead");
+	long c_idx = read.getC_idx();
+	String c_content = read.getC_content();
 %>	
 
 <div class="board_wrap">
@@ -36,15 +36,15 @@
 		</div>
 		<div class="write">
 
-	<form action="${cp}/mate/mateModify" method="post">
-		<input type="hidden" name='m_idx' value='<%=m_idx %>' >
+	<form action="${cp}/comp/compModify" method="post">
+		<input type="hidden" name='c_idx' value='<%=c_idx %>' >
 		
 			<div class="title">
-			<input type="text" id="m_title" name="m_title" placeholder="제목" required><br>
+			<input type="text" id="c_title" name="c_title" placeholder="제목" required><br>
 			</div>
 				
 			<div class="content">
-			<textarea rows="30" id="m_content" name="m_content" required></textarea><br>
+			<textarea rows="30" id="c_content" name="c_content" required></textarea><br>
 			</div>
     
 		<div class="write_actions">

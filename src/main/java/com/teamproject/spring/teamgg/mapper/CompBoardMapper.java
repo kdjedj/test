@@ -2,14 +2,14 @@ package com.teamproject.spring.teamgg.mapper;
 
 import java.util.List;
 
-import com.teamproject.spring.teamgg.vo.MateBoardVo;
+import com.teamproject.spring.teamgg.vo.CompBoardVo;
 
-public interface MateBoardMapper {
-	public List<MateBoardVo> mateList(int page);
-	public MateBoardVo mateRead(long m_idx);
-	public void mateDel(long m_idx);
-	public void mateWrite(MateBoardVo mvo);
-	public void mateModify(MateBoardVo mvo);
+public interface CompBoardMapper {
+	public List<CompBoardVo> compList(int page);
+	public CompBoardVo compRead(long c_idx);
+	public void compDel(long c_idx);
+	public void compWrite(CompBoardVo cvo);
+	public void compModify(CompBoardVo cvo);
 	public int getTotalCount();
-	public String getAuthorNickname(long m_idx);
+	public String getAuthorNickname(long c_idx);
 }

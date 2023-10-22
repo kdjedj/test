@@ -1,4 +1,4 @@
-<%@page import="com.teamproject.spring.teamgg.vo.MateBoardVo"%>
+<%@page import="com.teamproject.spring.teamgg.vo.CompBoardVo"%>
 <%@page import="java.sql.Date"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="${cp}/resources/mate/mateList.css">
+<link rel="stylesheet" type="text/css" href="${cp}/resources/comp/compList.css">
 </head>
 <body>
 
@@ -21,7 +21,7 @@
 <div class="head">
 		<div class="logoBox">	
 			<a href="${cp}/">
-				<img class="logo" alt="로고" src="${cp}/resources/mate/img/LOGO_small_2.png">
+				<img class="logo" alt="로고" src="${cp}/resources/comp/img/LOGO_small_2.png">
 			</a>
 		</div>
 		<div class="headTab">
@@ -43,7 +43,7 @@
 					<div class="boards_head">
 							<a href="${cp}/free/freeList">자유게시판</a>
 							<a href="${cp}/tip/tipList">정보게시판</a>
-							<a href="${cp}/mate/mateList">유저찾기게시판</a>
+							<a href="${cp}/comp/compList">유저찾기게시판</a>
 					</div>
 				</div>
 		</div>

@@ -1,5 +1,7 @@
 package com.teamproject.spring.teamgg.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -10,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.teamproject.spring.teamgg.board.ConfigBoard;
+import com.teamproject.spring.teamgg.service.CommentService;
 import com.teamproject.spring.teamgg.service.FreeBoardService;
 import com.teamproject.spring.teamgg.vo.FreeBoardVo;
+import com.teamproject.spring.teamgg.vo.FreeCommentVo;
 import com.teamproject.spring.teamgg.vo.MemberVO;
 
 import lombok.AllArgsConstructor;
@@ -23,6 +27,7 @@ import lombok.extern.log4j.Log4j;
 @Controller
 public class FreeBoardController {
 	private FreeBoardService service;
+	private CommentService commentService;
 	
 	// 리스트
 	@GetMapping("/freeList")
@@ -93,6 +98,9 @@ public class FreeBoardController {
 	public void read(@RequestParam("f_idx") Long f_idx, Model model) {
 		System.out.println("====== 읽기, 수정 (" + f_idx + ")");
 		model.addAttribute("freeRead",service.read(f_idx));
+		
+		List<FreeCommentVo> fcList = commentService.getFcList(f_idx);
+	    model.addAttribute("fcList", fcList);
 	}
 
 	@GetMapping("/freeDel")

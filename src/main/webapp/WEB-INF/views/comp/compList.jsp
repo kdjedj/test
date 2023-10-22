@@ -1,4 +1,4 @@
-<%@page import="com.teamproject.spring.teamgg.vo.MateBoardVo"%>
+<%@page import="com.teamproject.spring.teamgg.vo.CompBoardVo"%>
 <%@page import="java.sql.Date"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="${cp}/resources/mate/mateList.css">
+<link rel="stylesheet" type="text/css" href="${cp}/resources/comp/compList.css">
 </head>
 <body>
 
@@ -21,7 +21,7 @@
 	<div class="head">
 		<div class="logoBox">	
 			<a href="${cp}/">
-				<img class="logo" alt="로고" src="${cp}/resources/mate/img/LOGO_small_2.png">
+				<img class="logo" alt="로고" src="${cp}/resources/comp/img/LOGO_small_2.png">
 			</a>
 		</div>
 		<div class="headTab">
@@ -43,7 +43,7 @@
 					<div class="boards_head">
 							<a href="${cp}/free/freeList">자유게시판</a>
 							<a href="${cp}/tip/tipList">정보게시판</a>
-							<a href="${cp}/mate/mateList">유저찾기게시판</a>
+							<a href="${cp}/comp/compList">유저찾기게시판</a>
 					</div>
 				</div>
 		</div>
@@ -67,19 +67,19 @@
 		<div class="list">
 			<div class="list_head">
 				<h1> 유저찾기 </h1>
-				<button type="button" id="write" title="글쓰기" onclick="location.href='mateWrite'">글쓰기</button>
+				<button type="button" id="write" title="글쓰기" onclick="location.href='compWrite'">글쓰기</button>
 			</div>
 <c:forEach var="item" items="${list}">
-	<c:set var="m_idx" value="${item.m_idx}"/>
-	<c:set var="m_title" value="${item.m_title}"/>
-	<c:set var="m_date" value="${item.m_date}"/>
-	<c:set var="m_id" value="${item.m_id}"/>
-	<c:set var="m_user" value="${item.m_user}"/>
+	<c:set var="c_idx" value="${item.c_idx}"/>
+	<c:set var="c_title" value="${item.c_title}"/>
+	<c:set var="c_date" value="${item.c_date}"/>
+	<c:set var="c_id" value="${item.c_id}"/>
+	<c:set var="c_user" value="${item.c_user}"/>
 			<ul class="post">
-            	<li class="posts w500">${item.m_idx}</li>
-            	<li class="posts w2500"><a href="mateRead?m_idx=${item.m_idx}">${item.m_title}</a></li>
-            	<li class="posts">${item.m_date}</li>
-            	<li class="posts">${item.m_user}</li>
+            	<li class="posts w500">${item.c_idx}</li>
+            	<li class="posts w2500"><a href="compRead?c_idx=${item.c_idx}">${item.c_title}</a></li>
+            	<li class="posts">${item.c_date}</li>
+            	<li class="posts">${item.c_user}</li>
 			</ul>
 </c:forEach>
 			<div class="paging">
