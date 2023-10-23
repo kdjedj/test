@@ -83,12 +83,14 @@ function switchToRecent() {
 		
         // 아이템을 생성하고 이벤트를 연결할 때마다 ID를 증가시킴
         li = $('<li>' +
-          '<span class="test">' + region + '</span>' +
-          '<span class="summoner">' + query + '</span>' +
-          '<div class="favorite-summoner-chk">' +
+            '<span class="test">' + region + '</span>' +
+            '<span class="summoner">' + query + '</span>' +
+            '<div class="favorite-summoner-chk">' +
 	          '<input type="checkbox" id="fav_' + i +'" class="checkBox">' +
 	          '<label for="fav_' + i +' " class="favorite-summoner-list ' + favoriteClass + '"></label>' +
-          '</div>' +
+            '</div>' +
+            '<button type="button" class="close-btn">' + "X" +
+      	    '</button>' +
           '</li>');
 
         // li 요소의 click 이벤트 핸들러에서 이벤트 중지
@@ -109,9 +111,17 @@ function switchToRecent() {
           event.stopPropagation();
 		  updateStarColor($(this), $(this).siblings('input[type="checkbox"]'));
 
-          // 즐겨찾기 업데이트
-          updateFavorites();
-          
+        // 즐겨찾기 업데이트
+        updateFavorites();
+		
+		
+		const closeBtn = $('.close-btn'); 
+		closeBtn.on('click', function(event) {
+		    console.log('삭제버튼클릭');
+		    event.stopPropagation();
+		    // 삭제 버튼이 클릭되면 부모 li 요소를 삭제
+		    $(this).closest('li').remove();
+		  });          
           
         });
 		// 페이지 로드 시 초기화 함수 호출
@@ -148,6 +158,8 @@ function switchToRecent() {
 	      var li = $('<li>' +
 	        '<span class="test">' + region + '</span>' +
 	        '<span class="summoner">' + query + '</span>' +
+	        '<button type="button" class="close-btn">' + "X" +
+      	    '</button>' +
 	        '</li>');
 	        
 	        initialize();
@@ -196,6 +208,8 @@ function switchToRecent() {
 		          '<input type="checkbox" id="fav_' + i +'" class="checkBox">' +
 		          '<label for="fav_' + i +' " class="favorite-summoner-list ' + favoriteClass + '"></label>' +
 	          '</div>' +
+	          '<button type="button" class="close-btn">' + "X" +
+      	      '</button>' +
 	          '</li>');
 	
 	        // li 요소의 click 이벤트 핸들러에서 이벤트 중지

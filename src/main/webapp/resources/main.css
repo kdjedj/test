@@ -247,6 +247,10 @@ nav li span {
 	display:flex;
 	align-items:center;
 }
+
+.close-btn {
+	margin-right: 30px;
+}
 .search_blank{
     width: 170px;
     height: 35px;
