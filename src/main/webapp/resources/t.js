@@ -385,6 +385,7 @@ underBar.children('.search-panel').on('click', function(event) {
   // 검색 버튼 클릭 시 검색 페이지로 이동
   $('#searchButton').on('click', function() {
     var searchQuery = $('input[name="search"]').val();
+    var selectedRegion = $('select[name="region"]').val();
     if (searchQuery) {
       var searchHistory = getCookie('searchHistory');
       var searchList = searchHistory ? searchHistory.split(',') : [];
@@ -402,7 +403,7 @@ underBar.children('.search-panel').on('click', function(event) {
         setCookie('searchHistory', searchList.join(','), 30); // 쿠키 유효기간 30일
       }
 
-      var searchUrl = '/teamgg/board/searching_player?userName=' + encodeURIComponent(searchQuery);
+      var searchUrl = '/teamgg/board/searching_player?userName=' + encodeURIComponent(searchQuery)+'&region='+encodeURIComponent(selectedRegion);
       window.location.href = searchUrl;
     }
   });

@@ -24,6 +24,7 @@ import org.springframework.web.client.RestTemplate;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.peisia.spring.spb.lol.Cat;
+import com.peisia.spring.spb.lol.DetailInfo;
 import com.peisia.spring.spb.lol.GameInfo;
 import com.peisia.spring.spb.lol.GradeInfo;
 import com.peisia.spring.spb.lol.LoginInfoVo;
@@ -45,6 +46,7 @@ import lombok.extern.log4j.Log4j;
 @Controller
 public class BoardController {
 private GuestService service;
+
 	@GetMapping("/Searching_User")
 	public void Searching_User() {
 		log.info("=====서칭 유저 컨트롤러 한번 다녀감");
@@ -213,9 +215,10 @@ private GuestService service;
 	}
 	
 	@RequestMapping("/searching_player")
-	public void searching_player(@RequestParam("userName") String userName, HttpServletRequest request, Model model) {
+	public void searching_player(@RequestParam("userName") String userName, @RequestParam("region") String region, HttpServletRequest request, Model model) {
 	//// 우리나라 공공 api ////			
-		//인코딩 인증키			
+		//인코딩 인증키		
+		DetailInfo dInfo = new DetailInfo();
 		String SurmmonerName = userName.replaceAll(" ", "%20");
 		String API_KEY = "RGAPI-0092f94c-82f2-4df3-ad25-ac35254f878e";
 				
@@ -253,7 +256,7 @@ private GuestService service;
 		
 		Summoner temp= null;
 		try{            
-			String urlstr = "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/"+
+			String urlstr = "https://"+region+".api.riotgames.com/lol/summoner/v4/summoners/by-name/"+
 					SurmmonerName+"?api_key="+API_KEY;
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -297,7 +300,7 @@ private GuestService service;
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
-		String INFO_API_URL = "https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/"
+		String INFO_API_URL = "https://"+region+".api.riotgames.com/lol/league/v4/entries/by-summoner/"
 				+ temp.getId()
 				+ "?api_key=" + API_KEY; 
 		
@@ -323,19 +326,49 @@ private GuestService service;
 		Integer losses = 0;
 		List<Map<String, Object>> lolbc = restTemplate.getForObject(lol_uri, List.class); // 자기 클래스로 바꾸시오..
 	//	log.info("==== json ==== : 해당 유저 티어는? : "+lolbc.get(0).get("tier"));
+		String rankStr = (String)lolbc.get(0).get("tier");
 		if(lolbc.size()==0) {
 			queueType ="no search";
 			 tier = "Unranked";
 			 rank = "no search";
 			 wins = 0;
 			 losses = 0;
-		} else {
+			 
+		} else if(rankStr.equals("CHALLENGER") || rankStr.equals("GRANDMASTER")||rankStr.equals("MASTER")) { 
+			queueType = (String)lolbc.get(0).get("queueType");
+			 tier = (String)lolbc.get(0).get("tier");
+			 rank = "";
+			 leaguePoints = (Integer)lolbc.get(0).get("leaguePoints");
+			 wins = (Integer)lolbc.get(0).get("wins");
+			 losses = (Integer)lolbc.get(0).get("losses");
+		}else {
 			queueType = (String)lolbc.get(0).get("queueType");
 			 tier = (String)lolbc.get(0).get("tier");
 			 rank = (String)lolbc.get(0).get("rank");
 			 leaguePoints = (Integer)lolbc.get(0).get("leaguePoints");
 			 wins = (Integer)lolbc.get(0).get("wins");
 			 losses = (Integer)lolbc.get(0).get("losses");
+		}
+		
+		switch(rank) {
+		case"I": 
+			rank="1";
+			break;
+			
+		case"II": 
+			rank="2";
+			break;
+			
+		case"III": 
+			rank="3";
+			break;
+			
+		case"IV": 
+			rank="4";
+			break;
+		default:
+			rank="";
+			break;
 		}
     	
 //		System.out.println("자료형 확인:"+lolbc.get(0).get("leaguePoints").getClass().getName());
@@ -364,9 +397,17 @@ private GuestService service;
 			int endNum = 9;
 			int countNum = 0;
 			int rankGames = 0;
-			String urlstr1 = "https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/"
+			String urlstr1 ="";
+			if(region.equals("na1")) {
+				urlstr1 = "https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/"
+						+ temp.getPuuid()
+						+ "/ids?start=0&count="+endNum+"&api_key="+API_KEY;
+			} else {
+				urlstr1 = "https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/"
 					+ temp.getPuuid()
 					+ "/ids?start=0&count="+endNum+"&api_key="+API_KEY;
+			}
+			
 			
 			countNum = endNum + 1;
 			System.out.println("현재 countNum 값 : "+countNum);
@@ -382,11 +423,10 @@ private GuestService service;
 			
 		//플레이어 데이터 수집
 		ArrayList<Lol_api> xx = new ArrayList<Lol_api>();
-//		ArrayList<Map<String, GradeInfo>> cg = new ArrayList<>();// 게임 수 승패휫수 한번에 구하기
 		Map<String, GradeInfo> cg = new HashMap<>();// 챔피언당 게임 수 승패휫수 한번에 구하기
 		GradeInfo mg = new GradeInfo(0,0,0,"","","","","","");// 챔피언당 게임 수 승패휫수 한번에 구하기
 		Map<String, Positions> positions = new HashMap<>();
-//		Map<String, Integer> cg = new HashMap<>();
+		ArrayList<Lol_api> di = new ArrayList<Lol_api>();
 		Integer mainKills = 0;	
 		Integer mainAsis = 0;	
 		Integer mainDeaths = 0;	
@@ -395,9 +435,17 @@ private GuestService service;
 		String gameMode = "";
 		for(String matid : grbc) {
 			// 아래 해당 사항들 배열로 만드어야함
-			String TEST_URL = "https://asia.api.riotgames.com/lol/match/v5/matches/"
-					+ matid
-					+"?api_key="+API_KEY; 
+			String TEST_URL ="";
+			if(region.equals("na1")) {
+				TEST_URL = "https://americas.api.riotgames.com/lol/match/v5/matches/"
+						+ matid
+						+"?api_key="+API_KEY; 
+			} else {
+				TEST_URL = "https://asia.api.riotgames.com/lol/match/v5/matches/"
+						+ matid
+						+"?api_key="+API_KEY; 
+			}
+			
 			URI test_uri = null;
 			try {			
 				test_uri = new URI(TEST_URL);		
@@ -437,17 +485,30 @@ private GuestService service;
 			//각 수치에 대한 객체 선언 - 꼭 괄호 바깥에서 선언*
 			List<Participants> player_info = (List<Participants>)testbc.info.participants;// 게임데이타 받아오기
 			Participants mainUser = null;
+			Participants perPlayer = null;
 			String aver = "";
-			
+			String perAverStr ="";
+			double perAver = 0.0;
 			Integer cs = 0; 
 			String spellId1 = null;
 			String spellId2 = null;
+			String perspell1= null;
+			String perspell2= null;
 //			Map<String, Integer> grade = new HashMap<>();
 //			GradeInfo chankey = cg.get(mainUser.championName); 
 			
 			for(int i=0; i<player_info.size(); i++) {
+				perPlayer = player_info.get(i);//각각 플레이어
+				perspell1= dInfo.getSpellName(perPlayer.summoner1Id);
+				perspell2= dInfo.getSpellName(perPlayer.summoner2Id);
+				perAverStr = String.format("%.2f", 
+						((double)player_info.get(i).kills+(double)player_info.get(i).assists/(double)player_info.get(i).deaths)
+						);
+				perAver = Double.parseDouble(perAverStr);
+				Lol_api yy=new Lol_api(perPlayer, perAver, perspell1, perspell2, 0.0, 0.0);
+				di.add(yy);
 				
-				if(player_info.get(i).puuid.equals(temp.getPuuid())) {
+				if(player_info.get(i).puuid.equals(temp.getPuuid())) {//메인 플레이어
 					mainUser = player_info.get(i);
 					
 					utotalkills += mainUser.assists + mainUser.kills;
@@ -546,7 +607,42 @@ private GuestService service;
 				}
 //				System.out.println("각 챔피언당 가한 데미지는 " +player_info.get(i).totalDamageDealtToChampions+"이고, 받은 데미지는"+player_info.get(i).totalDamageTaken+"이다");
 			}
-			//
+			
+			//가한 데미지 그래프 기준 정하고, 게이지 만들기
+			int maxDealt = 0;
+			String dealtStr= "";
+			int maxTaken = 0;
+			String takenStr= "";
+			for(Lol_api p : di) {
+				if(p.getMainUser().totalDamageDealtToChampions>maxDealt) {
+					maxDealt = p.getMainUser().totalDamageDealtToChampions;
+				}
+				
+				if(p.getMainUser().totalDamageTaken>maxTaken) {
+					maxTaken = p.getMainUser().totalDamageTaken;
+				}
+				
+			}
+			
+			for(int i=0; i < di.size(); i++) {
+				dealtStr = String.format("%.4f",
+						((double)di.get(i).mainUser.totalDamageDealtToChampions/(double)maxDealt)*100
+						 );
+				
+				takenStr = String.format("%.4f",
+						((double)di.get(i).mainUser.totalDamageTaken/(double)maxTaken)*100
+						);
+				
+				di.get(i).dealtPer = Double.parseDouble(dealtStr);
+				di.get(i).takenPer = Double.parseDouble(takenStr);
+				
+				
+			}
+			
+			
+			
+			
+			//도합 킬수 구하기
 			for(int i=0; i<player_info.size(); i++) {
 				if(player_info.get(i).win==mainUser.win) { 
 					totalkills += player_info.get(i).kills;
@@ -630,7 +726,7 @@ private GuestService service;
 				aver="Perfact";
 			}
 			
-			Lol_api l = new Lol_api(player_info, gameMode, timemin, timesec, mainUser, aver, killsRate, cs, spellId1, spellId2);
+			Lol_api l = new Lol_api(player_info, gameMode, timemin, timesec, mainUser, aver, killsRate, cs, spellId1, spellId2, di);
 			xx.add(l);
 			
 //			System.out.println("4번째 아이템 고유 번호 "+ mainUser.item3);

@@ -69,7 +69,15 @@
 						</div>
 						<div class="tier-info">
 							<div class=tier>
-								<h2>${liv.tier }</h2>
+								<c:choose>
+									<c:when test="${liv.rank eq ''}">
+										<h2>${liv.tier }</h2>
+									</c:when>
+									<c:otherwise>
+										<h2>${liv.tier }&nbsp;${liv.rank }</h2>
+									</c:otherwise>
+								</c:choose>
+								
 							</div>
 							<div class=lp>${liv.leaguePoints} lp</div>
 						</div>
@@ -833,6 +841,7 @@
 										<table class="back_color red">
 									</c:otherwise>
 								</c:choose>
+								
 								
 									<colgroup>
 										<col width="44">
