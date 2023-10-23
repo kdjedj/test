@@ -39,9 +39,7 @@
         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-<<<<<<< HEAD
                                         		
-=======
                                 
         
         
@@ -52,7 +50,6 @@
                                                         		
         
         
->>>>>>> branch 'searchingPage_0' of git@github.com:kdjedj/test.git
         
         
         
