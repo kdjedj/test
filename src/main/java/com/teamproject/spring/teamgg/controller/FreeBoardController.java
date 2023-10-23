@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.teamproject.spring.teamgg.board.ConfigBoard;
-import com.teamproject.spring.teamgg.service.CommentService;
+import com.teamproject.spring.teamgg.service.FreeCommentService;
 import com.teamproject.spring.teamgg.service.FreeBoardService;
 import com.teamproject.spring.teamgg.vo.FreeBoardVo;
 import com.teamproject.spring.teamgg.vo.FreeCommentVo;
@@ -27,7 +27,7 @@ import lombok.extern.log4j.Log4j;
 @Controller
 public class FreeBoardController {
 	private FreeBoardService service;
-	private CommentService commentService;
+	private FreeCommentService commentService;
 	
 	// 리스트
 	@GetMapping("/freeList")

@@ -519,7 +519,7 @@ private GuestService service;
 					
 //					cg.put(mainUser.championName, cg.get(0).(mainUser.championName, 0) + 1);
 					//포지션별 횟수 구하기
-					if(gameMode.equals("CLASSIC")) {
+						if(gameMode.equals("솔랭")) {
 						rankGames += 1;
 					
 						if(positions.get(mainUser.individualPosition) == null) {
@@ -530,7 +530,7 @@ private GuestService service;
 									));
 							positions.get(mainUser.individualPosition).times = positions.get(mainUser.individualPosition).times + 1;
 						} else {
-							positions.get(mainUser.individualPosition).times = positions.get(mainUser.individualPosition).times + 1;;
+							positions.get(mainUser.individualPosition).times = positions.get(mainUser.individualPosition).times + 1;
 						}
 						
 						}

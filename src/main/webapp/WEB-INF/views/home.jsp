@@ -117,13 +117,8 @@
 						</a>
 					</li>
 					<li class="board3">
-<<<<<<< HEAD
-						<a href="${cp}/comp/compList">
-							<div data-key="CHAMPION" class="css-q3uz41 emmetr11">유저찾기게시판</div>
-=======
 						<a href="${cp}/mate/mateList">
 							<div>유저찾기게시판</div>
->>>>>>> fe5f3e86706002eeb4ce17dcb217ff1540ef54c3
 						</a>
 					</li>
 				</ul>
@@ -173,6 +168,7 @@
 			</div>
 			<button id="searchButton" class="search-button">검색</button>
 		</div>
+	</div>
 	</div>
 
 

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.teamproject.spring.teamgg.mapper.FreeCommentMapper;
-import com.teamproject.spring.teamgg.vo.FreeBoardVo;
 import com.teamproject.spring.teamgg.vo.FreeCommentVo;
 
 import lombok.Setter;
@@ -15,7 +14,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @Service
 //@AllArgsConstructor
-public class CommentServiceImpl implements CommentService{
+public class FreeCommentServiceImpl implements FreeCommentService{
 	
 	@Setter(onMethod_ = @Autowired)
 	private FreeCommentMapper mapper;

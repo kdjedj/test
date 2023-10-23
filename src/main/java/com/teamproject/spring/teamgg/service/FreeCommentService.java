@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.teamproject.spring.teamgg.vo.FreeCommentVo;
 
-public interface CommentService {
+public interface FreeCommentService {
 	public List<FreeCommentVo> getFcList(Long f_idx);
 	public FreeCommentVo getData(long fc_idx);
 	public void del(Long fc_idx);

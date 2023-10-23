@@ -1,18 +1,14 @@
 package com.teamproject.spring.teamgg.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.teamproject.spring.teamgg.service.CommentService;
-import com.teamproject.spring.teamgg.vo.FreeBoardVo;
+import com.teamproject.spring.teamgg.service.FreeCommentService;
 import com.teamproject.spring.teamgg.vo.FreeCommentVo;
 
 import lombok.AllArgsConstructor;
@@ -22,8 +18,8 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/comment/*")
 @AllArgsConstructor
 @Controller
-public class CommentController {
-	private CommentService service;
+public class FreeCommentController {
+	private FreeCommentService service;
 	
 	@GetMapping("/fcDel")
 	public String del(@RequestParam("fc_idx") Long fc_idx, HttpSession session) {
