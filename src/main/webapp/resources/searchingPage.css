@@ -37,11 +37,11 @@ padding: 32px 16px;
 }
 
 .info{
-	.
+	
 }
 
 .subBanner{
-	.
+	
 }
 
 .user-logo-box{
@@ -70,14 +70,14 @@ padding: 32px 16px;
 .all_container{
 	
 	width: 100%; max-width: 1200px; min-width: 1200px;
-    display: block;
-    background-color: #ffdcdc;
+    display: flex;
+   /* background-color: #ffdcdc;
+     padding: 32px 16px; */
     border: none;
-    /* padding: 32px 16px; */
     margin-top: 10px;
     margin-left: auto;
     margin-right: auto;
-    
+    position: relative;
 }
 
 .info{
@@ -97,9 +97,12 @@ padding: 32px 16px;
 }
 
 .tier-and-prevplayer{
-	  /*   background-color: aqua; */
+	    /* background-color: aqua; */
     display: inline-block;
     width: 302px;
+    position: sticky;
+    top: 100px;
+    margin-top: 8px;
 }
 
 .tier-box{
@@ -108,48 +111,123 @@ padding: 32px 16px;
 
 .rank{
 	margin-bottom: 18px;
-    background-color: aqua;
-    border-radius: 100px;
-    padding: 20px 30px;
+    background-color: #fff;
+    border-radius: 73px;
+    padding: 23px 32px 12px;
 }
 
 .rank-header{
-	
+	padding-bottom: 8px;
+    border-bottom: 1px solid #758592;
 }
 
 .rank-content{
-	
+	    display: flex;
+    margin-top: 16px;
+}
+
+.rank_winRate{
+	padding: 28px 13px;
+    background-color: #ededed;
+    border-radius: 50%;
+    font-size: 1.4em;
+    font-weight: 700;
 }
 
 .tier-picture{
+	 padding: 8px 6px 5px;
+    background-color: #ededed;
+    border-radius: 50%;
+	
+}
+
+.tier-picture img{
+	 width:72px;
 	
 }
 
 .tier-info{
-	
+	    margin-left: 15px;
 }
 
 .tier{
-	
+	    font-size: 1.3em;
+    font-weight: 700;
+    font-family: 'Malgun Gothic';
 }
 
 .lp{
-	
+	    margin-top: 12px;
+    font-size: 1.2em;
 }
 
 .lose-win-ratio{
+	    margin-left: 20px;
+	    padding-top: 15px;
+}
+
+.lose-win-ratio .lose-win span{
 	
 }
 
-.lose-win{
+.lose-win-ratio .lose-win .d{
 	
+}
+
+.allgame{
+	font-size: 1.1em;
+    color: #9AA4AF;
+}
+
+.lose-win{
+	    margin-top: 7px;
 }
 
 .latio{
 	
 }
 
+.champions{
+	    width: 222px;
+    margin-left: 16px;
+}
 
+.champions li img{
+	width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    margin-right: 8px;
+	
+}
+
+.champions ul li:nth-of-type(1){
+	    margin-top: 0px;
+}
+
+.champions ul li{
+	   display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-top: 8px;
+}
+
+
+
+.title{
+	line-height: 16px;
+    font-size: 12px;
+    color: #758592;
+    text-align: center;
+}
+
+.champions ul{
+	  display: flex;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+    height: 88px;
+    margin-top: 12px;
+}
 
 .queue_content{
 	display: inline-block;
@@ -209,12 +287,75 @@ padding: 32px 16px;
 }
 
 .stat{
-	
+	width: 222px;
+}
+
+.stat .kda{
+	display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-top: 12px;
+}
+
+.stat .kda .chart{
+	position: relative;
+    width: 88px;
+    height: 88px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    font-size: 2em;
+}
+
+.stat div.win-lose div.k-d-a{
+	color:#9AA4AF;
+}
+
+.stat div.ratio{
+	margin-top: 2px;
+    line-height: 26px;
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--gray900);
+    font-family: Roboto, sans-serif;
+}
+
+.stat div.kill_per{
+	    line-height: 16px;
+    margin-top: 2px;
+    font-size: 0.8em;
+    color: #D31A45;
+    font-weight: 600;
 }
 
 .win-lose{
-	
+	font-size: 11px;
+	font-family: '맑은 고딕', Arial, sans-serif; 
+    font-weight: bold; 
+    color:#9AA4AF;
 }
+
+.aver{
+	
+	display: inline-block;
+    font-size: 11px;
+    margin-left: 4px;
+}
+
+.per{
+	display: inline-block;
+    font-size: 11px;
+    font-weight: bold; 
+    color: #ffb914;
+}
+
+.gd{
+	display: inline-block;
+    font-size: 11px;
+    font-weight: bold; 
+    color: #50cc5c;
+}
+
 
 .kda{
 	
@@ -231,8 +372,37 @@ padding: 32px 16px;
 .title-cham{
 	
 }
+/* 포지션 css */
+.positions {
+	width: 222px;
+    margin-left: 16px;
+}
 
+.positions ul{
+	display: flex;
+    justify-content: space-around;
+    margin-top: 12px;
+}
 
+.positions ul li{
+	
+}
+.positions ul li .bar{
+	display: flex;
+    align-items: flex-end;
+    width: 16px;
+    height: 64px;
+    background-color: #DBE0E4;
+}
+
+div.bar div.gauge{
+	   width: 16px;
+    background-color: #5383E8;
+}
+
+.positionLogo{
+	    margin-top: 8px;
+}
 
  .queue_content_box{
 	margin-top:8px;
@@ -291,7 +461,7 @@ padding: 32px 16px;
 
 .game{
 	    width: 108px;
-    color: var(--gray500);
+    color: #758592;
     line-height: 16px;
     display: flex;
     flex-direction: column;
@@ -309,7 +479,7 @@ padding: 32px 16px;
     color: #ff0000;
 }
 
-.bar{
+div.game div.bar{
 	    width: 48px;
     height: 1px;
     margin: 8px 0px 4px;
@@ -336,6 +506,7 @@ padding: 32px 16px;
 	display: flex;
     -webkit-box-align: center;
     align-items: center;
+    margin-right: 8px;
 }
 
 .icon{
@@ -354,6 +525,11 @@ padding: 32px 16px;
 	width: 48px; height: 48px; 
 	display: block;
 	border-radius: 50%;
+}
+
+.spells img {
+	display: block;
+	border-radius:4px;
 }
 
 span.chamlv{
@@ -375,7 +551,7 @@ span.chamlv{
 }
 
 
-.kda{
+.gameBox .champion .kda{
 	display: flex;
     flex-direction: column;
     -webkit-box-pack: center;
@@ -386,10 +562,10 @@ span.chamlv{
 
 }
 
-.k-d-a{
+.flexbox .k-d-a{
 	line-height: 22px;
     font-size: 15px;
-    color: var(--gray400);
+/*     color: var(--gray400); */
     font-family: Roboto, sans-serif;
 }
 
@@ -403,8 +579,40 @@ span.chamlv{
 }
 
 .ratio{
+	line-height: 16px;
+	color:#758592;
+}
+
+.flexBox:nth-of-type(1)>div.stats::before{
+	content: "";
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 1px;
+    height: 100%;
+    background-color: #c2c2c2;
+}
+
+.stats{
+	position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 140px;
+    color: #758592;
+    padding-left: 8px;
+    font-size: 11px;
+}
+
+.p-kill span{
+	color: red;
+}
+
+.cs{
 	
 }
+
+
 
 .items{
 	display: flex;
@@ -465,6 +673,15 @@ span.chamlv{
 	margin-left: 2px;
 }
 
+.ward img{
+	border-radius: 50%;
+}
+
+
+
+
+
+
 .participants{
 	display: flex;
 }
@@ -489,13 +706,13 @@ span.chamlv{
 
 }
 
-.name{
+.player_list .name{
 	display: inline-block;
     max-width: 60px;
     vertical-align: middle;
 }
 
-.name a{
+.player_list .name a{
 	font-size: 12px;
     color: inherit;
     display: block;
@@ -503,4 +720,269 @@ span.chamlv{
     white-space: nowrap;
     overflow: hidden;
 }
+
+.addBtnDiv{
+	    background-color: mediumpurple;
+    display: flex;
+    flex-direction: column-reverse;
+    padding-bottom: 10px;
+}
+
+.addInfoBtn{
+	width: 24px;
+    height: 16px;
+    background-color: mediumpurple;
+    border: none;
+    padding: 4px 4px 0px;
+    border-radius: 50%;
+}
+
+.addInfo{
+	    margin-top: 8px;
+}
+
+.addInfo table:nth-of-type(1){
+	border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+.addInfo table{
+	border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.addInfo thead th:nth-of-type(1){
+	padding-left: 15px;
+    text-align: left;
+}
+
+.addInfo thead th{
+	height: 32px;
+    color: #9AA4AF;
+    font-size: 12px;
+    font-weight: normal;
+    text-align: center;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #6e6e6e;
+    vertical-align: middle;
+}
+
+.addInfoBtn img {
+    width: 15px;
+}
+
+.back_color{
+	width: 100%;
+    table-layout: fixed;
+    background-color: #fff;
+}
+
+.userWin span{
+	font-size: 12px;
+    color: #4171D6;
+}
+
+.userLose span{
+	font-size: 12px;
+    color: #D31A45;
+}
+
+.result{
+	margin-right: 4px;
+    font-weight: bold;
+}
+
+td{
+	padding: 4px 0px 7px;
+    vertical-align: middle;
+}
+
+tr.mainPlayer td{
+	
+}
+
+td.champion{
+	padding-left: 10px;
+    padding-right: 4px;
+}
+
+td.champion a{
+	position: relative;
+    display: block;
+}
+
+
+td.champion div{
+	    width: 32px;
+}
+
+td.champion a div img{
+display: block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+
+td.champion a div span{
+	position: absolute;
+    left: -3px;
+    bottom: -4px;
+    width: 15px;
+    height: 15px;
+    background: rgb(32, 45, 55);
+    border-radius: 50%;
+    color: rgb(255, 255, 255);
+    font-size: 10px;
+    text-align: center;
+    line-height: 15px;
+    font-family: Roboto, sans-serif;
+}
+
+.blue tbody{
+	background-color: #ECF2FF;
+    border-top: 1px solid rgb(213, 227, 255);
+    border-right-color: rgb(213, 227, 255);
+    border-bottom-color: rgb(213, 227, 255);
+    border-left-color: rgb(213, 227, 255);
+}
+
+.red tbody{
+	background-color: #FFF1F3;
+    border-top: 1px solid rgb(255, 216, 217);
+    border-right-color: rgb(255, 216, 217);
+    border-bottom-color: rgb(255, 216, 217);
+    border-left-color: rgb(255, 216, 217);
+}
+
+td.spells{
+	
+}
+
+td.spells div{
+	
+}
+
+td.name {
+	padding-left: 5px;
+     white-space: nowrap;
+    text-overflow: ellipsis;
+     overflow: hidden;
+}
+
+td.name a{
+	line-height: 16px;
+    color: black;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+td.kda{
+	text-align: center;
+    white-space: nowrap;
+    font-family: Roboto, sans-serif;
+}
+
+td.kda .k-d-a{
+	    color: #758592;
+    line-height: 14px;
+    font-size: 11px;
+}
+
+td.kda .killRate{
+	
+}
+
+td.damage{
+	    font-family: Roboto, sans-serif;
+}
+
+td.damage div{
+	    display:flex;
+	    justify-content: space-around;
+}
+
+td.damage>div:first-child{
+	
+}
+
+
+td.damage .dealt{
+	
+}
+
+td.damage .progress{
+	
+}
+
+td.damage .progress .fill{
+	
+}
+
+td.damage .taken {
+	
+}
+
+td.damage .progress_taken{
+	
+}
+
+td.damage .progress_taken .fill{
+	
+}
+
+td.cs{
+	text-align: center;
+    color: #758592;
+    font-size: 11px;
+}
+
+td.cs div{
+	
+}
+
+td.items{
+	
+}
+
+td.items .item_box{
+	text-align: center;
+    font-size: 0px;
+}
+
+td.items li{
+	display: inline-block;
+    width: 22px;
+    height: 22px;
+    margin-left: 1px;
+    vertical-align: middle;
+}
+
+.blue td.items .item_box{
+	    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    background-color: #B3CDFF;
+}
+
+.red td.items .item_box{
+	    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    background-color: #FFBAC3;
+}
+
+/*===========================================================================  */
+/* etc function */
+/*===========================================================================  */
+
+.hidden{
+	display: none;
+}
+
+.rotated{
+	transform: rotate(180deg);
+    transition: transform 1s;
+}
+
 

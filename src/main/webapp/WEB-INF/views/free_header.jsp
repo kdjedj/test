@@ -11,13 +11,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<!-- jquery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- my css -->
 <link rel="stylesheet" type="text/css" href="${cp}/resources/reset.css?ver=<%=System.currentTimeMillis()%>">
 <link rel="stylesheet" type="text/css" href="${cp}/resources/searchingPage.css?ver=<%=System.currentTimeMillis()%>">
 
 <link rel="stylesheet" type="text/css" href="${cp}/resources/freeList.css?ver=<%=System.currentTimeMillis()%>">
-<script src="${cp}/resources/free/a.css?ver=${ts}"></script>
-</head>
+<script type="text/javascript" src="${cp}/resources/searchingPage.js?ver=<%= System.currentTimeMillis() %>"></script></head>
 <body>
 
 <div class="head">
