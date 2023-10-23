@@ -7,7 +7,7 @@ $(document).ready(function() {
   const bookMarks = $('.bookmarks');
   const recentSearch= $('.recent-search');
   var MAX_SEARCH_HISTORY = 5; // 최대 검색어 개수
-
+  
   // 쿠키를 읽어와서 검색어 입력 필드에 설정
   searchInput.val(getCookie('searchHistory'));
 
@@ -49,10 +49,8 @@ function switchToRecent() {
   $('.recent-search').addClass('pick');
   $('.bookmarks').removeClass('pick');
 }
-  // 검색창 클릭 시 서치패널 보이게
-  underBox.on('click', function(event) {
-  console.log('검색창클릭')
-  	switchToRecent()
+function handleSearchBoxClick(){
+	switchToRecent()
   	
     underBar.children('.search-panel').css('display', 'block');
     event.stopPropagation();
@@ -93,6 +91,8 @@ function switchToRecent() {
       	    '</button>' +
           '</li>');
 
+
+		
         // li 요소의 click 이벤트 핸들러에서 이벤트 중지
         li.on('click', function(event) {
           event.stopPropagation();
@@ -115,13 +115,7 @@ function switchToRecent() {
         updateFavorites();
 		
 		
-		const closeBtn = $('.close-btn'); 
-		closeBtn.on('click', function(event) {
-		    console.log('삭제버튼클릭');
-		    event.stopPropagation();
-		    // 삭제 버튼이 클릭되면 부모 li 요소를 삭제
-		    $(this).closest('li').remove();
-		  });          
+		         
           
         });
 		// 페이지 로드 시 초기화 함수 호출
@@ -135,6 +129,42 @@ function switchToRecent() {
       } // for
     } //searchHistory if
     
+    //삭제버튼 클릭시 li와 쿠키 삭제
+	const closeBtn = $('.close-btn'); //삭제버튼
+	closeBtn.on('click', function(event) {
+	console.log('삭제버튼클릭');
+	    event.stopPropagation();
+	    var li = $(this).closest('li');
+	    var region = li.find('.test').text();
+	    var summoner = li.find('.summoner').text();
+	
+	    // 쿠키에서 해당 항목 제거
+	    var searchHistory = getCookie('searchHistory');
+	    if (searchHistory) {
+	        var searchList = searchHistory.split(',');
+	        var updatedList = [];
+	
+	        for (var i = 0; i < searchList.length; i++) {
+	            var searchData = searchList[i].split(':');
+	            if (searchData[0] !== region || searchData[1] !== summoner) {
+	                updatedList.push(searchList[i]);
+	            }
+	        }
+	
+	        // 변경된 목록으로 쿠키 업데이트
+	        setCookie('searchHistory', updatedList.join(','), 30);
+	    }
+	
+	    // 해당 항목 삭제
+	    li.remove();
+
+	  });
+	}
+		  
+  // 검색창 클릭 시 서치패널 보이게
+  underBox.on('click', function(event) {
+  	console.log('검색창클릭')
+  	handleSearchBoxClick()	
     
 	bookMarks.on("click", function(){
 	  // 즐겨찾기 탭을 클릭했을 때 수행할 작업
@@ -176,6 +206,36 @@ function switchToRecent() {
 	      
 	    cookiesList.empty().append(li);
 	  }
+	  // bookmarks 탭에서 삭제 버튼 클릭 시 아이템 삭제
+$('.bookmarks .close-btn').on('click', function(event) {
+    event.stopPropagation();
+    var li = $(this).closest('li');
+    var region = li.find('.test').text();
+    var summoner = li.find('.summoner').text();
+
+    // 쿠키에서 해당 항목 제거
+    var favorites = getCookie('favorites');
+    if (favorites) {
+        var favoritesList = favorites.split(',');
+        var updatedFavorites = [];
+
+        for (var i = 0; i < favoritesList.length; i++) {
+            var favoritesData = favoritesList[i].split(':');
+            if (favoritesData[0] !== region || favoritesData[1] !== summoner) {
+                updatedFavorites.push(favoritesList[i]);
+            }
+        }
+
+        // 변경된 목록으로 쿠키 업데이트
+        setCookie('favorites', updatedFavorites.join(','), 30);
+    }
+
+    // 해당 항목 삭제
+    li.remove();
+
+    // 해당 항목의 노란 별을 빈 별로 변경
+    li.find('label').removeClass('yellow-star');
+});
 	});
 		
 		
@@ -245,9 +305,42 @@ function switchToRecent() {
 			
 	      } // for
 	    } //searchHistory if
-
+	    
 	    console.log('최근검색 탭 클릭');
+		
+		//삭제버튼 클릭시 li와 쿠키 삭제
+			const closeBtn = $('.close-btn'); //삭제버튼
+			closeBtn.on('click', function(event) {
+			console.log('삭제버튼클릭');
+			    event.stopPropagation();
+			    var li = $(this).closest('li');
+			    var region = li.find('.test').text();
+			    var summoner = li.find('.summoner').text();
+			
+			    // 쿠키에서 해당 항목 제거
+			    var searchHistory = getCookie('searchHistory');
+			    if (searchHistory) {
+			        var searchList = searchHistory.split(',');
+			        var updatedList = [];
+			
+			        for (var i = 0; i < searchList.length; i++) {
+			            var searchData = searchList[i].split(':');
+			            if (searchData[0] !== region || searchData[1] !== summoner) {
+			                updatedList.push(searchList[i]);
+			            }
+			        }
+			
+			        // 변경된 목록으로 쿠키 업데이트
+			        setCookie('searchHistory', updatedList.join(','), 30);
+			    }
+			
+			    // 해당 항목 삭제
+			    li.remove();
+		
+			  });
+			
 		});
+		
   });// 검색창 클릭 시 서치패널 보이게
   
   
