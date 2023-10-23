@@ -15,10 +15,8 @@ public class Participants {
 	public Integer assists;
 	public Integer champLevel;
 	public Integer profileIcon;
-	public Integer spell1Casts;
-    public Integer spell2Casts;
-    public Integer spell3Casts;
-    public Integer spell4Casts;
+	public String summoner1Id;
+	public String summoner2Id;
     public String item0;
     public String item1;
     public String item2;
@@ -27,6 +25,11 @@ public class Participants {
     public String item5;
     public String item6;
     public String puuid;
+    public Integer totalEnemyJungleMinionsKilled;
+    public Integer totalMinionsKilled;
+    public String individualPosition;
+    public Integer totalDamageDealtToChampions;
+    public Integer totalDamageTaken;
     }
     
     

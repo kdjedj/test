@@ -11,10 +11,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<<<<<<< HEAD
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" type="text/css" href="${cp}/resources/reset.css?ver=<%= System.currentTimeMillis() %>">
 <link rel="stylesheet" type="text/css" href="${cp}/resources/main.css?ver=<%= System.currentTimeMillis() %>">
 <script type="text/javascript" src="${cp}/resources/t.js?ver=<%= System.currentTimeMillis() %>"></script>
+=======
+<link rel="stylesheet" type="text/css" href="${cp}/resources/reset.css?ver=<%=System.currentTimeMillis()%>">
+<link rel="stylesheet" type="text/css" href="${cp}/resources/main.css?ver=<%=System.currentTimeMillis()%>">
+
+>>>>>>> branch 'searchingPage_0' of git@github.com:kdjedj/test.git
 </head>
 <body>
 <header class="header">
@@ -136,7 +142,7 @@
 			<a><img alt="로고" src="${cp}/resources/Logo.png"></a>
 		</div>
 		<div class="focusbox" alt="전적검색">
-			<form action="" class="region">
+			<form action="${cp}/board/searching_player" class="region">
 				<div>
 					<small class="label">Region</small>
 					<div class="">
@@ -148,7 +154,7 @@
 						</select>
 					</div>
 				</div>
-			</form>
+			
 			<div class="searchbox">
 				<label for="searchHome" class="label">Search</label>
 				<input id="searchHome" name="search" autocomplete="off" type="text" placeholder="소환사명, 소환사명, ...">
@@ -165,6 +171,13 @@
 			</div>
 			<button id="searchButton" class="search-button">검색</button>
 			
+				<label for="serachHome" class="label">Search</label><!-- 이부분 클릭해도 텍스트써지게 javascript -->
+				<input id="" name="userName" autocomplete="off" type="text" placeholder="소환사명, 소환사명, ...">
+				<div class="under-bar"></div>
+				<!--클릭시 최근검색이랑 즐겨찾기 나오는거 구현해야하나  -->
+				<a href="${cp}/board/searching_player?userName=hideonbush">페이커</a>
+				<button type="submit">검색</button>
+			</div></form>
 		</div>
 	</div>
 

@@ -32,6 +32,10 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/com/fasterxml/jackson/core/jackson-databind/2.12.5/jackson-databind-2.12.5.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/com/fasterxml/jackson/core/jackson-annotations/2.12.5/jackson-annotations-2.12.5.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/com/fasterxml/jackson/core/jackson-core/2.12.5/jackson-core-2.12.5.jar" enabled="true" runInBatchMode="false"/>
+<<<<<<< HEAD
     <factorypathentry kind="EXTJAR" id="C:\Users\GDJ\Documents\workspace-sts-3.9.18.RELEASE\teamgg\mysql-connector-j-8.0.31.jar" enabled="true" runInBatchMode="false"/>
+=======
+    <factorypathentry kind="EXTJAR" id="C:\workspace\Folder_For_Java\Team_gg\mysql-connector-j-8.0.31.jar" enabled="true" runInBatchMode="false"/>
+>>>>>>> branch 'searchingPage_0' of git@github.com:kdjedj/test.git
     <factorypathentry kind="PLUGIN" id="org.eclipse.jst.ws.annotations.core" enabled="true" runInBatchMode="false"/>
 </factorypath>
