@@ -215,7 +215,7 @@ nav li span {
 	justify-content: center;
 	align-items: center;
 }
-.bookmarks{
+.bookmarks-list{
 	display: flex;
 	width:50%;
 	height:40px;
@@ -238,11 +238,16 @@ nav li span {
 	display:flex;
 	align-items:center;
 	padding-left:10px;
+	justify-content: space-between;
+	
+	
 }
 
-
+.summoner {
+	margin-right:auto;
+}
 .favorite-summoner-chk{
-	margin-left: auto;
+	margin-left:auto;
 	margin-right: 30px;
 	display:flex;
 	align-items:center;
@@ -250,6 +255,8 @@ nav li span {
 
 .close-btn {
 	margin-right: 30px;
+	display:flex;
+	align-items:center;
 }
 .search_blank{
     width: 170px;
@@ -260,22 +267,6 @@ nav li span {
     
 }
 
-div.search_box button{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 75px;
-    height: 40px;
-    border-radius: 20px;
-    background-color: #ffffff;
-    margin-left: 20px;
-    color: #cb78fd;
-    font-size: 1.5em;
-    font-family: 'Black Han Sans', sans-serif;
-    border: none
-}
-
-/* div.search_box, div.search_box */
 
 .post_content{
 	    box-shadow: 0 1px 3px 0 rgba(0,0,0,.15);

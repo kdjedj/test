@@ -156,7 +156,7 @@
 					<div class="search-panel">
 						<div class="panel-rap">
 							<div class="recent-search">최근검색</div>
-							<div class="bookmarks">즐겨찾기</div>
+							<div class="bookmarks-list">즐겨찾기</div>
 							<ul class="cookies">
 							</ul>
 						</div>

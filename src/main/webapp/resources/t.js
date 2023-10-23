@@ -4,7 +4,7 @@ $(document).ready(function() {
   const underBox = $('.searchbox');
   const underBar = $('.under-bar');
   const searchInput = $('#searchInput'); // 검색어 입력 필드 선택
-  const bookMarks = $('.bookmarks');
+  const bookMarks = $('.bookmarks-list');
   const recentSearch= $('.recent-search');
   var MAX_SEARCH_HISTORY = 5; // 최대 검색어 개수
   
@@ -47,7 +47,7 @@ function updateStarColor(label, checkbox) {
 function switchToRecent() {
   $('.cookies').removeClass('bookmarks').addClass('recent');
   $('.recent-search').addClass('pick');
-  $('.bookmarks').removeClass('pick');
+  $('.bookmarks-list').removeClass('pick');
 }
 function handleSearchBoxClick(){
 	switchToRecent()
@@ -171,7 +171,7 @@ function handleSearchBoxClick(){
 	  console.log('즐겨찾기 탭 클릭');
 	  var cookiesList = $('.cookies'); // 여기에서 변수를 정의합니다.
 	  cookiesList.removeClass('recent').addClass('bookmarks');
-	  $('.bookmarks').addClass('pick');
+	  $('.bookmarks-list').addClass('pick');
 	  $('.recent-search').removeClass('pick');
 	  
 	  var favorites = getCookie('favorites');
@@ -242,7 +242,7 @@ $('.bookmarks .close-btn').on('click', function(event) {
 	recentSearch.on("click", function(){
 	  switchToRecent();
   	  $('.recent-search').addClass('pick');
-	  $('.bookmarks').removeClass('pick');
+	  $('.bookmarks-list').removeClass('pick');
 	  var searchHistory = getCookie('searchHistory');
 	  function switchToRecent() {
 	  $('.cookies').removeClass('bookmarks').addClass('recent');
