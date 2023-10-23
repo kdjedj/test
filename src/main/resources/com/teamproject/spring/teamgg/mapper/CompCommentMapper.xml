@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.teamproject.spring.teamgg.mapper.CompCommentMapper">
+
+	<select id="ccList" parameterType="long" resultType="com.teamproject.spring.teamgg.vo.CompCommentVo">
+	    select * from comp_comment
+	    where c_idx = #{c_idx}
+	    order by cc_num
+	</select>
+	
+	<delete id="ccDel">
+		delete from comp_comment where cc_idx = #{cc_idx}
+	</delete>
+	
+	<insert id="ccWrite" parameterType="com.teamproject.spring.teamgg.vo.CompCommentVo">
+		insert into comp_comment
+		(c_idx, cc_id, cc_user, cc_comment, cc_class, cc_group, cc_num, cc_date)
+		values
+		(#{c_idx}, #{cc_id}, #{cc_user}, #{cc_comment}, #{cc_class}, #{cc_group}, #{cc_num}, now())
+	</insert>
+	
+	<update id="ccModify">
+		update comp_comment
+		set cc_comment = #{cc_comment}
+		where cc_idx = #{cc_idx} and cc_id = #{cc_id}
+	</update>
+	
+	<select id="findLastGroupNum" parameterType="Long" resultType="Integer">
+    select max(cc_group) from comp_comment where c_idx = #{c_idx}
+	</select>
+	
+	<select id="findLastCcNum" parameterType="map" resultType="Integer">
+    select max(cc_num) from comp_comment where c_idx = #{c_idx} and cc_group = #{cc_group}
+	</select>
+	
+	<select id="getData" resultType="com.teamproject.spring.teamgg.vo.CompCommentVo">
+	select * from comp_comment where cc_idx = #{cc_idx}
+	</select>	
+	
+	<select id="getWriterByCcIdx" resultType="String">
+		select cc_id from comp_comment where cc_idx = #{cc_idx}
+	</select>
+	
+</mapper>

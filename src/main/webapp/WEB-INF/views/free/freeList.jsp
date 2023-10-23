@@ -13,9 +13,10 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="${cp}/resources/free/freeList.css">
-<script src="${cp}/resources/free/a.css?ver=${ts}"></script>
 </head>
 <body>
+
+<c:set var="userName" value="${sessionScope.m_user}" />
 
 	<div class="head">
 		<div class="logoBox">	
@@ -25,13 +26,25 @@
 		</div>
 		<div class="headTab">
 				<div class="headTop">
-				<a href="${cp}/member/login">유저명/로그인</a>
+					<div class="userName">
+						<c:if test="${not empty userName}">
+		      			<p>${userName}</p>
+		    			</c:if>
+					</div>
+					<div class="Proclogin">
+						<% if (session.getAttribute("m_id") != null) { %>
+		       				 <a href="${cp}/member/logout" class="">로그아웃</a>
+					    <% } else { %>
+					    	 <a href="${cp}/member/login" class="">로그인</a>
+					    <% } %>
+					</div>
 				</div>
-				<div class="boards_head">
-						<a href="${cp}/free/freeList">자유게시판
-<!-- 						<div data-key="HOME" class="css-7rk75k emmetr11">자유게시판</div> -->
-							<!-- data-key는 자바스크립트 사용자정의 데이터용. -->
-						</a> 게시판 2 게시판 3
+				<div class="headBot">
+					<div class="boards_head">
+							<a href="${cp}/free/freeList">자유게시판</a>
+							<a href="${cp}/tip/tipList">정보게시판</a>
+							<a href="${cp}/comp/compList">유저찾기게시판</a>
+					</div>
 				</div>
 		</div>
 	</div>
@@ -56,24 +69,19 @@
 				<h1> 자유 </h1>
 				<button type="button" id="write" title="글쓰기" onclick="location.href='freeWrite'">글쓰기</button>
 			</div>
-<%
-	Object o = request.getAttribute("list");
-	List<FreeBoardVo> list = (List<FreeBoardVo>) o; 
-	for(int i=0;i<list.size();i++){
-		Long f_idx = list.get(i).getF_idx();
-		String f_title = list.get(i).getF_title();
-		Date f_date = list.get(i).getF_date();
-		String f_writer = list.get(i).getF_writer();
-%>	
+<c:forEach var="item" items="${list}">
+    <c:set var="f_idx" value="${item.f_idx}" />
+    <c:set var="f_title" value="${item.f_title}" />
+    <c:set var="f_date" value="${item.f_date}" />
+    <c:set var="f_id" value="${item.f_id}" />
+    <c:set var="f_user" value="${item.f_user}" />
 			<ul class="post">
-            	<li class="posts w500"><%=f_idx%></li>
-            	<li class="posts w2500"><a href="freeRead?f_idx=<%=f_idx%>"><%=f_title %></a></li>
-            	<li class="posts"><%=f_date%></li>
-            	<li class="posts"><%=f_writer%></li>
+            	<li class="posts w500">${item.f_idx}</li>
+            	<li class="posts w2500"><a href="freeRead?f_idx=${item.f_idx}">${item.f_title}</a></li>
+            	<li class="posts">${item.f_date}</li>
+            	<li class="posts">${item.f_user}</li>
 			</ul>
-<%
-	}
-%>
+</c:forEach>
 			<div class="paging">
 				<c:choose>
 				    <c:when test="${hasPrev == true}">

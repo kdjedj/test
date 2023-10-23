@@ -10,15 +10,14 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
-<link rel="stylesheet" href="${cp}/resources/Singup.css" />
+<link rel="stylesheet" href="${cp}/resources/css/Singup.css" />
 </head>
 <body>
 	<div class="container">
 		<form action="${cp}/member/register" method="post">
 			<div class="container">
-				<h1>
-					<a href="main.jsp" id="logo">로고자리</a>
-				</h1>
+				<a href="/teamgg" id="logo"><img
+					src="${cp}/resources/img/Logo.png" id="logoimg"></a>
 			</div>
 			<h1>회원가입</h1>
 			<div class="form-control">
@@ -36,12 +35,12 @@
 			<input type="submit" class="btn" value="회원가입">
 			<button class="btn" type="reset">리셋</button>
 			<div style="text-align: center;">
-				<span id="clock" style="color: gray; font-size: 60px;"></span> <span
-					id="apm" style="color: gray; font-size: 30px;"></span>
+				<span id="clock" style="color: rgb(222, 220, 238); font-size: 60px;"></span>
+				<span id="apm" style="color: rgb(222, 220, 238); font-size: 30px;"></span>
 			</div>
 		</form>
 	</div>
-	<script src="${cp}/resources/popword.js"></script>
-	<script src="${cp}/resources/time.js"></script>
+	<script src="${cp}/resources/js/popword.js"></script>
+	<script src="${cp}/resources/js/time.js"></script>
 </body>
 </html>

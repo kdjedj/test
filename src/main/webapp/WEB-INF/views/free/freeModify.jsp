@@ -27,28 +27,34 @@
 					</div>	
 	</div>
 	
-	<div class="container">
+	<div class="write_container">
 		<div class="sideMenu">
 			<div id="profileBox">
 			</div>
 			<div id="boards_container">
 			</div>
 		</div>
-		<div class="modify">
-
-글번호:<%=f_idx %><br>
-글내용:	
+		<div class="write">
 
 	<form action="${cp}/free/freeModify" method="post">
 		<input type="hidden" name='f_idx' value='<%=f_idx %>' >
 		
-		<label for="f_title">제목: </label>
-	    <input type="text" name="f_title" required><br>
-	
-	    <label for="f_content">내용: </label>
-	    <textarea rows="3" name="f_content" required></textarea><br>
+			<div class="title">
+			<input type="text" id="f_title" name="f_title" placeholder="제목" required><br>
+			</div>
+				
+			<div class="content">
+			<textarea rows="30" id="f_content" name="f_content" required></textarea><br>
+			</div>
     
-		<input type="submit" value="수정하기">
+		<div class="write_actions">
+			<div>
+			    <input type="submit" id="cancel" value="취소">
+			</div>
+			<div>
+			    <input type="submit" id="publish" value="글쓰기">
+			</div>
+		</div>
 	</form>
 		</div>
 	</div>

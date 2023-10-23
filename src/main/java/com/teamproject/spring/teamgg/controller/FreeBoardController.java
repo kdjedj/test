@@ -1,5 +1,7 @@
 package com.teamproject.spring.teamgg.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -10,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.teamproject.spring.teamgg.board.ConfigBoard;
+import com.teamproject.spring.teamgg.service.FreeCommentService;
 import com.teamproject.spring.teamgg.service.FreeBoardService;
 import com.teamproject.spring.teamgg.vo.FreeBoardVo;
+import com.teamproject.spring.teamgg.vo.FreeCommentVo;
 import com.teamproject.spring.teamgg.vo.MemberVO;
 
 import lombok.AllArgsConstructor;
@@ -23,6 +27,7 @@ import lombok.extern.log4j.Log4j;
 @Controller
 public class FreeBoardController {
 	private FreeBoardService service;
+	private FreeCommentService commentService;
 	
 	// 리스트
 	@GetMapping("/freeList")
@@ -89,50 +94,96 @@ public class FreeBoardController {
 		
 	}
 	
-	@GetMapping({"/freeRead", "/freeModify"})
+	@GetMapping("/freeRead")
 	public void read(@RequestParam("f_idx") Long f_idx, Model model) {
 		System.out.println("====== 읽기, 수정 (" + f_idx + ")");
 		model.addAttribute("freeRead",service.read(f_idx));
+		
+		List<FreeCommentVo> fcList = commentService.getFcList(f_idx);
+	    model.addAttribute("fcList", fcList);
 	}
-	
+
 	@GetMapping("/freeDel")
 	public String del(@RequestParam("f_idx") Long f_idx, HttpSession session) {
-		String loggedInNickname = (String) session.getAttribute("m_user");
-		String authorNickname = service.getAuthorNickname(f_idx);
-		if (loggedInNickname != null && loggedInNickname.equals(authorNickname)) {
-	        service.del(f_idx);
+		String f_id = (String) session.getAttribute("m_id");
+		if (f_id == null) {
+			return "redirect:/member/login";
+		}
+	    FreeBoardVo originPost = service.read(f_idx);
+	    if (!f_id.equals(originPost.getF_id())) {
+	        return "redirect:/errorPage";
 	    }
+	        service.del(f_idx);
 		return "redirect:/free/freeList";
 	}
 	
 	@GetMapping("/freeWrite") // view
 	public String write(HttpSession session) {
-		String f_writer = (String) session.getAttribute("m_id");
-	    if (f_writer == null) {
+		String f_id = (String) session.getAttribute("m_id");
+	    if (f_id == null) {
 	        return "redirect:/member/login";
 	    }
 	    return "/free/freeWrite";
 	}
 	
-	@PostMapping("/freeWrite")        // todo: 리스트 말고 작성한 글 읽기 화면으로 리다이렉트하기
+	@PostMapping("/freeWrite")
 	public String write(FreeBoardVo fvo, HttpSession session) {
-		String f_writer = (String) session.getAttribute("m_id");
-	    if (f_writer == null) {
+		String f_id = (String) session.getAttribute("m_id");
+		String f_user = (String) session.getAttribute("m_user");
+	    if (f_id == null) {
 	        return "redirect:/member/login";
 	    }
-	    fvo.setF_writer(f_writer);
-	    service.write(fvo, f_writer);
-	    return "redirect:/free/freeList";
+	    fvo.setF_id(f_id);
+	    fvo.setF_user(f_user);
+	    service.write(fvo);
+//	    작성 완료된 글번호로 이동
+	    Long writeIdx = fvo.getWriteIdx();
+	    if (writeIdx != null) {
+	        return "redirect:/free/freeRead?f_idx=" + writeIdx;
+	    } else {
+	        return "redirect:/errorPage";
+	    }
 	}
 	
-	@PostMapping("/freeModify")           // todo: 리스트 말고 작성한 글 읽기 화면으로 리다이렉트하기
+	@GetMapping("/freeModify")
+	public String modify(@RequestParam("f_idx") Long f_idx, Model model, HttpSession session) {
+		String f_id = (String) session.getAttribute("m_id");
+		if (f_id == null) {
+			return "redirect:/member/login";
+		}
+		
+	    FreeBoardVo originPost = service.read(f_idx);
+	    if (!f_id.equals(originPost.getF_id())) {
+	        return "redirect:/errorPage";
+	    }
+	    
+		model.addAttribute("freeRead", service.read(f_idx));
+		return "/free/freeModify";
+	}
+	
+	@PostMapping("/freeModify")
 	public String modify(FreeBoardVo fvo, HttpSession session) {
-		String f_writer = (String) session.getAttribute("m_id");
-	    if (f_writer == null) {
+		String f_id = (String) session.getAttribute("m_id");
+	    if (f_id == null) {
 	        return "redirect:/member/login";
 	    }
-	    fvo.setF_writer(f_writer);
-	    service.modify(fvo, f_writer);
-	    return "redirect:/free/freeList";
+	    
+	    FreeBoardVo originPost = service.read(fvo.getF_idx());
+
+	    if (!f_id.equals(originPost.getF_id())) {
+	        return "redirect:/errorPage";
+	    }
+
+	    originPost.setF_title(fvo.getF_title());
+	    originPost.setF_content(fvo.getF_content());
+	    service.modify(originPost);
+
+	    // 작성 완료된 글번호로 이동
+	    Long writeIdx = originPost.getF_idx();
+	    if (writeIdx != null) {
+	        return "redirect:/free/freeRead?f_idx=" + writeIdx;
+	    } else {
+	        return "redirect:/errorPage";
+	    }
 	}
 }

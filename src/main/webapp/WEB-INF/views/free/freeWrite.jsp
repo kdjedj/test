@@ -21,7 +21,6 @@
 						<input id="search" name="search" autocomplete="off" type="text" placeholder="소환사 검색">
 					</div>	
 	</div>
-	<div class="please">
 	<div class="write_container">
 		<div class="sideMenu">
 			<div id="profileBox">
@@ -57,7 +56,6 @@
 		</div>
 		
 	</div>
-</div>
 	<div class=bottom>
 	바텀
 	</div>

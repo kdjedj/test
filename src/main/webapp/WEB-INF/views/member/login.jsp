@@ -10,15 +10,14 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
-<link rel="stylesheet" href="${cp}/resources/Login.css" />
+<link rel="stylesheet" href="${cp}/resources/css/Login.css" />
 </head>
 <body>
 	<div class="container">
 		<form action="${cp}/member/login" method="post">
 			<div class="container">
-				<h1>
-					<a href="main.jsp" id="logo">로고자리</a>
-				</h1>
+				<a href="/teamgg" id="logo"><img
+					src="${cp}/resources/img/Logo.png" id="logoimg"></a>
 			</div>
 			<h1>로그인</h1>
 			<div class="form-control">
@@ -29,15 +28,15 @@
 			</div>
 			<input type="submit" class="btn" value="로그인">
 			<p class="text">
-				계정이 없나요? <a href="singup.jsp">회원가입</a>
+				계정이 없나요? <a href="${cp}/member/register">회원가입</a>
 			</p>
 		</form>
 		<div style="text-align: center;">
-			<span id="clock" style="color: gray; font-size: 60px;"></span> <span
-				id="apm" style="color: gray; font-size: 30px;"></span>
+			<span id="clock" style="color: rgb(222, 220, 238); font-size: 60px;"></span>
+			<span id="apm" style="color: rgb(222, 220, 238); font-size: 30px;"></span>
 		</div>
 	</div>
-	<script src="${cp}/resources/popword.js"></script>
-	<script src="${cp}/resources/time.js"></script>
+	<script src="${cp}/resources/js/popword.js"></script>
+	<script src="${cp}/resources/js/time.js"></script>
 </body>
 </html>

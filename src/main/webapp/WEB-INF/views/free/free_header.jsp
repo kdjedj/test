@@ -13,9 +13,10 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="${cp}/resources/free/freeList.css">
-<script src="${cp}/resources/free/a.css?ver=${ts}"></script>
 </head>
 <body>
+
+<c:set var="userName" value="${sessionScope.m_user}" />
 
 <div class="head">
 		<div class="logoBox">	
@@ -25,13 +26,25 @@
 		</div>
 		<div class="headTab">
 				<div class="headTop">
-				유저명/로그인
+					<div class="userName">
+						<c:if test="${not empty userName}">
+		      			<p>${userName}</p>
+		    			</c:if>
+					</div>
+					<div class="Proclogin">
+						<% if (session.getAttribute("m_id") != null) { %>
+		       				 <a href="${cp}/member/logout" class="">로그아웃</a>
+					    <% } else { %>
+					    	 <a href="${cp}/member/login" class="">로그인</a>
+					    <% } %>
+					</div>
 				</div>
-				<div class="boards_head">
-						<a href="${cp}/free/freeList?page=1">자유게시판
-<!-- 							<div data-key="HOME" class="css-7rk75k emmetr11">자유게시판</div> -->
-							<!-- data-key는 자바스크립트 사용자정의 데이터용. -->
-						</a> 게시판 2 게시판 3
+				<div class="headBot">
+					<div class="boards_head">
+							<a href="${cp}/free/freeList">자유게시판</a>
+							<a href="${cp}/tip/tipList">정보게시판</a>
+							<a href="${cp}/comp/compList">유저찾기게시판</a>
+					</div>
 				</div>
 		</div>
 	</div>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.teamproject.spring.teamgg.mapper.TipCommentMapper">
+
+	<select id="tcList" parameterType="long" resultType="com.teamproject.spring.teamgg.vo.TipCommentVo">
+	    select * from tip_comment
+	    where t_idx = #{t_idx}
+	    order by tc_num
+	</select>
+	
+	<delete id="tcDel">
+		delete from tip_comment where tc_idx = #{tc_idx}
+	</delete>
+	
+	<insert id="tcWrite" parameterType="com.teamproject.spring.teamgg.vo.TipCommentVo">
+		insert into tip_comment
+		(t_idx, tc_id, tc_user, tc_comment, tc_class, tc_group, tc_num, tc_date)
+		values
+		(#{t_idx}, #{tc_id}, #{tc_user}, #{tc_comment}, #{tc_class}, #{tc_group}, #{tc_num}, now())
+	</insert>
+	
+	<update id="tcModify">
+		update tip_comment
+		set tc_comment = #{tc_comment}
+		where tc_idx = #{tc_idx} and tc_id = #{tc_id}
+	</update>
+	
+	<select id="findLastGroupNum" parameterType="Long" resultType="Integer">
+    select max(tc_group) from tip_comment where t_idx = #{t_idx}
+	</select>
+	
+	<select id="findLastTcNum" parameterType="map" resultType="Integer">
+    select max(tc_num) from tip_comment where t_idx = #{t_idx} and tc_group = #{tc_group}
+	</select>
+	
+	<select id="getData" resultType="com.teamproject.spring.teamgg.vo.TipCommentVo">
+	select * from tip_comment where tc_idx = #{tc_idx}
+	</select>	
+	
+	<select id="getWriterByTcIdx" resultType="String">
+		select tc_id from tip_comment where tc_idx = #{tc_idx}
+	</select>
+	
+</mapper>
