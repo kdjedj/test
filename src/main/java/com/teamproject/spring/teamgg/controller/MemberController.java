@@ -1,5 +1,6 @@
 package com.teamproject.spring.teamgg.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -59,6 +60,7 @@ public class MemberController {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("/member/Message");
 		MemberVO member = service.login(mvo);
+		String oldurl = (String) session.getAttribute("oldurl");
 		if (member != null) {
 			log.info("로그인성공");
 			session.setAttribute("m_id", member.getM_id());
@@ -67,7 +69,11 @@ public class MemberController {
 			session.setAttribute("m_date", member.getM_date());
 			session.setAttribute("m_role", member.getM_role());
 			mv.addObject("message", member.getM_user() + " 님 환영합니다!");
-			mv.addObject("href", "/teamgg");
+			if (oldurl != null) {
+				mv.addObject("href", oldurl);
+			} else {
+				mv.addObject("href", "/teamgg");
+			}
 			return mv;
 		} else {
 			log.info("로그인실패");
@@ -78,20 +84,25 @@ public class MemberController {
 	}
 
 	@GetMapping("/login")
-	public void login() {
-
+	public void login(HttpSession session, HttpServletRequest request) {
+		String oldurl = request.getHeader("referer");
+		log.info(oldurl + " << 로그인 이전 페이지");
+		session.setAttribute("oldurl", oldurl);
 	}
 
 	@RequestMapping("/logout")
-	public ModelAndView logout(HttpSession session, ModelAndView mv) {
+	public ModelAndView logout(HttpSession session, ModelAndView mv, HttpServletRequest request) {
+		String oldurl = request.getHeader("referer");
+		log.info(oldurl + " << 로그인 이전 페이지");
 		service.logout(session);
 		log.info("로그아웃 완료");
 		mv.setViewName("/member/Message");
 		mv.addObject("message", "로그아웃완료!");
-		mv.addObject("href", "/teamgg");
+		if (oldurl != null) {
+			mv.addObject("href", oldurl);
+		} else {
+			mv.addObject("href", "/teamgg");
+		}
 		return mv;
-	}
-	@RequestMapping("/Searching_User")
-	public void Searching_User() {
 	}
 }

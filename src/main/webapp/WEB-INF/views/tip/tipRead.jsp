@@ -21,7 +21,7 @@
 	String t_writer = read.getT_writer();
 	String t_title = read.getT_title();	
 	String t_content = read.getT_content();
-	Date t_date = read.getT_date();
+	String t_date = read.getT_date();
 %>	
 
 <div class="board_wrap">

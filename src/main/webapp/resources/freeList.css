@@ -1,0 +1,192 @@
+html {
+	height: 100%;
+}
+body {
+    background-color: rgb(222,220,238);;
+	margin: 0 auto;
+	min-height: 100%;
+}
+
+/* .board_wrap{ */
+/* } */
+
+
+
+/* ================== head ================== */
+.head{
+	display: flex;
+	background-color: rgb(106,96,169);
+	position: sticky;
+	padding-top: 32px;
+  	top: -32px;
+  	z-index: 1;
+/* 	margin: 0px; */
+}
+
+@media screen and (max-width: 600px) {
+  .boards_head {
+  display: none;
+  }
+}
+
+.logoBox{
+	padding: 15px;
+	width: 150px;
+	height: 50px;
+}
+
+.logo{
+  width: 100%; 
+  object-fit: cover;
+}
+
+.headTab{
+	display: block;
+/* 	background-color: green; */
+	width: 100%;
+}
+
+.headTop{
+	height: 50%;
+	text-align: right;
+/* 	background-color: yellow; */
+	line-height: 40px;
+	padding-right: 10px;
+}
+
+.headBot{
+	padding-left: 5px;
+	padding-right: 5px;
+	height: 50%;
+	justify-content: flex-start;
+/* 	background-color: blue;	 */
+	display: flex;
+	line-height: 40px;
+}
+
+#boards_head{
+	width: 50%;
+/* 	background-color: gold;	 */
+	
+}
+
+
+
+
+
+/* ==================== middle ==================== */
+.middle{
+	width: 100%; height: 100px;
+}
+
+#search{
+	position: absolute;
+	top: 250px;
+	right: 200px;
+}
+
+@media screen and (max-width: 800px) {
+  .middle {
+	display: none;
+}
+}
+
+/* ================== container  ================== */
+/* .container{
+	display: flex;
+	margin: 100px;
+}
+ */
+/* 리스트 */
+.list{
+	width: 80%;
+	display: block;
+	background-color: beige;
+}
+
+@media screen and (max-width: 1500px) {
+  .list {
+    width: 100%;
+  }
+} 
+
+.list_head{
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	width: auto;
+	height: 100px;
+	margin-bottom: 100px;
+	background-color: blue;
+}
+
+/* #write{ */
+/* } */
+
+/* ul {
+	width: auto;
+	list-style: none;
+	display: flex;
+	justify-content: space-between;
+	text-align: center;
+	margin: 0px;
+	background-color: gold;
+} */
+
+.posts {
+	width: 100%;
+	margin: 0px;
+	padding: 10px;
+	border-bottom: 1px solid #EBEEF1;
+}
+
+.w500 {
+	width: 500px;
+}
+
+.w2500 {
+	text-align: left;
+	width: 2500px;
+}
+
+.paging{
+	display: block;
+	width: 100%;
+	height: 30px;
+	background-color: grey;
+	text-align: center;
+/* 	align-self: initial; */
+}
+
+/* sideMenu */
+.sideMenu{
+	margin-right: 10px;
+	background-color: yellow;
+	width: 20%;
+	height:600px;
+	position: sticky;
+	top: 80px;
+/* 	width: 300px; */
+/* 	padding-right: 10px; */
+}
+
+@media screen and (max-width: 1500px) {
+  .sideMenu {
+    display: none;
+  }
+}
+
+#profileBox{
+	background-color: pink;
+	height: 200px;
+}
+
+/* #boards_container{ */
+/* } */
+
+/* ================== bottom  ================== */
+.bottom{
+	text-align: center;	
+	width: 100%;
+	background-color: silver;
+}

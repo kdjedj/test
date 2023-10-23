@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.teamproject.spring.teamgg.board.ConfigBoard;
 import com.teamproject.spring.teamgg.service.TipBoardService;
 import com.teamproject.spring.teamgg.vo.TipBoardVo;
+import com.teamproject.spring.teamgg.vo.FreeBoardVo;
 import com.teamproject.spring.teamgg.vo.MemberVO;
 
 import lombok.AllArgsConstructor;
@@ -114,7 +115,7 @@ public class TipBoardController {
 	    return "/tip/tipWrite";
 	}
 	
-	@PostMapping("/tipWrite")        // todo: 리스트 말고 작성한 글 읽기 화면으로 리다이렉트하기
+	@PostMapping("/tipWrite")
 	public String write(TipBoardVo tvo, HttpSession session) {
 		String t_writer = (String) session.getAttribute("m_id");
 	    if (t_writer == null) {
@@ -122,7 +123,13 @@ public class TipBoardController {
 	    }
 	    tvo.setT_writer(t_writer);
 	    service.write(tvo);
-	    return "redirect:/tip/tipList";
+//	    작성 완료된 글번호로 이동
+	    Long writeIdx = tvo.getWriteIdx();
+	    if (writeIdx != null) {
+	        return "redirect:/tip/tipRead?t_idx=" + writeIdx;
+	    } else {
+	        return "redirect:/errorPage";
+	    }
 	}
 	
 	@GetMapping("/tipModify")
@@ -135,15 +142,20 @@ public class TipBoardController {
 		return "/tip/tipModify";
 	}
 	
-	@PostMapping("/tipModify")           // todo: 리스트 말고 작성한 글 읽기 화면으로 리다이렉트하기
+	@PostMapping("/tipModify")
 	public String modify(TipBoardVo tvo, HttpSession session) {
 		String t_writer = (String) session.getAttribute("m_id");
 	    if (t_writer == null) {
 	        return "redirect:/member/login";
 	    }
 	    tvo.setT_writer(t_writer);
-	    log.info("======modify fvo: "+tvo+", t_writer: " + t_writer);
-	    service.modify(tvo);
-	    return "redirect:/tip/tipList";
+	    service.write(tvo);
+//	    작성 완료된 글번호로 이동
+	    Long writeIdx = tvo.getWriteIdx();
+	    if (writeIdx != null) {
+	        return "redirect:/tip/tipRead?t_idx=" + writeIdx;
+	    } else {
+	        return "redirect:/errorPage";
+	    }
 	}
 }

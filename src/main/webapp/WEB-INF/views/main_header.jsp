@@ -8,7 +8,7 @@
 <c:set var="cp" value="${pageContext.request.contextPath}" />
     
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="${cp}/resources/reset.css?ver=<%=System.currentTimeMillis()%>">
@@ -99,18 +99,18 @@
 			<nav class="board-nav">
 				<ul class="boards">
 					<li class="board1">
-						<a href="${cp}/board/teamMate">
+						<a href="${cp}/board/teamMate?m_id=guest&m_pw=guest">
 							<div data-key="HOME" class="css-7rk75k emmetr11">게시판1</div>
 							<!-- data-key는 자바스크립트 사용자정의 데이터용. -->
 						</a>
 					</li>
 					<li class="board2">
-						<a href="${cp}/board/Searching_User">
+						<a href="${cp}/board/teamMate">
 							<div data-key="CHAMPION" class="css-q3uz41 emmetr11">게시판2</div>
 						</a>
 					</li>
 					<li class="board3">
-						<a href="${cp}/board/Searching_User">
+						<a href="${cp}/board/teamMate">
 							<div data-key="CHAMPION" class="css-q3uz41 emmetr11">게시판3</div>
 						</a>
 					</li>
@@ -124,4 +124,18 @@
 			</nav>
 		</div>
 	</div>
-</header>
+	</header>
+	<div class="container">
+	
+	<div class="top_part">
+		<div class = "logo_box">
+			<a><img id="logo" alt="로고" src="${cp}/resources/img/Logo.png"></a>
+		</div> 
+			<form action="${cp}/board/searcing_player" method="post">
+		<div class="search_box" alt="전적검색">
+			<input class="search_blank" name="userName" placeholder="소환사 검색">
+			<button type=submit>.GG</button>
+		</div>
+			</form>
+		<a href="${cp}/board/searching_player?userName=hideonbush"><div class="function_button">페이커</div></a>
+	</div>

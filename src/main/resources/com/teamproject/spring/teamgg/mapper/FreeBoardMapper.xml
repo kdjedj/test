@@ -16,7 +16,8 @@
 		delete from free_board where f_idx = #{f_idx}
 	</delete>
 		
-	<insert id="freeWrite" parameterType="com.teamproject.spring.teamgg.vo.FreeBoardVo">
+	<insert id="freeWrite" parameterType="com.teamproject.spring.teamgg.vo.FreeBoardVo"
+	useGeneratedKeys="true" keyProperty="writeIdx">
 		insert into free_board(f_title, f_writer, f_content, f_date)
     	values (#{f_title}, #{f_writer}, #{f_content}, now())
 	</insert>		

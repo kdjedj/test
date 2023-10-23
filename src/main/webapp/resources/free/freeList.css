@@ -48,28 +48,42 @@ body {
 
 .headTop{
 	height: 50%;
-	text-align: right;
-/* 	background-color: yellow; */
+	float: right;
 	line-height: 40px;
 	padding-right: 10px;
 }
 
+.Proclogin {
+   width:80px;
+   height:40px;
+   text-align:center;
+   display:flex;
+   align-items:center;
+   justify-content:center;
+}
+.Proclogin a {
+   background-color:#dedcee;
+   font-size:15px;
+   color:#6a60a9;
+   border-radius:4px;
+   height:30px;
+   text-align:center;
+   display:flex;
+   flex-direction: column;
+   justify-content:center;
+}
+
 .headBot{
-	padding-left: 5px;
-	padding-right: 5px;
-	height: 50%;
-	justify-content: flex-start;
-/* 	background-color: blue;	 */
+/* 	background-color: yellow; */
+	height: 100%;
 	display: flex;
-	line-height: 40px;
 }
 
-#boards_head{
-	width: 50%;
-/* 	background-color: gold;	 */
-	
+.boards_head{
+/* 	background-color: green; */
+	 align-self: flex-end;
+	 margin-bottom: 10px;
 }
-
 
 
 
