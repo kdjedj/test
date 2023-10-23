@@ -11,6 +11,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" type="text/css" href="${cp}/resources/reset.css?ver=<%= System.currentTimeMillis() %>">
+<link rel="stylesheet" type="text/css" href="${cp}/resources/main.css?ver=<%= System.currentTimeMillis() %>">
+<script type="text/javascript" src="${cp}/resources/t.js?ver=<%= System.currentTimeMillis() %>"></script>
 <link rel="stylesheet" type="text/css" href="${cp}/resources/reset.css?ver=<%=System.currentTimeMillis()%>">
 <link rel="stylesheet" type="text/css" href="${cp}/resources/main.css?ver=<%=System.currentTimeMillis()%>">
 
@@ -104,18 +108,17 @@
 				<ul class="boards">
 					<li class="board1">
 						<a href="${cp}/free/freeList">
-							<div data-key="HOME" class="css-7rk75k emmetr11">자유게시판</div>
-							<!-- data-key는 자바스크립트 사용자정의 데이터용. -->
+							<div>자유게시판</div>
 						</a>
 					</li>
 					<li class="board2">
 						<a href="${cp}/tip/tipList">
-							<div data-key="CHAMPION" class="css-q3uz41 emmetr11">정보게시판</div>
+							<div>정보게시판</div>
 						</a>
 					</li>
 					<li class="board3">
 						<a href="${cp}/mate/mateList">
-							<div data-key="CHAMPION" class="css-q3uz41 emmetr11">유저찾기게시판</div>
+							<div>유저찾기게시판</div>
 						</a>
 					</li>
 				</ul>
@@ -148,20 +151,26 @@
 						</select>
 					</div>
 				</div>
-			
+			</form>
 			<div class="searchbox">
-				<label for="serachHome" class="label">Search</label><!-- 이부분 클릭해도 텍스트써지게 javascript -->
-				<input id="" name="userName" autocomplete="off" type="text" placeholder="소환사명, 소환사명, ...">
-				<div class="under-bar"></div>
-				<!--클릭시 최근검색이랑 즐겨찾기 나오는거 구현해야하나  -->
-				<a href="${cp}/board/searching_player?userName=hideonbush">페이커</a>
-				<button type="submit">검색</button>
-			</div></form>
+				<label for="searchHome" class="label">Search</label>
+				<input id="searchHome" name="search" autocomplete="off" type="text" placeholder="소환사명, 소환사명, ...">
+				<div class="under-bar">
+					<div class="search-panel">
+						<div class="panel-rap">
+							<div class="recent-search">최근검색</div>
+							<div class="bookmarks-list">즐겨찾기</div>
+							<ul class="cookies">
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<button id="searchButton" class="search-button">검색</button>
 		</div>
 	</div>
 
-</div>
-
+	</div>
 	<br> 
 	id : <%=session.getAttribute("m_id")%><br> 
 	Nickname : <%=session.getAttribute("m_user")%><br>
@@ -169,9 +178,9 @@
 	date : <%=session.getAttribute("m_date")%><br>
 	role : <%=session.getAttribute("m_role")%><br>
 
-<div class="footer">
+<!-- <div class="footer">
 	<div class="footer-rap">
 	</div>
-</div>
+</div> -->
 </body>
 </html>

@@ -378,7 +378,7 @@ private GuestService service;
 			}	
 			List<String> grbc = restTemplate.getForObject(gr_uri, List.class); 
 			String grbc1 = (String)grbc.get(0);
-			System.out.println(grbc1);
+//			System.out.println(grbc1);
 			
 		//플레이어 데이터 수집
 		ArrayList<Lol_api> xx = new ArrayList<Lol_api>();
@@ -432,7 +432,7 @@ private GuestService service;
 			Integer gameDuration = (Integer)testbc.info.gameDuration;
 			Integer timemin = gameDuration/60;
 			Integer timesec = gameDuration%60;
-			System.out.println(timemin+"분 " +timesec+"초");
+//			System.out.println(timemin+"분 " +timesec+"초");
 			
 			//각 수치에 대한 객체 선언 - 꼭 괄호 바깥에서 선언*
 			List<Participants> player_info = (List<Participants>)testbc.info.participants;// 게임데이타 받아오기
@@ -519,18 +519,20 @@ private GuestService service;
 					
 //					cg.put(mainUser.championName, cg.get(0).(mainUser.championName, 0) + 1);
 					//포지션별 횟수 구하기
-					if(gameMode.equals("CLASSIC")) {
+					if(gameMode.equals("솔랭")) {
 						rankGames += 1;
-					
+//						System.out.println("현 게임에 포지션은?" + mainUser.individualPosition);
 						if(positions.get(mainUser.individualPosition) == null) {
-							System.out.println("포지션 테이블이 없어서 한번 만들음");
+//							System.out.println("포지션 테이블이 없어서 한번 만들음");
 							positions.put(mainUser.individualPosition, new Positions(
 									mainUser.individualPosition,
 									0
 									));
 							positions.get(mainUser.individualPosition).times = positions.get(mainUser.individualPosition).times + 1;
+//						System.out.println("테이블 하나 만들고 감");
 						} else {
-							positions.get(mainUser.individualPosition).times = positions.get(mainUser.individualPosition).times + 1;;
+							positions.get(mainUser.individualPosition).times = positions.get(mainUser.individualPosition).times + 1;
+//							System.out.println("안만들고 감");
 						}
 						
 						}
@@ -542,7 +544,7 @@ private GuestService service;
 						
 //				System.out.println("이 값이 나오냐 안나오냐 : "+aver);
 				}
-				System.out.println("각 챔피언당 가한 데미지는 " +player_info.get(i).totalDamageDealtToChampions+"이고, 받은 데미지는"+player_info.get(i).totalDamageTaken+"이다");
+//				System.out.println("각 챔피언당 가한 데미지는 " +player_info.get(i).totalDamageDealtToChampions+"이고, 받은 데미지는"+player_info.get(i).totalDamageTaken+"이다");
 			}
 			//
 			for(int i=0; i<player_info.size(); i++) {
@@ -731,7 +733,7 @@ private GuestService service;
         	if(positionN.get(i).gauge.equals("")) {
         		positionN.get(i).gauge = "0";
         	}
-//    		System.out.println("포지션 " +positionN.get(i).position+ "에 " +positionN.get(i).gauge+"의 값이 들어있음");
+    		System.out.println("포지션 " +positionN.get(i).position+ "에 " +positionN.get(i).gauge+"의 값이 들어있음");
         }
         
         //해당유저 평균 게임 정보
@@ -805,4 +807,4 @@ private GuestService service;
 	
 	}
 	
-}
+	}
