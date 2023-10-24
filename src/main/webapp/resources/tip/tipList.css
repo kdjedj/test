@@ -145,7 +145,7 @@ body {
 /* #write{ */
 /* } */
 
-ul {
+.post {
 	width: auto;
 	list-style: none;
 	display: flex;

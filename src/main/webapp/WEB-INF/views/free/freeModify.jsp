@@ -13,7 +13,7 @@
 <link rel="stylesheet" type="text/css" href="${cp}/resources/free/freeWrite.css">
 </head>
 <body>
-<%@include file="free_header.jsp" %>
+<%@include file="/WEB-INF/views/header.jsp" %>
 <%
 	FreeBoardVo read = (FreeBoardVo)request.getAttribute("freeRead");
 	long f_idx = read.getF_idx();

@@ -48,7 +48,6 @@ body {
 
 .headTop{
 	height: 50%;
-	display: flex;
 	float: right;
 	line-height: 40px;
 	padding-right: 10px;
@@ -92,6 +91,7 @@ body {
 	 align-self: flex-end;
 	 margin-bottom: 10px;
 }
+
 
 
 
@@ -145,7 +145,7 @@ body {
 /* #write{ */
 /* } */
 
-ul {
+.post {
 	width: auto;
 	list-style: none;
 	display: flex;

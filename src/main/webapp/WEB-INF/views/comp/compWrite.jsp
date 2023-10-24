@@ -13,7 +13,7 @@
 <link rel="stylesheet" type="text/css" href="${cp}/resources/comp/compWrite.css">
 </head>
 <body>
-<%@include file="comp_header.jsp" %>
+<%@include file="/WEB-INF/views/header.jsp" %>
 
 <div class="board_wrap">
 	<div class="middle">

@@ -1,0 +1,128 @@
+@charset "UTF-8";
+body {
+	background-color:#dedcee; 
+	/* 255 217 250 */
+	font-family: Roboto_2d0052, Roboto_Fallback_2d0052, sans-serif, system-ui, sans-serif;
+    color:white;
+	
+}
+.header{
+}
+
+.header-rap {
+   width:100%;
+   height:88px;
+   background-color:yellow;
+}
+
+
+.main-tab {
+   width:100%;
+   height:40px;
+   background-color:#6a60a9;
+   display:flex;
+   justify-content: center;
+}
+@media screen and (max-width: 672px) {
+	.main-tab{
+	width:672px;
+	display:flex;
+	}
+}
+.boards {
+   width:100%;
+   display:flex;
+   text-align:center;
+}
+@media screen and (max-width:672px) {
+	.boards {
+   width:415px;
+   display:flex;
+   text-align:center;
+}
+}
+@media screen and (min-width: 1044px) {
+	.boards{
+	width:calc(1044px - 44px);
+	display:flex;
+   text-align:center;
+	}
+}
+.main-tab .logo {
+    width:65px;
+    padding-left:10px;
+
+}
+.main-tab .logo img{
+    background-color:#dedcee;
+    width:65px;
+    height:40px;
+}
+.main-tab nav {
+   width:950px;
+   height:40px;
+   background-color:#6a60a9;
+   justify-content: center;
+   /*187 53 251  */
+}
+nav span {
+   
+}
+nav li {
+   width:138px;
+   height:40px;
+}
+nav li>a {
+	font-family:'Malgun Gothic', sans-serif;
+	font-size: 1.2em;
+	font-weight: 800;
+	display: block;
+	color: inherit;
+}
+nav li img {
+   width: 24px;
+   height:24px;
+   border:0px;
+   vertival-align:middle;
+   max-width:100%;
+}
+nav li span {
+   font-size:12px;
+   margin-left:8px;
+}
+.Proclogin {
+   width:80px;
+   height:40px;
+   text-align:center;
+   display:flex;
+   align-items:center;
+   justify-content:center;
+}
+.Proclogin a {
+   background-color:#dedcee;
+   font-size:15px;
+   color:#6a60a9;
+   border-radius:4px;
+   height:30px;
+   text-align:center;
+   display:flex;
+   flex-direction: column;
+   justify-content:center;
+}
+
+.sub-tab {
+   height:48px;
+   background-color:#6a60a9;
+}
+.board-nav{
+	display:flex;
+	justify-content:center;
+}
+
+
+.boards li {
+   display:flex;
+   flex-direction:column;
+   justify-content:center;
+   margin-left:24px;
+}

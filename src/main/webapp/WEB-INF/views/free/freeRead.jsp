@@ -16,7 +16,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-<%@include file="free_header.jsp" %>
+<%@include file="/WEB-INF/views/header.jsp" %>
 <%
 	FreeBoardVo read = (FreeBoardVo)request.getAttribute("freeRead");
 	Long f_idx = read.getF_idx();
