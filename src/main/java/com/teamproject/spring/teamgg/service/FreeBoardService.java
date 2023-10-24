@@ -3,7 +3,7 @@ import java.util.List;
 import com.teamproject.spring.teamgg.vo.FreeBoardVo;
 
 public interface FreeBoardService {
-	public List<FreeBoardVo> getList(int page);
+	public List<FreeBoardVo> getList(int index);
 	public FreeBoardVo read(long f_idx);
 	public void del(long f_idx);
 	public void write(FreeBoardVo fvo);

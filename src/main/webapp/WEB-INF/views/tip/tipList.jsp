@@ -16,31 +16,8 @@
 </head>
 <body>
 
-	<div class="head">
-		<div class="logoBox">	
-			<a href="${cp}/">
-				<img class="logo" alt="로고" src="${cp}/resources/tip/img/LOGO_small_2.png">
-			</a>
-		</div>
-		<div class="headTab">
-				<div class="headTop">
-				<div class="Proclogin">
-				<% if (session.getAttribute("m_id") != null) { %>
-       				 <a href="${cp}/member/logout" class="">로그아웃</a>
-			    <% } else { %>
-			    	 <a href="${cp}/member/login" class="">로그인</a>
-			    <% } %>
-			</div>
-				</div>
-				<div class="headBot">
-					<div class="boards_head">
-							<a href="${cp}/free/freeList">자유게시판</a>
-							<a href="${cp}/tip/tipList">정보게시판</a>
-							<a href="${cp}/mate/mateList">유저찾기게시판</a>
-					</div>
-				</div>
-		</div>
-	</div>
+<c:set var="userName" value="${sessionScope.m_user}" />
+<%@include file="/WEB-INF/views/header.jsp" %>
 	
 <div class="board_wrap">
 	<div class="middle">
@@ -62,24 +39,19 @@
 				<h1> 정보 </h1>
 				<button type="button" id="write" title="글쓰기" onclick="location.href='tipWrite'">글쓰기</button>
 			</div>
-<%
-	Object o = request.getAttribute("list");
-	List<TipBoardVo> list = (List<TipBoardVo>) o; 
-	for(int i=0;i<list.size();i++){
-		Long t_idx = list.get(i).getT_idx();
-		String t_title = list.get(i).getT_title();
-		String t_date = list.get(i).getT_date();
-		String t_writer = list.get(i).getT_writer();
-%>	
+<c:forEach var="item" items="${list}">
+	<c:set var="t_idx" value="${item.t_idx}"/>
+	<c:set var="t_title" value="${item.t_title}"/>
+	<c:set var="t_date" value="${item.t_date}"/>
+	<c:set var="t_id" value="${item.t_id}"/>
+	<c:set var="t_user" value="${item.t_user}"/>
 			<ul class="post">
-            	<li class="posts w500"><%=t_idx%></li>
-            	<li class="posts w2500"><a href="tipRead?t_idx=<%=t_idx%>"><%=t_title %></a></li>
-            	<li class="posts"><%=t_date%></li>
-            	<li class="posts"><%=t_writer%></li>
+            	<li class="posts w500">${item.t_idx}</li>
+            	<li class="posts w2500"><a href="tipRead?t_idx=${item.t_idx}">${item.t_title}</a></li>
+            	<li class="posts">${item.t_date}</li>
+            	<li class="posts">${item.t_user}</li>
 			</ul>
-<%
-	}
-%>
+</c:forEach>
 			<div class="paging">
 				<c:choose>
 				    <c:when test="${hasPrev == true}">

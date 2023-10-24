@@ -520,6 +520,7 @@ private GuestService service;
 //					cg.put(mainUser.championName, cg.get(0).(mainUser.championName, 0) + 1);
 					//포지션별 횟수 구하기
 					if(gameMode.equals("솔랭")) {
+						if(gameMode.equals("솔랭")) {
 						rankGames += 1;
 //						System.out.println("현 게임에 포지션은?" + mainUser.individualPosition);
 						if(positions.get(mainUser.individualPosition) == null) {
@@ -545,6 +546,7 @@ private GuestService service;
 //				System.out.println("이 값이 나오냐 안나오냐 : "+aver);
 				}
 //				System.out.println("각 챔피언당 가한 데미지는 " +player_info.get(i).totalDamageDealtToChampions+"이고, 받은 데미지는"+player_info.get(i).totalDamageTaken+"이다");
+			}
 			}
 			//
 			for(int i=0; i<player_info.size(); i++) {
@@ -807,4 +809,5 @@ private GuestService service;
 	
 	}
 	
-	}
+}
+

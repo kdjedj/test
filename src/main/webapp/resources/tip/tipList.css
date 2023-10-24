@@ -53,6 +53,13 @@ body {
 	padding-right: 10px;
 }
 
+.userName {
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	height:40px;
+}
+
 .Proclogin {
    width:80px;
    height:40px;
@@ -138,7 +145,7 @@ body {
 /* #write{ */
 /* } */
 
-ul {
+.post {
 	width: auto;
 	list-style: none;
 	display: flex;
@@ -176,7 +183,7 @@ ul {
 /* sideMenu */
 .sideMenu{
 	margin-right: 10px;
-	background-color: yellow;
+	background-color: white;
 	width: 20%;
 	height:600px;
 	position: sticky;
@@ -192,8 +199,9 @@ ul {
 }
 
 #profileBox{
-	background-color: pink;
+	background-color: white;
 	height: 200px;
+	border-bottom: 1px solid #EBEEF1;
 }
 
 /* #boards_container{ */

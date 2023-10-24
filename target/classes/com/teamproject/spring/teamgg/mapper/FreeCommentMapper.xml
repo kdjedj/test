@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.teamproject.spring.teamgg.mapper.FreeCommentMapper">
+
+	<select id="fcList" parameterType="long" resultType="com.teamproject.spring.teamgg.vo.FreeCommentVo">
+	    select * from free_comment
+	    where f_idx = #{f_idx}
+	    order by fc_num
+	</select>
+	
+	<delete id="fcDel">
+		delete from free_comment where fc_idx = #{fc_idx}
+	</delete>
+	
+	<insert id="fcWrite" parameterType="com.teamproject.spring.teamgg.vo.FreeCommentVo">
+		insert into free_comment
+		(f_idx, fc_id, fc_user, fc_comment, fc_class, fc_group, fc_num, fc_date)
+		values
+		(#{f_idx}, #{fc_id}, #{fc_user}, #{fc_comment}, #{fc_class}, #{fc_group}, #{fc_num}, now())
+	</insert>
+	
+	<update id="fcModify">
+		update free_comment
+		set fc_comment = #{fc_comment}
+		where fc_idx = #{fc_idx} and fc_id = #{fc_id}
+	</update>
+	
+	<select id="findLastGroupNum" parameterType="Long" resultType="Integer">
+    select max(fc_group) from free_comment where f_idx = #{f_idx}
+	</select>
+	
+	<select id="findLastFcNum" parameterType="map" resultType="Integer">
+    select max(fc_num) from free_comment where f_idx = #{f_idx} and fc_group = #{fc_group}
+	</select>
+	
+	<select id="getData" resultType="com.teamproject.spring.teamgg.vo.FreeCommentVo">
+	select * from free_comment where fc_idx = #{fc_idx}
+	</select>	
+	
+	<select id="getWriterByFcIdx" resultType="String">
+		select fc_id from free_comment where fc_idx = #{fc_idx}
+	</select>
+	
+</mapper>

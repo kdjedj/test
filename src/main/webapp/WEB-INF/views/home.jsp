@@ -20,121 +20,11 @@
 
 </head>
 <body>
-<header class="header">
-	<div class="header-rap">
-		<!-- 로고 -->
-		<div class = "main-tab">
-			<a href="${cp}/" class = "logo">
-				<img alt="로고" src="${cp}/resources/Logo.png">
-			</a>
-		
-			<!-- 게임탭메뉴 -->
-			<nav>
-				<ul>
-					<li>
-						<span>
-							<img alt="" src="#">
-							<span>리그오브레전드</span>
-						</span>
-					</li>
-					<!-- 롤 제외 전부 주석
-					<li>
-						<a href="https://tft.op.gg">
-							<span>
-								<img alt="tft아이콘" src="*jpg">
-								<span>전략적 팀 전투</span>
-							</span>
-						</a>
-					</li>
-					<li>
-						<a href="https://tft.op.gg">
-							<span>
-								<img alt="오버워치2아이콘" src="*jpg">
-								<span>오버워치2</span>
-							</span>
-						</a>
-					</li> -->
-				</ul>
-			</nav>
-			
-			<!--  ...버튼
-			<div>
-				<button class="">
-					<img src ="*.jpg" alt="more">
-				</button>
-			</div>
-		
-			faq/피드백 버튼
-			<div>
-				<button class="">
-					<span class="hidden">Theme Button</span>
-				</button>
-				
-			</div> -->
-		
-			<!-- 다크모드 버튼
-			<div>
-				<button class="">
-					<span class="hidden">Theme Button</span>
-				</button>
-			</div>
-	 			-->		
-			<!-- 언어선택
-			<div class="">
-				<img alt="" src="*.jpg">
-				<div class="">
-					<label class="hidden" for="ko_KR">ko_KR</label>
-					<select id="ko_KR">
-						<option value="en_US" selected>English</option>
-						<option value="ko_KR" selected>한국어</option>
-						<option value="ja_JP" selected>日本語</option>
-					</select>
-				</div>	
-			</div> -->
-			
-			<!-- 로그인 -->
-			<div class="Proclogin">
-				<% if (session.getAttribute("m_id") != null) { %>
-       				 <a href="${cp}/member/logout" class="">로그아웃</a>
-			    <% } else { %>
-			    	 <a href="${cp}/member/login" class="">로그인</a>
-			    <% } %>
-			</div>
-		</div>
-	
-		<!-- 메인탭 아래 보조 탭 -->
-		<div class="sub-tab">
-			<nav class="board-nav">
-				<ul class="boards">
-					<li class="board1">
-						<a href="${cp}/free/freeList">
-							<div>자유게시판</div>
-						</a>
-					</li>
-					<li class="board2">
-						<a href="${cp}/tip/tipList">
-							<div>정보게시판</div>
-						</a>
-					</li>
-					<li class="board3">
-						<a href="${cp}/mate/mateList">
-							<div>유저찾기게시판</div>
-						</a>
-					</li>
-				</ul>
-				<!-- 마우스 오버시 색진해짐, 언더라인 누르면 링크이동 <a href="${cp}/guest/getList?page=1">방명록</a>-->
-				<!--<button class="">
-					<span class="logo"></span>
-					<span>13.18</span>
-					"패치노트 보기"
-				</button>  -->
-			</nav>
-		</div>
-	</div>
-</header>
+<%@include file="/WEB-INF/views/header.jsp" %>
 <div class="container">
 	<!--  <P>  The time on the server is ${serverTime}. </P>-->
 	<div class="middle">
+	
 		<div class = "logo">
 			<a><img alt="로고" src="${cp}/resources/Logo.png"></a>
 		</div>
@@ -168,6 +58,7 @@
 			</div>
 			<button id="searchButton" class="search-button">검색</button>
 		</div>
+	</div>
 	</div>
 
 	</div>
