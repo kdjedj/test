@@ -300,12 +300,36 @@ padding: 32px 16px;
 
 .stat .kda .chart{
 	position: relative;
-    width: 88px;
-    height: 88px;
+    width: 100px;
+    height: 100px;
     justify-content: center;
     align-items: center;
     display: flex;
-    font-size: 2em;
+    font-size: 1.3em;
+}
+
+.stat .kda .chart .circleGauge{
+	position: relative;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.stat .kda .chart .circleGauge::before{
+	    content: "";
+    width: 85px;
+    height: 85px;
+    position: absolute;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.stat .kda .chart .circleGauge span{
+	position:relative;
 }
 
 .stat div.win-lose div.k-d-a{
@@ -444,8 +468,8 @@ div.bar div.gauge{
     border-radius: 4px;
     border-left-width: 6px;
     border-left-style: solid;
-    border-color: #ff5454;
-    background-color: #d6d6d6;
+    border-color: #758592;
+    background-color: #F7F7F9;
 }
 
 .content_box{
@@ -865,12 +889,20 @@ td.champion a div span{
     border-left-color: rgb(255, 216, 217);
 }
 
+.gray tbody{
+	background-color: #F7F7F9;
+    border-top: 1px solid rgb(235, 238, 241);
+    border-right-color: rgb(235, 238, 241);
+    border-bottom-color: rgb(235, 238, 241);
+    border-left-color: rgb(235, 238, 241);
+}
+
 td.spells{
 	
 }
 
 td.spells div{
-	
+	   margin-left: 4px;
 }
 
 td.name {

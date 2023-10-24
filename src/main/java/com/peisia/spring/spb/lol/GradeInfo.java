@@ -18,6 +18,7 @@ public class GradeInfo {
 	public String gradestr = "";
 	public String winRate="";
 	public String killRate = "";
+	public double winCircle =0.0;
 	
 	
 		public GradeInfo(String chamName, Integer chamWins, Integer chamLosses, Integer chamGames,
@@ -33,7 +34,7 @@ public class GradeInfo {
 		}
 		public GradeInfo(Integer chamWins, Integer chamLosses, Integer chamGames,
 				String killGrade, String asiGrade, String deathGrade, String gradestr,
-				String winRate, String killRate) {
+				String winRate, String killRate, double winCircle) {
 			this.chamWins = chamWins;
 			this.chamLosses = chamLosses;
 			this.chamGames = chamGames;
@@ -43,5 +44,6 @@ public class GradeInfo {
 			this.gradestr = gradestr;
 			this.winRate = winRate;
 			this.killRate = killRate;
+			this.winCircle = winCircle;
 		}
 }

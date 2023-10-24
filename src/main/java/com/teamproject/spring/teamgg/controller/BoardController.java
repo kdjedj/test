@@ -214,11 +214,9 @@ private GuestService service;
 		return "redirect:/board/teamMate?m_id="+mv.getM_id()+"&m_pw="+mv.getM_pw();	// 책 p.245 참고
 	}
 	
-	@RequestMapping("/searching_player")
-	public void searching_player(@RequestParam("userName") String userName, @RequestParam("region") String region, HttpServletRequest request, Model model) {
-	//// 우리나라 공공 api ////			
-		//인코딩 인증키		
-		DetailInfo dInfo = new DetailInfo();
+	@RequestMapping("/exist_user")
+	public String exist_user(@RequestParam("userName") String userName, @RequestParam("region") String region,
+			HttpServletRequest request, Model model) {
 		String SurmmonerName = userName.replaceAll(" ", "%20");
 		String API_KEY = "RGAPI-0092f94c-82f2-4df3-ad25-ac35254f878e";
 				
@@ -228,7 +226,6 @@ private GuestService service;
 //				+ "?api_key=" + API_KEY; 
 //				
 ////				* 주의 * https 아님 http 임. https 는 인증관련 복잡한 처리를 해야함.	
-		RestTemplate restTemplate = new RestTemplate();			
 //					
 //		//// **** 중요 **** uri			
 //		URI uri = null; //java.net.URI 임포트 하셈			
@@ -297,7 +294,103 @@ private GuestService service;
 			System.out.println(e.getMessage());
 		}
 		
+		
+		
+		
+		
+		
+		model.addAttribute("temp", temp);// 이걸 다음으로 어떻게 넘기냐
+		return "redirect:/board/searching_player?userName="+SurmmonerName+"&region="+region;
+	}
 	
+	
+	@RequestMapping("/searching_player")
+	public void searching_player(@RequestParam("userName") String userName, @RequestParam("region") String region,
+			HttpServletRequest request, Model model) {
+	//// 우리나라 공공 api ////			
+		//인코딩 인증키		
+		DetailInfo dInfo = new DetailInfo();
+		RestTemplate restTemplate = new RestTemplate();			
+//		BufferedReader br = null;
+		String API_KEY = "RGAPI-0092f94c-82f2-4df3-ad25-ac35254f878e";
+		String SurmmonerName = userName.replaceAll(" ", "%20");
+				
+//		String API_URL = "https://kr.api.riotgames.com/lol/summoner/v4"
+//				+ "/summoners/by-name/"
+//				+ SurmmonerName
+//				+ "?api_key=" + API_KEY; 
+//				
+////				* 주의 * https 아님 http 임. https 는 인증관련 복잡한 처리를 해야함.	
+//					
+//		//// **** 중요 **** uri			
+//		URI uri = null; //java.net.URI 임포트 하셈			
+//		try {			
+//			uri = new URI(API_URL);		
+//		} catch (URISyntaxException e) {			
+//			e.printStackTrace();		
+//		}	
+//		
+////		String s = restTemplate.getForObject(uri, String.class); //
+////		log.info("====== 로그인 정보 잘 나오나?? "+s);
+//		
+//		BasisicLoginVo bc = restTemplate.getForObject(uri, BasisicLoginVo.class); // 자기 클래스로 바꾸시오..
+////		log.info("==== json ==== : 유저이름? : "+bc.name);
+//		String accountId = bc.accountId;
+//		String id = bc.id;
+//		String puuid = bc.puuid;
+//		System.out.println("1번 puuid값 : "+puuid);
+////		String ddara = String.format("==== json ==== : 해당 검색 유저의 이름은 %s 입니다. 계정 id값은 %s 입니다", bc.name, accountId);
+////		log.info(ddara);
+//	
+		
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		BufferedReader br = null;
+		
+		Summoner temp= null;
+		try{            
+			String urlstr = "https://"+region+".api.riotgames.com/lol/summoner/v4/summoners/by-name/"+
+					SurmmonerName+"?api_key="+API_KEY;
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+			urlconnection.setRequestMethod("GET");
+			br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(),"UTF-8")); // 여기에 문자열을 받아와라.
+			String result = "";
+			String line;
+			while((line = br.readLine()) != null) { // 그 받아온 문자열을 계속 br에서 줄단위로 받고 출력하겠다.
+				result = result + line;
+			}
+			JsonParser jsonParser = new JsonParser();
+			JsonObject k = (JsonObject) jsonParser.parse(result);
+			String name_a = k.get("name").getAsString();
+			log.info("==== json ==== : 해당 유저 이름은 무엇인가요? : "+name_a);
+			String puuid_a = k.get("puuid").getAsString();
+//			if(puuid_a.equals(puuid)) {
+//				System.out.println("두 값이 같음");
+//			} else {
+//				System.out.println("아예 두값이 틀림");
+//			}
+//			System.out.println("2번 puuid값 : " + puuid_a);
+			Double profileIconId = k.get("profileIconId").getAsDouble();
+			int profileIconId_int = (int)Math.ceil((double) profileIconId);
+//			log.info("==== json ==== : 해당 유저 아이콘 번호 무엇인가요? : "+profileIconId_int);
+
+			Double summonerLevel_a = k.get("summonerLevel").getAsDouble();
+			Double revisionDate_a = k.get("revisionDate").getAsDouble();
+			String id_a = k.get("id").getAsString();
+			String accountId_a = k.get("accountId").getAsString();
+
+			temp = new Summoner(profileIconId_int,name_a,puuid_a,summonerLevel_a,revisionDate_a,id_a,accountId_a);
+			
+//			String ddaratest = String.format("==== json ==== : 소환사의 프로필사진 코드는 %s이고, 이름은 %s, 공용id는 %s, 레벨은 %s,"
+//					+ " 리비젼데이트는 %s이며, 아이디는 %s, 계정 고유 아이디는 %s입니다 ", 
+//					profileIconId, bc.name, puuid_a, summonerLevel_a, revisionDate_a, id_a,accountId_a);
+//			log.info(ddaratest);
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		
+		
+		
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 		String INFO_API_URL = "https://"+region+".api.riotgames.com/lol/league/v4/entries/by-summoner/"
@@ -424,7 +517,7 @@ private GuestService service;
 		//플레이어 데이터 수집
 		ArrayList<Lol_api> xx = new ArrayList<Lol_api>();
 		Map<String, GradeInfo> cg = new HashMap<>();// 챔피언당 게임 수 승패휫수 한번에 구하기
-		GradeInfo mg = new GradeInfo(0,0,0,"","","","","","");// 챔피언당 게임 수 승패휫수 한번에 구하기
+		GradeInfo mg = new GradeInfo(0,0,0,"","","","","","", 0.0);// 챔피언당 게임 수 승패휫수 한번에 구하기
 		Map<String, Positions> positions = new HashMap<>();
 		
 		Integer mainKills = 0;	
@@ -834,7 +927,7 @@ private GuestService service;
         }
         
         //해당유저 평균 게임 정보
-        
+        String winCircleStr = "";
         mg.chamGames = mg.chamWins + mg.chamLosses;
 //        System.out.println("총 게임수 : " +mg.chamGames+"번, 도합 킬 수 : "+mainKills+ "번, 도합 데스 수 : "+mainDeaths+ "번, 도합 어시 수 : "+mainAsis+"번");
         mg.killGrade = String.format("%.1f",(double)mainKills/(double)(mg.chamWins+mg.chamLosses));
@@ -843,6 +936,9 @@ private GuestService service;
         mg.gradestr = String.format("%.2f",(double)(mainKills+ mainAsis)/(double)mainDeaths);
         mg.winRate = String.format("%.0f",((double)mg.chamWins/(double)mg.chamGames)*100);
         mg.killRate = String.format("%.0f",((double)utotalkills/(double)totalkills)*100);
+        winCircleStr = String.format("%.3f",(Double.parseDouble(mg.winRate)/100.0)*360);
+        mg.winCircle = Double.parseDouble(winCircleStr);
+        
         GameInfo gg = new GameInfo(mg, endNum); // 게임 기본 정보 넘기기
         
 //        // 각 키에 대해 작업

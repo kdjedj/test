@@ -152,7 +152,10 @@
 				</div>
 				<div class="kda">
 					<div class="chart">
-						${gameInfo.gg.winRate }%
+						<div class="circleGauge" style="background: conic-gradient(#7d2ae8 ${gameInfo.gg.winCircle}deg, #ededed 0deg);"> 
+							<span>${gameInfo.gg.winRate }%</span>
+						</div>					
+						
 						<%-- <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
 						         <defs>
 						            <linearGradient id="GradientColor">
@@ -343,8 +346,106 @@
 					</c:when>
 					
 					<c:when test="${pi.timemin < 3}">
-					
-					
+						<li>
+							<div class="re_box">
+								<div class="content_box">
+									<div class="gameBox">
+										<div class="game">
+											<div class="gameType">${pi.gameMode }</div>
+											<div class="bar"></div>
+											<div class="result">다시하기</div>
+											<div class="length">${pi.timemin }분 ${pi.timesec }초</div>
+										</div>
+										<%@include file="../board/detailInfo_Info(div)_parti(div).jsp"%>
+									</div>
+								</div>
+								<div class="addBtnDiv">
+									<button class="addInfoBtn" >
+										<img src="${cp}/resources/wa.png" alt="화살표">
+									</button>
+								</div>
+							</div>
+							<div class="addInfo hidden">
+								<table class="back_color gray">
+									<colgroup>
+										<col width="44">
+										<col width="36">
+										<col >
+										<col width="166">
+										<col width="120">
+										<col width="104">
+										<col width="175">
+									</colgroup>
+									<thead>
+										<tr>			
+											<th class="userLose" colspan="3">
+												<span class="result">무승부</span>(레드팀)
+											</th>
+											<th>KDA</th>
+											<th>가한피해량/받은피해량</th>
+											<th>CS</th>
+											<th>아이템</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="player" items="${pi.perPlayers }"
+													begin="0" step="1" end="4">
+													 
+													 	<c:choose>
+															<c:when test="${player.mainUser.summonerName eq pi.mainUser.summonerName}"><!-- 색깔 진하게 구분 -->
+																<tr class="mainPlayer">
+																	<%@include file="../board/detailInfo_td.jsp"%>
+																</tr>
+															</c:when>
+															<c:otherwise>
+																<tr>
+																	<%@include file="../board/detailInfo_td.jsp"%>
+																</tr>
+															</c:otherwise>
+														</c:choose>
+													
+										</c:forEach>
+									</tbody>
+								</table>
+								
+								<div class="summary">
+									
+								</div>
+								
+								<table class="back_color gray">
+									<colgroup>
+										<col width="44">
+										<col width="36">
+										<col >
+										<col width="166">
+										<col width="120">
+										<col width="104">
+										<col width="175">
+									</colgroup>
+									<thead>
+										<tr>
+											<th class="userLose" colspan="3">
+												<span class="result">무승부</span>(블루팀)
+											</th>
+											<th>KDA</th>
+											<th>가한피해량/받은피해량</th>
+											<th>CS</th>
+											<th>아이템</th>
+										</tr>
+									</thead>
+									<tbody>
+										<c:forEach var="player" items="${pi.perPlayers }"
+													begin="5" step="1" end="9">
+														<tr>
+																	<%@include file="../board/detailInfo_td.jsp"%>
+														</tr>
+										</c:forEach>
+										
+									</tbody>
+								</table>
+								
+							</div>
+						</li>
 					</c:when>
 
 
