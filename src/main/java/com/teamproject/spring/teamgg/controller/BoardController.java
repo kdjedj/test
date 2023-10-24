@@ -426,7 +426,7 @@ private GuestService service;
 		Map<String, GradeInfo> cg = new HashMap<>();// 챔피언당 게임 수 승패휫수 한번에 구하기
 		GradeInfo mg = new GradeInfo(0,0,0,"","","","","","");// 챔피언당 게임 수 승패휫수 한번에 구하기
 		Map<String, Positions> positions = new HashMap<>();
-		ArrayList<Lol_api> di = new ArrayList<Lol_api>();
+		
 		Integer mainKills = 0;	
 		Integer mainAsis = 0;	
 		Integer mainDeaths = 0;	
@@ -483,6 +483,7 @@ private GuestService service;
 //			System.out.println(timemin+"분 " +timesec+"초");
 			
 			//각 수치에 대한 객체 선언 - 꼭 괄호 바깥에서 선언*
+			ArrayList<Lol_api> di = new ArrayList<Lol_api>();
 			List<Participants> player_info = (List<Participants>)testbc.info.participants;// 게임데이타 받아오기
 			Participants mainUser = null;
 			Participants perPlayer = null;
@@ -623,7 +624,7 @@ private GuestService service;
 				}
 				
 			}
-			
+//			System.out.println("di 사이즈는? : "+ di.size());
 			for(int i=0; i < di.size(); i++) {
 				dealtStr = String.format("%.4f",
 						((double)di.get(i).mainUser.totalDamageDealtToChampions/(double)maxDealt)*100
@@ -636,7 +637,7 @@ private GuestService service;
 				di.get(i).dealtPer = Double.parseDouble(dealtStr);
 				di.get(i).takenPer = Double.parseDouble(takenStr);
 				
-				
+//				System.out.println("해당 유저의 딜 그래프수치는 "+di.get(i).dealtPer+"이고, 받은 데미지는 "+di.get(i).takenPer+"이다");
 			}
 			
 			
@@ -817,7 +818,7 @@ private GuestService service;
         			if(positions.get(key).times!=0) {
 //        				System.out.println("현재 rankGames 값 : "+rankGames);
         			positionN.get(i).gauge = String.format("%.4f",((double)positions.get(key).times/(double)rankGames)*100); 
-        			System.out.println(positionN.get(i).position+"의 포지션에 값이 들어감 : " +positionN.get(i).gauge);
+//        			System.out.println(positionN.get(i).position+"의 포지션에 값이 들어감 : " +positionN.get(i).gauge);
         			} 
         		}
         
@@ -829,13 +830,13 @@ private GuestService service;
         	if(positionN.get(i).gauge.equals("")) {
         		positionN.get(i).gauge = "0";
         	}
-    		System.out.println("포지션 " +positionN.get(i).position+ "에 " +positionN.get(i).gauge+"의 값이 들어있음");
+//    		System.out.println("포지션 " +positionN.get(i).position+ "에 " +positionN.get(i).gauge+"의 값이 들어있음");
         }
         
         //해당유저 평균 게임 정보
         
         mg.chamGames = mg.chamWins + mg.chamLosses;
-        System.out.println("총 게임수 : " +mg.chamGames+"번, 도합 킬 수 : "+mainKills+ "번, 도합 데스 수 : "+mainDeaths+ "번, 도합 어시 수 : "+mainAsis+"번");
+//        System.out.println("총 게임수 : " +mg.chamGames+"번, 도합 킬 수 : "+mainKills+ "번, 도합 데스 수 : "+mainDeaths+ "번, 도합 어시 수 : "+mainAsis+"번");
         mg.killGrade = String.format("%.1f",(double)mainKills/(double)(mg.chamWins+mg.chamLosses));
         mg.asiGrade = String.format("%.1f",(double)mainAsis/(double)(mg.chamWins+mg.chamLosses));
         mg.deathGrade = String.format("%.1f",(double)mainDeaths/(double)(mg.chamWins+mg.chamLosses));

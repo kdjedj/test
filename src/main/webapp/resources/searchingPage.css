@@ -6,6 +6,7 @@
 .container{
 	 width: 100%;
     /* max-width: 1200px; */
+    min-width: 1200px;
     display: block;
     background-color: #fff;
     /* margin-left: auto; */
@@ -329,7 +330,7 @@ padding: 32px 16px;
 }
 
 .win-lose{
-	font-size: 11px;
+	font-size: 13px;
 	font-family: '맑은 고딕', Arial, sans-serif; 
     font-weight: bold; 
     color:#9AA4AF;
@@ -338,27 +339,27 @@ padding: 32px 16px;
 .aver{
 	
 	display: inline-block;
-    font-size: 11px;
+    font-size: 12px;
     margin-left: 4px;
 }
 
 .per{
 	display: inline-block;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: bold; 
     color: #ffb914;
 }
 
 .gd{
 	display: inline-block;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: bold; 
     color: #50cc5c;
 }
 
 
-.kda{
-	
+div.info .flexBox .kda{
+	    margin-right: 10px;
 }
 
 .chart{
@@ -437,7 +438,15 @@ div.bar div.gauge{
     background-color: #ffc8c8;
 }
 
-
+.re_box{
+	display: flex;
+    height: 96px;
+    border-radius: 4px;
+    border-left-width: 6px;
+    border-left-style: solid;
+    border-color: #ff5454;
+    background-color: #d6d6d6;
+}
 
 .content_box{
 	 display: flex;
@@ -805,6 +814,7 @@ tr.mainPlayer td{
 td.champion{
 	padding-left: 10px;
     padding-right: 4px;
+    padding-top: 10px;
 }
 
 td.champion a{
@@ -873,8 +883,9 @@ td.name {
 td.name a{
 	line-height: 16px;
     color: black;
-    font-size: 12px;
+    font-size: 13px;
     text-decoration: none;
+      font-weight: 500;
 }
 
 td.kda{
@@ -897,7 +908,7 @@ td.damage{
 	    font-family: Roboto, sans-serif;
 }
 
-td.damage div{
+td.damage > div{
 	    display:flex;
 	    justify-content: space-around;
 }
@@ -908,33 +919,49 @@ td.damage>div:first-child{
 
 
 td.damage .dealt{
-	
+	    text-align: center;
+    color: #758592;
+    font-size: 11px;
+    line-height: 14px;
 }
 
 td.damage .progress{
-	
+	    width: 50px;
+    height: 6px;
+    margin: 4px auto 0px;
+    background-color: #fff;
 }
 
 td.damage .progress .fill{
-	
+	height: 100%;
+    background-color: #E84057;
 }
 
-td.damage .taken {
-	
+td.damage .taken{
+	text-align: center;
+    color: #758592;
+    font-size: 11px;
+    line-height: 14px;
+    margin-left: 8px;
+
 }
 
 td.damage .progress_taken{
-	
+	    width: 50px;
+    height: 6px;
+    margin: 4px auto 0px 8px;
+    background-color: #fff;
 }
 
 td.damage .progress_taken .fill{
-	
+	height: 100%;
+    background-color: #9AA4AF;
 }
 
 td.cs{
 	text-align: center;
     color: #758592;
-    font-size: 11px;
+    font-size: 13px;
 }
 
 td.cs div{
