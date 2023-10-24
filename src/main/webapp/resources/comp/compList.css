@@ -183,7 +183,7 @@ ul {
 /* sideMenu */
 .sideMenu{
 	margin-right: 10px;
-	background-color: yellow;
+	background-color: white;
 	width: 20%;
 	height:600px;
 	position: sticky;
@@ -199,8 +199,9 @@ ul {
 }
 
 #profileBox{
-	background-color: pink;
+	background-color: white;
 	height: 200px;
+	border-bottom: 1px solid #EBEEF1;
 }
 
 /* #boards_container{ */

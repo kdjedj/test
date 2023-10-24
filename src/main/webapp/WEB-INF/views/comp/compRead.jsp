@@ -179,19 +179,19 @@ CompBoardVo read = (CompBoardVo)request.getAttribute("compRead");
             modifyButtons.forEach(function (button) {
                 button.addEventListener('click', function () {
                 	// 버튼에서 cc_idx 값 꺼내옴
-                    var editccIdx = this.getAttribute('data-cc-idx');
+                    var editCcIdx = this.getAttribute('data-cc-idx');
                     var writerId = this.getAttribute('data-cc-id');
                     var modal = document.getElementById('commentModal');
                     var modalContent = modal.querySelector('.modal-content');
                     var ccIdxInput = modalContent.querySelector('input[name="cc_idx"]');
 
                     // 꺼내온 cc_idx 값 설정
-                    ccIdxInput.value = editccIdx;
+                    ccIdxInput.value = editCcIdx;
 
             if (isLoggedIn && currentUserId === writerId) {
                 // 로그인된 상태에서만 모달 열기
                 modal.style.display = 'block';
-                console.log('editccIdx:', editccIdx);
+                console.log('editCcIdx:', editCcIdx);
                 console.log('ccIdxInput:', ccIdxInput);
                 console.log('writerId:', writerId);
             } else {

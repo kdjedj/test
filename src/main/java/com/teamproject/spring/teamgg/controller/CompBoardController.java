@@ -1,5 +1,7 @@
 package com.teamproject.spring.teamgg.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.teamproject.spring.teamgg.board.ConfigBoard;
 import com.teamproject.spring.teamgg.service.CompBoardService;
+import com.teamproject.spring.teamgg.service.CompCommentService;
 import com.teamproject.spring.teamgg.vo.CompBoardVo;
+import com.teamproject.spring.teamgg.vo.CompCommentVo;
 import com.teamproject.spring.teamgg.vo.MemberVO;
 
 import lombok.AllArgsConstructor;
@@ -23,6 +27,7 @@ import lombok.extern.log4j.Log4j;
 @Controller
 public class CompBoardController {
 	private CompBoardService service;
+	private CompCommentService commentService;
 	
 	// 리스트
 	@GetMapping("/compList")
@@ -93,6 +98,9 @@ public class CompBoardController {
 	public void read(@RequestParam("c_idx") Long c_idx, Model model) {
 		System.out.println("====== 읽기, 수정 (" + c_idx + ")");
 		model.addAttribute("compRead",service.read(c_idx));
+		
+		List<CompCommentVo> ccList = commentService.getCcList(c_idx);
+		model.addAttribute("ccList", ccList);
 	}
 
 	@GetMapping("/compDel")
