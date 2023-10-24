@@ -179,19 +179,19 @@
             modifyButtons.forEach(function (button) {
                 button.addEventListener('click', function () {
                 	// 버튼에서 tc_idx 값 꺼내옴
-                    var edittcIdx = this.getAttribute('data-tc-idx');
+                    var editTcIdx = this.getAttribute('data-tc-idx');
                     var writerId = this.getAttribute('data-tc-id');
                     var modal = document.getElementById('commentModal');
                     var modalContent = modal.querySelector('.modal-content');
                     var tcIdxInput = modalContent.querySelector('input[name="tc_idx"]');
 
                     // 꺼내온 tc_idx 값 설정
-                    tcIdxInput.value = edittcIdx;
+                    tcIdxInput.value = editTcIdx;
 
             if (isLoggedIn && currentUserId === writerId) {
                 // 로그인된 상태에서만 모달 열기
                 modal.style.display = 'block';
-                console.log('edittcIdx:', edittcIdx);
+                console.log('editTcIdx:', editTcIdx);
                 console.log('tcIdxInput:', tcIdxInput);
                 console.log('writerId:', writerId);
             } else {

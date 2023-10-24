@@ -1,5 +1,7 @@
 package com.teamproject.spring.teamgg.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -11,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.teamproject.spring.teamgg.board.ConfigBoard;
 import com.teamproject.spring.teamgg.service.TipBoardService;
+import com.teamproject.spring.teamgg.service.TipCommentService;
 import com.teamproject.spring.teamgg.vo.TipBoardVo;
+import com.teamproject.spring.teamgg.vo.TipCommentVo;
 import com.teamproject.spring.teamgg.vo.FreeBoardVo;
+import com.teamproject.spring.teamgg.vo.FreeCommentVo;
 import com.teamproject.spring.teamgg.vo.MemberVO;
 
 import lombok.AllArgsConstructor;
@@ -24,6 +29,7 @@ import lombok.extern.log4j.Log4j;
 @Controller
 public class TipBoardController {
 	private TipBoardService service;
+	private TipCommentService commentService;
 	
 	// 리스트
 	@GetMapping("/tipList")
@@ -94,8 +100,11 @@ public class TipBoardController {
 	public void read(@RequestParam("t_idx") Long t_idx, Model model) {
 		System.out.println("====== 읽기, 수정 (" + t_idx + ")");
 		model.addAttribute("tipRead",service.read(t_idx));
+		
+		List<TipCommentVo> tcList = commentService.getTcList(t_idx);
+		model.addAttribute("tcList", tcList);
 	}
-
+	
 	@GetMapping("/tipDel")
 	public String del(@RequestParam("t_idx") Long t_idx, HttpSession session) {
 		String t_id = (String) session.getAttribute("m_id");
