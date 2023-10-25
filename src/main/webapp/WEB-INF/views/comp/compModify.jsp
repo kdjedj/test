@@ -13,7 +13,7 @@
 <link rel="stylesheet" type="text/css" href="${cp}/resources/free/freeWrite.css">
 </head>
 <body>
-<%@include file="comp_header.jsp" %>
+<%@include file="/WEB-INF/views/header.jsp" %>
 <%
 	CompBoardVo read = (CompBoardVo)request.getAttribute("compRead");
 	long c_idx = read.getC_idx();
