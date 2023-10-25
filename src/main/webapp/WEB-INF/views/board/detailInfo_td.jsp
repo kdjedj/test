@@ -28,7 +28,7 @@
 																		
 																	</td>
 																	<td class="name">
-																		<a href="${cp}/board/searching_player?userName=${player.mainUser.summonerName }">${player.mainUser.summonerName }</a>
+																		<a href="${cp}/board/exist_user?userName=${player.mainUser.summonerName }&region=${liv.region}">${player.mainUser.summonerName }</a>
 																		<!-- 각자의 랭크 -->
 																	</td>
 																	<td class="kda">

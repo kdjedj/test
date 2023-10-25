@@ -732,7 +732,7 @@ span.chamlv{
 	    display: flex;
     -webkit-box-align: center;
     align-items: center;
-    width: 88px;
+    width: 94px;
     height: 18px;
     text-align: left;
     white-space: nowrap;
@@ -741,8 +741,9 @@ span.chamlv{
 
 .player_list .name{
 	display: inline-block;
-    max-width: 60px;
+    max-width: 68px;
     vertical-align: middle;
+    color: #758592;
 }
 
 .player_list .name a{
@@ -881,6 +882,10 @@ td.champion a div span{
     border-left-color: rgb(213, 227, 255);
 }
 
+.blue .mainPlayer{
+	   background-color: #d6e3ff;
+}
+
 .red tbody{
 	background-color: #FFF1F3;
     border-top: 1px solid rgb(255, 216, 217);
@@ -889,12 +894,20 @@ td.champion a div span{
     border-left-color: rgb(255, 216, 217);
 }
 
+.red .mainPlayer{
+	   background-color: #ffd1d8;
+}
+
 .gray tbody{
 	background-color: #F7F7F9;
     border-top: 1px solid rgb(235, 238, 241);
     border-right-color: rgb(235, 238, 241);
     border-bottom-color: rgb(235, 238, 241);
     border-left-color: rgb(235, 238, 241);
+}
+
+.gray .mainPlayer{
+	   background-color: #dedede;
 }
 
 td.spells{
@@ -918,6 +931,10 @@ td.name a{
     font-size: 13px;
     text-decoration: none;
       font-weight: 500;
+}
+
+.mainPlayer td.name a{
+	  font-weight: bolder;
 }
 
 td.kda{
@@ -1044,4 +1061,25 @@ td.items li{
     transition: transform 1s;
 }
 
+/*===========================================================================  */
+/* no_search */
+/*===========================================================================  */
 
+.no_search{
+	 margin: 10% auto;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.no_search span{
+	color: #9f9bbd;
+    font-size: 2em;
+}
+
+.no_search_mark{
+	margin-top: -7px;
+    color: #9f9bbd;
+    font-size: 20em;
+}

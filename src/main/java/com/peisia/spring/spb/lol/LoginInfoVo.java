@@ -21,9 +21,11 @@ public Integer losses;
 //public Boolean hotStreak;
 
 public String win_per;
+public String region;
 
-
-	public LoginInfoVo(String queueType, String tier, String rank, Integer leaguePoints, Integer wins, Integer losses, String win_per) {
+	public LoginInfoVo(String queueType, String tier, String rank, 
+			Integer leaguePoints, Integer wins, Integer losses, 
+			String win_per, String region) {
 		this.queueType = queueType;
 		this.tier = tier;
 		this.rank = rank;
@@ -31,6 +33,7 @@ public String win_per;
 		this.wins = wins;
 		this.losses = losses;
 		this.win_per=win_per;
+		this.region = region;
 	}
 	
 

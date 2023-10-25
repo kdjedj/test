@@ -403,8 +403,8 @@ underBar.children('.search-panel').on('click', function(event) {
         setCookie('searchHistory', searchList.join(','), 30); // 쿠키 유효기간 30일
       }
 
-      //var searchUrl = '/teamgg/board/exist_user?userName=' + encodeURIComponent(searchQuery)+'&region='+encodeURIComponent(selectedRegion);
-      var searchUrl = '/teamgg/board/searching_player?userName=' + encodeURIComponent(searchQuery)+'&region='+encodeURIComponent(selectedRegion);
+      var searchUrl = '/teamgg/board/exist_user?userName=' + encodeURIComponent(searchQuery)+'&region='+encodeURIComponent(selectedRegion);
+      //var searchUrl = '/teamgg/board/searching_player?userName=' + encodeURIComponent(searchQuery)+'&region='+encodeURIComponent(selectedRegion);
       window.location.href = searchUrl;
     }
   });

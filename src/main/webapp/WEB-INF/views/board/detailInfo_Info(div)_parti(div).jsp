@@ -174,23 +174,65 @@
 											<ul>
 												<c:forEach var="player" items="${pi.participants }"
 													begin="0" step="1" end="4">
-													<li class="player_list">
-														<div class="icon">
-															<a href="#"> <img
-																src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/champion/${player.championName }.png"><span></span>
-															</a>
-														</div>
-														<div class="name">
-															<a
-																href="${cp}/board/searching_player?userName=${player.summonerName }">${player.summonerName }</a>
-														</div>
-													</li>
+													<c:choose>
+														<c:when test="${player.summonerName eq pi.mainUser.summonerName }">
+															<li class="player_list main">
+																<div class="icon">
+																	<a href="#"> 
+																		<img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/champion/${player.championName }.png" style="border-radius:50%;"><span></span>
+																	</a>
+																</div>
+																<div class="name">
+																	<a href="${cp}/board/exist_user?userName=${player.summonerName }&region=${liv.region}" style="color: black;">${player.summonerName }</a>
+																</div>
+															</li>
+														</c:when>
+														<c:otherwise>
+															<li class="player_list">
+																<div class="icon">
+																	<a href="#"> 
+																		<img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/champion/${player.championName }.png"><span></span>
+																	</a>
+																</div>
+																<div class="name">
+																	<a href="${cp}/board/exist_user?userName=${player.summonerName }&region=${liv.region}">${player.summonerName }</a>
+																</div>
+															</li>
+														</c:otherwise>
+													</c:choose>
+													
 												</c:forEach>
 											</ul>
 											<ul>
 												<c:forEach var="player" items="${pi.participants }"
 													begin="5" step="1" end="9">
-													<li class="player_list">
+													<c:choose>
+														<c:when test="${player.summonerName eq pi.mainUser.summonerName }">
+															<li class="player_list main">
+																<div class="icon">
+																	<a href="#"> 
+																		<img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/champion/${player.championName }.png"><span></span>
+																	</a>
+																</div>
+																<div class="name">
+																	<a href="${cp}/board/exist_user?userName=${player.summonerName }&region=${liv.region}">${player.summonerName }</a>
+																</div>
+															</li>
+														</c:when>
+														<c:otherwise>
+															<li class="player_list">
+																<div class="icon">
+																	<a href="#"> 
+																		<img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/champion/${player.championName }.png"><span></span>
+																	</a>
+																</div>
+																<div class="name">
+																	<a href="${cp}/board/exist_user?userName=${player.summonerName }&region=${liv.region}">${player.summonerName }</a>
+																</div>
+															</li>
+														</c:otherwise>
+													</c:choose>
+													<%-- <li class="player_list">
 														<div class="icon">
 															<a href="#"> <img
 																src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/champion/${player.championName }.png"><span></span>
@@ -198,9 +240,9 @@
 														</div>
 														<div class="name">
 															<a
-																href="${cp}/board/searching_player?userName=${player.summonerName }">${player.summonerName }</a>
+																href="${cp}/board/searching_player?userName=${player.summonerName }&region=${liv.region}">${player.summonerName }</a>
 														</div>
-													</li>
+													</li> --%>
 												</c:forEach>
 											</ul>
 

@@ -565,7 +565,7 @@
 			</div>
 			
 			<div class="more_info">
-				<botton action="">더보기</botton>
+				<button action="">더보기</button>
 			</div>
 			
 		</div>
@@ -574,7 +574,6 @@
 
 
 
-</div>
 
 </body>
 </html>
