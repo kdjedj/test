@@ -16,8 +16,8 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+<%@include file="/WEB-INF/views/board_header.jsp" %>
 <c:set var="userId" value="${sessionScope.m_id}" />
-<%@include file="/WEB-INF/views/header.jsp" %>
 <%
 	FreeBoardVo read = (FreeBoardVo)request.getAttribute("freeRead");
 	Long f_idx = read.getF_idx();
@@ -192,7 +192,7 @@ var userName = "<c:out value='${userName}' />";
 	</div>
 </div>
 
-<script type="text/javascript" src="${cp}/resources/free/freeBoard.js"></script>
+<script type="text/javReadipt" src="${cp}/resources/free/freeBoard.js"></script>
 <script type="text/javascript" src="${cp}/resources/free/freeRead.js"></script>
 </body>
 </html>

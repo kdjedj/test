@@ -13,7 +13,7 @@
 <link rel="stylesheet" type="text/css" href="${cp}/resources/free/freeWrite.css">
 </head>
 <body>
-<%@include file="/WEB-INF/views/header.jsp" %>
+<%@include file="/WEB-INF/views/board_header.jsp" %>
 <%
 	TipBoardVo read = (TipBoardVo)request.getAttribute("tipRead");
 	long t_idx = read.getT_idx();

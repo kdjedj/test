@@ -15,11 +15,11 @@
 <link rel="stylesheet" type="text/css" href="${cp}/resources/free/freeList.css?ver=<%= System.currentTimeMillis() %>">
 </head>
 <body>
+<%@include file="/WEB-INF/views/board_header.jsp" %>
 <c:set var="userName" value="${sessionScope.m_user}" />
 <script type="text/javascript">
 var userName = "<c:out value='${userName}' />";
 </script>
-<%@include file="/WEB-INF/views/header.jsp" %>
 	
 <div class="board_wrap">
 	<div class="middle">

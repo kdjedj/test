@@ -1,3 +1,5 @@
+<%@page import="com.teamproject.spring.teamgg.vo.FreeBoardVo"%>
+<%@page import="com.teamproject.spring.teamgg.vo.TipBoardVo"%>
 <%@page import="com.teamproject.spring.teamgg.vo.CompBoardVo"%>
 <%@page import="java.sql.Date"%>
 <%@page import="java.util.List"%>
