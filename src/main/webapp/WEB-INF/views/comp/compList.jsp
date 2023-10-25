@@ -12,42 +12,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="${cp}/resources/comp/compList.css">
+<link rel="stylesheet" type="text/css" href="${cp}/resources/free/freeList.css">
 </head>
 <body>
-
+<%@include file="comp_header.jsp" %>
 <c:set var="userName" value="${sessionScope.m_user}" />
-
-	<div class="head">
-		<div class="logoBox">	
-			<a href="${cp}/">
-				<img class="logo" alt="로고" src="${cp}/resources/comp/img/LOGO_small_2.png">
-			</a>
-		</div>
-		<div class="headTab">
-				<div class="headTop">
-					<div class="userName">
-						<c:if test="${not empty userName}">
-		      			<p>${userName}</p>
-		    			</c:if>
-					</div>
-					<div class="Proclogin">
-						<% if (session.getAttribute("m_id") != null) { %>
-		       				 <a href="${cp}/member/logout" class="">로그아웃</a>
-					    <% } else { %>
-					    	 <a href="${cp}/member/login" class="">로그인</a>
-					    <% } %>
-					</div>
-				</div>
-				<div class="headBot">
-					<div class="boards_head">
-							<a href="${cp}/free/freeList">자유게시판</a>
-							<a href="${cp}/tip/tipList">정보게시판</a>
-							<a href="${cp}/comp/compList">유저찾기게시판</a>
-					</div>
-				</div>
-		</div>
-	</div>
+<script type="text/javascript">
+var userName = "<c:out value='${userName}' />";
+</script>
 	
 <div class="board_wrap">
 	<div class="middle">
@@ -60,32 +32,56 @@
 	<div class="container">
 		<div class="sideMenu">
 			<div id="profileBox">
+				<div class="userName side">
+					<c:choose>
+					    <c:when test="${not empty userName}">
+					        <p>${userName}</p>
+					    </c:when>
+					    <c:otherwise>
+					        <p>로그인이 필요합니다.</p>
+					    </c:otherwise>
+					</c:choose>
+				</div>
+				<div class="side_btn">
+					<button type="button" id="write" title="글쓰기" onclick="location.href='compWrite'">글쓰기</button>
+				</div>
+				<div class="side_btn">
+					<button type="button" id="login" title="로그인" onclick="location.href='${cp}/member/login'">로그인</button>
+				</div>
 			</div>
-			<div id="boards_container">
+			<div class="boards_side">
+			<p style="color: grey; font-size: 12px;">커뮤니티</p>
+				<button type="button" id="side_free" onclick="window.location.href='${cp}/free/freeList'">자유게시판</button>
+				<button type="button" id="side_tip" onclick="window.location.href='${cp}/tip/tipList'">정보게시판</button>
+				<button type="button" id="side_comp" onclick="window.location.href='${cp}/comp/compList'">유저찾기게시판</button>
 			</div>
 		</div>
 		<div class="list">
 			<div class="list_head">
-				<h1> 유저찾기 </h1>
-				<button type="button" id="write" title="글쓰기" onclick="location.href='compWrite'">글쓰기</button>
+				<h1 style="color: rgb(106,96,169)"> 유저찾기 </h1>
 			</div>
+			<div id="postBox">
 <c:forEach var="item" items="${list}">
-	<c:set var="c_idx" value="${item.c_idx}"/>
-	<c:set var="c_title" value="${item.c_title}"/>
-	<c:set var="c_date" value="${item.c_date}"/>
-	<c:set var="c_id" value="${item.c_id}"/>
-	<c:set var="c_user" value="${item.c_user}"/>
+    <c:set var="c_idx" value="${item.c_idx}" />
+    <c:set var="c_title" value="${item.c_title}" />
+    <c:set var="c_date" value="${item.c_date}" />
+    <c:set var="c_id" value="${item.c_id}" />
+    <c:set var="c_user" value="${item.c_user}" />
+    	<div class="postBox">
 			<ul class="post">
-            	<li class="posts w500">${item.c_idx}</li>
-            	<li class="posts w2500"><a href="compRead?c_idx=${item.c_idx}">${item.c_title}</a></li>
-            	<li class="posts">${item.c_date}</li>
-            	<li class="posts">${item.c_user}</li>
+            	<li class="posts idx">${item.c_idx}</li>
+            	<li class="posts title"><a href="compRead?c_idx=${item.c_idx}">${item.c_title}</a></li>
+            	<li class="posts date">${item.c_date}</li>
+            	<li class="posts user">${item.c_user}</li>
 			</ul>
+    	</div>
 </c:forEach>
+			</div>
+
 			<div class="paging">
 				<c:choose>
 				    <c:when test="${hasPrev == true}">
-				        [<a href="${cp}/mate/mateList?page=${prevPage}"><b>이전</b></a>]
+				        [<a href="${cp}/comp/compList?page=${prevPage}"><b>이전</b></a>]
 				    </c:when>
 				    <c:otherwise>
 				        [이전]
@@ -93,12 +89,12 @@
 				</c:choose>
 				
 				<c:forEach var="p" begin="${blockStartNo}" end="${blockEndNo}">
-					[<a href="${cp}/mate/mateList?page=${p}">${p}</a>]
+					[<a href="${cp}/comp/compList?page=${p}">${p}</a>]
 				</c:forEach>
 				
 				<c:choose>
 					<c:when test="${hasNext == true }">
-						[<a href="${cp}/mate/mateList?page=${nextPage}"><b>다음</b></a>]
+						[<a href="${cp}/comp/compList?page=${nextPage}"><b>다음</b></a>]
 						</c:when>
 						<c:otherwise>
 							[다음]
@@ -109,9 +105,9 @@
 	</div>
 
 	<div class=bottom>
-	바텀
 	</div>
 </div>
 
+<script type="text/javascript" src="${cp}/resources/free/freeBoard.js"></script>
 </body>
 </html>

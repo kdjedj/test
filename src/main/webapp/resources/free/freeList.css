@@ -7,6 +7,13 @@ body {
 	min-height: 100%;
 }
 
+a {
+  font-family: '맑은 고딕', sans-serif;
+  font-size: 16px;
+  color: inherit;
+  text-decoration: none; /* 밑줄 제거 */
+}
+
 /* .board_wrap{ */
 /* } */
 
@@ -20,7 +27,6 @@ body {
 	padding-top: 32px;
   	top: -32px;
   	z-index: 1;
-/* 	margin: 0px; */
 }
 
 @media screen and (max-width: 600px) {
@@ -42,7 +48,6 @@ body {
 
 .headTab{
 	display: block;
-/* 	background-color: green; */
 	width: 100%;
 }
 
@@ -59,6 +64,10 @@ body {
 	align-items:center;
 	justify-content:center;
 	height:40px;
+}
+
+#userNameTop {
+	color: white;
 }
 
 .Proclogin {
@@ -82,15 +91,17 @@ body {
 }
 
 .headBot{
-/* 	background-color: yellow; */
 	height: 100%;
 	display: flex;
 }
 
 .boards_head{
-/* 	background-color: green; */
 	 align-self: flex-end;
 	 margin-bottom: 10px;
+}
+
+.boards_head a{
+	color: white;
 }
 
 
@@ -123,7 +134,7 @@ body {
 .list{
 	width: 80%;
 	display: block;
-	background-color: beige;
+	background-color:#dedcee;
 }
 
 @media screen and (max-width: 1500px) {
@@ -134,62 +145,71 @@ body {
 
 .list_head{
 	display: flex;
-	justify-content: space-between;
-	align-items: flex-end;
+	align-items: flex-start;
 	width: auto;
-	height: 100px;
-	margin-bottom: 100px;
-	background-color: blue;
+	height: 130px;
+	padding-left: 20px;
+	margin-bottom: 10px;
+	background-color: white;
+	box-shadow: 0px 1px 3px 2px rgba(106, 96, 169, 0.3);
 }
 
-/* #write{ */
-/* } */
+.postBox{
+	width: 100%;
+	border-bottom: 1px solid #EBEEF1;
+}
+
+#postBox{
+	box-shadow: 0px 1px 3px 2px rgba(106, 96, 169, 0.3);
+	
+}
 
 ul {
 	width: auto;
 	list-style: none;
 	display: flex;
-	justify-content: space-between;
-	text-align: center;
 	margin: 0px;
-	background-color: gold;
+	background-color: white;
+	padding-top: 4px;
 }
 
 .posts {
 	width: 100%;
+	height: 30px;
 	margin: 0px;
 	padding: 10px;
-	border-bottom: 1px solid #EBEEF1;
 }
 
-.w500 {
-	width: 500px;
+.idx, .date, .user {
+	width: 10%;
+	color: rgb(106,96,169);
 }
 
-.w2500 {
+.title {
 	text-align: left;
-	width: 2500px;
+	width: 70%;
+	color: #474747;
 }
 
 .paging{
 	display: block;
 	width: 100%;
-	height: 30px;
-	background-color: grey;
+	height: 40px;
+	background-color: white;
 	text-align: center;
-/* 	align-self: initial; */
+	padding-top: 15px;
+	box-shadow: 0px 1px 3px 2px rgba(106, 96, 169, 0.3);
 }
 
 /* sideMenu */
 .sideMenu{
-	margin-right: 10px;
+	margin-right: 6px;
 	background-color: white;
 	width: 20%;
 	height:600px;
 	position: sticky;
 	top: 80px;
-/* 	width: 300px; */
-/* 	padding-right: 10px; */
+	box-shadow: 0px 1px 3px 2px rgba(106, 96, 169, 0.3);
 }
 
 @media screen and (max-width: 1500px) {
@@ -204,12 +224,56 @@ ul {
 	border-bottom: 1px solid #EBEEF1;
 }
 
-/* #boards_container{ */
-/* } */
+.side{
+	height: 120px;
+}
+
+.side_btn{
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+#write, #login{
+	background-color: rgb(106,96,169);
+	border: none;
+	border-radius: 5px;
+	height: 50px;
+	width: 180px;
+	cursor: pointer;
+	font-size: 18px;
+	color: white;
+}
+
+#write:hover {
+	background-color: rgb(70,56,129);
+	transition: background-color 0.2s;
+}
+
+.boards_side{
+	margin-left: 20px;
+}
+
+#side_free, #side_tip, #side_comp{
+	text-align: left;
+	width: 90%;
+	height: 40px;
+	margin-top: 15px;
+	border: none;
+	cursor: pointer;
+	background-color: white;
+}
+
+
+#side_free:hover, #side_tip:hover, #side_comp:hover{
+	background-color: #dedcee;
+	transition: background-color 0.2s;
+}
 
 /* ================== bottom  ================== */
 .bottom{
 	text-align: center;	
 	width: 100%;
-	background-color: silver;
+	height: 40px;
 }

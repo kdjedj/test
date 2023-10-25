@@ -17,6 +17,7 @@
 </head>
 <body>
 <%@include file="free_header.jsp" %>
+<c:set var="userId" value="${sessionScope.m_id}" />
 <%
 	FreeBoardVo read = (FreeBoardVo)request.getAttribute("freeRead");
 	Long f_idx = read.getF_idx();
@@ -26,6 +27,14 @@
 	String f_content = read.getF_content();
 	String f_date = read.getF_date();
 %>	
+
+<script type="text/javascript">
+var isLoggedIn = <%= session.getAttribute("m_id") != null %>;
+var currentUserId = "<%= session.getAttribute("m_id") %>";
+var fId = "<%= f_id %>";
+var userId = "<c:out value='${userId}' />";
+var userName = "<c:out value='${userName}' />";
+</script>
 
 <div class="board_wrap">
 	<div class="middle">
@@ -37,31 +46,53 @@
 	<div class="read_container">
 		<div class="sideMenu">
 			<div id="profileBox">
+				<div class="userName side">
+					<c:choose>
+					    <c:when test="${not empty userName}">
+					        <p>${userName}</p>
+					    </c:when>
+					    <c:otherwise>
+					        <p>로그인이 필요합니다.</p>
+					    </c:otherwise>
+					</c:choose>
+				</div>
+				<div class="side_btn">
+					<button type="button" id="write" title="글쓰기" onclick="location.href='freeWrite'">글쓰기</button>
+				</div>
+				<div class="side_btn">
+					<button type="button" id="login" title="로그인" onclick="window.location.href='${cp}/member/login'">로그인</button>
+				</div>
 			</div>
-			<div id="boards_container">
+			<div class="boards_side">
+			<p style="color: grey; font-size: 12px;">커뮤니티</p>
+				<button type="button" id="side_free" onclick="window.location.href='${cp}/free/freeList'">자유게시판</button>
+				<button type="button" id="side_tip" onclick="window.location.href='${cp}/tip/tipList'">정보게시판</button>
+				<button type="button" id="side_comp" onclick="window.location.href='${cp}/comp/compList'">유저찾기게시판</button>
 			</div>
 		</div>
+
 		<div class="read">
 			<div class="read_head">
-<h1> <%=f_title %> </h1>
-<%= f_date %> <%=f_user %>
+				<h1> <%=f_title %> </h1>
+				<%= f_date %> / <%=f_user %>
 			</div>
 			<div class="content">
-<%=f_content %>
+				<%=f_content %>
 			</div>
 		
 			<div class="read_actions">
-				<a href="${cp}/free/freeList">리스트</a>
-				<a href="${cp}/free/freeModify?f_idx=<%=f_idx%>">수정</a>
-				<a href="${cp}/free/freeDel?f_idx=<%=f_idx%>">삭제</a>
+				<div class="read_action">
+					<button type="button" id="read_action" onclick="location.href='${cp}/free/freeModify?f_idx=<%=f_idx%>'">수정</button>
+					<button type="button" id="read_action" onclick="location.href='${cp}/free/freeDel?f_idx=<%=f_idx%>'">삭제</button>
+				</div>
 			</div>
 			
 <!-- 			댓글 -->
 			<div class="commentForm">
-				<form action="${cp}/comment/fcWrite" method="post">
+				<form id="form" action="${cp}/comment/fcWrite" method="post">
 			    	<input type="hidden" name="f_idx" value="<%=f_idx%>">
-			    	<textarea name="fc_comment" rows="4" cols="50"></textarea>
-			    	<div class="commentAction">
+			    	<textarea class="comment" name="fc_comment" rows="4" cols="50"></textarea>
+			    	<div class="commentSubmit">
 			    	<button type="submit">작성</button>
 			   		</div>
 				</form>
@@ -80,7 +111,7 @@
 				<c:set var="fc_group" value="${comment.fc_group}" />
 				
 				    <div class="c_top">
-				        ${comment.fc_user} ${comment.fc_date}
+				        <span class="user">${comment.fc_user}</span> <span class="date"> ${comment.fc_date}</span>
 				    </div>
 				    <div class="c_content">
 				        ${comment.fc_comment}
@@ -88,9 +119,14 @@
 				    
 <!-- 				    대댓글 -->
 				        <div class="c_reply" data-fc-group="${comment.fc_group}">
-				        	<button class="replyForm-modify" data-fc-idx="${comment.fc_idx}" data-fc-id="${comment.fc_id}">수정</button>
-							<a href="${cp}/comment/fcDel?fc_idx=${comment.fc_idx}">삭제</a>
-				            <button class="replyForm-btn">답글쓰기</button>
+				        	<div class="btnTrue">
+				        	<button class="replyForm-modify" id="comment_modify" data-fc-idx="${comment.fc_idx}" data-fc-id="${comment.fc_id}">수정</button>
+							<button class="replyForm-delete" id="comment_delete" onclick="location.href='${cp}/comment/fcDel?fc_idx=${comment.fc_idx}'">삭제</button>
+				            <button class="replyForm-btn" id="comment_reply">답글</button>
+				        	</div>
+				        	<div class="btnFalse">
+				            <button class="replyForm-btn" id="comment_reply">답글</button>
+				        	</div>
                             <div class="replyList hidden">
 				        <c:forEach var="reply" items="${fcList}">
 				        <c:set var="fc_user" value="${reply.fc_user}" />
@@ -101,24 +137,28 @@
 						<c:set var="fc_group" value="${reply.fc_group}" />
                         <c:choose>
                             <c:when test="${reply.fc_num != 0 && reply.fc_group == comment.fc_group}">
-                                    <div class="c_top">
-                                        ${reply.fc_user} ${reply.fc_date}
+                            <div class="reply_mark" style="font-size: 22px; color: lightgrey;">┗</div>
+                                    <div class="r_top">
+                                        <span class="user">${reply.fc_user}</span> <span class="date"> ${reply.fc_date}</span>
                                     </div>
-                                    <div class="c_content">
+                                    <div class="r_content">
                                         ${reply.fc_comment}
                                     </div>
-                            <button class="replyForm-modify" data-fc-idx="${reply.fc_idx} "data-fc-id="${reply.fc_id}">수정</button>
-							<a href="${cp}/comment/fcDel?fc_idx=${reply.fc_idx}">삭제</a>
+                            <div class="btnTrue">
+                            <button class="replyForm-modify" id="reply_modify" data-fc-idx="${reply.fc_idx} "data-fc-id="${reply.fc_id}">수정</button>
+							<button class="replyForm-delete" id="reply_delete" onclick="location.href='${cp}/comment/fcDel?fc_idx=${reply.fc_idx}'">삭제</button>
+                            </div>
                             </c:when>
                         </c:choose>
                     </c:forEach>
+                    	<div class="reply_mark" style="font-size: 22px; color: lightgrey;">┗</div>
 					        <div class="replyForm hidden">
-							    <form action="${cp}/comment/fcWrite" method="post">
+							    <form id="form" action="${cp}/comment/fcWrite" method="post">
 							        <input type="hidden" name="f_idx" value="<%=f_idx%>">
 							        <input type="hidden" name="fc_class" value="1">
-							        <textarea name="fc_comment" rows="4" cols="50"></textarea>
+							        <textarea class="comment" name="fc_comment" rows="4" cols="50"></textarea>
         							<input type="hidden" name="fc_group" value="${comment.fc_group}">
-								    <div class="replyAction">
+								    <div class="commentSubmit">
 								    	<button type="submit">작성</button>
 								    </div>
 							    </form>
@@ -133,7 +173,7 @@
 			
 			<div class="modal" id="commentModal">
 			    <div class="modal-content">
-			        <form action="${cp}/comment/fcModify" method="post">
+			        <form id="form" action="${cp}/comment/fcModify" method="post">
 			            <input type="hidden" name="fc_idx">
 			            <input type="hidden" name="f_idx" value="<%=f_idx%>">
 			            <textarea name="fc_comment" rows="4" cols="50"></textarea>
@@ -145,77 +185,14 @@
 			    </div>
 			<div class="modal-background"></div>
 			</div>
-			
-			<script>
-			
-			var replyButtons = document.querySelectorAll('.replyForm-btn');
-			replyButtons.forEach(function (button) {
-			    button.addEventListener('click', function () {
-			        var replyContainer = this.parentElement;
-			        var replyForm = replyContainer.querySelector('.replyForm');
-			        var replyList = replyContainer.querySelector('.replyList');
-			        replyForm.classList.toggle('hidden');
-			        replyList.classList.toggle('hidden');
-
-			        // 열려있던 폼 닫기
-			        var allReplyForms = document.querySelectorAll('.replyForm');
-			        allReplyForms.forEach(function (form) {
-			            if (form !== replyForm) {
-			                form.classList.add('hidden');
-			                var list = form.querySelector('.replyList');
-			                if (list) {
-			                    list.classList.add('hidden');
-			                }
-			            }
-			        });
-			    });
-			});
-			
-			var isLoggedIn = <%= session.getAttribute("m_id") != null %>;
-			var currentUserId = "<%= session.getAttribute("m_id") %>";
-			
-            // 수정 버튼 클릭 시 모달 열기
-            var modifyButtons = document.querySelectorAll('.replyForm-modify');
-            modifyButtons.forEach(function (button) {
-                button.addEventListener('click', function () {
-                	// 버튼에서 fc_idx 값 꺼내옴
-                    var editFcIdx = this.getAttribute('data-fc-idx');
-                    var writerId = this.getAttribute('data-fc-id');
-                    var modal = document.getElementById('commentModal');
-                    var modalContent = modal.querySelector('.modal-content');
-                    var fcIdxInput = modalContent.querySelector('input[name="fc_idx"]');
-
-                    // 꺼내온 fc_idx 값 설정
-                    fcIdxInput.value = editFcIdx;
-
-            if (isLoggedIn && currentUserId === writerId) {
-                // 로그인된 상태에서만 모달 열기
-                modal.style.display = 'block';
-                console.log('editFcIdx:', editFcIdx);
-                console.log('fcIdxInput:', fcIdxInput);
-                console.log('writerId:', writerId);
-            } else {
-                // 비로그인 상태에서는 페이지 이동
-                window.location.href = '/teamgg/member/login';
-            }
-                });
-            });
-            
-            // 취소버튼으로 모달 닫기
-            var cancelEditButton = document.querySelector('.modifyForm-cancel');
-            cancelEditButton.addEventListener('click', function () {
-                var modal = document.getElementById('commentModal');
-                modal.style.display = 'none';
-            });
-			</script>
-
 		</div>
 	</div>
 
 	<div class=bottom>
-	바텀
 	</div>
 </div>
 
+<script type="text/javascript" src="${cp}/resources/free/freeBoard.js"></script>
+<script type="text/javascript" src="${cp}/resources/free/freeRead.js"></script>
 </body>
 </html>

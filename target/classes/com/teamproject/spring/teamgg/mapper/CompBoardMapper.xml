@@ -5,7 +5,7 @@
 <mapper namespace="com.teamproject.spring.teamgg.mapper.CompBoardMapper">
 	<select id="compList" resultType="com.teamproject.spring.teamgg.vo.CompBoardVo">
 		SELECT * FROM ${@com.teamproject.spring.teamgg.vo.CompBoardVo@TABLE_NAME_COMP}
-		ORDER BY c_idx DESC LIMIT #{page},30
+		ORDER BY c_idx DESC LIMIT #{page},20
 	</select>
 	
 	<select id="compRead" resultType="com.teamproject.spring.teamgg.vo.CompBoardVo">

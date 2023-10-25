@@ -9,8 +9,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="${cp}/resources/comp/compList.css">
-<link rel="stylesheet" type="text/css" href="${cp}/resources/comp/compWrite.css">
+<link rel="stylesheet" type="text/css" href="${cp}/resources/free/freeList.css">
+<link rel="stylesheet" type="text/css" href="${cp}/resources/free/freeWrite.css">
 </head>
 <body>
 <%@include file="comp_header.jsp" %>
@@ -18,7 +18,10 @@
 	CompBoardVo read = (CompBoardVo)request.getAttribute("compRead");
 	long c_idx = read.getC_idx();
 	String c_content = read.getC_content();
-%>	
+%>
+<script type="text/javascript">
+var userName = "<c:out value='${userName}' />";
+</script>
 
 <div class="board_wrap">
 	<div class="middle">
@@ -26,43 +29,63 @@
 						<input id="search" name="search" autocomplete="off" type="text" placeholder="소환사 검색">
 					</div>	
 	</div>
-	
 	<div class="write_container">
 		<div class="sideMenu">
 			<div id="profileBox">
+				<div class="userName side">
+					<c:choose>
+					    <c:when test="${not empty userName}">
+					        <p>${userName}</p>
+					    </c:when>
+					    <c:otherwise>
+					        <p>로그인이 필요합니다.</p>
+					    </c:otherwise>
+					</c:choose>
+				</div>
+				<div class="side_btn">
+					<button type="button" id="write" title="글쓰기" onclick="location.href='compWrite'">글쓰기</button>
+				</div>
+				<div class="side_btn">
+					<button type="button" id="login" title="로그인" onclick="location.href='${cp}/member/login'">로그인</button>
+				</div>
 			</div>
-			<div id="boards_container">
+			<div class="boards_side">
+			<p style="color: grey; font-size: 12px;">커뮤니티</p>
+				<button type="button" id="side_free" onclick="window.location.href='${cp}/free/freeList'">자유게시판</button>
+				<button type="button" id="side_tip" onclick="window.location.href='${cp}/tip/tipList'">정보게시판</button>
+				<button type="button" id="side_comp" onclick="window.location.href='${cp}/comp/compList'">유저찾기게시판</button>
 			</div>
 		</div>
 		<div class="write">
-
-	<form action="${cp}/comp/compModify" method="post">
-		<input type="hidden" name='c_idx' value='<%=c_idx %>' >
-		
-			<div class="title">
-			<input type="text" id="c_title" name="c_title" placeholder="제목" required><br>
-			</div>
+			<div class="writeForm">
+			<form id="form" action="${cp}/comp/compModify" method="post" accept-charset="utf-8">
+			<input type="hidden" name='c_idx' value='<%=c_idx %>' >
+				<div class="title">
+			    <input type="text" id="title" name="c_title" placeholder="제목" required><br>
+				</div>
 				
-			<div class="content">
-			<textarea rows="30" id="c_content" name="c_content" required></textarea><br>
-			</div>
-    
+				<div class="content">
+			    <textarea rows="40" id="content" name="c_content" required></textarea><br>
+				</div>
+			
 		<div class="write_actions">
 			<div>
-			    <input type="submit" id="cancel" value="취소">
+			    <input type="button" id="cancel" value="취소" onclick="goBack()">
 			</div>
 			<div>
-			    <input type="submit" id="publish" value="글쓰기">
+			    <input type="button" id="publish" value="작성" onclick="submitForm()">
 			</div>
 		</div>
-	</form>
+			</form>
+			</div>
 		</div>
+		
 	</div>
-
 	<div class=bottom>
-	바텀
 	</div>
 </div>
 
+<script type="text/javascript" src="${cp}/resources/free/freeBoard.js"></script>
+<script type="text/javascript" src="${cp}/resources/free/freeWrite.js"></script>
 </body>
 </html>

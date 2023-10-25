@@ -5,7 +5,7 @@
 <mapper namespace="com.teamproject.spring.teamgg.mapper.TipBoardMapper">
 	<select id="tipList" resultType="com.teamproject.spring.teamgg.vo.TipBoardVo">
 		SELECT * FROM ${@com.teamproject.spring.teamgg.vo.TipBoardVo@TABLE_NAME_TIP}
-		ORDER BY t_idx DESC LIMIT #{page},30
+		ORDER BY t_idx DESC LIMIT #{page},20
 	</select>
 	
 	<select id="tipRead" resultType="com.teamproject.spring.teamgg.vo.TipBoardVo">

@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="${cp}/resources/comp/compList.css">
+<link rel="stylesheet" type="text/css" href="${cp}/resources/free/freeList.css">
 </head>
 <body>
 

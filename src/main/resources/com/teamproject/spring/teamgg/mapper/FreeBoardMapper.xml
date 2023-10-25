@@ -5,7 +5,7 @@
 <mapper namespace="com.teamproject.spring.teamgg.mapper.FreeBoardMapper">
 	<select id="freeList" resultType="com.teamproject.spring.teamgg.vo.FreeBoardVo">
 		SELECT * FROM ${@com.teamproject.spring.teamgg.vo.FreeBoardVo@TABLE_NAME_FREE}
-		ORDER BY f_idx DESC LIMIT #{page},30
+		ORDER BY f_idx DESC LIMIT #{page},20
 	</select>
 	
 	<select id="freeRead" resultType="com.teamproject.spring.teamgg.vo.FreeBoardVo">

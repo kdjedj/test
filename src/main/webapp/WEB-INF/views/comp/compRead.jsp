@@ -11,14 +11,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="${cp}/resources/comp/compList.css">
-<link rel="stylesheet" type="text/css" href="${cp}/resources/comp/compRead.css">
+<link rel="stylesheet" type="text/css" href="${cp}/resources/free/freeList.css">
+<link rel="stylesheet" type="text/css" href="${cp}/resources/free/freeRead.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <%@include file="comp_header.jsp" %>
+<c:set var="userId" value="${sessionScope.m_id}" />
 <%
-CompBoardVo read = (CompBoardVo)request.getAttribute("compRead");
+	CompBoardVo read = (CompBoardVo)request.getAttribute("compRead");
 	Long c_idx = read.getC_idx();
 	String c_id = read.getC_id();
 	String c_user = read.getC_user();
@@ -26,6 +27,14 @@ CompBoardVo read = (CompBoardVo)request.getAttribute("compRead");
 	String c_content = read.getC_content();
 	String c_date = read.getC_date();
 %>	
+
+<script type="text/javascript">
+var isLoggedIn = <%= session.getAttribute("m_id") != null %>;
+var currentUserId = "<%= session.getAttribute("m_id") %>";
+var cId = "<%= c_id %>";
+var userId = "<c:out value='${userId}' />";
+var userName = "<c:out value='${userName}' />";
+</script>
 
 <div class="board_wrap">
 	<div class="middle">
@@ -37,31 +46,53 @@ CompBoardVo read = (CompBoardVo)request.getAttribute("compRead");
 	<div class="read_container">
 		<div class="sideMenu">
 			<div id="profileBox">
+				<div class="userName side">
+					<c:choose>
+					    <c:when test="${not empty userName}">
+					        <p>${userName}</p>
+					    </c:when>
+					    <c:otherwise>
+					        <p>로그인이 필요합니다.</p>
+					    </c:otherwise>
+					</c:choose>
+				</div>
+				<div class="side_btn">
+					<button type="button" id="write" title="글쓰기" onclick="location.href='compWrite'">글쓰기</button>
+				</div>
+				<div class="side_btn">
+					<button type="button" id="login" title="로그인" onclick="window.location.href='${cp}/member/login'">로그인</button>
+				</div>
 			</div>
-			<div id="boards_container">
+			<div class="boards_side">
+			<p style="color: grey; font-size: 12px;">커뮤니티</p>
+				<button type="button" id="side_free" onclick="window.location.href='${cp}/free/freeList'">자유게시판</button>
+				<button type="button" id="side_tip" onclick="window.location.href='${cp}/tip/tipList'">정보게시판</button>
+				<button type="button" id="side_comp" onclick="window.location.href='${cp}/comp/compList'">유저찾기게시판</button>
 			</div>
 		</div>
+
 		<div class="read">
 			<div class="read_head">
-<h1> <%=c_title %> </h1>
-<%= c_date %> <%=c_user %>
+				<h1> <%=c_title %> </h1>
+				<%= c_date %> / <%=c_user %>
 			</div>
 			<div class="content">
-<%=c_content %>
+				<%=c_content %>
 			</div>
 		
 			<div class="read_actions">
-				<a href="${cp}/comp/compList">리스트</a>
-				<a href="${cp}/comp/compModify?c_idx=<%=c_idx%>">수정</a>
-				<a href="${cp}/comp/compDel?c_idx=<%=c_idx%>">삭제</a>
+				<div class="read_action">
+					<button type="button" id="read_action" onclick="location.href='${cp}/comp/compModify?c_idx=<%=c_idx%>'">수정</button>
+					<button type="button" id="read_action" onclick="location.href='${cp}/comp/compDel?c_idx=<%=c_idx%>'">삭제</button>
+				</div>
 			</div>
-
+			
 <!-- 			댓글 -->
 			<div class="commentForm">
-				<form action="${cp}/comment/ccWrite" method="post">
+				<form id="form" action="${cp}/comment/ccWrite" method="post">
 			    	<input type="hidden" name="c_idx" value="<%=c_idx%>">
-			    	<textarea name="cc_comment" rows="4" cols="50"></textarea>
-			    	<div class="commentAction">
+			    	<textarea class="comment" name="cc_comment" rows="4" cols="50"></textarea>
+			    	<div class="commentSubmit">
 			    	<button type="submit">작성</button>
 			   		</div>
 				</form>
@@ -80,7 +111,7 @@ CompBoardVo read = (CompBoardVo)request.getAttribute("compRead");
 				<c:set var="cc_group" value="${comment.cc_group}" />
 				
 				    <div class="c_top">
-				        ${comment.cc_user} ${comment.cc_date}
+				        <span class="user">${comment.cc_user}</span> <span class="date"> ${comment.cc_date}</span>
 				    </div>
 				    <div class="c_content">
 				        ${comment.cc_comment}
@@ -88,9 +119,14 @@ CompBoardVo read = (CompBoardVo)request.getAttribute("compRead");
 				    
 <!-- 				    대댓글 -->
 				        <div class="c_reply" data-cc-group="${comment.cc_group}">
-				        	<button class="replyForm-modify" data-cc-idx="${comment.cc_idx}" data-cc-id="${comment.cc_id}">수정</button>
-							<a href="${cp}/comment/ccDel?cc_idx=${comment.cc_idx}">삭제</a>
-				            <button class="replyForm-btn">답글쓰기</button>
+				        	<div class="btnTrue">
+				        	<button class="replyForm-modify" id="comment_modify" data-cc-idx="${comment.cc_idx}" data-cc-id="${comment.cc_id}">수정</button>
+							<button class="replyForm-delete" id="comment_delete" onclick="location.href='${cp}/comment/ccDel?cc_idx=${comment.cc_idx}'">삭제</button>
+				            <button class="replyForm-btn" id="comment_reply">답글</button>
+				        	</div>
+				        	<div class="btnFalse">
+				            <button class="replyForm-btn" id="comment_reply">답글</button>
+				        	</div>
                             <div class="replyList hidden">
 				        <c:forEach var="reply" items="${ccList}">
 				        <c:set var="cc_user" value="${reply.cc_user}" />
@@ -101,24 +137,28 @@ CompBoardVo read = (CompBoardVo)request.getAttribute("compRead");
 						<c:set var="cc_group" value="${reply.cc_group}" />
                         <c:choose>
                             <c:when test="${reply.cc_num != 0 && reply.cc_group == comment.cc_group}">
-                                    <div class="c_top">
-                                        ${reply.cc_user} ${reply.cc_date}
+                            <div class="reply_mark" style="font-size: 22px; color: lightgrey;">┗</div>
+                                    <div class="r_top">
+                                        <span class="user">${reply.cc_user}</span> <span class="date"> ${reply.cc_date}</span>
                                     </div>
-                                    <div class="c_content">
+                                    <div class="r_content">
                                         ${reply.cc_comment}
                                     </div>
-                            <button class="replyForm-modify" data-cc-idx="${reply.cc_idx} "data-cc-id="${reply.cc_id}">수정</button>
-							<a href="${cp}/comment/ccDel?cc_idx=${reply.cc_idx}">삭제</a>
+                            <div class="btnTrue">
+                            <button class="replyForm-modify" id="reply_modify" data-cc-idx="${reply.cc_idx} "data-cc-id="${reply.cc_id}">수정</button>
+							<button class="replyForm-delete" id="reply_delete" onclick="location.href='${cp}/comment/ccDel?cc_idx=${reply.cc_idx}'">삭제</button>
+                            </div>
                             </c:when>
                         </c:choose>
                     </c:forEach>
+                    	<div class="reply_mark" style="font-size: 22px; color: lightgrey;">┗</div>
 					        <div class="replyForm hidden">
-							    <form action="${cp}/comment/ccWrite" method="post">
+							    <form id="form" action="${cp}/comment/ccWrite" method="post">
 							        <input type="hidden" name="c_idx" value="<%=c_idx%>">
 							        <input type="hidden" name="cc_class" value="1">
-							        <textarea name="cc_comment" rows="4" cols="50"></textarea>
+							        <textarea class="comment" name="cc_comment" rows="4" cols="50"></textarea>
         							<input type="hidden" name="cc_group" value="${comment.cc_group}">
-								    <div class="replyAction">
+								    <div class="commentSubmit">
 								    	<button type="submit">작성</button>
 								    </div>
 							    </form>
@@ -133,7 +173,7 @@ CompBoardVo read = (CompBoardVo)request.getAttribute("compRead");
 			
 			<div class="modal" id="commentModal">
 			    <div class="modal-content">
-			        <form action="${cp}/comment/ccModify" method="post">
+			        <form id="form" action="${cp}/comment/ccModify" method="post">
 			            <input type="hidden" name="cc_idx">
 			            <input type="hidden" name="c_idx" value="<%=c_idx%>">
 			            <textarea name="cc_comment" rows="4" cols="50"></textarea>
@@ -145,77 +185,14 @@ CompBoardVo read = (CompBoardVo)request.getAttribute("compRead");
 			    </div>
 			<div class="modal-background"></div>
 			</div>
-			
-			<script>
-			
-			var replyButtons = document.querySelectorAll('.replyForm-btn');
-			replyButtons.forEach(function (button) {
-			    button.addEventListener('click', function () {
-			        var replyContainer = this.parentElement;
-			        var replyForm = replyContainer.querySelector('.replyForm');
-			        var replyList = replyContainer.querySelector('.replyList');
-			        replyForm.classList.toggle('hidden');
-			        replyList.classList.toggle('hidden');
-
-			        // 열려있던 폼 닫기
-			        var allReplyForms = document.querySelectorAll('.replyForm');
-			        allReplyForms.forEach(function (form) {
-			            if (form !== replyForm) {
-			                form.classList.add('hidden');
-			                var list = form.querySelector('.replyList');
-			                if (list) {
-			                    list.classList.add('hidden');
-			                }
-			            }
-			        });
-			    });
-			});
-			
-			var isLoggedIn = <%= session.getAttribute("m_id") != null %>;
-			var currentUserId = "<%= session.getAttribute("m_id") %>";
-			
-            // 수정 버튼 클릭 시 모달 열기
-            var modifyButtons = document.querySelectorAll('.replyForm-modify');
-            modifyButtons.forEach(function (button) {
-                button.addEventListener('click', function () {
-                	// 버튼에서 cc_idx 값 꺼내옴
-                    var editCcIdx = this.getAttribute('data-cc-idx');
-                    var writerId = this.getAttribute('data-cc-id');
-                    var modal = document.getElementById('commentModal');
-                    var modalContent = modal.querySelector('.modal-content');
-                    var ccIdxInput = modalContent.querySelector('input[name="cc_idx"]');
-
-                    // 꺼내온 cc_idx 값 설정
-                    ccIdxInput.value = editCcIdx;
-
-            if (isLoggedIn && currentUserId === writerId) {
-                // 로그인된 상태에서만 모달 열기
-                modal.style.display = 'block';
-                console.log('editCcIdx:', editCcIdx);
-                console.log('ccIdxInput:', ccIdxInput);
-                console.log('writerId:', writerId);
-            } else {
-                // 비로그인 상태에서는 페이지 이동
-                window.location.href = '/teamgg/member/login';
-            }
-                });
-            });
-            
-            // 취소버튼으로 모달 닫기
-            var cancelEditButton = document.querySelector('.modifyForm-cancel');
-            cancelEditButton.addEventListener('click', function () {
-                var modal = document.getElementById('commentModal');
-                modal.style.display = 'none';
-            });
-			</script>
-
 		</div>
 	</div>
 
 	<div class=bottom>
-	바텀
 	</div>
 </div>
 
+<script type="text/javascript" src="${cp}/resources/free/freeBoard.js"></script>
+<script type="text/javascript" src="${cp}/resources/comp/compRead.js"></script>
 </body>
 </html>
