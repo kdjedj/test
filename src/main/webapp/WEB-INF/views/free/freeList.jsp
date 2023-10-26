@@ -13,6 +13,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="${cp}/resources/free/freeList.css?ver=<%= System.currentTimeMillis() %>">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <%@include file="/WEB-INF/views/board_header.jsp" %>
@@ -23,10 +24,33 @@ var userName = "<c:out value='${userName}' />";
 	
 <div class="board_wrap">
 	<div class="middle">
-					<div>
-						<input id="search" name="search" autocomplete="off"
-						type="text" placeholder="소환사 검색">
-					</div>	
+		<div class="focusbox" alt="전적검색">
+			<form action="${cp}/board/searching_player" class="region">
+					<div class="kr">
+						<select id="kr">
+							<option value="na">NA</option>
+							<option value="kr" selected>KR</option>
+							<option value="jp">JP</option>
+						</select>
+					</div>
+			</form>
+			<div class="searchbox">
+				<input id="searchHome" name="search" autocomplete="off" type="text" placeholder="소환사명, 소환사명, ...">
+				<div class="under-bar">
+					<div class="search-panel">
+						<div class="panel-rap">
+							<div class="recent-search">최근검색</div>
+							<div class="bookmarks-list">즐겨찾기</div>
+							<ul class="cookies">
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<button id="searchButton" class="search-button">
+				<img src="${cp}/resources/free/img/LOGO_search.png" width="43" height="23">
+			</button>
+		</div>
 	</div>
 	
 	<div class="container">
@@ -58,7 +82,8 @@ var userName = "<c:out value='${userName}' />";
 		</div>
 		<div class="list">
 			<div class="list_head">
-				<h1 style="color: rgb(106,96,169)"> 자유 </h1>
+				<h1 id="boardName" style="color: rgb(106,96,169)"> 자유 </h1>
+				<img id="writeIcon" onclick="location.href='freeWrite'" src="${cp}/resources/free/img/icon-write.png">
 			</div>
 			<div id="postBox">
 <c:forEach var="item" items="${list}">
@@ -109,5 +134,6 @@ var userName = "<c:out value='${userName}' />";
 </div>
 
 <script type="text/javascript" src="${cp}/resources/free/freeBoard.js"></script>
+<script type="text/javascript" src="${cp}/resources/t.js?ver=<%= System.currentTimeMillis() %>"></script>
 </body>
 </html>

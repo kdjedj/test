@@ -14,12 +14,17 @@
 }
 
 @media screen and (max-width: 1500px) {
-  .write {
+  .write, .write_container {
     width: 100%;
-    margin-top: 100px;
-    margin-left: 0px;
+    margin: 0px;
   }
-}
+} 
+
+@media screen and (max-width: 1500px) {
+  .write {
+    margin-top: 20px;
+  }
+} 
 
 #form{
 	height: 100%;

@@ -14,12 +14,15 @@
 							}
 						});
 
-
-				// 사이드메뉴 버튼 스타일 고정
+				// 게시판 탭 스타일 고정
 				window.onload = function() {
-					var freeBtn = document.getElementById("side_free");
-					var tipBtn = document.getElementById("side_tip");
-					var compBtn = document.getElementById("side_comp");
+					var freeBtnSide = document.getElementById("side_free");
+					var tipBtnSide = document.getElementById("side_tip");
+					var compBtnSide = document.getElementById("side_comp");
+					var freeBtnHead = document.getElementById("head_free");
+					var tipBtnHead = document.getElementById("head_tip");
+					var compBtnHead = document.getElementById("head_comp");
+
 					var currentURL = window.location.href;
 				
 					var freeURL = "http://localhost:8080/teamgg/free/";
@@ -27,12 +30,15 @@
 					var compURL = "http://localhost:8080/teamgg/comp/";
 					
 					if (currentURL.includes(freeURL)) {
-						freeBtn.style.backgroundColor = "#dedcee"; // 배경색 변경
+						freeBtnSide.style.backgroundColor = "#EBE9FC"; // 배경색 변경
+						freeBtnHead.style.borderBottom = "3px solid white";
 					}
 					if (currentURL.includes(tipURL)) {
-						tipBtn.style.backgroundColor = "#dedcee";
+						tipBtnSide.style.backgroundColor = "#EBE9FC";
+						tipBtnHead.style.borderBottom = "3px solid white";
 					}
 					if (currentURL.includes(compURL)) {
-						compBtn.style.backgroundColor = "#dedcee";
+						compBtnSide.style.backgroundColor = "#EBE9FC";
+						compBtnHead.style.borderBottom = "3px solid white";
 					}
 				}

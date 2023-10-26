@@ -13,17 +13,11 @@
 }
 
 @media screen and (max-width: 1500px) {
-  .read {
+  .read, .read_container {
     width: 100%;
-    margin-top: 100px;
-    margin-left: 0px;
+    margin: 0px;
   }
-}
-@media screen and (max-width: 800px) {
-  .read {
-	min-height: 600px;
-  }
-}
+} 
 
 .read_head{
 	width:: 100%;
@@ -34,10 +28,11 @@
 	border-bottom: 1px solid #EBEEF1;
 }
 
+
 .content{
 	padding-top: 30px;
 	padding-left: 30px;
-	min-height: 1000px;
+	min-height: 600px;
 }
 
 .read_actions{
@@ -63,12 +58,6 @@
 #read_action:hover {
 	background-color: #dedcee;
 	transition: background-color 0.2s;
-}
-
-@media screen and (max-width: 1500px) {
-  .read_actions {
-	display: none;
-}
 }
 
 #form{

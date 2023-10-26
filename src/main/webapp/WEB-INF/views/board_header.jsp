@@ -29,9 +29,11 @@
 		<div class="headTab">
 				<div class="headTop">
 					<div class="userName">
-						<c:if test="${not empty userName}">
-		      			<p>${userName}</p>
-		    			</c:if>
+						<div id="userNameTop">
+							<c:if test="${not empty userName}">
+			      			<p>${userName}</p>
+		    				</c:if>
+						</div>
 					</div>
 					<div class="Proclogin">
 						<% if (session.getAttribute("m_id") != null) { %>
@@ -43,13 +45,20 @@
 				</div>
 				<div class="headBot">
 					<div class="boards_head">
+						<div id="head_free">
 							<a href="${cp}/free/freeList">자유게시판</a>
+						</div>
+						<div id="head_tip">
 							<a href="${cp}/tip/tipList">정보게시판</a>
+						</div>
+						<div id="head_comp">
 							<a href="${cp}/comp/compList">유저찾기게시판</a>
+						</div>
 					</div>
 				</div>
 		</div>
 	</div>
 
+<script type="text/javascript" src="${cp}/resources/free/freeBoard.js"></script>
 </body>
 </html>
