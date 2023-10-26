@@ -221,6 +221,8 @@ private GuestService service;
 	public String exist_user(@RequestParam("userName") String userName, @RequestParam("region") String region,
 			HttpServletRequest request, Model model)  throws UnsupportedEncodingException {
 		String SurmmonerName = userName.replaceAll(" ", "%20");
+//		System.out.println("검색어에 적은 유저이름은? : "+SurmmonerName);
+//		System.out.println("넘어온 지역 번호는? : " +region);
 		String API_KEY = "RGAPI-0092f94c-82f2-4df3-ad25-ac35254f878e";
 		HttpSession session = request.getSession();
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -261,8 +263,10 @@ private GuestService service;
 			return "redirect:/board/no_search";
 		}
 		String utrName = URLEncoder.encode(SurmmonerName, "UTF-8");
+		SurmmonerName = utrName.replaceAll("%25", "%");
+		System.out.println("다음으로 넘어가는 이름은? : "+SurmmonerName);
 		session.setAttribute("temp", temp);
-		return "redirect:/board/searching_player?userName="+utrName+"&region="+region;
+		return "redirect:/board/searching_player?userName="+SurmmonerName+"&region="+region;
 	}
 	
 	@RequestMapping("/no_search")
@@ -282,6 +286,10 @@ private GuestService service;
 		//세션에서 값 불러오기
 		HttpSession session = request.getSession();
 		Summoner temp= (Summoner)session.getAttribute("temp");
+		
+//		System.out.println("검색어에 적은 유저이름은? : "+userName);
+//		System.out.println("넘어온 지역 번호는? : " +region);
+
 //		String SurmmonerName = userName.replaceAll(" ", "%20");
 //		String API_URL = "https://kr.api.riotgames.com/lol/summoner/v4"
 //				+ "/summoners/by-name/"
@@ -315,52 +323,55 @@ private GuestService service;
 //		BufferedReader br = null;
 //		
 //		Summoner temp= null;
-//		try{            
-//			String urlstr = "https://"+region+".api.riotgames.com/lol/summoner/v4/summoners/by-name/"+
-//					SurmmonerName+"?api_key="+API_KEY;
-//			URL url = new URL(urlstr);
-//			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
-//			urlconnection.setRequestMethod("GET");
-//			br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(),"UTF-8")); // 여기에 문자열을 받아와라.
-//			String result = "";
-//			String line;
-//			while((line = br.readLine()) != null) { // 그 받아온 문자열을 계속 br에서 줄단위로 받고 출력하겠다.
-//				result = result + line;
-//			}
-//			JsonParser jsonParser = new JsonParser();
-//			JsonObject k = (JsonObject) jsonParser.parse(result);
-//			String name_a = k.get("name").getAsString();
-//			log.info("==== json ==== : 해당 유저 이름은 무엇인가요? : "+name_a);
-//			String puuid_a = k.get("puuid").getAsString();
-////			if(puuid_a.equals(puuid)) {
-////				System.out.println("두 값이 같음");
-////			} else {
-////				System.out.println("아예 두값이 틀림");
-////			}
-////			System.out.println("2번 puuid값 : " + puuid_a);
-//			Double profileIconId = k.get("profileIconId").getAsDouble();
-//			int profileIconId_int = (int)Math.ceil((double) profileIconId);
-////			log.info("==== json ==== : 해당 유저 아이콘 번호 무엇인가요? : "+profileIconId_int);
-//
-//			Double summonerLevel_a = k.get("summonerLevel").getAsDouble();
-//			Double revisionDate_a = k.get("revisionDate").getAsDouble();
-//			String id_a = k.get("id").getAsString();
-//			String accountId_a = k.get("accountId").getAsString();
-//
-//			temp = new Summoner(profileIconId_int,name_a,puuid_a,summonerLevel_a,revisionDate_a,id_a,accountId_a);
-//			
-////			String ddaratest = String.format("==== json ==== : 소환사의 프로필사진 코드는 %s이고, 이름은 %s, 공용id는 %s, 레벨은 %s,"
-////					+ " 리비젼데이트는 %s이며, 아이디는 %s, 계정 고유 아이디는 %s입니다 ", 
-////					profileIconId, bc.name, puuid_a, summonerLevel_a, revisionDate_a, id_a,accountId_a);
-////			log.info(ddaratest);
-//		}catch(Exception e){
-//			System.out.println(e.getMessage());
-//		}
-//		
-//		
-//		
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
+		//새로 고침 할 때
+		if(temp == null) {
+		try{         
+			String SurmmonerName = userName.replaceAll(" ", "%20");
+			String urlstr = "https://"+region+".api.riotgames.com/lol/summoner/v4/summoners/by-name/"+
+					SurmmonerName+"?api_key="+API_KEY;
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+			urlconnection.setRequestMethod("GET");
+			br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(),"UTF-8")); // 여기에 문자열을 받아와라.
+			String result = "";
+			String line;
+			while((line = br.readLine()) != null) { // 그 받아온 문자열을 계속 br에서 줄단위로 받고 출력하겠다.
+				result = result + line;
+			}
+			JsonParser jsonParser = new JsonParser();
+			JsonObject k = (JsonObject) jsonParser.parse(result);
+			String name_a = k.get("name").getAsString();
+			log.info("==== json ==== : 해당 유저 이름은 무엇인가요? : "+name_a);
+			String puuid_a = k.get("puuid").getAsString();
+//			if(puuid_a.equals(puuid)) {
+//				System.out.println("두 값이 같음");
+//			} else {
+//				System.out.println("아예 두값이 틀림");
+//			}
+//			System.out.println("2번 puuid값 : " + puuid_a);
+			Double profileIconId = k.get("profileIconId").getAsDouble();
+			int profileIconId_int = (int)Math.ceil((double) profileIconId);
+//			log.info("==== json ==== : 해당 유저 아이콘 번호 무엇인가요? : "+profileIconId_int);
+
+			Double summonerLevel_a = k.get("summonerLevel").getAsDouble();
+			Double revisionDate_a = k.get("revisionDate").getAsDouble();
+			String id_a = k.get("id").getAsString();
+			String accountId_a = k.get("accountId").getAsString();
+
+			temp = new Summoner(profileIconId_int,name_a,puuid_a,summonerLevel_a,revisionDate_a,id_a,accountId_a);
+			
+//			String ddaratest = String.format("==== json ==== : 소환사의 프로필사진 코드는 %s이고, 이름은 %s, 공용id는 %s, 레벨은 %s,"
+//					+ " 리비젼데이트는 %s이며, 아이디는 %s, 계정 고유 아이디는 %s입니다 ", 
+//					profileIconId, bc.name, puuid_a, summonerLevel_a, revisionDate_a, id_a,accountId_a);
+//			log.info(ddaratest);
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		
+		}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//		System.out.println("현재 Id의 값은? : " + temp.getId());
 		String INFO_API_URL = "https://"+region+".api.riotgames.com/lol/league/v4/entries/by-summoner/"
 				+ temp.getId()
 				+ "?api_key=" + API_KEY; 
@@ -536,7 +547,10 @@ private GuestService service;
 				gameMode = "무작위 총력전";
 			} else if(queueId==1700) {
 				gameMode = "아레나";
-			} else {
+			} else if(queueId==1300) {
+				gameMode = "돌격!넥서스";
+			}	else {
+			
 				gameMode = queueId+"";
 			}
 			

@@ -127,7 +127,7 @@
 		<div class="queue_type_select">
 			<ul>
 				<li>
-					<button class="queue_type_select_button" id="total" value="TOTAL">전체</button>
+					<button class="queue_type_select_button selected" id="total" value="TOTAL">전체</button>
 				</li>
 
 				<li>
@@ -237,6 +237,7 @@
 		
 		<div class="queue_content">
 			<c:forEach var="pi" items="${L_Api}" begin="0" step="1" end="${gameInfo.en}"><%--  ${}로 부를때는 반드시 GameInfo클래스 맴버변수 이름으로 불러야한다 --%>
+				<c:if test="true">
 				<c:choose>
 					<c:when test="${pi.mainUser.win==true}">
 						<li>
@@ -560,6 +561,7 @@
 
 					</c:otherwise>
 				</c:choose>
+				</c:if>
 			</c:forEach>
 			
 			</div>

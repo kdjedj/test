@@ -102,7 +102,8 @@ function handleSearchBoxClick(){
         // 소환사명 누르면 전적검색 이동
         li.find('.summoner').on('click', function(event) {
           var searchQuery = $(this).text();
-          var searchUrl = '/teamgg/board/searching_player?userName=' + encodeURIComponent(searchQuery);
+          var regionQuery = $(this).parent().find('.test').text();
+          var searchUrl = '/teamgg/board/exist_user?userName=' + encodeURIComponent(searchQuery)+'&region='+encodeURIComponent(regionQuery);
           window.location.href = searchUrl;
         });
 
@@ -281,7 +282,8 @@ $('.bookmarks .close-btn').on('click', function(event) {
 	        // 소환사명 누르면 전적검색 이동
 	        li.find('.summoner').on('click', function(event) {
 	          var searchQuery = $(this).text();
-	          var searchUrl = '/teamgg/board/searching_player?userName=' + encodeURIComponent(searchQuery);
+            var regionQuery = $(this).text();
+	          var searchUrl = '/teamgg/board/exist_user?userName=' + encodeURIComponent(searchQuery)+'&region='+encodeURIComponent(regionQuery);
 	          window.location.href = searchUrl;
 	        });
 	
