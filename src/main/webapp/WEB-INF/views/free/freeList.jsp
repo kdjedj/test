@@ -21,6 +21,7 @@
 <script type="text/javascript">
 var userName = "<c:out value='${userName}' />";
 </script>
+<c:set var="currentPage" value="${param.page == null ? '1' : param.page}" />
 	
 <div class="board_wrap">
 	<div class="middle">
@@ -114,7 +115,14 @@ var userName = "<c:out value='${userName}' />";
 				</c:choose>
 				
 				<c:forEach var="p" begin="${blockStartNo}" end="${blockEndNo}">
-					[<a href="${cp}/free/freeList?page=${p}">${p}</a>]
+				    <c:choose>
+				        <c:when test="${p == currentPage }">
+				            <b>[<a href="${cp}/free/freeList?page=${p}">${p}</a>]</b>
+				        </c:when>
+				        <c:otherwise>
+				            [<a href="${cp}/free/freeList?page=${p}">${p}</a>]
+				        </c:otherwise>
+				    </c:choose>
 				</c:forEach>
 				
 				<c:choose>
