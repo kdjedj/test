@@ -468,7 +468,7 @@ a {
 	color: white;
 }
 
-#write:hover {
+#write:hover, #login:hover {
 	background-color: rgb(70,56,129);
 	transition: background-color 0.2s;
 }
