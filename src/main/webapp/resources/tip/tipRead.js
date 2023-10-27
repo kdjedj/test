@@ -70,7 +70,7 @@
 	                 });
 	             });			
 	             // 취소버튼으로 모달 닫기
-	             var cancelEditButton = document.querySelector('.modifyForm-cancel');
+	             var cancelEditButton = document.querySelector('#modifyForm-cancel');
 	             cancelEditButton.addEventListener('click', function () {
 	                 var modal = document.getElementById('commentModal');
 	                 modal.style.display = 'none';

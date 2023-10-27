@@ -142,5 +142,6 @@ var userName = "<c:out value='${userName}' />";
 </div>
 
 <script type="text/javascript" src="${cp}/resources/free/freeBoard.js"></script>
+<script type="text/javascript" src="${cp}/resources/t.js?ver=<%= System.currentTimeMillis() %>"></script>
 </body>
 </html>

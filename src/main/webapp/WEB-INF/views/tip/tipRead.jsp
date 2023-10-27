@@ -200,10 +200,10 @@ var userName = "<c:out value='${userName}' />";
 			        <form id="form" action="${cp}/comment/tcModify" method="post">
 			            <input type="hidden" name="tc_idx">
 			            <input type="hidden" name="t_idx" value="<%=t_idx%>">
-			            <textarea name="tc_comment" rows="4" cols="50"></textarea>
+			            <textarea id="modalForm" name="tc_comment" rows="4" cols="50"></textarea>
 			            <div class="replyAction">
-			                <button type="submit">수정</button>
-			                <button type="button" class="modifyForm-cancel">취소</button>
+			                <button class="modalBtn" type="submit">수정</button>
+			                <button class="modalBtn" type="button" id="modifyForm-cancel">취소</button>
 			            </div>
 			        </form>
 			    </div>
