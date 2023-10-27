@@ -2,16 +2,19 @@ package com.teamproject.spring.teamgg.controller;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +27,7 @@ import org.springframework.web.client.RestTemplate;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.peisia.spring.spb.lol.Cat;
+import com.peisia.spring.spb.lol.DetailInfo;
 import com.peisia.spring.spb.lol.GameInfo;
 import com.peisia.spring.spb.lol.GradeInfo;
 import com.peisia.spring.spb.lol.LoginInfoVo;
@@ -45,6 +49,7 @@ import lombok.extern.log4j.Log4j;
 @Controller
 public class BoardController {
 private GuestService service;
+
 	@GetMapping("/Searching_User")
 	public void Searching_User() {
 		log.info("=====서칭 유저 컨트롤러 한번 다녀감");
@@ -212,20 +217,86 @@ private GuestService service;
 		return "redirect:/board/teamMate?m_id="+mv.getM_id()+"&m_pw="+mv.getM_pw();	// 책 p.245 참고
 	}
 	
-	@RequestMapping("/searching_player")
-	public void searching_player(@RequestParam("userName") String userName, HttpServletRequest request, Model model) {
-	//// 우리나라 공공 api ////			
-		//인코딩 인증키			
+	@RequestMapping("/exist_user")
+	public String exist_user(@RequestParam("userName") String userName, @RequestParam("region") String region,
+			HttpServletRequest request, Model model)  throws UnsupportedEncodingException {
 		String SurmmonerName = userName.replaceAll(" ", "%20");
+//		System.out.println("검색어에 적은 유저이름은? : "+SurmmonerName);
+//		System.out.println("넘어온 지역 번호는? : " +region);
 		String API_KEY = "RGAPI-0092f94c-82f2-4df3-ad25-ac35254f878e";
-				
+		HttpSession session = request.getSession();
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		BufferedReader br = null;
+		
+		Summoner temp= null;
+		try{            
+			String urlstr = "https://"+region+".api.riotgames.com/lol/summoner/v4/summoners/by-name/"+
+					SurmmonerName+"?api_key="+API_KEY;
+			URL url = new URL(urlstr);
+			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
+			urlconnection.setRequestMethod("GET");
+			br = new BufferedReader(new InputStreamReader(urlconnection.getInputStream(),"UTF-8")); // 여기에 문자열을 받아와라.
+			String result = "";
+			String line;
+			while((line = br.readLine()) != null) { // 그 받아온 문자열을 계속 br에서 줄단위로 받고 출력하겠다.
+				result = result + line;
+			}
+			JsonParser jsonParser = new JsonParser();
+			JsonObject k = (JsonObject) jsonParser.parse(result);
+			String name_a = k.get("name").getAsString();
+			log.info("==== json ==== : 해당 유저 이름은 무엇인가요? : "+name_a);
+			String puuid_a = k.get("puuid").getAsString();
+
+			Double profileIconId = k.get("profileIconId").getAsDouble();
+			int profileIconId_int = (int)Math.ceil((double) profileIconId);
+			Double summonerLevel_a = k.get("summonerLevel").getAsDouble();
+			Double revisionDate_a = k.get("revisionDate").getAsDouble();
+			String id_a = k.get("id").getAsString();
+			String accountId_a = k.get("accountId").getAsString();
+
+			temp = new Summoner(profileIconId_int,name_a,puuid_a,summonerLevel_a,revisionDate_a,id_a,accountId_a);
+			
+		}catch(Exception e){
+			System.out.println(e.getMessage());
+		}
+		if(temp==null) {
+			return "redirect:/board/no_search";
+		}
+		String utrName = URLEncoder.encode(SurmmonerName, "UTF-8");
+		SurmmonerName = utrName.replaceAll("%25", "%");
+		System.out.println("다음으로 넘어가는 이름은? : "+SurmmonerName);
+		session.setAttribute("temp", temp);
+		return "redirect:/board/searching_player?userName="+SurmmonerName+"&region="+region;
+	}
+	
+	@RequestMapping("/no_search")
+	public void no_search() {
+		System.out.println("한번 지나감 ");
+	}
+	
+	@RequestMapping("/searching_player")
+	public void searching_player(@RequestParam("userName") String userName, @RequestParam("region") String region,
+			HttpServletRequest request, Model model) {
+	//// 우리나라 공공 api ////			
+		//인코딩 인증키		
+		DetailInfo dInfo = new DetailInfo();
+		RestTemplate restTemplate = new RestTemplate();			
+		BufferedReader br = null;
+		String API_KEY = "RGAPI-0092f94c-82f2-4df3-ad25-ac35254f878e";
+		//세션에서 값 불러오기
+		HttpSession session = request.getSession();
+		Summoner temp= (Summoner)session.getAttribute("temp");
+		
+//		System.out.println("검색어에 적은 유저이름은? : "+userName);
+//		System.out.println("넘어온 지역 번호는? : " +region);
+
+//		String SurmmonerName = userName.replaceAll(" ", "%20");
 //		String API_URL = "https://kr.api.riotgames.com/lol/summoner/v4"
 //				+ "/summoners/by-name/"
 //				+ SurmmonerName
 //				+ "?api_key=" + API_KEY; 
 //				
 ////				* 주의 * https 아님 http 임. https 는 인증관련 복잡한 처리를 해야함.	
-		RestTemplate restTemplate = new RestTemplate();			
 //					
 //		//// **** 중요 **** uri			
 //		URI uri = null; //java.net.URI 임포트 하셈			
@@ -249,11 +320,15 @@ private GuestService service;
 //	
 		
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		BufferedReader br = null;
+//		BufferedReader br = null;
+//		
+//		Summoner temp= null;
 		
-		Summoner temp= null;
-		try{            
-			String urlstr = "https://kr.api.riotgames.com/lol/summoner/v4/summoners/by-name/"+
+		//새로 고침 할 때
+		if(temp == null) {
+		try{         
+			String SurmmonerName = userName.replaceAll(" ", "%20");
+			String urlstr = "https://"+region+".api.riotgames.com/lol/summoner/v4/summoners/by-name/"+
 					SurmmonerName+"?api_key="+API_KEY;
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
@@ -294,10 +369,10 @@ private GuestService service;
 			System.out.println(e.getMessage());
 		}
 		
-	
+		}
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		
-		String INFO_API_URL = "https://kr.api.riotgames.com/lol/league/v4/entries/by-summoner/"
+//		System.out.println("현재 Id의 값은? : " + temp.getId());
+		String INFO_API_URL = "https://"+region+".api.riotgames.com/lol/league/v4/entries/by-summoner/"
 				+ temp.getId()
 				+ "?api_key=" + API_KEY; 
 		
@@ -323,19 +398,51 @@ private GuestService service;
 		Integer losses = 0;
 		List<Map<String, Object>> lolbc = restTemplate.getForObject(lol_uri, List.class); // 자기 클래스로 바꾸시오..
 	//	log.info("==== json ==== : 해당 유저 티어는? : "+lolbc.get(0).get("tier"));
+
 		if(lolbc.size()==0) {
 			queueType ="no search";
 			 tier = "Unranked";
 			 rank = "no search";
 			 wins = 0;
 			 losses = 0;
+			 
 		} else {
-			queueType = (String)lolbc.get(0).get("queueType");
-			 tier = (String)lolbc.get(0).get("tier");
-			 rank = (String)lolbc.get(0).get("rank");
-			 leaguePoints = (Integer)lolbc.get(0).get("leaguePoints");
-			 wins = (Integer)lolbc.get(0).get("wins");
-			 losses = (Integer)lolbc.get(0).get("losses");
+			String rankStr = (String)lolbc.get(0).get("tier");
+				if(rankStr.equals("CHALLENGER") || rankStr.equals("GRANDMASTER")||rankStr.equals("MASTER")) { 
+					queueType = (String)lolbc.get(0).get("queueType");
+					 tier = (String)lolbc.get(0).get("tier");
+					 rank = "";
+					 leaguePoints = (Integer)lolbc.get(0).get("leaguePoints");
+					 wins = (Integer)lolbc.get(0).get("wins");
+					 losses = (Integer)lolbc.get(0).get("losses");
+				}else {
+					queueType = (String)lolbc.get(0).get("queueType");
+					 tier = (String)lolbc.get(0).get("tier");
+					 rank = (String)lolbc.get(0).get("rank");
+					 leaguePoints = (Integer)lolbc.get(0).get("leaguePoints");
+					 wins = (Integer)lolbc.get(0).get("wins");
+					 losses = (Integer)lolbc.get(0).get("losses");
+		}
+		}
+		switch(rank) {
+		case"I": 
+			rank="1";
+			break;
+			
+		case"II": 
+			rank="2";
+			break;
+			
+		case"III": 
+			rank="3";
+			break;
+			
+		case"IV": 
+			rank="4";
+			break;
+		default:
+			rank="";
+			break;
 		}
     	
 //		System.out.println("자료형 확인:"+lolbc.get(0).get("leaguePoints").getClass().getName());
@@ -352,7 +459,7 @@ private GuestService service;
 //				+ "해당 유저의 티어는 %s이며, 랭크는%s , %s번 이겼고, %s번 져서 리그포인트는 %s점 입니다", queueType, tier, rank
 //				,wins, losses, leaguePoints);
 //		log.info(ddaralol);
-		LoginInfoVo = new LoginInfoVo(queueType, tier, rank, leaguePoints, wins, losses, winper);
+		LoginInfoVo = new LoginInfoVo(queueType, tier, rank, leaguePoints, wins, losses, winper, region);
 //		log.info("==== json ==== : 해당 유저 랭크는? : "+rank);
 
 
@@ -364,9 +471,17 @@ private GuestService service;
 			int endNum = 9;
 			int countNum = 0;
 			int rankGames = 0;
-			String urlstr1 = "https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/"
+			String urlstr1 ="";
+			if(region.equals("na1")) {
+				urlstr1 = "https://americas.api.riotgames.com/lol/match/v5/matches/by-puuid/"
+						+ temp.getPuuid()
+						+ "/ids?start=0&count="+endNum+"&api_key="+API_KEY;
+			} else {
+				urlstr1 = "https://asia.api.riotgames.com/lol/match/v5/matches/by-puuid/"
 					+ temp.getPuuid()
 					+ "/ids?start=0&count="+endNum+"&api_key="+API_KEY;
+			}
+			
 			
 			countNum = endNum + 1;
 			System.out.println("현재 countNum 값 : "+countNum);
@@ -382,11 +497,10 @@ private GuestService service;
 			
 		//플레이어 데이터 수집
 		ArrayList<Lol_api> xx = new ArrayList<Lol_api>();
-//		ArrayList<Map<String, GradeInfo>> cg = new ArrayList<>();// 게임 수 승패휫수 한번에 구하기
 		Map<String, GradeInfo> cg = new HashMap<>();// 챔피언당 게임 수 승패휫수 한번에 구하기
-		GradeInfo mg = new GradeInfo(0,0,0,"","","","","","");// 챔피언당 게임 수 승패휫수 한번에 구하기
+		GradeInfo mg = new GradeInfo(0,0,0,"","","","","","", 0.0);// 챔피언당 게임 수 승패휫수 한번에 구하기
 		Map<String, Positions> positions = new HashMap<>();
-//		Map<String, Integer> cg = new HashMap<>();
+		
 		Integer mainKills = 0;	
 		Integer mainAsis = 0;	
 		Integer mainDeaths = 0;	
@@ -395,9 +509,17 @@ private GuestService service;
 		String gameMode = "";
 		for(String matid : grbc) {
 			// 아래 해당 사항들 배열로 만드어야함
-			String TEST_URL = "https://asia.api.riotgames.com/lol/match/v5/matches/"
-					+ matid
-					+"?api_key="+API_KEY; 
+			String TEST_URL ="";
+			if(region.equals("na1")) {
+				TEST_URL = "https://americas.api.riotgames.com/lol/match/v5/matches/"
+						+ matid
+						+"?api_key="+API_KEY; 
+			} else {
+				TEST_URL = "https://asia.api.riotgames.com/lol/match/v5/matches/"
+						+ matid
+						+"?api_key="+API_KEY; 
+			}
+			
 			URI test_uri = null;
 			try {			
 				test_uri = new URI(TEST_URL);		
@@ -425,7 +547,10 @@ private GuestService service;
 				gameMode = "무작위 총력전";
 			} else if(queueId==1700) {
 				gameMode = "아레나";
-			} else {
+			} else if(queueId==1300) {
+				gameMode = "돌격!넥서스";
+			}	else {
+			
 				gameMode = queueId+"";
 			}
 			
@@ -435,19 +560,33 @@ private GuestService service;
 //			System.out.println(timemin+"분 " +timesec+"초");
 			
 			//각 수치에 대한 객체 선언 - 꼭 괄호 바깥에서 선언*
+			ArrayList<Lol_api> di = new ArrayList<Lol_api>();
 			List<Participants> player_info = (List<Participants>)testbc.info.participants;// 게임데이타 받아오기
 			Participants mainUser = null;
+			Participants perPlayer = null;
 			String aver = "";
-			
+			String perAverStr ="";
+			double perAver = 0.0;
 			Integer cs = 0; 
 			String spellId1 = null;
 			String spellId2 = null;
+			String perspell1= null;
+			String perspell2= null;
 //			Map<String, Integer> grade = new HashMap<>();
 //			GradeInfo chankey = cg.get(mainUser.championName); 
 			
 			for(int i=0; i<player_info.size(); i++) {
+				perPlayer = player_info.get(i);//각각 플레이어
+				perspell1= dInfo.getSpellName(perPlayer.summoner1Id);
+				perspell2= dInfo.getSpellName(perPlayer.summoner2Id);
+				perAverStr = String.format("%.2f", 
+						((double)player_info.get(i).kills+(double)player_info.get(i).assists/(double)player_info.get(i).deaths)
+						);
+				perAver = Double.parseDouble(perAverStr);
+				Lol_api yy=new Lol_api(perPlayer, perAver, perspell1, perspell2, 0.0, 0.0);
+				di.add(yy);
 				
-				if(player_info.get(i).puuid.equals(temp.getPuuid())) {
+				if(player_info.get(i).puuid.equals(temp.getPuuid())) {//메인 플레이어
 					mainUser = player_info.get(i);
 					
 					utotalkills += mainUser.assists + mainUser.kills;
@@ -549,6 +688,42 @@ private GuestService service;
 			}
 			}
 			//
+			
+			//가한 데미지 그래프 기준 정하고, 게이지 만들기
+			int maxDealt = 0;
+			String dealtStr= "";
+			int maxTaken = 0;
+			String takenStr= "";
+			for(Lol_api p : di) {
+				if(p.getMainUser().totalDamageDealtToChampions>maxDealt) {
+					maxDealt = p.getMainUser().totalDamageDealtToChampions;
+				}
+				
+				if(p.getMainUser().totalDamageTaken>maxTaken) {
+					maxTaken = p.getMainUser().totalDamageTaken;
+				}
+				
+			}
+//			System.out.println("di 사이즈는? : "+ di.size());
+			for(int i=0; i < di.size(); i++) {
+				dealtStr = String.format("%.4f",
+						((double)di.get(i).mainUser.totalDamageDealtToChampions/(double)maxDealt)*100
+						 );
+				
+				takenStr = String.format("%.4f",
+						((double)di.get(i).mainUser.totalDamageTaken/(double)maxTaken)*100
+						);
+				
+				di.get(i).dealtPer = Double.parseDouble(dealtStr);
+				di.get(i).takenPer = Double.parseDouble(takenStr);
+				
+//				System.out.println("해당 유저의 딜 그래프수치는 "+di.get(i).dealtPer+"이고, 받은 데미지는 "+di.get(i).takenPer+"이다");
+			}
+			
+			
+			
+			
+			//도합 킬수 구하기
 			for(int i=0; i<player_info.size(); i++) {
 				if(player_info.get(i).win==mainUser.win) { 
 					totalkills += player_info.get(i).kills;
@@ -632,7 +807,7 @@ private GuestService service;
 				aver="Perfact";
 			}
 			
-			Lol_api l = new Lol_api(player_info, gameMode, timemin, timesec, mainUser, aver, killsRate, cs, spellId1, spellId2);
+			Lol_api l = new Lol_api(player_info, gameMode, timemin, timesec, mainUser, aver, killsRate, cs, spellId1, spellId2, di);
 			xx.add(l);
 			
 //			System.out.println("4번째 아이템 고유 번호 "+ mainUser.item3);
@@ -723,7 +898,7 @@ private GuestService service;
         			if(positions.get(key).times!=0) {
 //        				System.out.println("현재 rankGames 값 : "+rankGames);
         			positionN.get(i).gauge = String.format("%.4f",((double)positions.get(key).times/(double)rankGames)*100); 
-        			System.out.println(positionN.get(i).position+"의 포지션에 값이 들어감 : " +positionN.get(i).gauge);
+//        			System.out.println(positionN.get(i).position+"의 포지션에 값이 들어감 : " +positionN.get(i).gauge);
         			} 
         		}
         
@@ -735,19 +910,22 @@ private GuestService service;
         	if(positionN.get(i).gauge.equals("")) {
         		positionN.get(i).gauge = "0";
         	}
-    		System.out.println("포지션 " +positionN.get(i).position+ "에 " +positionN.get(i).gauge+"의 값이 들어있음");
+//    		System.out.println("포지션 " +positionN.get(i).position+ "에 " +positionN.get(i).gauge+"의 값이 들어있음");
         }
         
         //해당유저 평균 게임 정보
-        
+        String winCircleStr = "";
         mg.chamGames = mg.chamWins + mg.chamLosses;
-        System.out.println("총 게임수 : " +mg.chamGames+"번, 도합 킬 수 : "+mainKills+ "번, 도합 데스 수 : "+mainDeaths+ "번, 도합 어시 수 : "+mainAsis+"번");
+//        System.out.println("총 게임수 : " +mg.chamGames+"번, 도합 킬 수 : "+mainKills+ "번, 도합 데스 수 : "+mainDeaths+ "번, 도합 어시 수 : "+mainAsis+"번");
         mg.killGrade = String.format("%.1f",(double)mainKills/(double)(mg.chamWins+mg.chamLosses));
         mg.asiGrade = String.format("%.1f",(double)mainAsis/(double)(mg.chamWins+mg.chamLosses));
         mg.deathGrade = String.format("%.1f",(double)mainDeaths/(double)(mg.chamWins+mg.chamLosses));
         mg.gradestr = String.format("%.2f",(double)(mainKills+ mainAsis)/(double)mainDeaths);
         mg.winRate = String.format("%.0f",((double)mg.chamWins/(double)mg.chamGames)*100);
         mg.killRate = String.format("%.0f",((double)utotalkills/(double)totalkills)*100);
+        winCircleStr = String.format("%.3f",(Double.parseDouble(mg.winRate)/100.0)*360);
+        mg.winCircle = Double.parseDouble(winCircleStr);
+        
         GameInfo gg = new GameInfo(mg, endNum); // 게임 기본 정보 넘기기
         
 //        // 각 키에 대해 작업

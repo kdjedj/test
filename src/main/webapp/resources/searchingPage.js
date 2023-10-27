@@ -9,6 +9,10 @@ $(document).ready(function() {
     const soloRank =$('#soloRank');
     const normalGame =$('#normalGame');
     
+    const divAllLi = $('div.queue_content');
+    //const liElements = divAllLi.querySelectorAll('>li');
+    const liElements = document.querySelectorAll('div.queue_content > li');
+    
     $('.addInfoBtn').click(function() {
       // 클릭된 버튼의 부모 div에서 데이터를 가져옵니다.
       var $div = $(this).closest('.addBtnDiv');
@@ -20,46 +24,108 @@ $(document).ready(function() {
      
   });
 
+
+//   function showDiv(group) {
+//     var elements = document.querySelectorAll('.' + group);
+//     elements.forEach(function(element) {
+//         element.style.display = 'block';
+//     });
+// }
+
+// function hideDiv(group) {
+//     var elements = document.querySelectorAll('.' + group);
+//     elements.forEach(function(element) {
+//         element.style.display = 'none';
+//     });
+// }
+
+// document.getElementById('showDiv1Button').addEventListener('click', function() {
+//     showDiv('div1');
+//     hideDiv('div2');
+// });
+
+// document.getElementById('showDiv2Button').addEventListener('click', function() {
+//     showDiv('div2');
+//     hideDiv('div1');
+// });
+
+// document.getElementById('showAllButton').addEventListener('click', function() {
+//     showDiv('div1');
+//     showDiv('div2');
+// });
+
+
+
     //경기 버튼 색깔 입히기
     total.on('click', function(){
         console.log('버튼 클릭함');
-        total.css('background-color', 'initial');
-        soloRank.css('background-color', 'initial');
-        normalGame.css('background-color', 'initial');
-
-        $(this).css('background-color','#9759ff');
-        soloRank.css('background-color', '#fff');
-        normalGame.css('background-color', '#fff');
-
+          soloRank.removeClass('selected');
+          normalGame.removeClass('selected');
+           $(this).addClass('selected');
         
+          for(let i = 0; i < liElements.length ; i++){
+            var li = liElements[i];
+            li.style.display = 'block';
+          }
+        // $(this).css('background-color','#9759ff');
+        // soloRank.css('background-color', '#fff');
+        // normalGame.css('background-color', '#fff');
 
         //코드를 추가하게 만들기
 
     })
 
-    soloRank.on('click', function(){
-        console.log('버튼 클릭함');
-        total.css('background-color', 'initial');
-        soloRank.css('background-color', 'initial');
-        normalGame.css('background-color', 'initial');
+      
 
-        $(this).css('background-color','#9759ff');
-        total.css('background-color', '#fff');
-        normalGame.css('background-color', '#fff');
+
+
+
+
+
+
+    soloRank.on('click', function(){
+      console.log('버튼 클릭함');
+        total.removeClass('selected');
+        normalGame.removeClass('selected');
+      $(this).addClass('selected');
 
         //코드를 추가하게 만들기
 
+        for(let i = 0; i < liElements.length ; i++){
+          var li = liElements[i];
+          var gameTypeDiv = li.querySelector('.gameType').textContent;
+          if(gameTypeDiv != "솔랭"){
+            li.style.display = 'none';
+        } else {
+          li.style.display = 'block';
+        }
+        }
     })
 
         normalGame.on('click', function(){
-        console.log('버튼 클릭함');
-        total.css('background-color', 'initial');
-        soloRank.css('background-color', 'initial');
-        normalGame.css('background-color', 'initial');
+          console.log('버튼 클릭함');
+            soloRank.removeClass('selected');
+            total.removeClass('selected');
+            $(this).addClass('selected');
+        
+            for(let i = 0; i < liElements.length ; i++){
+              var li = liElements[i];
+              var gameTypeDiv = li.querySelector('.gameType').textContent;
+              if(gameTypeDiv == "솔랭"){
+                li.style.display = 'none';
+            } else {
+              li.style.display = 'block';
+            }
+            }
 
-        $(this).css('background-color','#9759ff');
-        soloRank.css('background-color', '#fff');
-        total.css('background-color', '#fff');
+          // console.log('버튼 클릭함');
+        // total.css('background-color', 'initial');
+        // soloRank.css('background-color', 'initial');
+        // normalGame.css('background-color', 'initial');
+
+        // $(this).css('background-color','#9759ff');
+        // soloRank.css('background-color', '#fff');
+        // total.css('background-color', '#fff');
 
         //코드를 추가하게 만들기
 

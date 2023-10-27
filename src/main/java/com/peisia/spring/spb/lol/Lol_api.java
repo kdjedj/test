@@ -5,21 +5,25 @@ import java.util.List;
 import lombok.Data;
 @Data
 public class Lol_api {
-	List<Participants> participants;
-	String gameMode;
-	Integer timemin;
-	Integer timesec;
-	Participants mainUser;
-	String aver;
-	String killsRate;
-	Integer cs;
-	String spellId1;
-	String spellId2;
+	public List<Participants> participants;
+	public String gameMode;
+	public Integer timemin;
+	public Integer timesec;
+	public Participants mainUser;
+	public String aver;
+	public double averD;
+	public String killsRate;
+	public Integer cs;
+	public String spellId1;
+	public String spellId2;
+	public double dealtPer;
+	public double takenPer;
+	public List<Lol_api> perPlayers;
 	
 	
 	public Lol_api(List<Participants> participants, String gameMode
 			, Integer timemin, Integer timesec, Participants mainUser, String aver, String killsRate,
-			Integer cs, String spellId1, String spellId2) {
+			Integer cs, String spellId1, String spellId2, List<Lol_api> perPlayer) {
 		this.participants = participants;
 		this.gameMode = gameMode;
 		this.timemin = timemin; 
@@ -30,13 +34,18 @@ public class Lol_api {
 		this.cs = cs;
 		this.spellId1 = spellId1;
 		this.spellId2 = spellId2;
+		this.perPlayers = perPlayer;
 	}
 	
 	
-	public Lol_api(List<Participants> participants, String gameMode, Participants mainUser) {
-		this.participants = participants;
-		this.gameMode = gameMode;
-		this.mainUser = mainUser;
+	public Lol_api(Participants perPlayer, double averD,
+			String spellId1, String spellId2, double dealtPer, double takenPer) {
+		this.mainUser = perPlayer;
+		this.averD = averD;
+		this.spellId1 = spellId1;
+		this.spellId2 = spellId2;
+		this.dealtPer = dealtPer;
+		this.takenPer = takenPer;
 	}
 	
 }
