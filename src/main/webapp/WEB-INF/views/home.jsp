@@ -59,16 +59,8 @@
 			<button id="searchButton" class="search-button">검색</button>
 		</div>
 	</div>
-	</div>
-
-	</div>
-	<br> 
-	id : <%=session.getAttribute("m_id")%><br> 
-	Nickname : <%=session.getAttribute("m_user")%><br>
-	email : <%=session.getAttribute("m_email")%><br>
-	date : <%=session.getAttribute("m_date")%><br>
-	role : <%=session.getAttribute("m_role")%><br>
-
+</div>
+	
 <!-- <div class="footer">
 	<div class="footer-rap">
 	</div>
