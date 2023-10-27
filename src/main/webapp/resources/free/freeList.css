@@ -428,6 +428,7 @@ a {
 	margin-right: 6px;
 	background-color: white;
 	width: 20%;
+	max-width: 260px;
 	height:600px;
 	position: sticky;
 	top: 80px;
@@ -468,7 +469,7 @@ a {
 	color: white;
 }
 
-#write:hover {
+#write:hover, #login:hover {
 	background-color: rgb(70,56,129);
 	transition: background-color 0.2s;
 }
@@ -495,7 +496,6 @@ a {
 
 /* ================== bottom  ================== */
 .bottom{
-/* 	text-align: center;	 */
-/* 	width: 100%; */
-/* 	height: 40px; */
+	width: 100%;
+	height: 40px;
 }

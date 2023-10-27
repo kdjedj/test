@@ -25,7 +25,7 @@
 				<ul>
 					<li>
 						<span>
-							<img alt="" src="#">
+							<img alt="lol" src="${cp}/resources/lol_client_logo.png">
 							<span>리그오브레전드</span>
 						</span>
 					</li>

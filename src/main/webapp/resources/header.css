@@ -53,7 +53,7 @@ body {
 
 }
 .main-tab .logo img{
-    background-color:#dedcee;
+    background-color:#6a60a9;
     width:65px;
     height:40px;
 }
@@ -71,6 +71,11 @@ nav li {
    width:138px;
    height:40px;
 }
+.main-tab nav li {
+   display: flex;
+   align-items: center; /* 세로 가운데 정렬을 위한 설정 */
+   margin-left: 24px;
+}
 nav li>a {
 	font-family:'Malgun Gothic', sans-serif;
 	font-size: 1.2em;
@@ -84,6 +89,7 @@ nav li img {
    border:0px;
    vertival-align:middle;
    max-width:100%;
+   
 }
 nav li span {
    font-size:12px;
