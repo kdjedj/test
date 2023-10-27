@@ -61,7 +61,7 @@
 	</div>
 	</div>
 
-
+	</div>
 	<br> 
 	id : <%=session.getAttribute("m_id")%><br> 
 	Nickname : <%=session.getAttribute("m_user")%><br>
