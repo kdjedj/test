@@ -34,10 +34,10 @@
 					<small class="label">Region</small>
 					<div class="">
 						<label class="hidden" for="kr">kr</label>
-						<select id="kr">
-							<option value="na">NA</option>
+						<select id="kr" name="region">
+							<option value="na1">NA</option>
 							<option value="kr" selected>KR</option>
-							<option value="jp">JP</option>
+							<option value="jp1">JP</option>
 						</select>
 					</div>
 				</div>

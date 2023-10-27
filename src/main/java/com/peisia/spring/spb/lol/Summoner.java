@@ -1,5 +1,8 @@
 package com.peisia.spring.spb.lol;
 
+import lombok.Data;
+
+@Data
 public class Summoner {
 	    private int profileIconId;
 	    private String name;
