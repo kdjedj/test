@@ -211,11 +211,11 @@
 															<li class="player_list main">
 																<div class="icon">
 																	<a href="#"> 
-																		<img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/champion/${player.championName }.png"><span></span>
+																		<img src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/champion/${player.championName }.png" style="border-radius:50%;"><span></span>
 																	</a>
 																</div>
 																<div class="name">
-																	<a href="${cp}/board/exist_user?userName=${player.summonerName }&region=${liv.region}">${player.summonerName }</a>
+																	<a href="${cp}/board/exist_user?userName=${player.summonerName }&region=${liv.region}" style="color: black;">${player.summonerName }</a>
 																</div>
 															</li>
 														</c:when>
@@ -232,17 +232,7 @@
 															</li>
 														</c:otherwise>
 													</c:choose>
-													<%-- <li class="player_list">
-														<div class="icon">
-															<a href="#"> <img
-																src="https://ddragon.leagueoflegends.com/cdn/13.19.1/img/champion/${player.championName }.png"><span></span>
-															</a>
-														</div>
-														<div class="name">
-															<a
-																href="${cp}/board/searching_player?userName=${player.summonerName }&region=${liv.region}">${player.summonerName }</a>
-														</div>
-													</li> --%>
+													
 												</c:forEach>
 											</ul>
 
