@@ -6,17 +6,18 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- 2. 0을 위한 준비. el 태그로 가져올 수 있는데 이걸 더 짧게 찍기위해 변수 대입함.     -->
 <c:set var="cp" value="${pageContext.request.contextPath}" />
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" type="text/css" href="${cp}/resources/reset.css?ver=<%= System.currentTimeMillis() %>">
 <link rel="stylesheet" type="text/css" href="${cp}/resources/main.css?ver=<%= System.currentTimeMillis() %>">
 <script type="text/javascript" src="${cp}/resources/home.js?ver=<%= System.currentTimeMillis() %>"></script>
 <link rel="stylesheet" type="text/css" href="${cp}/resources/reset.css?ver=<%=System.currentTimeMillis()%>">
 <link rel="stylesheet" type="text/css" href="${cp}/resources/main.css?ver=<%=System.currentTimeMillis()%>">
+
 
 </head>
 <body>
@@ -60,7 +61,6 @@
 		</div>
 	</div>
 </div>
-	
 <!-- <div class="footer">
 	<div class="footer-rap">
 	</div>
