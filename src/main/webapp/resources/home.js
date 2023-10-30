@@ -304,7 +304,7 @@ underBar.children('.search-panel').on('click', function(event) {
       	var searchUrl = '/teamgg/board/exist_user?userName=' + encodeURIComponent(searchQuery) + '&region=' + encodeURIComponent(selectedRegion);
 		
 		searchList.push(selectedRegion + ':' + searchQuery);
-		
+		//todo: 실패 페이지로 이동시 쿠키 추가 안되게 하여 최근검색에 안뜨게 하기.
 		
         // 최대 개수를 초과하는 경우 가장 오래된(첫 번째) 검색어 삭제
         if (searchList.length > MAX_SEARCH_HISTORY) {
@@ -314,7 +314,7 @@ underBar.children('.search-panel').on('click', function(event) {
         // 검색어 목록을 쿠키에 저장 (쉼표로 구분하여 저장)
         setCookie('searchHistory', searchList.join(','), 30); // 쿠키 유효기간 30일
 	}
-      //window.location.href = searchUrl;
+      window.location.href = searchUrl;
     }
   });
 
