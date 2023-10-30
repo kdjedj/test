@@ -396,8 +396,10 @@ underBar.children('.search-panel').on('click', function(event) {
 	  if (searchList.indexOf(selectedRegion + ':' + searchQuery) === -1) {
       	var searchUrl = '/teamgg/board/exist_user?userName=' + encodeURIComponent(searchQuery) + '&region=' + encodeURIComponent(selectedRegion);
       // 검색 요청
+      
       $.get(searchUrl, function(data) {
         if (data === 'success') {
+          
           // 검색 성공한 경우에만 새로운 검색어 추가
           searchList.push(selectedRegion + ':' + searchQuery);
 

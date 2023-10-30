@@ -258,7 +258,8 @@ private GuestService service;
 			System.out.println(e.getMessage());
 		}
 		if(temp==null) {
-			return "redirect:/board/no_search";
+			String result = "none";
+			return "redirect:/board/no_search?result="+result;
 		}
 		String utrName = URLEncoder.encode(SurmmonerName, "UTF-8");
 		SurmmonerName = utrName.replaceAll("%25", "%");
@@ -289,10 +290,10 @@ private GuestService service;
 		
 		//새로 고침 할 때
 		if(temp == null) {
-		try{         
 			String SurmmonerName = userName.replaceAll(" ", "%20");
 			String urlstr = "https://"+region+".api.riotgames.com/lol/summoner/v4/summoners/by-name/"+
 					SurmmonerName+"?api_key="+API_KEY;
+		try{         
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 			urlconnection.setRequestMethod("GET");
@@ -329,14 +330,6 @@ private GuestService service;
 		
 //				* 주의 * https 아님 http 임. https 는 인증관련 복잡한 처리를 해야함.	
 		
-		//// **** 중요 **** uri			
-		URI lol_uri = null; //java.net.URI 임포트 하셈			
-		try {			
-			lol_uri = new URI(INFO_API_URL);		
-		} catch (URISyntaxException e) {			
-			e.printStackTrace();		
-		}	
-		
 		
 		LoginInfoVo LoginInfoVo = null;
 		String tier = "";
@@ -345,6 +338,14 @@ private GuestService service;
 		Integer leaguePoints = 0;
 		Integer wins = 0;
 		Integer losses = 0;
+		//// **** 중요 **** uri			
+		URI lol_uri = null; //java.net.URI 임포트 하셈			
+		try {			
+			lol_uri = new URI(INFO_API_URL);		
+		} catch (URISyntaxException e) {			
+			e.printStackTrace();		
+		}	
+		
 		List<Map<String, Object>> lolbc = restTemplate.getForObject(lol_uri, List.class); // 자기 클래스로 바꾸시오..
 
 		if(lolbc.size()==0) {
