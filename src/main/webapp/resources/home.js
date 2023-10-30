@@ -30,6 +30,7 @@ $(document).ready(function() {
     // 선택한 main-tab의 span 스타일 변경
     $(this).find('span').css('font-weight', 'bold');
   });
+  
 function updateStarColor(label, checkbox) {
   // 체크박스 상태 변경
   checkbox.prop('checked', !checkbox.prop('checked'));
@@ -43,12 +44,14 @@ function updateStarColor(label, checkbox) {
 	  // 즐겨찾기 업데이트
 	  updateFavorites();
 }
+
 // 최근검색&즐겨찾기 탭전환 함수
 function switchToRecent() {
   $('.cookies').removeClass('bookmarks').addClass('recent');
   $('.recent-search').addClass('pick');
   $('.bookmarks-list').removeClass('pick');
 }
+
 function handleSearchBoxClick(){
 	switchToRecent()
   	
@@ -133,7 +136,7 @@ function handleSearchBoxClick(){
     //삭제버튼 클릭시 li와 쿠키 삭제
 	const closeBtn = $('.close-btn'); //삭제버튼
 	closeBtn.on('click', function(event) {
-	console.log('삭제버튼클릭');
+		console.log('삭제버튼클릭');
 	    event.stopPropagation();
 	    var li = $(this).closest('li');
 	    var region = li.find('.test').text();
@@ -159,13 +162,13 @@ function handleSearchBoxClick(){
 	    // 해당 항목 삭제
 	    li.remove();
 
-	  });
-	}
+  });
+} //handleSearchBoxClick
 		  
   // 검색창 클릭 시 서치패널 보이게
   underBox.on('click', function(event) {
   	console.log('검색창클릭')
-  	handleSearchBoxClick()	
+  	handleSearchBoxClick()
     
 	bookMarks.on("click", function(){
 	  // 즐겨찾기 탭을 클릭했을 때 수행할 작업
@@ -208,35 +211,35 @@ function handleSearchBoxClick(){
 	    cookiesList.empty().append(li);
 	  }
 	  // bookmarks 탭에서 삭제 버튼 클릭 시 아이템 삭제
-$('.bookmarks .close-btn').on('click', function(event) {
-    event.stopPropagation();
-    var li = $(this).closest('li');
-    var region = li.find('.test').text();
-    var summoner = li.find('.summoner').text();
+	$('.bookmarks .close-btn').on('click', function(event) {
+	    event.stopPropagation();
+	    var li = $(this).closest('li');
+	    var region = li.find('.test').text();
+	    var summoner = li.find('.summoner').text();
+	
+	    // 쿠키에서 해당 항목 제거
+	    var favorites = getCookie('favorites');
+	    if (favorites) {
+	        var favoritesList = favorites.split(',');
+	        var updatedFavorites = [];
+	
+	        for (var i = 0; i < favoritesList.length; i++) {
+	            var favoritesData = favoritesList[i].split(':');
+	            if (favoritesData[0] !== region || favoritesData[1] !== summoner) {
+	                updatedFavorites.push(favoritesList[i]);
+	            }
+	        }
+	
+	        // 변경된 목록으로 쿠키 업데이트
+	        setCookie('favorites', updatedFavorites.join(','), 30);
+	    }
 
-    // 쿠키에서 해당 항목 제거
-    var favorites = getCookie('favorites');
-    if (favorites) {
-        var favoritesList = favorites.split(',');
-        var updatedFavorites = [];
-
-        for (var i = 0; i < favoritesList.length; i++) {
-            var favoritesData = favoritesList[i].split(':');
-            if (favoritesData[0] !== region || favoritesData[1] !== summoner) {
-                updatedFavorites.push(favoritesList[i]);
-            }
-        }
-
-        // 변경된 목록으로 쿠키 업데이트
-        setCookie('favorites', updatedFavorites.join(','), 30);
-    }
-
-    // 해당 항목 삭제
-    li.remove();
-
-    // 해당 항목의 노란 별을 빈 별로 변경
-    li.find('label').removeClass('yellow-star');
-});
+	    // 해당 항목 삭제
+	    li.remove();
+	
+	    // 해당 항목의 노란 별을 빈 별로 변경
+	    li.find('label').removeClass('yellow-star');
+		});
 	});
 		
 		
@@ -244,104 +247,9 @@ $('.bookmarks .close-btn').on('click', function(event) {
 	  switchToRecent();
   	  $('.recent-search').addClass('pick');
 	  $('.bookmarks-list').removeClass('pick');
-	  var searchHistory = getCookie('searchHistory');
-	  function switchToRecent() {
 	  $('.cookies').removeClass('bookmarks').addClass('recent');
-	  }
-	
-	  if (searchHistory) {
-	      var searchList = searchHistory.split(','); // 쿠키에서 검색어 목록 가져오기
-	      var cookiesList = $('.cookies'); // 쿠키 목록 요소 선택
-	      cookiesList.empty();
-	      
-	      li=null
-	      for (let i = 0; i < searchList.length; i++) {
-	        var searchData = searchList[i].split(':');
-	        var region = searchData[0]; // 리전
-	        var query = searchData[1]; // 검색어
-			var favoriteClass = searchData[2] || ''; // 쿠키에서 가져온 클래스 (또는 빈 문자열)
-			
-	        // 아이템을 생성하고 이벤트를 연결할 때마다 ID를 증가시킴
-	        li = $('<li>' +
-	          '<span class="test">' + region + '</span>' +
-	          '<span class="summoner">' + query + '</span>' +
-	          '<div class="favorite-summoner-chk">' +
-		          '<input type="checkbox" id="fav_' + i +'" class="checkBox">' +
-		          '<label for="fav_' + i +' " class="favorite-summoner-list ' + favoriteClass + '"></label>' +
-	          '</div>' +
-	          '<button type="button" class="close-btn">' + "X" +
-      	      '</button>' +
-	          '</li>');
-	
-	        // li 요소의 click 이벤트 핸들러에서 이벤트 중지
-	        li.on('click', function(event) {
-	          event.stopPropagation();
-	          
-	        });
-			
-	        // 소환사명 누르면 전적검색 이동
-	        li.find('.summoner').on('click', function(event) {
-	          var searchQuery = $(this).text();
-            var regionQuery = $(this).text();
-	          var searchUrl = '/teamgg/board/exist_user?userName=' + encodeURIComponent(searchQuery)+'&region='+encodeURIComponent(regionQuery);
-	          window.location.href = searchUrl;
-	        });
-	
-	        // 아이템 클릭 이벤트 핸들러
-	        li.find('label').on('click', function(event) {
-	          event.stopPropagation();
-			  updateStarColor($(this), $(this).siblings('input[type="checkbox"]'));
-	
-	          // 즐겨찾기 업데이트
-	          updateFavorites();
-	          
-	          
-	        });
-			// 페이지 로드 시 초기화 함수 호출
-			initialize();
-			console.log("Initialize function called")
-	        cookiesList.append(li);
-	        initialize();
-			
-			
-			
-	      } // for
-	    } //searchHistory if
-	    
-	    console.log('최근검색 탭 클릭');
-		
-		//삭제버튼 클릭시 li와 쿠키 삭제
-			const closeBtn = $('.close-btn'); //삭제버튼
-			closeBtn.on('click', function(event) {
-			console.log('삭제버튼클릭');
-			    event.stopPropagation();
-			    var li = $(this).closest('li');
-			    var region = li.find('.test').text();
-			    var summoner = li.find('.summoner').text();
-			
-			    // 쿠키에서 해당 항목 제거
-			    var searchHistory = getCookie('searchHistory');
-			    if (searchHistory) {
-			        var searchList = searchHistory.split(',');
-			        var updatedList = [];
-			
-			        for (var i = 0; i < searchList.length; i++) {
-			            var searchData = searchList[i].split(':');
-			            if (searchData[0] !== region || searchData[1] !== summoner) {
-			                updatedList.push(searchList[i]);
-			            }
-			        }
-			
-			        // 변경된 목록으로 쿠키 업데이트
-			        setCookie('searchHistory', updatedList.join(','), 30);
-			    }
-			
-			    // 해당 항목 삭제
-			    li.remove();
-		
-			  });
-			
-		});
+	  handleSearchBoxClick()
+	  });
 		
   });// 검색창 클릭 시 서치패널 보이게
   
