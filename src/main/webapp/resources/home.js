@@ -303,24 +303,18 @@ $(document).ready(function() {
 	       // 중복 검사
 		  if (searchList.indexOf(selectedRegion + ':' + searchQuery) === -1) {
 	      	var searchUrl = '/teamgg/board/exist_user?userName=' + encodeURIComponent(searchQuery) + '&region=' + encodeURIComponent(selectedRegion);
-	      // 검색 요청
-	      $.get(searchUrl, function(data) {
-	        if (data === 'success') {
-	          // 검색 성공한 경우에만 새로운 검색어 추가
-	          searchList.push(selectedRegion + ':' + searchQuery);
+	        searchList.push(selectedRegion + ':' + searchQuery);
 	
 			
 			
-	        // 최대 개수를 초과하는 경우 가장 오래된(첫 번째) 검색어 삭제
-	        if (searchList.length > MAX_SEARCH_HISTORY) {
-	          searchList.shift();
+		        // 최대 개수를 초과하는 경우 가장 오래된(첫 번째) 검색어 삭제
+		        if (searchList.length > MAX_SEARCH_HISTORY) {
+		          searchList.shift();
+		        }
+		
+		        // 검색어 목록을 쿠키에 저장 (쉼표로 구분하여 저장)
+		        setCookie('searchHistory', searchList.join(','), 30); // 쿠키 유효기간 30일
 	        }
-	
-	        // 검색어 목록을 쿠키에 저장 (쉼표로 구분하여 저장)
-	        setCookie('searchHistory', searchList.join(','), 30); // 쿠키 유효기간 30일
-	      }
-	    });
-		}
 	      var searchUrl = '/teamgg/board/exist_user?userName=' + encodeURIComponent(searchQuery)+'&region='+encodeURIComponent(selectedRegion);
 	      //var searchUrl = '/teamgg/board/searching_player?userName=' + encodeURIComponent(searchQuery)+'&region='+encodeURIComponent(selectedRegion);
 	      window.location.href = searchUrl;
