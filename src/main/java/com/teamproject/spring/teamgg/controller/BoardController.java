@@ -446,15 +446,17 @@ private GuestService service;
 		Integer totalkills = 0;
 		Integer utotalkills = 0;
 		String gameMode = "";
-		for(String matid : grbc) {
+		
+//		for(String matid : grbc) {
+			for(int a=0; a<grbc.size(); a++) {
 			String TEST_URL ="";
 			if(region.equals("na1")) {
 				TEST_URL = "https://americas.api.riotgames.com/lol/match/v5/matches/"
-						+ matid
+						+ grbc.get(a)
 						+"?api_key="+API_KEY; 
 			} else {
 				TEST_URL = "https://asia.api.riotgames.com/lol/match/v5/matches/"
-						+ matid
+						+ grbc.get(a)
 						+"?api_key="+API_KEY; 
 			}
 			
@@ -465,6 +467,10 @@ private GuestService service;
 				e.printStackTrace();		
 			}	
 			Cat testbc = restTemplate.getForObject(test_uri, Cat.class); // 자기 클래스로 바꾸시오..
+			if(testbc==null) { // 경기수가 부족할 경우
+				endNum = a;
+				break;
+			}
 			String gameModeEn = (String)testbc.info.gameMode;
 			Integer queueId = (Integer)testbc.info.queueId;
 			if(queueId==420) {//switch로 해도됨
@@ -486,9 +492,21 @@ private GuestService service;
 			Integer timemin = gameDuration/60;
 			Integer timesec = gameDuration%60;
 			
+			boolean moni = false; //잘못된 유저 호출 변수
 			//각 수치에 대한 객체 선언 - 꼭 괄호 바깥에서 선언*
 			ArrayList<Lol_api> di = new ArrayList<Lol_api>();
 			List<Participants> player_info = (List<Participants>)testbc.info.participants;// 게임데이타 받아오기
+			for(int x=0; x<player_info.size(); x++) {
+				if(player_info.get(x).summonerName.equals(temp.getName())) {
+					moni = true;
+					break;
+					
+			}
+			}
+			if(moni != true) {
+				endNum=a;
+				break;
+			}
 			Participants mainUser = null;
 			Participants perPlayer = null;
 			String aver = "";
@@ -513,7 +531,15 @@ private GuestService service;
 				
 				if(player_info.get(i).puuid.equals(temp.getPuuid())) {//메인 플레이어
 					mainUser = player_info.get(i);
-					
+//					System.out.println("현재 비교값은? : " + temp.getName());
+//					System.out.println("원래 소환사 이름은? : " + mainUser.summonerName);
+//					if(mainUser.summonerName.equals(temp.getName())) { //잘못 불러올 경우 나가기 처리
+//						System.out.println("조건문 비교값은? : " + temp.getName());
+//						System.out.println("조건문 원래 소환사 이름은? : " + mainUser.summonerName);
+//						
+//						endNum = a;
+//						break;
+//					}
 					utotalkills += mainUser.assists + mainUser.kills;
 					
 					//해당유저 모든 챔피언 평점(kda와 숭패 휫수)
@@ -583,6 +609,7 @@ private GuestService service;
 					
 					
 					
+					System.out.println("현재 누가 호출 되고 있나요 ? :" + mainUser.summonerName);
 					System.out.println("=============== 경계선 ===============");
 					
 						
