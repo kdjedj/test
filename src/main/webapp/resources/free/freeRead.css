@@ -5,7 +5,6 @@
 .read{
 	background-color: white;
 	width: 80%;
-	max-width: 1041px;
 	min-height: 60vw;
 	margin-top: -620px;
 	margin-left: 270px;
@@ -16,7 +15,6 @@
 @media screen and (max-width: 1500px) {
   .read, .read_container {
     width: 100%;
-    max-width: 100%;
     margin: 0px;
   }
 } 
@@ -34,7 +32,7 @@
 .content{
 	padding-top: 30px;
 	padding-left: 30px;
-	min-height: 600px;
+	min-height: 400px;
 }
 
 .read_actions{
