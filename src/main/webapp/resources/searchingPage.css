@@ -827,7 +827,7 @@ span.chamlv{
     font-weight: bold;
 }
 
-td{
+tbody td{
 	padding: 4px 0px 7px;
     vertical-align: middle;
 }
