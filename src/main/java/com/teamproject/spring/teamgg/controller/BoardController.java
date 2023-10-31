@@ -527,7 +527,7 @@ private GuestService service;
 					}
 					
 					//cs
-					cs = mainUser.totalMinionsKilled + mainUser.totalEnemyJungleMinionsKilled;
+					cs = mainUser.totalMinionsKilled + mainUser.neutralMinionsKilled;
 					//평점
 					aver = String.format("%.2f", 
 							((double)((double)mainUser.kills+(double)mainUser.assists)/(double)mainUser.deaths)
