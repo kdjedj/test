@@ -117,10 +117,10 @@ var userName = "<c:out value='${userName}' />";
 				<c:forEach var="p" begin="${blockStartNo}" end="${blockEndNo}">
 				    <c:choose>
 				        <c:when test="${p == currentPage }">
-				            <b>[<a href="${cp}/free/freeList?page=${p}">${p}</a>]</b>
+				            <b>[<a href="${cp}/comp/compList?page=${p}">${p}</a>]</b>
 				        </c:when>
 				        <c:otherwise>
-				            [<a href="${cp}/free/freeList?page=${p}">${p}</a>]
+				            [<a href="${cp}/comp/compList?page=${p}">${p}</a>]
 				        </c:otherwise>
 				    </c:choose>
 				</c:forEach>

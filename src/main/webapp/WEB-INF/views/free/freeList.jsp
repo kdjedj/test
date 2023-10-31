@@ -107,7 +107,7 @@ var userName = "<c:out value='${userName}' />";
 			<div class="paging">
 				<c:choose>
 				    <c:when test="${hasPrev == true}">
-				        [<a href="${cp}/free/freeList?page=${prevPage}"><b>이전</b></a>]
+				        [<a href="${cp}/free/freeList?page=${prevPage}">이전</a>]
 				    </c:when>
 				    <c:otherwise>
 				        [이전]
@@ -127,7 +127,7 @@ var userName = "<c:out value='${userName}' />";
 				
 				<c:choose>
 					<c:when test="${hasNext == true }">
-						[<a href="${cp}/free/freeList?page=${nextPage}"><b>다음</b></a>]
+						[<a href="${cp}/free/freeList?page=${nextPage}">다음</a>]
 						</c:when>
 						<c:otherwise>
 							[다음]
