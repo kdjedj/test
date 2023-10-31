@@ -87,21 +87,21 @@ var userName = "<c:out value='${userName}' />";
 				<img id="writeIcon" onclick="location.href='compWrite'" src="${cp}/resources/free/img/icon-write.png">
 			</div>
 			<div id="postBox">
-<c:forEach var="item" items="${list}">
-    <c:set var="c_idx" value="${item.c_idx}" />
-    <c:set var="c_title" value="${item.c_title}" />
-    <c:set var="c_date" value="${item.c_date}" />
-    <c:set var="c_id" value="${item.c_id}" />
-    <c:set var="c_user" value="${item.c_user}" />
-    	<div class="postBox">
-			<ul class="post">
-            	<li class="posts idx">${item.c_idx}</li>
-            	<li class="posts title"><a href="compRead?c_idx=${item.c_idx}">${item.c_title}</a></li>
-            	<li class="posts date">${item.c_date}</li>
-            	<li class="posts user">${item.c_user}</li>
-			</ul>
-    	</div>
-</c:forEach>
+				<c:forEach var="item" items="${list}">
+				    <c:set var="c_idx" value="${item.c_idx}" />
+				    <c:set var="c_title" value="${item.c_title}" />
+				    <c:set var="c_date" value="${item.c_date}" />
+				    <c:set var="c_id" value="${item.c_id}" />
+				    <c:set var="c_user" value="${item.c_user}" />
+				    	<div class="postBox">
+							<ul class="post">
+				            	<li class="posts idx">${item.c_idx}</li>
+				            	<li class="posts title"><a href="compRead?c_idx=${item.c_idx}">${item.c_title}</a></li>
+				            	<li class="posts date">${item.c_date}</li>
+				            	<li class="posts user">${item.c_user}</li>
+							</ul>
+				    	</div>
+				</c:forEach>
 			</div>
 
 			<div class="paging">
@@ -117,10 +117,10 @@ var userName = "<c:out value='${userName}' />";
 				<c:forEach var="p" begin="${blockStartNo}" end="${blockEndNo}">
 				    <c:choose>
 				        <c:when test="${p == currentPage }">
-				            <b>[<a href="${cp}/free/freeList?page=${p}">${p}</a>]</b>
+				            <b>[<a href="${cp}/comp/compList?page=${p}">${p}</a>]</b>
 				        </c:when>
 				        <c:otherwise>
-				            [<a href="${cp}/free/freeList?page=${p}">${p}</a>]
+				            [<a href="${cp}/comp/compList?page=${p}">${p}</a>]
 				        </c:otherwise>
 				    </c:choose>
 				</c:forEach>
@@ -142,6 +142,6 @@ var userName = "<c:out value='${userName}' />";
 </div>
 
 <script type="text/javascript" src="${cp}/resources/free/freeBoard.js"></script>
-<script type="text/javascript" src="${cp}/resources/t.js?ver=<%= System.currentTimeMillis() %>"></script>
+<script type="text/javascript" src="${cp}/resources/home.js?ver=<%= System.currentTimeMillis() %>"></script>
 </body>
 </html>
