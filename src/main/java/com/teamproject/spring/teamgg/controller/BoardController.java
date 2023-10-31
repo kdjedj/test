@@ -264,7 +264,9 @@ private GuestService service;
 		SurmmonerName = utrName.replaceAll("%25", "%");
 		System.out.println("다음으로 넘어가는 이름은? : "+SurmmonerName);
 		session.setAttribute("temp", temp);
+		model.addAttribute("temp",temp);
 		return "redirect:/board/searching_player?userName="+SurmmonerName+"&region="+region;
+		
 	}
 	
 	@RequestMapping("/no_search")

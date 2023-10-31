@@ -87,21 +87,21 @@ var userName = "<c:out value='${userName}' />";
 				<img id="writeIcon" onclick="location.href='freeWrite'" src="${cp}/resources/free/img/icon-write.png">
 			</div>
 			<div id="postBox">
-<c:forEach var="item" items="${list}">
-    <c:set var="f_idx" value="${item.f_idx}" />
-    <c:set var="f_title" value="${item.f_title}" />
-    <c:set var="f_date" value="${item.f_date}" />
-    <c:set var="f_id" value="${item.f_id}" />
-    <c:set var="f_user" value="${item.f_user}" />
-    	<div class="postBox">
-			<ul class="post">
-            	<li class="posts idx">${item.f_idx}</li>
-            	<li class="posts title"><a href="freeRead?f_idx=${item.f_idx}">${item.f_title}</a></li>
-            	<li class="posts date">${item.f_date}</li>
-            	<li class="posts user">${item.f_user}</li>
-			</ul>
-    	</div>
-</c:forEach>
+				<c:forEach var="item" items="${list}">
+				    <c:set var="f_idx" value="${item.f_idx}" />
+				    <c:set var="f_title" value="${item.f_title}" />
+				    <c:set var="f_date" value="${item.f_date}" />
+				    <c:set var="f_id" value="${item.f_id}" />
+				    <c:set var="f_user" value="${item.f_user}" />
+				    	<div class="postBox">
+							<ul class="post">
+				            	<li class="posts idx">${item.f_idx}</li>
+				            	<li class="posts title"><a href="freeRead?f_idx=${item.f_idx}">${item.f_title}</a></li>
+				            	<li class="posts date">${item.f_date}</li>
+				            	<li class="posts user">${item.f_user}</li>
+							</ul>
+				    	</div>
+				</c:forEach>
 			</div>
 
 			<div class="paging">

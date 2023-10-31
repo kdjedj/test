@@ -14,10 +14,10 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+<%@include file="/WEB-INF/views/board_header.jsp" %>
 <script type="text/javascript">
 var userName = "<c:out value='${userName}' />";
 </script>
-<%@include file="/WEB-INF/views/board_header.jsp" %>
 
 <div class="board_wrap">
 	<div class="middle">
