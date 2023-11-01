@@ -91,20 +91,6 @@
 	                 modal.style.display = 'none';
             	});
 
-				// 수정 확인 팝업
-				document.addEventListener("DOMContentLoaded", function () {
-					// 수정 버튼 클릭 시
-					var modalModifyButton = document.getElementById("modal-modify");
-					modalModifyButton.addEventListener("click", function () {
-						if (confirm("수정하시겠습니까?")) {
-							// 팝업 확인을 누르면 폼을 제출
-							document.getElementById("form").submit();
-						}else{
-							window.close();
-						}
-					});
-				});
-
 				// 댓글 삭제 팝업
 				document.getElementById('comment_delete').addEventListener('click', function () {
 					var tcIdx = this.getAttribute('data-tc-idx');

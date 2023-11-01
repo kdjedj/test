@@ -202,7 +202,7 @@ var userName = "<c:out value='${userName}' />";
 			            <input type="hidden" name="c_idx" value="<%=c_idx%>">
 			            <textarea id="modalForm" name="cc_comment" rows="4" cols="50"></textarea>
 			            <div class="replyAction">
-			                <button class="modalBtn" type="button" id="modal-modify">수정</button>
+			                <button class="modalBtn" type="submit" id="modal-modify">수정</button>
 			                <button class="modalBtn" type="button" id="modifyForm-cancel">취소</button>
 			            </div>
 			        </form>
