@@ -106,8 +106,8 @@ var userName = "<c:out value='${userName}' />";
 		
 			<div class="read_actions">
 				<div class="read_action">
-					<button type="button" id="read_action" onclick="location.href='${cp}/free/freeModify?f_idx=<%=f_idx%>'">수정</button>
-					<button type="button" id="read_action" onclick="location.href='${cp}/free/freeDel?f_idx=<%=f_idx%>'">삭제</button>
+					<button type="button" class="read-btn" onclick="location.href='${cp}/free/freeModify?f_idx=<%=f_idx%>'">수정</button>
+					<button type="button" class="read-btn" data-f-idx="<%=f_idx %>" id="read_delete">삭제</button>
 				</div>
 			</div>
 			
@@ -144,8 +144,8 @@ var userName = "<c:out value='${userName}' />";
 <!-- 				    대댓글 -->
 				        <div class="c_reply" data-fc-group="${comment.fc_group}">
 				        	<div class="btnTrue">
-				        	<button class="replyForm-modify" id="comment_modify" data-fc-idx="${comment.fc_idx}" data-fc-id="${comment.fc_id}">수정</button>
-							<button class="replyForm-delete" id="comment_delete" onclick="location.href='${cp}/comment/fcDel?fc_idx=${comment.fc_idx}'">삭제</button>
+				        	<button class="replyForm-modify" id="comment_modify" data-fc-idx="${comment.fc_idx}" data-fc-id="${comment.fc_id}" data-fc-comment="${comment.fc_comment}">수정</button>
+							<button class="replyForm-delete" id="comment_delete" data-fc-idx="${comment.fc_idx}">삭제</button>
 				            <button class="replyForm-btn" id="comment_reply">답글</button>
 				        	</div>
 				        	<div class="btnFalse">
@@ -169,8 +169,8 @@ var userName = "<c:out value='${userName}' />";
                                         ${reply.fc_comment}
                                     </div>
                             <div class="btnTrue">
-                            <button class="replyForm-modify" id="reply_modify" data-fc-idx="${reply.fc_idx} "data-fc-id="${reply.fc_id}">수정</button>
-							<button class="replyForm-delete" id="reply_delete" onclick="location.href='${cp}/comment/fcDel?fc_idx=${reply.fc_idx}'">삭제</button>
+                            <button class="replyForm-modify" id="reply_modify" data-fc-idx="${reply.fc_idx} "data-fc-id="${reply.fc_id}" data-fc-comment="${reply.fc_comment}">수정</button>
+							<button class="replyForm-delete" id="reply_delete" data-fc-idx="${reply.fc_idx}" >삭제</button>
                             </div>
                             </c:when>
                         </c:choose>
@@ -202,7 +202,7 @@ var userName = "<c:out value='${userName}' />";
 			            <input type="hidden" name="f_idx" value="<%=f_idx%>">
 			            <textarea id="modalForm" name="fc_comment" rows="4" cols="50"></textarea>
 			            <div class="replyAction">
-			                <button class="modalBtn" type="submit">수정</button>
+			                <button class="modalBtn" type="button" id="modal-modify">수정</button>
 			                <button class="modalBtn" type="button" id="modifyForm-cancel">취소</button>
 			            </div>
 			        </form>

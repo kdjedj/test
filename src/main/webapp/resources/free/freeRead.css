@@ -43,7 +43,7 @@
 	border-bottom: 1px solid #EBEEF1;
 }
 
-#read_action{
+.read-btn{
 	background-color: white;
 	margin: 3px;
 	border: 1px solid #F5F5F5;
@@ -55,7 +55,7 @@
 	color: grey;
 }
 
-#read_action:hover {
+.read-btn:hover {
 	background-color: #dedcee;
 	transition: background-color 0.2s;
 }

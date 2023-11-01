@@ -19,6 +19,7 @@
 	FreeBoardVo read = (FreeBoardVo)request.getAttribute("freeRead");
 	long f_idx = read.getF_idx();
 	String f_content = read.getF_content();
+	String f_title = read.getF_title();
 %>
 <script type="text/javascript">
 var userName = "<c:out value='${userName}' />";
@@ -98,12 +99,21 @@ var userName = "<c:out value='${userName}' />";
 			    <input type="button" id="cancel" value="취소" onclick="goBack()">
 			</div>
 			<div>
-			    <input type="button" id="publish" value="작성" onclick="submitForm()">
+			    <input type="button" id="publish" value="수정" onclick="submitForm()">
 			</div>
 		</div>
 			</form>
 			</div>
 		</div>
+		
+		<script>
+		//필드에 원글 내용 설정
+    	var fContent = '<%= f_content %>';
+    	var fTitle = '<%= f_title %>';
+
+		document.getElementById("title").value = fTitle;
+		document.getElementById("content").value = fContent;
+		</script>
 		
 	</div>
 	<div class=bottom>

@@ -106,8 +106,8 @@ var userName = "<c:out value='${userName}' />";
 		
 			<div class="read_actions">
 				<div class="read_action">
-					<button type="button" id="read_action" onclick="location.href='${cp}/tip/tipModify?t_idx=<%=t_idx%>'">수정</button>
-					<button type="button" id="read_action" onclick="location.href='${cp}/tip/tipDel?t_idx=<%=t_idx%>'">삭제</button>
+					<button type="button" class="read-btn" onclick="location.href='${cp}/tip/tipModify?t_idx=<%=t_idx%>'">수정</button>
+					<button type="button" class="read-btn" data-t-idx="<%=t_idx %>" id="read_delete">삭제</button>
 				</div>
 			</div>
 			
@@ -144,8 +144,8 @@ var userName = "<c:out value='${userName}' />";
 <!-- 				    대댓글 -->
 				        <div class="c_reply" data-tc-group="${comment.tc_group}">
 				        	<div class="btnTrue">
-				        	<button class="replyForm-modify" id="comment_modify" data-tc-idx="${comment.tc_idx}" data-tc-id="${comment.tc_id}">수정</button>
-							<button class="replyForm-delete" id="comment_delete" onclick="location.href='${cp}/comment/tcDel?tc_idx=${comment.tc_idx}'">삭제</button>
+				        	<button class="replyForm-modify" id="comment_modify" data-tc-idx="${comment.tc_idx}" data-tc-id="${comment.tc_id}" data-tc-comment="${comment.tc_comment}">수정</button>
+							<button class="replyForm-delete" id="comment_delete" data-tc-idx="${comment.tc_idx}">삭제</button>
 				            <button class="replyForm-btn" id="comment_reply">답글</button>
 				        	</div>
 				        	<div class="btnFalse">
@@ -169,8 +169,8 @@ var userName = "<c:out value='${userName}' />";
                                         ${reply.tc_comment}
                                     </div>
                             <div class="btnTrue">
-                            <button class="replyForm-modify" id="reply_modify" data-tc-idx="${reply.tc_idx} "data-tc-id="${reply.tc_id}">수정</button>
-							<button class="replyForm-delete" id="reply_delete" onclick="location.href='${cp}/comment/tcDel?tc_idx=${reply.tc_idx}'">삭제</button>
+                            <button class="replyForm-modify" id="reply_modify" data-tc-idx="${reply.tc_idx} "data-tc-id="${reply.tc_id}" data-tc-comment="${reply.tc_comment}">수정</button>
+							<button class="replyForm-delete" id="reply_delete" data-tc-idx="${reply.tc_idx}" >삭제</button>
                             </div>
                             </c:when>
                         </c:choose>
@@ -202,7 +202,7 @@ var userName = "<c:out value='${userName}' />";
 			            <input type="hidden" name="t_idx" value="<%=t_idx%>">
 			            <textarea id="modalForm" name="tc_comment" rows="4" cols="50"></textarea>
 			            <div class="replyAction">
-			                <button class="modalBtn" type="submit">수정</button>
+			                <button class="modalBtn" type="button" id="modal-modify">수정</button>
 			                <button class="modalBtn" type="button" id="modifyForm-cancel">취소</button>
 			            </div>
 			        </form>
