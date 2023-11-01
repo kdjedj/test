@@ -106,8 +106,8 @@ var userName = "<c:out value='${userName}' />";
 		
 			<div class="read_actions">
 				<div class="read_action">
-					<button type="button" id="read_action" onclick="location.href='${cp}/comp/compModify?c_idx=<%=c_idx%>'">수정</button>
-					<button type="button" id="read_action" onclick="location.href='${cp}/comp/compDel?c_idx=<%=c_idx%>'">삭제</button>
+					<button type="button" class="read-btn" onclick="location.href='${cp}/comp/compModify?c_idx=<%=c_idx%>'">수정</button>
+					<button type="button" class="read-btn" data-c-idx="<%=c_idx %>" id="read_delete">삭제</button>
 				</div>
 			</div>
 			
@@ -144,8 +144,8 @@ var userName = "<c:out value='${userName}' />";
 <!-- 				    대댓글 -->
 				        <div class="c_reply" data-cc-group="${comment.cc_group}">
 				        	<div class="btnTrue">
-				        	<button class="replyForm-modify" id="comment_modify" data-cc-idx="${comment.cc_idx}" data-cc-id="${comment.cc_id}">수정</button>
-							<button class="replyForm-delete" id="comment_delete" onclick="location.href='${cp}/comment/ccDel?cc_idx=${comment.cc_idx}'">삭제</button>
+				        	<button class="replyForm-modify" id="comment_modify" data-cc-idx="${comment.cc_idx}" data-cc-id="${comment.cc_id}" data-cc-comment="${comment.cc_comment}">수정</button>
+							<button class="replyForm-delete" id="comment_delete" data-cc-idx="${comment.cc_idx}">삭제</button>
 				            <button class="replyForm-btn" id="comment_reply">답글</button>
 				        	</div>
 				        	<div class="btnFalse">
@@ -169,8 +169,8 @@ var userName = "<c:out value='${userName}' />";
                                         ${reply.cc_comment}
                                     </div>
                             <div class="btnTrue">
-                            <button class="replyForm-modify" id="reply_modify" data-cc-idx="${reply.cc_idx} "data-cc-id="${reply.cc_id}">수정</button>
-							<button class="replyForm-delete" id="reply_delete" onclick="location.href='${cp}/comment/ccDel?cc_idx=${reply.cc_idx}'">삭제</button>
+                            <button class="replyForm-modify" id="reply_modify" data-cc-idx="${reply.cc_idx}" data-cc-id="${reply.cc_id}" data-cc-comment="${reply.cc_comment}">수정</button>
+							<button class="replyForm-delete" id="reply_delete" data-cc-idx="${reply.cc_idx}" >삭제</button>
                             </div>
                             </c:when>
                         </c:choose>
@@ -202,7 +202,7 @@ var userName = "<c:out value='${userName}' />";
 			            <input type="hidden" name="c_idx" value="<%=c_idx%>">
 			            <textarea id="modalForm" name="cc_comment" rows="4" cols="50"></textarea>
 			            <div class="replyAction">
-			                <button class="modalBtn" type="submit">수정</button>
+			                <button class="modalBtn" type="button" id="modal-modify">수정</button>
 			                <button class="modalBtn" type="button" id="modifyForm-cancel">취소</button>
 			            </div>
 			        </form>

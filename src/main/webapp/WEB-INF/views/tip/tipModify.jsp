@@ -19,6 +19,7 @@
 	TipBoardVo read = (TipBoardVo)request.getAttribute("tipRead");
 	long t_idx = read.getT_idx();
 	String t_content = read.getT_content();
+	String t_title = read.getT_title();
 %>
 <script type="text/javascript">
 var userName = "<c:out value='${userName}' />";
@@ -98,12 +99,21 @@ var userName = "<c:out value='${userName}' />";
 			    <input type="button" id="cancel" value="취소" onclick="goBack()">
 			</div>
 			<div>
-			    <input type="button" id="publish" value="작성" onclick="submitForm()">
+			    <input type="button" id="publish" value="수정" onclick="submitForm()">
 			</div>
 		</div>
 			</form>
 			</div>
 		</div>
+		
+		<script>
+		//필드에 원글 내용 설정
+    	var tContent = '<%= t_content %>';
+    	var tTitle = '<%= t_title %>';
+
+		document.getElementById("title").value = tTitle;
+		document.getElementById("content").value = tContent;
+		</script>
 		
 	</div>
 	<div class=bottom>
