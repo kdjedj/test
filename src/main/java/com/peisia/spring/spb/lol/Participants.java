@@ -25,7 +25,7 @@ public class Participants {
     public String item5;
     public String item6;
     public String puuid;
-    public Integer totalEnemyJungleMinionsKilled;
+    public Integer neutralMinionsKilled;
     public Integer totalMinionsKilled;
     public String individualPosition;
     public Integer totalDamageDealtToChampions;

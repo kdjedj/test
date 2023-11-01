@@ -68,7 +68,7 @@
 																			</div>
 																		</div>
 																	</td>
-																	<td class="cs"><div>${player.mainUser.totalMinionsKilled+player.mainUser.totalEnemyJungleMinionsKilled }</div></td>
+																	<td class="cs"><div>${player.mainUser.totalMinionsKilled+player.mainUser.neutralMinionsKilled }</div></td>
 																	<td class="items">
 																	
 																		<li><c:choose>

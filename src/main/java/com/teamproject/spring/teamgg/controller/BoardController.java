@@ -258,7 +258,8 @@ private GuestService service;
 			System.out.println(e.getMessage());
 		}
 		if(temp==null) {
-			return "redirect:/board/no_search";
+			String result = "none";
+			return "redirect:/board/no_search?result="+result;
 		}
 		String utrName = URLEncoder.encode(SurmmonerName, "UTF-8");
 		SurmmonerName = utrName.replaceAll("%25", "%");
@@ -291,10 +292,10 @@ private GuestService service;
 		
 		//새로 고침 할 때
 		if(temp == null) {
-		try{         
 			String SurmmonerName = userName.replaceAll(" ", "%20");
 			String urlstr = "https://"+region+".api.riotgames.com/lol/summoner/v4/summoners/by-name/"+
 					SurmmonerName+"?api_key="+API_KEY;
+		try{         
 			URL url = new URL(urlstr);
 			HttpURLConnection urlconnection = (HttpURLConnection) url.openConnection();
 			urlconnection.setRequestMethod("GET");
@@ -331,14 +332,6 @@ private GuestService service;
 		
 //				* 주의 * https 아님 http 임. https 는 인증관련 복잡한 처리를 해야함.	
 		
-		//// **** 중요 **** uri			
-		URI lol_uri = null; //java.net.URI 임포트 하셈			
-		try {			
-			lol_uri = new URI(INFO_API_URL);		
-		} catch (URISyntaxException e) {			
-			e.printStackTrace();		
-		}	
-		
 		
 		LoginInfoVo LoginInfoVo = null;
 		String tier = "";
@@ -347,6 +340,14 @@ private GuestService service;
 		Integer leaguePoints = 0;
 		Integer wins = 0;
 		Integer losses = 0;
+		//// **** 중요 **** uri			
+		URI lol_uri = null; //java.net.URI 임포트 하셈			
+		try {			
+			lol_uri = new URI(INFO_API_URL);		
+		} catch (URISyntaxException e) {			
+			e.printStackTrace();		
+		}	
+		
 		List<Map<String, Object>> lolbc = restTemplate.getForObject(lol_uri, List.class); // 자기 클래스로 바꾸시오..
 
 		if(lolbc.size()==0) {
@@ -445,15 +446,17 @@ private GuestService service;
 		Integer totalkills = 0;
 		Integer utotalkills = 0;
 		String gameMode = "";
-		for(String matid : grbc) {
+		
+//		for(String matid : grbc) {
+			for(int a=0; a<grbc.size(); a++) {
 			String TEST_URL ="";
 			if(region.equals("na1")) {
 				TEST_URL = "https://americas.api.riotgames.com/lol/match/v5/matches/"
-						+ matid
+						+ grbc.get(a)
 						+"?api_key="+API_KEY; 
 			} else {
 				TEST_URL = "https://asia.api.riotgames.com/lol/match/v5/matches/"
-						+ matid
+						+ grbc.get(a)
 						+"?api_key="+API_KEY; 
 			}
 			
@@ -464,6 +467,10 @@ private GuestService service;
 				e.printStackTrace();		
 			}	
 			Cat testbc = restTemplate.getForObject(test_uri, Cat.class); // 자기 클래스로 바꾸시오..
+			if(testbc==null) { // 경기수가 부족할 경우
+				endNum = a;
+				break;
+			}
 			String gameModeEn = (String)testbc.info.gameMode;
 			Integer queueId = (Integer)testbc.info.queueId;
 			if(queueId==420) {//switch로 해도됨
@@ -485,9 +492,21 @@ private GuestService service;
 			Integer timemin = gameDuration/60;
 			Integer timesec = gameDuration%60;
 			
+			boolean moni = false; //잘못된 유저 호출 변수
 			//각 수치에 대한 객체 선언 - 꼭 괄호 바깥에서 선언*
 			ArrayList<Lol_api> di = new ArrayList<Lol_api>();
 			List<Participants> player_info = (List<Participants>)testbc.info.participants;// 게임데이타 받아오기
+			for(int x=0; x<player_info.size(); x++) {
+				if(player_info.get(x).summonerName.equals(temp.getName())) {
+					moni = true;
+					break;
+					
+			}
+			}
+			if(moni != true) {
+				endNum=a;
+				break;
+			}
 			Participants mainUser = null;
 			Participants perPlayer = null;
 			String aver = "";
@@ -512,7 +531,15 @@ private GuestService service;
 				
 				if(player_info.get(i).puuid.equals(temp.getPuuid())) {//메인 플레이어
 					mainUser = player_info.get(i);
-					
+//					System.out.println("현재 비교값은? : " + temp.getName());
+//					System.out.println("원래 소환사 이름은? : " + mainUser.summonerName);
+//					if(mainUser.summonerName.equals(temp.getName())) { //잘못 불러올 경우 나가기 처리
+//						System.out.println("조건문 비교값은? : " + temp.getName());
+//						System.out.println("조건문 원래 소환사 이름은? : " + mainUser.summonerName);
+//						
+//						endNum = a;
+//						break;
+//					}
 					utotalkills += mainUser.assists + mainUser.kills;
 					
 					//해당유저 모든 챔피언 평점(kda와 숭패 휫수)
@@ -526,7 +553,7 @@ private GuestService service;
 					}
 					
 					//cs
-					cs = mainUser.totalMinionsKilled + mainUser.totalEnemyJungleMinionsKilled;
+					cs = mainUser.totalMinionsKilled + mainUser.neutralMinionsKilled;
 					//평점
 					aver = String.format("%.2f", 
 							((double)((double)mainUser.kills+(double)mainUser.assists)/(double)mainUser.deaths)
@@ -582,6 +609,7 @@ private GuestService service;
 					
 					
 					
+					System.out.println("현재 누가 호출 되고 있나요 ? :" + mainUser.summonerName);
 					System.out.println("=============== 경계선 ===============");
 					
 						

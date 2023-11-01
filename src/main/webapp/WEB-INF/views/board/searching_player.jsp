@@ -582,9 +582,9 @@
 			
 			</div>
 			
-			<div class="more_info">
+			<!-- <div class="more_info">
 				<button action="">더보기</button>
-			</div>
+			</div> -->
 			
 		</div>
 
