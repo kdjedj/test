@@ -14,11 +14,11 @@
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <!-- my css -->
-<link rel="stylesheet" type="text/css" href="${cp}/resources/reset.css?ver=<%= System.currentTimeMillis() %>">
-<link rel="stylesheet" type="text/css" href="${cp}/resources/searchingPage.css?ver=<%=System.currentTimeMillis()%>">
+<link rel="stylesheet" type="text/css" href="${cp}/resources/css/reset.css?ver=<%= System.currentTimeMillis() %>">
+<link rel="stylesheet" type="text/css" href="${cp}/resources/css/searchingPage.css?ver=<%=System.currentTimeMillis()%>">
 
-<link rel="stylesheet" type="text/css" href="${cp}/resources/freeList.css?ver=<%=System.currentTimeMillis()%>">
-<script type="text/javascript" src="${cp}/resources/searchingPage.js?ver=<%= System.currentTimeMillis() %>"></script></head>
+<link rel="stylesheet" type="text/css" href="${cp}/resources/css/freeList.css?ver=<%=System.currentTimeMillis()%>">
+<script type="text/javascript" src="${cp}/resources/js/searchingPage.js?ver=<%= System.currentTimeMillis() %>"></script></head>
 <body>
 
 
@@ -271,7 +271,7 @@
 								</div>
 								<div class="addBtnDiv">
 									<button class="addInfoBtn" >
-										<img src="${cp}/resources/wa.png" alt="화살표">
+										<img src="${cp}/resources/img/wa.png" alt="화살표">
 									</button>
 								</div>
 							</div>
@@ -378,7 +378,7 @@
 								</div>
 								<div class="addBtnDiv">
 									<button class="addInfoBtn" >
-										<img src="${cp}/resources/wa.png" alt="화살표">
+										<img src="${cp}/resources/img/wa.png" alt="화살표">
 									</button>
 								</div>
 							</div>
@@ -482,7 +482,7 @@
 								</div>
 								<div class="addBtnDiv">
 									<button class="addInfoBtn" >
-										<img src="${cp}/resources/wa.png" alt="화살표">
+										<img src="${cp}/resources/img/wa.png" alt="화살표">
 									</button>
 								</div>
 									
