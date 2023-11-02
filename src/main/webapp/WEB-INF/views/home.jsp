@@ -12,11 +12,10 @@
 <meta charset="UTF-8">
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" type="text/css" href="${cp}/resources/reset.css?ver=<%= System.currentTimeMillis() %>">
-<link rel="stylesheet" type="text/css" href="${cp}/resources/main.css?ver=<%= System.currentTimeMillis() %>">
-<script type="text/javascript" src="${cp}/resources/home.js?ver=<%= System.currentTimeMillis() %>"></script>
-<link rel="stylesheet" type="text/css" href="${cp}/resources/reset.css?ver=<%=System.currentTimeMillis()%>">
-<link rel="stylesheet" type="text/css" href="${cp}/resources/main.css?ver=<%=System.currentTimeMillis()%>">
+<link rel="stylesheet" type="text/css" href="${cp}/resources/css/reset.css?ver=<%= System.currentTimeMillis() %>">
+<link rel="stylesheet" type="text/css" href="${cp}/resources/css/main.css?ver=<%= System.currentTimeMillis() %>">
+<script type="text/javascript" src="${cp}/resources/js/home.js?ver=<%= System.currentTimeMillis() %>"></script>
+<link rel="stylesheet" type="text/css" href="${cp}/resources/css/reset.css?ver=<%=System.currentTimeMillis()%>">
 
 
 </head>
@@ -27,7 +26,7 @@
 	<div class="middle">
 	
 		<div class = "logo">
-			<a><img alt="로고" src="${cp}/resources/Logo.png"></a>
+			<a><img alt="로고" src="${cp}/resources/img/Logo.png"></a>
 		</div>
 		<div class="focusbox" alt="전적검색">
 			<form action="${cp}/board/searching_player" class="region">

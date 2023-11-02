@@ -6,9 +6,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" type="text/css" href="${cp}/resources/reset.css?ver=<%= System.currentTimeMillis() %>">
-<link rel="stylesheet" type="text/css" href="${cp}/resources/header.css?ver=<%=System.currentTimeMillis()%>">
-<script type="text/javascript" src="${cp}/resources/header.js?ver=<%= System.currentTimeMillis() %>"></script>
+<link rel="stylesheet" type="text/css" href="${cp}/resources/css/reset.css?ver=<%= System.currentTimeMillis() %>">
+<link rel="stylesheet" type="text/css" href="${cp}/resources/css/header.css?ver=<%=System.currentTimeMillis()%>">
+<script type="text/javascript" src="${cp}/resources/js/header.js?ver=<%= System.currentTimeMillis() %>"></script>
 
 </head>
 <body>
@@ -17,7 +17,7 @@
 		<!-- 로고 -->
 		<div class = "main-tab">
 			<a href="${cp}/" class = "logo">
-				<img alt="로고" src="${cp}/resources/Logo_white.png">
+				<img alt="로고" src="${cp}/resources/img/Logo_white.png">
 			</a>
 		
 			<!-- 게임탭메뉴 -->
@@ -25,7 +25,7 @@
 				<ul>
 					<li>
 						<span>
-							<img alt="lol" src="${cp}/resources/lol_client_logo.png">
+							<img alt="lol" src="${cp}/resources/img/lol_client_logo.png">
 							<span>리그오브레전드</span>
 						</span>
 					</li>
