@@ -143,14 +143,9 @@ var userName = "<c:out value='${userName}' />";
 				    
 <!-- 				    대댓글 -->
 				        <div class="c_reply" data-cc-group="${comment.cc_group}">
-				        	<div class="btnTrue">
 				        	<button class="replyForm-modify" id="comment_modify" data-cc-idx="${comment.cc_idx}" data-cc-id="${comment.cc_id}" data-cc-comment="${comment.cc_comment}">수정</button>
-							<button class="replyForm-delete" id="comment_delete" data-cc-idx="${comment.cc_idx}">삭제</button>
-				            <button class="replyForm-btn" id="comment_reply">답글</button>
-				        	</div>
-				        	<div class="btnFalse">
-				            <button class="replyForm-btn" id="comment_reply">답글</button>
-				        	</div>
+							<button class="replyForm-delete" id="comment_delete" data-cc-idx="${comment.cc_idx}" data-cc-id="${comment.cc_id}">삭제</button>
+				            <button class="replyForm-btn" id="comment_reply" data-cc-id="${comment.cc_id}">답글</button>
                             <div class="replyList hidden">
 				        <c:forEach var="reply" items="${ccList}">
 				        <c:set var="cc_user" value="${reply.cc_user}" />
@@ -168,10 +163,8 @@ var userName = "<c:out value='${userName}' />";
                                     <div class="r_content">
                                         ${reply.cc_comment}
                                     </div>
-                            <div class="btnTrue">
                             <button class="replyForm-modify" id="reply_modify" data-cc-idx="${reply.cc_idx}" data-cc-id="${reply.cc_id}" data-cc-comment="${reply.cc_comment}">수정</button>
-							<button class="replyForm-delete" id="reply_delete" data-cc-idx="${reply.cc_idx}" >삭제</button>
-                            </div>
+							<button class="replyForm-delete" id="reply_delete" data-cc-idx="${reply.cc_idx}" data-cc-id="${reply.cc_id}">삭제</button>
                             </c:when>
                         </c:choose>
                     </c:forEach>

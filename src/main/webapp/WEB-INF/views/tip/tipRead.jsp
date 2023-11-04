@@ -143,14 +143,9 @@ var userName = "<c:out value='${userName}' />";
 				    
 <!-- 				    대댓글 -->
 				        <div class="c_reply" data-tc-group="${comment.tc_group}">
-				        	<div class="btnTrue">
 				        	<button class="replyForm-modify" id="comment_modify" data-tc-idx="${comment.tc_idx}" data-tc-id="${comment.tc_id}" data-tc-comment="${comment.tc_comment}">수정</button>
-							<button class="replyForm-delete" id="comment_delete" data-tc-idx="${comment.tc_idx}">삭제</button>
-				            <button class="replyForm-btn" id="comment_reply">답글</button>
-				        	</div>
-				        	<div class="btnFalse">
-				            <button class="replyForm-btn" id="comment_reply">답글</button>
-				        	</div>
+							<button class="replyForm-delete" id="comment_delete" data-tc-idx="${comment.tc_idx}" data-tc-id="${comment.tc_id}">삭제</button>
+				            <button class="replyForm-btn" id="comment_reply" data-tc-id="${comment.tc_id}">답글</button>
                             <div class="replyList hidden">
 				        <c:forEach var="reply" items="${tcList}">
 				        <c:set var="tc_user" value="${reply.tc_user}" />
@@ -168,10 +163,8 @@ var userName = "<c:out value='${userName}' />";
                                     <div class="r_content">
                                         ${reply.tc_comment}
                                     </div>
-                            <div class="btnTrue">
-                            <button class="replyForm-modify" id="reply_modify" data-tc-idx="${reply.tc_idx} "data-tc-id="${reply.tc_id}" data-tc-comment="${reply.tc_comment}">수정</button>
-							<button class="replyForm-delete" id="reply_delete" data-tc-idx="${reply.tc_idx}" >삭제</button>
-                            </div>
+                            <button class="replyForm-modify" id="reply_modify" data-tc-idx="${reply.tc_idx}" data-tc-id="${reply.tc_id}" data-tc-comment="${reply.tc_comment}">수정</button>
+							<button class="replyForm-delete" id="reply_delete" data-tc-idx="${reply.tc_idx}" data-tc-id="${reply.tc_id}">삭제</button>
                             </c:when>
                         </c:choose>
                     </c:forEach>

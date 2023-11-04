@@ -30,30 +30,31 @@
                     });
                 });		
                
-               // 수정, 삭제 버튼 처리(댓글)
-                var modifyButton = document.querySelector('.replyForm-modify');
-                var writerId = modifyButton.getAttribute('data-cc-id');
-                var btnTrue = document.querySelectorAll('.btnTrue');
-                var btnFalse = document.querySelectorAll('.btnFalse');
-                if (isLoggedIn && currentUserId === writerId) {
-                    btnTrue.forEach(function (btn) {
-                        btn.style.display = 'block';
-                    });
-                    btnFalse.forEach(function (btn) {
-                        btn.style.display = 'none';
-                    });
-                } else {
-                    btnTrue.forEach(function (btn) {
-                        btn.style.display = 'none';
-                    });
-                    btnFalse.forEach(function (btn) {
-                        btn.style.display = 'block';
-                    });
-                    var commentReplyButton = document.querySelectorAll('.replyForm-btn');
-                    commentReplyButton.forEach(function(button) { // false일때 답글버튼 띄우기
-                        button.style.marginLeft = '30px';
-                    });
-                }
+				// 수정, 삭제 버튼 처리(댓글)
+				var modifyButtons = document.querySelectorAll('.replyForm-modify');
+				var deleteButtons = document.querySelectorAll('.replyForm-delete');
+				var replyButtons = document.querySelectorAll('.replyForm-btn');
+
+				modifyButtons.forEach(function (button) {
+					var ccId = button.getAttribute('data-cc-id');
+					if (ccId !== currentUserId) {
+						button.style.display = 'none';
+					}
+				});
+				deleteButtons.forEach(function (button) {
+					var ccId = button.getAttribute('data-cc-id');
+					if (ccId !== currentUserId) {
+						button.style.display = 'none';
+					}
+				});	
+
+				// 답글 버튼 스타일 변경
+				replyButtons.forEach(function (button) {
+					var ccId = button.getAttribute('data-cc-id');
+					if (ccId !== currentUserId) {
+						button.style.marginLeft = '30px'; // 현재 로그인된 사용자와 작성자 ID가 다를 때 왼쪽 여백 추가
+					}
+				});
 
                 	             // 수정 버튼 클릭 시 모달 열기
 	             var modifyButtons = document.querySelectorAll('.replyForm-modify');
