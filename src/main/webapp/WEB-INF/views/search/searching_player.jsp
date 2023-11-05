@@ -266,7 +266,7 @@
 											<div class="result">승리</div>
 											<div class="length">${pi.timemin }분 ${pi.timesec }초</div>
 										</div>
-										<%@include file="../board/detailInfo_Info(div)_parti(div).jsp"%>
+										<%@include file="../search/detailInfo_Info(div)_parti(div).jsp"%>
 									</div>
 								</div>
 								<div class="addBtnDiv">
@@ -304,12 +304,12 @@
 													 	<c:choose>
 															<c:when test="${player.mainUser.summonerName eq pi.mainUser.summonerName}"><!-- 색깔 진하게 구분 -->
 																<tr class="mainPlayer">
-																	<%@include file="../board/detailInfo_td.jsp"%>
+																	<%@include file="../search/detailInfo_td.jsp"%>
 																</tr>
 															</c:when>
 															<c:otherwise>
 																<tr>
-																	<%@include file="../board/detailInfo_td.jsp"%>
+																	<%@include file="../search/detailInfo_td.jsp"%>
 																</tr>
 															</c:otherwise>
 														</c:choose>
@@ -348,7 +348,7 @@
 													begin="0" step="1" end="9">
 													 <c:if test="${pi.mainUser.win!=player.mainUser.win}">
 														<tr>
-																	<%@include file="../board/detailInfo_td.jsp"%>
+																	<%@include file="../search/detailInfo_td.jsp"%>
 														</tr>
 													</c:if> 
 										</c:forEach>
@@ -373,7 +373,7 @@
 											<div class="result">다시하기</div>
 											<div class="length">${pi.timemin }분 ${pi.timesec }초</div>
 										</div>
-										<%@include file="../board/detailInfo_Info(div)_parti(div).jsp"%>
+										<%@include file="../search/detailInfo_Info(div)_parti(div).jsp"%>
 									</div>
 								</div>
 								<div class="addBtnDiv">
@@ -411,12 +411,12 @@
 													 	<c:choose>
 															<c:when test="${player.mainUser.summonerName eq pi.mainUser.summonerName}"><!-- 색깔 진하게 구분 -->
 																<tr class="mainPlayer">
-																	<%@include file="../board/detailInfo_td.jsp"%>
+																	<%@include file="../search/detailInfo_td.jsp"%>
 																</tr>
 															</c:when>
 															<c:otherwise>
 																<tr>
-																	<%@include file="../board/detailInfo_td.jsp"%>
+																	<%@include file="../search/detailInfo_td.jsp"%>
 																</tr>
 															</c:otherwise>
 														</c:choose>
@@ -454,7 +454,7 @@
 										<c:forEach var="player" items="${pi.perPlayers }"
 													begin="5" step="1" end="9">
 														<tr>
-																	<%@include file="../board/detailInfo_td.jsp"%>
+																	<%@include file="../search/detailInfo_td.jsp"%>
 														</tr>
 										</c:forEach>
 										
@@ -477,7 +477,7 @@
 											<div class="result">패배</div>
 											<div class="length">${pi.timemin }분 ${pi.timesec }초</div>
 										</div>
-											<%@include file="../board/detailInfo_Info(div)_parti(div).jsp"%>
+											<%@include file="../search/detailInfo_Info(div)_parti(div).jsp"%>
 									</div>
 								</div>
 								<div class="addBtnDiv">
@@ -516,12 +516,12 @@
 													 	<c:choose>
 															<c:when test="${player.mainUser.summonerName eq pi.mainUser.summonerName}"><!-- 색깔 진하게 구분 -->
 																<tr class="mainPlayer">
-																	<%@include file="../board/detailInfo_td.jsp"%>
+																	<%@include file="../search/detailInfo_td.jsp"%>
 																</tr>
 															</c:when>
 															<c:otherwise>
 																<tr>
-																	<%@include file="../board/detailInfo_td.jsp"%>
+																	<%@include file="../search/detailInfo_td.jsp"%>
 																</tr>
 															</c:otherwise>
 														</c:choose>
@@ -562,7 +562,7 @@
 													 <c:if test="${pi.mainUser.win!=player.mainUser.win}">
 													 	
 																<tr>
-																	<%@include file="../board/detailInfo_td.jsp"%>
+																	<%@include file="../search/detailInfo_td.jsp"%>
 																</tr>
 															
 													</c:if> 

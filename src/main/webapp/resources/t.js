@@ -103,7 +103,7 @@ function handleSearchBoxClick(){
         li.find('.summoner').on('click', function(event) {
           var searchQuery = $(this).text();
           var regionQuery = $(this).parent().find('.test').text();
-          var searchUrl = '/teamgg/board/exist_user?userName=' + encodeURIComponent(searchQuery)+'&region='+encodeURIComponent(regionQuery);
+          var searchUrl = '/teamgg/search/exist_user?userName=' + encodeURIComponent(searchQuery)+'&region='+encodeURIComponent(regionQuery);
           window.location.href = searchUrl;
         });
 
@@ -283,7 +283,7 @@ $('.bookmarks .close-btn').on('click', function(event) {
 	        li.find('.summoner').on('click', function(event) {
 	          var searchQuery = $(this).text();
             var regionQuery = $(this).text();
-	          var searchUrl = '/teamgg/board/exist_user?userName=' + encodeURIComponent(searchQuery)+'&region='+encodeURIComponent(regionQuery);
+	          var searchUrl = '/teamgg/search/exist_user?userName=' + encodeURIComponent(searchQuery)+'&region='+encodeURIComponent(regionQuery);
 	          window.location.href = searchUrl;
 	        });
 	
@@ -394,7 +394,7 @@ underBar.children('.search-panel').on('click', function(event) {
 
        // 중복 검사
 	  if (searchList.indexOf(selectedRegion + ':' + searchQuery) === -1) {
-      	var searchUrl = '/teamgg/board/exist_user?userName=' + encodeURIComponent(searchQuery) + '&region=' + encodeURIComponent(selectedRegion);
+      	var searchUrl = '/teamgg/search/exist_user?userName=' + encodeURIComponent(searchQuery) + '&region=' + encodeURIComponent(selectedRegion);
       // 검색 요청
       
       $.get(searchUrl, function(data) {
@@ -415,8 +415,8 @@ underBar.children('.search-panel').on('click', function(event) {
       }
     });
 	}
-      var searchUrl = '/teamgg/board/exist_user?userName=' + encodeURIComponent(searchQuery)+'&region='+encodeURIComponent(selectedRegion);
-      //var searchUrl = '/teamgg/board/searching_player?userName=' + encodeURIComponent(searchQuery)+'&region='+encodeURIComponent(selectedRegion);
+      var searchUrl = '/teamgg/search/exist_user?userName=' + encodeURIComponent(searchQuery)+'&region='+encodeURIComponent(selectedRegion);
+      //var searchUrl = '/teamgg/search/searching_player?userName=' + encodeURIComponent(searchQuery)+'&region='+encodeURIComponent(selectedRegion);
       window.location.href = searchUrl;
     }
   });

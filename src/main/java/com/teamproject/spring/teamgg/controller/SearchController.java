@@ -44,10 +44,10 @@ import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
-@RequestMapping("/board/*")
+@RequestMapping("/search/*")
 @AllArgsConstructor
 @Controller
-public class BoardController {
+public class SearchController {
 private GuestService service;
 
 	@GetMapping("/Searching_User")
@@ -207,14 +207,14 @@ private GuestService service;
 		log.info("수정 컨트롤러 ==== 글idx ==============="+gvo.getM_idx());
 		
 		service.modify(gvo);
-		return "redirect:/board/teamMate?m_id="+mv.getM_id()+"&m_pw="+mv.getM_pw();
+		return "redirect:/search/teamMate?m_id="+mv.getM_id()+"&m_pw="+mv.getM_pw();
 	}
 	
 	@GetMapping("/login_admin")
 	public String login_admin(MemberVO mv) {
 		log.info("컨트롤러 ==== 글id ==============="+mv.getM_id());
 		log.info("컨트롤러 ==== 글pw ==============="+mv.getM_pw());
-		return "redirect:/board/teamMate?m_id="+mv.getM_id()+"&m_pw="+mv.getM_pw();	// 책 p.245 참고
+		return "redirect:/search/teamMate?m_id="+mv.getM_id()+"&m_pw="+mv.getM_pw();	// 책 p.245 참고
 	}
 	
 	@RequestMapping("/exist_user")
@@ -259,14 +259,14 @@ private GuestService service;
 		}
 		if(temp==null) {
 			String result = "none";
-			return "redirect:/board/no_search?result="+result;
+			return "redirect:/search/no_search?result="+result;
 		}
 		String utrName = URLEncoder.encode(SurmmonerName, "UTF-8");
 		SurmmonerName = utrName.replaceAll("%25", "%");
 		System.out.println("다음으로 넘어가는 이름은? : "+SurmmonerName);
 		session.setAttribute("temp", temp);
 		model.addAttribute("temp",temp);
-		return "redirect:/board/searching_player?userName="+SurmmonerName+"&region="+region;
+		return "redirect:/search/searching_player?userName="+SurmmonerName+"&region="+region;
 		
 	}
 	

@@ -106,7 +106,7 @@ function handleSearchBoxClick(){
         li.find('.summoner').on('click', function(event) {
           var searchQuery = $(this).text();
           var regionQuery = $(this).parent().find('.test').text();
-          var searchUrl = '/teamgg/board/exist_user?userName=' + encodeURIComponent(searchQuery)+'&region='+encodeURIComponent(regionQuery);
+          var searchUrl = '/teamgg/search/exist_user?userName=' + encodeURIComponent(searchQuery)+'&region='+encodeURIComponent(regionQuery);
           window.location.href = searchUrl;
         });
 
@@ -301,7 +301,7 @@ underBar.children('.search-panel').on('click', function(event) {
 
        // 중복 검사
 	  if (searchList.indexOf(selectedRegion + ':' + searchQuery) === -1) {
-      	var searchUrl = '/teamgg/board/exist_user?userName=' + encodeURIComponent(searchQuery) + '&region=' + encodeURIComponent(selectedRegion);
+      	var searchUrl = '/teamgg/search/exist_user?userName=' + encodeURIComponent(searchQuery) + '&region=' + encodeURIComponent(selectedRegion);
 		
 		searchList.push(selectedRegion + ':' + searchQuery);
 		//todo: 실패 페이지로 이동시 쿠키 추가 안되게 하여 최근검색에 안뜨게 하기.
