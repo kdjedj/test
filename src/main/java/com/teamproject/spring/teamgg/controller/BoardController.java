@@ -432,6 +432,7 @@ private GuestService service;
 				e.printStackTrace();		
 			}	
 			List<String> grbc = restTemplate.getForObject(gr_uri, List.class); 
+			///////////////여기 문제///////////////////
 			String grbc1 = (String)grbc.get(0);
 			
 		//플레이어 데이터 수집
@@ -492,10 +493,9 @@ private GuestService service;
 			Integer timemin = gameDuration/60;
 			Integer timesec = gameDuration%60;
 			
-			boolean moni = false; //잘못된 유저 호출 변수
-			//각 수치에 대한 객체 선언 - 꼭 괄호 바깥에서 선언*
+			boolean moni = false; //잘못된 유저 호출을 위한 변수
 			ArrayList<Lol_api> di = new ArrayList<Lol_api>();
-			List<Participants> player_info = (List<Participants>)testbc.info.participants;// 게임데이타 받아오기
+			List<Participants> player_info = (List<Participants>)testbc.info.participants;  // 게임데이타 받아오기
 			for(int x=0; x<player_info.size(); x++) {
 				if(player_info.get(x).summonerName.equals(temp.getName())) {
 					moni = true;
@@ -504,7 +504,7 @@ private GuestService service;
 			}
 			}
 			if(moni != true) {
-				endNum=a;
+				endNum=a; //a = 현재 인덱스 넘버
 				break;
 			}
 			Participants mainUser = null;
@@ -593,7 +593,6 @@ private GuestService service;
 					
 					//포지션별 횟수 구하기
 					if(gameMode.equals("솔랭")) {
-						if(gameMode.equals("솔랭")) {
 						rankGames += 1;
 						if(positions.get(mainUser.individualPosition) == null) {
 							positions.put(mainUser.individualPosition, new Positions(
@@ -604,14 +603,9 @@ private GuestService service;
 						} else {
 							positions.get(mainUser.individualPosition).times = positions.get(mainUser.individualPosition).times + 1;
 						}
-						
-						}
-					
-					
 					
 					System.out.println("현재 누가 호출 되고 있나요 ? :" + mainUser.summonerName);
 					System.out.println("=============== 경계선 ===============");
-					
 						
 				}
 			}
@@ -646,14 +640,10 @@ private GuestService service;
 				
 			}
 			
-			
-			
-			
 			//도합 킬수 구하기
 			for(int i=0; i<player_info.size(); i++) {
 				if(player_info.get(i).win==mainUser.win) { 
 					totalkills += player_info.get(i).kills;
-					
 				}
 			}
 			
