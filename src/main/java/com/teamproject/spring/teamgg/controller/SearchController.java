@@ -43,7 +43,7 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/board/*")
 @AllArgsConstructor
 @Controller
-public class BoardController {
+public class SearchController {
 private GuestService service;
 	@GetMapping("/Searching_User")
 	public void Searching_User() {

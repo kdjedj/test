@@ -1,4 +1,4 @@
-<%@page import="com.teamproject.spring.teamgg.vo.FreeBoardVo"%>
+<%@page import="com.teamproject.spring.teamgg.vo.BoardVO"%>
 <%@page import="java.sql.Date"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

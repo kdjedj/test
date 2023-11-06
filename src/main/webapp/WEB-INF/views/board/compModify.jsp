@@ -1,5 +1,5 @@
 <%@page import="java.util.ArrayList"%>
-<%@page import="com.teamproject.spring.teamgg.vo.CompBoardVo"%>
+<%@page import="com.teamproject.spring.teamgg.vo.BoardVO"%>
 <%@page import="java.util.List"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="cp" value="${pageContext.request.contextPath}" />
@@ -16,7 +16,7 @@
 <body>
 <%@include file="/WEB-INF/views/board_header.jsp" %>
 <%
-	CompBoardVo read = (CompBoardVo)request.getAttribute("compRead");
+	BoardVO read = (BoardVO)request.getAttribute("compRead");
 	long c_idx = read.getC_idx();
 	String c_content = read.getC_content();
 %>
@@ -76,14 +76,14 @@ var userName = "<c:out value='${userName}' />";
 			</div>
 			<div class="boards_side">
 			<p style="color: grey; font-size: 12px;">커뮤니티</p>
-				<button type="button" id="side_free" onclick="window.location.href='${cp}/free/freeList'">자유게시판</button>
-				<button type="button" id="side_tip" onclick="window.location.href='${cp}/tip/tipList'">정보게시판</button>
-				<button type="button" id="side_comp" onclick="window.location.href='${cp}/comp/compList'">유저찾기게시판</button>
+				<button type="button" id="side_free" onclick="window.location.href='${cp}/board/freeList'">자유게시판</button>
+				<button type="button" id="side_tip" onclick="window.location.href='${cp}/board/tipList'">정보게시판</button>
+				<button type="button" id="side_comp" onclick="window.location.href='${cp}/board/compList'">유저찾기게시판</button>
 			</div>
 		</div>
 		<div class="write">
 			<div class="writeForm">
-			<form id="form" action="${cp}/comp/compModify" method="post" accept-charset="utf-8">
+			<form id="form" action="${cp}/board/compModify" method="post" accept-charset="utf-8">
 			<input type="hidden" name='c_idx' value='<%=c_idx %>' >
 				<div class="title">
 			    <input type="text" id="title" name="c_title" placeholder="제목" required><br>

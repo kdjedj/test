@@ -1,4 +1,4 @@
-<%@page import="com.teamproject.spring.teamgg.vo.TipBoardVo"%>
+<%@page import="com.teamproject.spring.teamgg.vo.BoardVO"%>
 <%@page import="com.teamproject.spring.teamgg.vo.TipCommentVo"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
@@ -19,7 +19,7 @@
 <%@include file="/WEB-INF/views/board_header.jsp" %>
 <c:set var="userId" value="${sessionScope.m_id}" />
 <%
-	TipBoardVo read = (TipBoardVo)request.getAttribute("tipRead");
+	BoardVO read = (BoardVO)request.getAttribute("tipRead");
 	Long t_idx = read.getT_idx();
 	String t_id = read.getT_id();
 	String t_user = read.getT_user();
@@ -89,9 +89,9 @@ var userName = "<c:out value='${userName}' />";
 			</div>
 			<div class="boards_side">
 			<p style="color: grey; font-size: 12px;">커뮤니티</p>
-				<button type="button" id="side_free" onclick="window.location.href='${cp}/free/freeList'">자유게시판</button>
-				<button type="button" id="side_tip" onclick="window.location.href='${cp}/tip/tipList'">정보게시판</button>
-				<button type="button" id="side_comp" onclick="window.location.href='${cp}/comp/compList'">유저찾기게시판</button>
+				<button type="button" id="side_free" onclick="window.location.href='${cp}/board/freeList'">자유게시판</button>
+				<button type="button" id="side_tip" onclick="window.location.href='${cp}/board/tipList'">정보게시판</button>
+				<button type="button" id="side_comp" onclick="window.location.href='${cp}/board/compList'">유저찾기게시판</button>
 			</div>
 		</div>
 
@@ -106,8 +106,8 @@ var userName = "<c:out value='${userName}' />";
 		
 			<div class="read_actions">
 				<div class="read_action">
-					<button type="button" id="read_action" onclick="location.href='${cp}/tip/tipModify?t_idx=<%=t_idx%>'">수정</button>
-					<button type="button" id="read_action" onclick="location.href='${cp}/tip/tipDel?t_idx=<%=t_idx%>'">삭제</button>
+					<button type="button" id="read_action" onclick="location.href='${cp}/board/tipModify?t_idx=<%=t_idx%>'">수정</button>
+					<button type="button" id="read_action" onclick="location.href='${cp}/board/tipDel?t_idx=<%=t_idx%>'">삭제</button>
 				</div>
 			</div>
 			

@@ -1,4 +1,4 @@
-<%@page import="com.teamproject.spring.teamgg.vo.FreeBoardVo"%>
+<%@page import="com.teamproject.spring.teamgg.vo.BoardVO"%>
 <%@page import="com.teamproject.spring.teamgg.vo.FreeCommentVo"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
@@ -19,7 +19,7 @@
 <%@include file="/WEB-INF/views/board_header.jsp" %>
 <c:set var="userId" value="${sessionScope.m_id}" />
 <%
-	FreeBoardVo read = (FreeBoardVo)request.getAttribute("freeRead");
+BoardVO read = (BoardVO)request.getAttribute("freeRead");
 	Long f_idx = read.getF_idx();
 	String f_id = read.getF_id();
 	String f_user = read.getF_user();
@@ -81,7 +81,7 @@ var userName = "<c:out value='${userName}' />";
 					</c:choose>
 				</div>
 				<div class="side_btn">
-					<button type="button" id="write" title="글쓰기" onclick="location.href='freeWrite'">글쓰기</button>
+					<button type="button" id="write" title="글쓰기" onclick="location.href='${cp}/board/freeWrite'">글쓰기</button>
 				</div>
 				<div class="side_btn">
 					<button type="button" id="login" title="로그인" onclick="window.location.href='${cp}/member/login'">로그인</button>
@@ -89,9 +89,9 @@ var userName = "<c:out value='${userName}' />";
 			</div>
 			<div class="boards_side">
 			<p style="color: grey; font-size: 12px;">커뮤니티</p>
-				<button type="button" id="side_free" onclick="window.location.href='${cp}/free/freeList'">자유게시판</button>
-				<button type="button" id="side_tip" onclick="window.location.href='${cp}/tip/tipList'">정보게시판</button>
-				<button type="button" id="side_comp" onclick="window.location.href='${cp}/comp/compList'">유저찾기게시판</button>
+				<button type="button" id="side_free" onclick="window.location.href='${cp}/board/freeList'">자유게시판</button>
+				<button type="button" id="side_tip" onclick="window.location.href='${cp}/board/tipList'">정보게시판</button>
+				<button type="button" id="side_comp" onclick="window.location.href='${cp}/board/compList'">유저찾기게시판</button>
 			</div>
 		</div>
 
@@ -106,8 +106,8 @@ var userName = "<c:out value='${userName}' />";
 		
 			<div class="read_actions">
 				<div class="read_action">
-					<button type="button" id="read_action" onclick="location.href='${cp}/free/freeModify?f_idx=<%=f_idx%>'">수정</button>
-					<button type="button" id="read_action" onclick="location.href='${cp}/free/freeDel?f_idx=<%=f_idx%>'">삭제</button>
+					<button type="button" id="read_action" onclick="location.href='${cp}/board/freeModify?f_idx=<%=f_idx%>'">수정</button>
+					<button type="button" id="read_action" onclick="location.href='${cp}/board/freeDel?f_idx=<%=f_idx%>'">삭제</button>
 				</div>
 			</div>
 			

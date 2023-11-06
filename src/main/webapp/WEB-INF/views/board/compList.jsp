@@ -1,4 +1,4 @@
-<%@page import="com.teamproject.spring.teamgg.vo.CompBoardVo"%>
+<%@page import="com.teamproject.spring.teamgg.vo.BoardVO"%>
 <%@page import="java.sql.Date"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -76,9 +76,9 @@ var userName = "<c:out value='${userName}' />";
 			</div>
 			<div class="boards_side">
 			<p style="color: grey; font-size: 12px;">커뮤니티</p>
-				<button type="button" id="side_free" onclick="window.location.href='${cp}/free/freeList'">자유게시판</button>
-				<button type="button" id="side_tip" onclick="window.location.href='${cp}/tip/tipList'">정보게시판</button>
-				<button type="button" id="side_comp" onclick="window.location.href='${cp}/comp/compList'">유저찾기게시판</button>
+				<button type="button" id="side_free" onclick="window.location.href='${cp}/board/freeList'">자유게시판</button>
+				<button type="button" id="side_tip" onclick="window.location.href='${cp}/board/tipList'">정보게시판</button>
+				<button type="button" id="side_comp" onclick="window.location.href='${cp}/board/compList'">유저찾기게시판</button>
 			</div>
 		</div>
 		<div class="list">
@@ -87,7 +87,7 @@ var userName = "<c:out value='${userName}' />";
 				<img id="writeIcon" onclick="location.href='compWrite'" src="${cp}/resources/free/img/icon-write.png">
 			</div>
 			<div id="postBox">
-<c:forEach var="item" items="${list}">
+<c:forEach var="item" items="${compList}">
     <c:set var="c_idx" value="${item.c_idx}" />
     <c:set var="c_title" value="${item.c_title}" />
     <c:set var="c_date" value="${item.c_date}" />
@@ -107,7 +107,7 @@ var userName = "<c:out value='${userName}' />";
 			<div class="paging">
 				<c:choose>
 				    <c:when test="${hasPrev == true}">
-				        [<a href="${cp}/comp/compList?page=${prevPage}"><b>이전</b></a>]
+				        [<a href="compList?page=${prevPage}"><b>이전</b></a>]
 				    </c:when>
 				    <c:otherwise>
 				        [이전]
@@ -117,17 +117,17 @@ var userName = "<c:out value='${userName}' />";
 				<c:forEach var="p" begin="${blockStartNo}" end="${blockEndNo}">
 				    <c:choose>
 				        <c:when test="${p == currentPage }">
-				            <b>[<a href="${cp}/free/freeList?page=${p}">${p}</a>]</b>
+				            <b>[<a href="compList?page=${p}">${p}</a>]</b>
 				        </c:when>
 				        <c:otherwise>
-				            [<a href="${cp}/free/freeList?page=${p}">${p}</a>]
+				            [<a href="compList?page=${p}">${p}</a>]
 				        </c:otherwise>
 				    </c:choose>
 				</c:forEach>
 				
 				<c:choose>
 					<c:when test="${hasNext == true }">
-						[<a href="${cp}/comp/compList?page=${nextPage}"><b>다음</b></a>]
+						[<a href="compList?page=${nextPage}"><b>다음</b></a>]
 						</c:when>
 						<c:otherwise>
 							[다음]

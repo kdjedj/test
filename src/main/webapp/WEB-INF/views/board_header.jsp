@@ -1,6 +1,4 @@
-<%@page import="com.teamproject.spring.teamgg.vo.FreeBoardVo"%>
-<%@page import="com.teamproject.spring.teamgg.vo.TipBoardVo"%>
-<%@page import="com.teamproject.spring.teamgg.vo.CompBoardVo"%>
+<%@page import="com.teamproject.spring.teamgg.vo.BoardVO"%>
 <%@page import="java.sql.Date"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -46,13 +44,13 @@
 				<div class="headBot">
 					<div class="boards_head">
 						<div id="head_free">
-							<a href="${cp}/free/freeList">자유게시판</a>
+							<a href="${cp}/board/freeList">자유게시판</a>
 						</div>
 						<div id="head_tip">
-							<a href="${cp}/tip/tipList">정보게시판</a>
+							<a href="${cp}/board/tipList">정보게시판</a>
 						</div>
 						<div id="head_comp">
-							<a href="${cp}/comp/compList">유저찾기게시판</a>
+							<a href="${cp}/board/compList">유저찾기게시판</a>
 						</div>
 					</div>
 				</div>

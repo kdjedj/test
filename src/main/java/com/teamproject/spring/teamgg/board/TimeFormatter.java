@@ -32,8 +32,6 @@ public class TimeFormatter {
 //	            3일 이상이면 날짜 형식으로 표시
 	            msg = dateFormat.format(date);
 	        }
-	    } else {
-	        msg = dateFormat.format(date);
 	    }
 	    
 	    return msg;

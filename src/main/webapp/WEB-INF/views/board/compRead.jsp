@@ -1,4 +1,4 @@
-<%@page import="com.teamproject.spring.teamgg.vo.CompBoardVo"%>
+<%@page import="com.teamproject.spring.teamgg.vo.BoardVO"%>
 <%@page import="com.teamproject.spring.teamgg.vo.CompCommentVo"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
@@ -19,7 +19,7 @@
 <%@include file="/WEB-INF/views/board_header.jsp" %>
 <c:set var="userId" value="${sessionScope.m_id}" />
 <%
-	CompBoardVo read = (CompBoardVo)request.getAttribute("compRead");
+	BoardVO read = (BoardVO)request.getAttribute("compRead");
 	Long c_idx = read.getC_idx();
 	String c_id = read.getC_id();
 	String c_user = read.getC_user();
@@ -89,9 +89,9 @@ var userName = "<c:out value='${userName}' />";
 			</div>
 			<div class="boards_side">
 			<p style="color: grey; font-size: 12px;">커뮤니티</p>
-				<button type="button" id="side_free" onclick="window.location.href='${cp}/free/freeList'">자유게시판</button>
-				<button type="button" id="side_tip" onclick="window.location.href='${cp}/tip/tipList'">정보게시판</button>
-				<button type="button" id="side_comp" onclick="window.location.href='${cp}/comp/compList'">유저찾기게시판</button>
+				<button type="button" id="side_free" onclick="window.location.href='${cp}/board/freeList'">자유게시판</button>
+				<button type="button" id="side_tip" onclick="window.location.href='${cp}/board/tipList'">정보게시판</button>
+				<button type="button" id="side_comp" onclick="window.location.href='${cp}/board/compList'">유저찾기게시판</button>
 			</div>
 		</div>
 
@@ -106,8 +106,8 @@ var userName = "<c:out value='${userName}' />";
 		
 			<div class="read_actions">
 				<div class="read_action">
-					<button type="button" id="read_action" onclick="location.href='${cp}/comp/compModify?c_idx=<%=c_idx%>'">수정</button>
-					<button type="button" id="read_action" onclick="location.href='${cp}/comp/compDel?c_idx=<%=c_idx%>'">삭제</button>
+					<button type="button" id="read_action" onclick="location.href='${cp}/board/compModify?c_idx=<%=c_idx%>'">수정</button>
+					<button type="button" id="read_action" onclick="location.href='${cp}/board/compDel?c_idx=<%=c_idx%>'">삭제</button>
 				</div>
 			</div>
 			

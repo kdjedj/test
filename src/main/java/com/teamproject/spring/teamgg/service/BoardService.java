@@ -1,18 +1,35 @@
 package com.teamproject.spring.teamgg.service;
 import java.util.List;
-import com.teamproject.spring.teamgg.vo.FreeBoardVo;
+import com.teamproject.spring.teamgg.vo.BoardVO;
 
-public interface FreeBoardService {
-	public List<FreeBoardVo> getList(int index);
-	public FreeBoardVo read(long f_idx);
-	public void del(long f_idx);
-	public void write(FreeBoardVo fvo);
-	public void modify(FreeBoardVo fvo);
-	
+public interface BoardService {
 	public int getStartIndex(int page);
-	public int getTotalCount();
-	public int getTotalPage();
-	public int getTotalBlock(int totalPage);
+	public List<BoardVO> getList(int index);
+
+//	FreeBoard
+	public int getTotalCountFree();
+	public int getTotalPageFree();
+	public int getTotalBlockFree(int totalPage);
+	public BoardVO freeRead(long f_idx);
+	public void freeDel(long f_idx);
+	public void freeWrite(BoardVO vo);
+	public void freeModify(BoardVO vo);
 	
-	public String getAuthorId(long f_idx);
+//	TipBoard
+	public BoardVO tipRead(long t_idx);
+	public int getTotalCountTip();
+	public int getTotalPageTip();
+	public int getTotalBlockTip(int totalPage);
+	public void tipDel(long t_idx);
+	public void tipWrite(BoardVO vo);
+	public void tipModify(BoardVO vo);
+	
+//	CompBoard
+	public BoardVO compRead(long c_idx);
+	public int getTotalCountComp();
+	public int getTotalPageComp();
+	public int getTotalBlockComp(int totalPage);
+	public void compDel(long c_idx);
+	public void compWrite(BoardVO vo);
+	public void compModify(BoardVO vo);
 }
