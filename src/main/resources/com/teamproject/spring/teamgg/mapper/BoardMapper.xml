@@ -4,17 +4,6 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.teamproject.spring.teamgg.mapper.BoardMapper">
 
-
-	<select id="getTotalCountFree" resultType="int">
-		SELECT count(*) from ${@com.teamproject.spring.teamgg.vo.BoardVO@TABLE_NAME_FREE}
-	</select>
-	<select id="getTotalCountTip" resultType="int">
-		SELECT count(*) from ${@com.teamproject.spring.teamgg.vo.BoardVO@TABLE_NAME_TIP}
-	</select>
-	<select id="getTotalCountComp" resultType="int">
-		SELECT count(*) from ${@com.teamproject.spring.teamgg.vo.BoardVO@TABLE_NAME_COMP}
-	</select>
-
 <!-- FreeBoard -->
 	<select id="freeList" resultType="com.teamproject.spring.teamgg.vo.BoardVO">
 		SELECT * FROM ${@com.teamproject.spring.teamgg.vo.BoardVO@TABLE_NAME_FREE}
@@ -42,7 +31,9 @@
 		where f_idx = #{f_idx} and f_id = #{f_id}
 	</update>
 	
-	
+	<select id="getTotalCountFree" resultType="int">
+		SELECT count(*) from ${@com.teamproject.spring.teamgg.vo.BoardVO@TABLE_NAME_FREE}
+	</select>
 	
 <!-- 	TipBoard -->
 	<select id="tipList" resultType="com.teamproject.spring.teamgg.vo.BoardVO">
@@ -71,7 +62,9 @@
 		where t_idx = #{t_idx} and t_id = #{t_id}
 	</update>
 	
-	
+	<select id="getTotalCountTip" resultType="int">
+		SELECT count(*) from ${@com.teamproject.spring.teamgg.vo.BoardVO@TABLE_NAME_TIP}
+	</select>
 	
 	<!-- 	CompBoard -->
 	<select id="compList" resultType="com.teamproject.spring.teamgg.vo.BoardVO">
@@ -99,4 +92,8 @@
 			c_content = #{c_content}
 		where c_idx = #{c_idx} and c_id = #{c_id}
 	</update>
+	
+	<select id="getTotalCountComp" resultType="int">
+		SELECT count(*) from ${@com.teamproject.spring.teamgg.vo.BoardVO@TABLE_NAME_COMP}
+	</select>
 </mapper>

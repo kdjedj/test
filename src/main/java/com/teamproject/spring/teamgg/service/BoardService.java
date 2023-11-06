@@ -4,9 +4,9 @@ import com.teamproject.spring.teamgg.vo.BoardVO;
 
 public interface BoardService {
 	public int getStartIndex(int page);
-	public List<BoardVO> getList(int index);
 
 //	FreeBoard
+	public List<BoardVO> getFreeList(int index);
 	public int getTotalCountFree();
 	public int getTotalPageFree();
 	public int getTotalBlockFree(int totalPage);
@@ -16,6 +16,7 @@ public interface BoardService {
 	public void freeModify(BoardVO vo);
 	
 //	TipBoard
+	public List<BoardVO> getTipList(int index);
 	public BoardVO tipRead(long t_idx);
 	public int getTotalCountTip();
 	public int getTotalPageTip();
@@ -25,6 +26,7 @@ public interface BoardService {
 	public void tipModify(BoardVO vo);
 	
 //	CompBoard
+	public List<BoardVO> getCompList(int index);
 	public BoardVO compRead(long c_idx);
 	public int getTotalCountComp();
 	public int getTotalPageComp();

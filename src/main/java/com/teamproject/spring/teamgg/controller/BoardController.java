@@ -96,7 +96,7 @@ public class BoardController {
 		model.addAttribute("hasNext",hasNext);
 		model.addAttribute("prevPage",prevPage);
 		model.addAttribute("nextPage",nextPage);
-		model.addAttribute("freeList",service.getList(index));
+		model.addAttribute("freeList",service.getFreeList(index));
 		
 	}
 	
@@ -254,7 +254,7 @@ public class BoardController {
 		model.addAttribute("hasNext",hasNext);
 		model.addAttribute("prevPage",prevPage);
 		model.addAttribute("nextPage",nextPage);
-		model.addAttribute("tipList",service.getList(index));
+		model.addAttribute("tipList",service.getTipList(index));
 		
 	}
 	
@@ -413,7 +413,7 @@ public class BoardController {
 		model.addAttribute("hasNext",hasNext);
 		model.addAttribute("prevPage",prevPage);
 		model.addAttribute("nextPage",nextPage);
-		model.addAttribute("compList",service.getList(index));
+		model.addAttribute("compList",service.getCompList(index));
 		
 	}
 	

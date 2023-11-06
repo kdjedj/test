@@ -26,13 +26,14 @@ public class BoardServiceImpl implements BoardService{
 		return index;
 	}
 
+	
+//	FreeBoard
+	
 	@Override
-	public List<BoardVO> getList(int page) {
+	public List<BoardVO> getFreeList(int page) {
 		return mapper.freeList(page);
 	}
 	
-	
-//	FreeBoard
 	@Override
 	public BoardVO freeRead(long f_idx) {
 		return mapper.freeRead(f_idx);
@@ -55,7 +56,6 @@ public class BoardServiceImpl implements BoardService{
 	
 	@Override
 	public int getTotalCountFree() {
-		
 		return mapper.getTotalCountFree();
 	}
 
@@ -87,6 +87,11 @@ public class BoardServiceImpl implements BoardService{
 	
 //	TipBoard
 	@Override
+	public List<BoardVO> getTipList(int page) {
+		return mapper.tipList(page);
+	}
+	
+	@Override
 	public BoardVO tipRead(long t_idx) {
 		return mapper.tipRead(t_idx);
 	}
@@ -108,7 +113,6 @@ public class BoardServiceImpl implements BoardService{
 	
 	@Override
 	public int getTotalCountTip() {
-		
 		return mapper.getTotalCountTip();
 	}
 
@@ -140,6 +144,11 @@ public class BoardServiceImpl implements BoardService{
 	
 //	FreeBoard
 	@Override
+	public List<BoardVO> getCompList(int page) {
+		return mapper.compList(page);
+	}
+	
+	@Override
 	public BoardVO compRead(long c_idx) {
 		return mapper.compRead(c_idx);
 	}
@@ -161,7 +170,6 @@ public class BoardServiceImpl implements BoardService{
 	
 	@Override
 	public int getTotalCountComp() {
-		
 		return mapper.getTotalCountComp();
 	}
 
