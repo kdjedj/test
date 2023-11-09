@@ -19,6 +19,7 @@
 	BoardVO read = (BoardVO)request.getAttribute("tipRead");
 	long t_idx = read.getT_idx();
 	String t_content = read.getT_content();
+	String t_title = read.getT_title();
 %>
 <script type="text/javascript">
 var userName = "<c:out value='${userName}' />";
@@ -104,6 +105,14 @@ var userName = "<c:out value='${userName}' />";
 			</form>
 			</div>
 		</div>
+		
+		<script>
+			//필드에 원글 내용 설정
+	    	var tContent = '<%= t_content %>';
+	    	var tTitle = '<%= t_title %>';
+			document.getElementById("title").value = tTitle;
+			document.getElementById("content").value = tContent;
+		</script>
 		
 	</div>
 	<div class=bottom>

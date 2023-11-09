@@ -46,17 +46,17 @@
 			<nav class="board-nav">
 				<ul class="boards">
 					<li class="board1">
-						<a href="${cp}/free/freeList">
+						<a href="${cp}/board/freeList">
 							<div>자유게시판</div>
 						</a>
 					</li>
 					<li class="board2">
-						<a href="${cp}/tip/tipList">
+						<a href="${cp}/board/tipList">
 							<div>정보게시판</div>
 						</a>
 					</li>
 					<li class="board3">
-						<a href="${cp}/comp/compList">
+						<a href="${cp}/board/compList">
 							<div>유저찾기게시판</div>
 						</a>
 					</li>
