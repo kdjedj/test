@@ -1,28 +1,24 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.teamproject.spring.teamgg.vo.BoardVO"%>
-<%@page import="java.sql.Date"%>
 <%@page import="java.util.List"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="cp" value="${pageContext.request.contextPath}" />
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="cp" value="${pageContext.request.contextPath}" />  
-<c:set var="ts" value="<%= System.currentTimeMillis() %>" />
-
-    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" type="text/css" href="${cp}/resources/free/freeList.css">
+<link rel="stylesheet" type="text/css" href="${cp}/resources/free/freeWrite.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <%@include file="/WEB-INF/views/board_header.jsp" %>
-<c:set var="userName" value="${sessionScope.m_user}" />
 <script type="text/javascript">
 var userName = "<c:out value='${userName}' />";
 </script>
-<c:set var="currentPage" value="${param.page == null ? '1' : param.page}" />
-	
+
 <div class="board_wrap">
 	<div class="middle">
 		<div class="focusbox" alt="전적검색">
@@ -53,8 +49,7 @@ var userName = "<c:out value='${userName}' />";
 			</button>
 		</div>
 	</div>
-	
-	<div class="container">
+	<div class="write_container">
 		<div class="sideMenu">
 			<div id="profileBox">
 				<div class="userName side">
@@ -68,7 +63,7 @@ var userName = "<c:out value='${userName}' />";
 					</c:choose>
 				</div>
 				<div class="side_btn">
-					<button type="button" id="write" title="글쓰기" onclick="location.href='compWrite'">글쓰기</button>
+					<button type="button" id="write" title="글쓰기" onclick="location.href='freeWrite'">글쓰기</button>
 				</div>
 				<div class="side_btn">
 					<button type="button" id="login" title="로그인" onclick="location.href='${cp}/member/login'">로그인</button>
@@ -81,67 +76,36 @@ var userName = "<c:out value='${userName}' />";
 				<button type="button" id="side_comp" onclick="window.location.href='${cp}/board/compList'">유저찾기게시판</button>
 			</div>
 		</div>
-		<div class="list">
-			<div class="list_head">
-				<h1 id="boardName" style="color: rgb(106,96,169)"> 유저찾기 </h1>
-				<img id="writeIcon" onclick="location.href='compWrite'" src="${cp}/resources/free/img/icon-write.png">
-			</div>
-			<div id="postBox">
-<c:forEach var="item" items="${compList}">
-    <c:set var="c_idx" value="${item.c_idx}" />
-    <c:set var="c_title" value="${item.c_title}" />
-    <c:set var="c_date" value="${item.c_date}" />
-    <c:set var="c_id" value="${item.c_id}" />
-    <c:set var="c_user" value="${item.c_user}" />
-    	<div class="postBox">
-			<ul class="post">
-            	<li class="posts idx">${item.c_idx}</li>
-            	<li class="posts title"><a href="compRead?c_idx=${item.c_idx}">${item.c_title}</a></li>
-            	<li class="posts date">${item.c_date}</li>
-            	<li class="posts user">${item.c_user}</li>
-			</ul>
-    	</div>
-</c:forEach>
-			</div>
-
-			<div class="paging">
-				<c:choose>
-				    <c:when test="${hasPrev == true}">
-				        [<a href="compList?page=${prevPage}"><b>이전</b></a>]
-				    </c:when>
-				    <c:otherwise>
-				        [이전]
-				    </c:otherwise>
-				</c:choose>
+		<div class="write">
+			<div class="writeForm">
+			<form id="form" action="${cp}/board/freeWrite" method="post" accept-charset="utf-8">
+				<div class="title">
+			    <input type="text" id="title" name="f_title" placeholder="제목" required><br>
+				</div>
 				
-				<c:forEach var="p" begin="${blockStartNo}" end="${blockEndNo}">
-				    <c:choose>
-				        <c:when test="${p == currentPage }">
-				            <b>[<a href="compList?page=${p}">${p}</a>]</b>
-				        </c:when>
-				        <c:otherwise>
-				            [<a href="compList?page=${p}">${p}</a>]
-				        </c:otherwise>
-				    </c:choose>
-				</c:forEach>
-				
-				<c:choose>
-					<c:when test="${hasNext == true }">
-						[<a href="compList?page=${nextPage}"><b>다음</b></a>]
-						</c:when>
-						<c:otherwise>
-							[다음]
-						</c:otherwise>
-				</c:choose>
+				<div class="content">
+			    <textarea rows="40" id="content" name="f_content" required></textarea><br>
+				</div>
+			
+		<div class="write_actions">
+			<div>
+			    <input type="button" id="cancel" value="취소" onclick="goBack()">
+			</div>
+			<div>
+			    <input type="button" id="publish" value="작성" onclick="submitForm()">
 			</div>
 		</div>
+			</form>
+			</div>
+		</div>
+		
 	</div>
-
 	<div class=bottom>
 	</div>
 </div>
 
 <script type="text/javascript" src="${cp}/resources/free/freeBoard.js"></script>
+<script type="text/javascript" src="${cp}/resources/free/freeWrite.js"></script>
 <script type="text/javascript" src="${cp}/resources/t.js?ver=<%= System.currentTimeMillis() %>"></script>
 </body>
 </html>

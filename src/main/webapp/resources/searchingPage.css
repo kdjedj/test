@@ -6,6 +6,7 @@
 .container{
 	 width: 100%;
     /* max-width: 1200px; */
+    min-width: 1200px;
     display: block;
     background-color: #fff;
     /* margin-left: auto; */
@@ -99,7 +100,7 @@ padding: 32px 16px;
 .tier-and-prevplayer{
 	    /* background-color: aqua; */
     display: inline-block;
-    width: 302px;
+    width: 335px;
     position: sticky;
     top: 100px;
     margin-top: 8px;
@@ -188,7 +189,7 @@ padding: 32px 16px;
 }
 
 .champions{
-	    width: 222px;
+	    width: 200px;
     margin-left: 16px;
 }
 
@@ -287,7 +288,7 @@ padding: 32px 16px;
 }
 
 .stat{
-	width: 222px;
+	width: 239px;
 }
 
 .stat .kda{
@@ -299,12 +300,36 @@ padding: 32px 16px;
 
 .stat .kda .chart{
 	position: relative;
-    width: 88px;
-    height: 88px;
+    width: 100px;
+    height: 100px;
     justify-content: center;
     align-items: center;
     display: flex;
-    font-size: 2em;
+    font-size: 1.3em;
+}
+
+.stat .kda .chart .circleGauge{
+	position: relative;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.stat .kda .chart .circleGauge::before{
+	    content: "";
+    width: 85px;
+    height: 85px;
+    position: absolute;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.stat .kda .chart .circleGauge span{
+	position:relative;
 }
 
 .stat div.win-lose div.k-d-a{
@@ -329,7 +354,7 @@ padding: 32px 16px;
 }
 
 .win-lose{
-	font-size: 11px;
+	font-size: 13px;
 	font-family: '맑은 고딕', Arial, sans-serif; 
     font-weight: bold; 
     color:#9AA4AF;
@@ -338,27 +363,27 @@ padding: 32px 16px;
 .aver{
 	
 	display: inline-block;
-    font-size: 11px;
+    font-size: 12px;
     margin-left: 4px;
 }
 
 .per{
 	display: inline-block;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: bold; 
     color: #ffb914;
 }
 
 .gd{
 	display: inline-block;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: bold; 
     color: #50cc5c;
 }
 
 
-.kda{
-	
+div.info .flexBox .kda{
+	    margin-right: 10px;
 }
 
 .chart{
@@ -437,7 +462,15 @@ div.bar div.gauge{
     background-color: #ffc8c8;
 }
 
-
+.re_box{
+	display: flex;
+    height: 96px;
+    border-radius: 4px;
+    border-left-width: 6px;
+    border-left-style: solid;
+    border-color: #758592;
+    background-color: #F7F7F9;
+}
 
 .content_box{
 	 display: flex;
@@ -699,7 +732,7 @@ span.chamlv{
 	    display: flex;
     -webkit-box-align: center;
     align-items: center;
-    width: 88px;
+    width: 94px;
     height: 18px;
     text-align: left;
     white-space: nowrap;
@@ -708,8 +741,9 @@ span.chamlv{
 
 .player_list .name{
 	display: inline-block;
-    max-width: 60px;
+    max-width: 68px;
     vertical-align: middle;
+    color: #758592;
 }
 
 .player_list .name a{
@@ -793,7 +827,7 @@ span.chamlv{
     font-weight: bold;
 }
 
-td{
+tbody td{
 	padding: 4px 0px 7px;
     vertical-align: middle;
 }
@@ -805,6 +839,7 @@ tr.mainPlayer td{
 td.champion{
 	padding-left: 10px;
     padding-right: 4px;
+    padding-top: 10px;
 }
 
 td.champion a{
@@ -847,6 +882,10 @@ td.champion a div span{
     border-left-color: rgb(213, 227, 255);
 }
 
+.blue .mainPlayer{
+	   background-color: #d6e3ff;
+}
+
 .red tbody{
 	background-color: #FFF1F3;
     border-top: 1px solid rgb(255, 216, 217);
@@ -855,12 +894,28 @@ td.champion a div span{
     border-left-color: rgb(255, 216, 217);
 }
 
+.red .mainPlayer{
+	   background-color: #ffd1d8;
+}
+
+.gray tbody{
+	background-color: #F7F7F9;
+    border-top: 1px solid rgb(235, 238, 241);
+    border-right-color: rgb(235, 238, 241);
+    border-bottom-color: rgb(235, 238, 241);
+    border-left-color: rgb(235, 238, 241);
+}
+
+.gray .mainPlayer{
+	   background-color: #dedede;
+}
+
 td.spells{
 	
 }
 
 td.spells div{
-	
+	   margin-left: 4px;
 }
 
 td.name {
@@ -873,8 +928,13 @@ td.name {
 td.name a{
 	line-height: 16px;
     color: black;
-    font-size: 12px;
+    font-size: 13px;
     text-decoration: none;
+      font-weight: 500;
+}
+
+.mainPlayer td.name a{
+	  font-weight: bolder;
 }
 
 td.kda{
@@ -897,7 +957,7 @@ td.damage{
 	    font-family: Roboto, sans-serif;
 }
 
-td.damage div{
+td.damage > div{
 	    display:flex;
 	    justify-content: space-around;
 }
@@ -908,33 +968,49 @@ td.damage>div:first-child{
 
 
 td.damage .dealt{
-	
+	    text-align: center;
+    color: #758592;
+    font-size: 11px;
+    line-height: 14px;
 }
 
 td.damage .progress{
-	
+	    width: 50px;
+    height: 6px;
+    margin: 4px auto 0px;
+    background-color: #fff;
 }
 
 td.damage .progress .fill{
-	
+	height: 100%;
+    background-color: #E84057;
 }
 
-td.damage .taken {
-	
+td.damage .taken{
+	text-align: center;
+    color: #758592;
+    font-size: 11px;
+    line-height: 14px;
+    margin-left: 8px;
+
 }
 
 td.damage .progress_taken{
-	
+	    width: 50px;
+    height: 6px;
+    margin: 4px auto 0px 8px;
+    background-color: #fff;
 }
 
 td.damage .progress_taken .fill{
-	
+	height: 100%;
+    background-color: #9AA4AF;
 }
 
 td.cs{
 	text-align: center;
     color: #758592;
-    font-size: 11px;
+    font-size: 13px;
 }
 
 td.cs div{
@@ -985,4 +1061,30 @@ td.items li{
     transition: transform 1s;
 }
 
+.selected{
+	background-color: rgb(151, 89, 255);
+	color: #fff;
+}
 
+/*===========================================================================  */
+/* no_search */
+/*===========================================================================  */
+
+.no_search{
+	 margin: 10% auto;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.no_search span{
+	color: #9f9bbd;
+    font-size: 2em;
+}
+
+.no_search_mark{
+	margin-top: -7px;
+    color: #9f9bbd;
+    font-size: 20em;
+}

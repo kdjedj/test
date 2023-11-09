@@ -19,6 +19,7 @@
 	BoardVO read = (BoardVO)request.getAttribute("compRead");
 	long c_idx = read.getC_idx();
 	String c_content = read.getC_content();
+	String c_title = read.getC_title();
 %>
 <script type="text/javascript">
 var userName = "<c:out value='${userName}' />";
@@ -98,12 +99,21 @@ var userName = "<c:out value='${userName}' />";
 			    <input type="button" id="cancel" value="취소" onclick="goBack()">
 			</div>
 			<div>
-			    <input type="button" id="publish" value="작성" onclick="submitForm()">
+			    <input type="button" id="publish" value="수정" onclick="submitForm()">
 			</div>
 		</div>
 			</form>
 			</div>
 		</div>
+		
+		<script>
+		//필드에 원글 내용 설정
+    	var cContent = '<%= c_content %>';
+    	var cTitle = '<%= c_title %>';
+    	
+		document.getElementById("title").value = cTitle;
+		document.getElementById("content").value = cContent;
+		</script>
 		
 	</div>
 	<div class=bottom>

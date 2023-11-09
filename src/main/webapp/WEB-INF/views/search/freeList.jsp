@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" type="text/css" href="${cp}/resources/free/freeList.css">
+<link rel="stylesheet" type="text/css" href="${cp}/resources/free/freeList.css?ver=<%= System.currentTimeMillis() %>">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
@@ -68,7 +68,7 @@ var userName = "<c:out value='${userName}' />";
 					</c:choose>
 				</div>
 				<div class="side_btn">
-					<button type="button" id="write" title="글쓰기" onclick="location.href='tipWrite'">글쓰기</button>
+					<button type="button" id="write" title="글쓰기" onclick="location.href='freeWrite'">글쓰기</button>
 				</div>
 				<div class="side_btn">
 					<button type="button" id="login" title="로그인" onclick="location.href='${cp}/member/login'">로그인</button>
@@ -83,31 +83,31 @@ var userName = "<c:out value='${userName}' />";
 		</div>
 		<div class="list">
 			<div class="list_head">
-				<h1 id="boardName" style="color: rgb(106,96,169)"> 정보 </h1>
-				<img id="writeIcon" onclick="location.href='tipWrite'" src="${cp}/resources/free/img/icon-write.png">
+				<h1 id="boardName" style="color: rgb(106,96,169)"> 자유 </h1>
+				<img id="writeIcon" onclick="location.href='freeWrite'" src="${cp}/resources/free/img/icon-write.png">
 			</div>
 			<div id="postBox">
-<c:forEach var="item" items="${tipList}">
-    <c:set var="t_idx" value="${item.t_idx}" />
-    <c:set var="t_title" value="${item.t_title}" />
-    <c:set var="t_date" value="${item.t_date}" />
-    <c:set var="t_id" value="${item.t_id}" />
-    <c:set var="t_user" value="${item.t_user}" />
-    	<div class="postBox">
-			<ul class="post">
-            	<li class="posts idx">${item.t_idx}</li>
-            	<li class="posts title"><a href="tipRead?t_idx=${item.t_idx}">${item.t_title}</a></li>
-            	<li class="posts date">${item.t_date}</li>
-            	<li class="posts user">${item.t_user}</li>
-			</ul>
-    	</div>
-</c:forEach>
+				<c:forEach var="item" items="${list}">
+				    <c:set var="f_idx" value="${item.f_idx}" />
+				    <c:set var="f_title" value="${item.f_title}" />
+				    <c:set var="f_date" value="${item.f_date}" />
+				    <c:set var="f_id" value="${item.f_id}" />
+				    <c:set var="f_user" value="${item.f_user}" />
+				    	<div class="postBox">
+							<ul class="post">
+				            	<li class="posts idx">${item.f_idx}</li>
+				            	<li class="posts title"><a href="freeRead?f_idx=${item.f_idx}">${item.f_title}</a></li>
+				            	<li class="posts date">${item.f_date}</li>
+				            	<li class="posts user">${item.f_user}</li>
+							</ul>
+				    	</div>
+				</c:forEach>
 			</div>
 
 			<div class="paging">
 				<c:choose>
 				    <c:when test="${hasPrev == true}">
-				        [<a href="tipList?page=${prevPage}"><b>이전</b></a>]
+				        [<a href="freeList?page=${prevPage}"><b>이전</b></a>]
 				    </c:when>
 				    <c:otherwise>
 				        [이전]
@@ -117,17 +117,17 @@ var userName = "<c:out value='${userName}' />";
 				<c:forEach var="p" begin="${blockStartNo}" end="${blockEndNo}">
 				    <c:choose>
 				        <c:when test="${p == currentPage }">
-				            <b>[<a href="tipList?page=${p}">${p}</a>]</b>
+				            <b>[<a href="freeList?page=${p}">${p}</a>]</b>
 				        </c:when>
 				        <c:otherwise>
-				            [<a href="tipList?page=${p}">${p}</a>]
+				            [<a href="freeList?page=${p}">${p}</a>]
 				        </c:otherwise>
 				    </c:choose>
 				</c:forEach>
 				
 				<c:choose>
 					<c:when test="${hasNext == true }">
-						[<a href="tipList?page=${nextPage}"><b>다음</b></a>]
+						[<a href="freeList?page=${nextPage}"><b>다음</b></a>]
 						</c:when>
 						<c:otherwise>
 							[다음]
@@ -142,5 +142,6 @@ var userName = "<c:out value='${userName}' />";
 </div>
 
 <script type="text/javascript" src="${cp}/resources/free/freeBoard.js"></script>
+<script type="text/javascript" src="${cp}/resources/home.js?ver=<%= System.currentTimeMillis() %>"></script>
 </body>
 </html>

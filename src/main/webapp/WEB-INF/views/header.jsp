@@ -17,7 +17,7 @@
 		<!-- 로고 -->
 		<div class = "main-tab">
 			<a href="${cp}/" class = "logo">
-				<img alt="로고" src="${cp}/resources/Logo.png">
+				<img alt="로고" src="${cp}/resources/Logo_white.png">
 			</a>
 		
 			<!-- 게임탭메뉴 -->
@@ -25,7 +25,7 @@
 				<ul>
 					<li>
 						<span>
-							<img alt="" src="#">
+							<img alt="lol" src="${cp}/resources/lol_client_logo.png">
 							<span>리그오브레전드</span>
 						</span>
 					</li>

@@ -106,8 +106,8 @@ var userName = "<c:out value='${userName}' />";
 		
 			<div class="read_actions">
 				<div class="read_action">
-					<button type="button" id="read_action" onclick="location.href='${cp}/board/freeModify?f_idx=<%=f_idx%>'">수정</button>
-					<button type="button" id="read_action" onclick="location.href='${cp}/board/freeDel?f_idx=<%=f_idx%>'">삭제</button>
+					<button type="button" class="read-btn" onclick="location.href='${cp}/free/freeModify?f_idx=<%=f_idx%>'">수정</button>
+					<button type="button" class="read-btn" data-f-idx="<%=f_idx %>" id="read_delete">삭제</button>
 				</div>
 			</div>
 			
@@ -193,10 +193,10 @@ var userName = "<c:out value='${userName}' />";
 			        <form id="form" action="${cp}/comment/fcModify" method="post">
 			            <input type="hidden" name="fc_idx">
 			            <input type="hidden" name="f_idx" value="<%=f_idx%>">
-			            <textarea name="fc_comment" rows="4" cols="50"></textarea>
+			            <textarea id="modalForm" name="fc_comment" rows="4" cols="50"></textarea>
 			            <div class="replyAction">
-			                <button type="submit">수정</button>
-			                <button type="button" class="modifyForm-cancel">취소</button>
+			                <button class="modalBtn" type="submit" id="modal-modify">수정</button>
+			                <button class="modalBtn" type="button" id="modifyForm-cancel">취소</button>
 			            </div>
 			        </form>
 			    </div>

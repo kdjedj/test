@@ -16,9 +16,10 @@
 <body>
 <%@include file="/WEB-INF/views/board_header.jsp" %>
 <%
-BoardVO read = (BoardVO)request.getAttribute("freeRead");
-	long f_idx = read.getF_idx();
-	String f_content = read.getF_content();
+	BoardVO read = (BoardVO)request.getAttribute("tipRead");
+	long t_idx = read.getT_idx();
+	String t_content = read.getT_content();
+	String t_title = read.getT_title();
 %>
 <script type="text/javascript">
 var userName = "<c:out value='${userName}' />";
@@ -68,7 +69,7 @@ var userName = "<c:out value='${userName}' />";
 					</c:choose>
 				</div>
 				<div class="side_btn">
-					<button type="button" id="write" title="글쓰기" onclick="location.href='freeWrite'">글쓰기</button>
+					<button type="button" id="write" title="글쓰기" onclick="location.href='tipWrite'">글쓰기</button>
 				</div>
 				<div class="side_btn">
 					<button type="button" id="login" title="로그인" onclick="location.href='${cp}/member/login'">로그인</button>
@@ -83,14 +84,14 @@ var userName = "<c:out value='${userName}' />";
 		</div>
 		<div class="write">
 			<div class="writeForm">
-			<form id="form" action="${cp}/board/freeModify" method="post" accept-charset="utf-8">
-			<input type="hidden" name='f_idx' value='<%=f_idx %>' >
+			<form id="form" action="${cp}/board/tipModify" method="post" accept-charset="utf-8">
+			<input type="hidden" name='t_idx' value='<%=t_idx %>' >
 				<div class="title">
-			    <input type="text" id="title" name="f_title" placeholder="제목" required><br>
+			    <input type="text" id="title" name="t_title" placeholder="제목" required><br>
 				</div>
 				
 				<div class="content">
-			    <textarea rows="40" id="content" name="f_content" required></textarea><br>
+			    <textarea rows="40" id="content" name="t_content" required></textarea><br>
 				</div>
 			
 		<div class="write_actions">
@@ -98,12 +99,21 @@ var userName = "<c:out value='${userName}' />";
 			    <input type="button" id="cancel" value="취소" onclick="goBack()">
 			</div>
 			<div>
-			    <input type="button" id="publish" value="작성" onclick="submitForm()">
+			    <input type="button" id="publish" value="수정" onclick="submitForm()">
 			</div>
 		</div>
 			</form>
 			</div>
 		</div>
+		
+		<script>
+		//필드에 원글 내용 설정
+    	var tContent = '<%= t_content %>';
+    	var tTitle = '<%= t_title %>';
+
+		document.getElementById("title").value = tTitle;
+		document.getElementById("content").value = tContent;
+		</script>
 		
 	</div>
 	<div class=bottom>

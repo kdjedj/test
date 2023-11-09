@@ -7,6 +7,16 @@
 									readActionDiv.style.display = 'none';
 								}
 							});	
+
+				// 글 삭제 팝업
+				document.getElementById('read_delete').addEventListener('click', function () {
+					var cIdx = this.getAttribute('data-c-idx');
+					if (confirm("삭제하시겠습니까?")) {
+						location.href = 'compDel?c_idx=' + cIdx;
+					} else {
+						window.close();
+					}
+				});
                             
 				// 답글 버튼
                 var replyButtons = document.querySelectorAll('.replyForm-btn');
@@ -20,30 +30,31 @@
                     });
                 });		
                
-               // 수정, 삭제 버튼 처리(댓글)
-                var modifyButton = document.querySelector('.replyForm-modify');
-                var writerId = modifyButton.getAttribute('data-cc-id');
-                var btnTrue = document.querySelectorAll('.btnTrue');
-                var btnFalse = document.querySelectorAll('.btnFalse');
-                if (isLoggedIn && currentUserId === writerId) {
-                    btnTrue.forEach(function (btn) {
-                        btn.style.display = 'block';
-                    });
-                    btnFalse.forEach(function (btn) {
-                        btn.style.display = 'none';
-                    });
-                } else {
-                    btnTrue.forEach(function (btn) {
-                        btn.style.display = 'none';
-                    });
-                    btnFalse.forEach(function (btn) {
-                        btn.style.display = 'block';
-                    });
-                    var commentReplyButton = document.querySelectorAll('.replyForm-btn');
-                    commentReplyButton.forEach(function(button) { // false일때 답글버튼 띄우기
-                        button.style.marginLeft = '30px';
-                    });
-                }			
+				// 수정, 삭제 버튼 처리(댓글)
+				var modifyButtons = document.querySelectorAll('.replyForm-modify');
+				var deleteButtons = document.querySelectorAll('.replyForm-delete');
+				var replyButtons = document.querySelectorAll('.replyForm-btn');
+
+				modifyButtons.forEach(function (button) {
+					var ccId = button.getAttribute('data-cc-id');
+					if (ccId !== currentUserId) {
+						button.style.display = 'none';
+					}
+				});
+				deleteButtons.forEach(function (button) {
+					var ccId = button.getAttribute('data-cc-id');
+					if (ccId !== currentUserId) {
+						button.style.display = 'none';
+					}
+				});	
+
+				// 답글 버튼 스타일 변경
+				replyButtons.forEach(function (button) {
+					var ccId = button.getAttribute('data-cc-id');
+					if (ccId !== currentUserId) {
+						button.style.marginLeft = '30px'; // 현재 로그인된 사용자와 작성자 ID가 다를 때 왼쪽 여백 추가
+					}
+				});
 
                 	             // 수정 버튼 클릭 시 모달 열기
 	             var modifyButtons = document.querySelectorAll('.replyForm-modify');
@@ -52,11 +63,15 @@
 	                 	// 버튼에서 cc_idx 값 꺼내옴
 	                     var editCcIdx = this.getAttribute('data-cc-idx');
 	                     var writerId = this.getAttribute('data-cc-id');
+						 var ccComment = this.getAttribute('data-cc-comment'); // 원댓 내용 설정
 	                     var modal = document.getElementById('commentModal');
 	                     var modalContent = modal.querySelector('.modal-content');
 	                     var ccIdxInput = modalContent.querySelector('input[name="cc_idx"]');
 	                     // 꺼내온 cc_idx 값 설정
 	                     ccIdxInput.value = editCcIdx;
+						// 원댓 내용 설정
+						 var ccCommentInput = modalContent.querySelector('textarea[name="cc_comment"]');
+						 ccCommentInput.value = ccComment;
 	             if (isLoggedIn && currentUserId === writerId) {
 	                 // 로그인된 상태에서만 모달 열기
 	                 modal.style.display = 'block';
@@ -68,10 +83,31 @@
 	                 window.location.href = '/teamgg/member/login';
 	             }
 	                 });
-	             });			
+	             });	
+
 	             // 취소버튼으로 모달 닫기
-	             var cancelEditButton = document.querySelector('.modifyForm-cancel');
+	             var cancelEditButton = document.querySelector('#modifyForm-cancel');
 	             cancelEditButton.addEventListener('click', function () {
 	                 var modal = document.getElementById('commentModal');
 	                 modal.style.display = 'none';
-             });
+             	});
+
+				// 댓글 삭제 팝업
+				document.getElementById('comment_delete').addEventListener('click', function () {
+					var ccIdx = this.getAttribute('data-cc-idx');
+					if (confirm("삭제하시겠습니까?")) {
+						location.href = '/teamgg/comment/ccDel?cc_idx=' + ccIdx;
+					} else {
+						window.close();
+					}
+				});
+				
+				// 대댓글 삭제 팝업
+				document.getElementById('reply_delete').addEventListener('click', function () {
+					var ccIdx = this.getAttribute('data-cc-idx');
+					if (confirm("삭제하시겠습니까?")) {
+						location.href = '/teamgg/comment/ccDel?cc_idx=' + ccIdx;
+					} else {
+						window.close();
+					}
+				});

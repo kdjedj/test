@@ -19,19 +19,19 @@
 <%@include file="/WEB-INF/views/board_header.jsp" %>
 <c:set var="userId" value="${sessionScope.m_id}" />
 <%
-	BoardVO read = (BoardVO)request.getAttribute("tipRead");
-	Long t_idx = read.getT_idx();
-	String t_id = read.getT_id();
-	String t_user = read.getT_user();
-	String t_title = read.getT_title();	
-	String t_content = read.getT_content();
-	String t_date = read.getT_date();
+	BoardVO read = (BoardVO)request.getAttribute("compRead");
+	Long c_idx = read.getC_idx();
+	String c_id = read.getC_id();
+	String c_user = read.getC_user();
+	String c_title = read.getC_title();	
+	String c_content = read.getC_content();
+	String c_date = read.getC_date();
 %>	
 
 <script type="text/javascript">
 var isLoggedIn = <%= session.getAttribute("m_id") != null %>;
 var currentUserId = "<%= session.getAttribute("m_id") %>";
-var tId = "<%= t_id %>";
+var cId = "<%= c_id %>";
 var userId = "<c:out value='${userId}' />";
 var userName = "<c:out value='${userName}' />";
 </script>
@@ -81,7 +81,7 @@ var userName = "<c:out value='${userName}' />";
 					</c:choose>
 				</div>
 				<div class="side_btn">
-					<button type="button" id="write" title="글쓰기" onclick="location.href='tipWrite'">글쓰기</button>
+					<button type="button" id="write" title="글쓰기" onclick="location.href='compWrite'">글쓰기</button>
 				</div>
 				<div class="side_btn">
 					<button type="button" id="login" title="로그인" onclick="window.location.href='${cp}/member/login'">로그인</button>
@@ -97,25 +97,25 @@ var userName = "<c:out value='${userName}' />";
 
 		<div class="read">
 			<div class="read_head">
-				<h1> <%=t_title %> </h1>
-				<%= t_date %> / <%=t_user %>
+				<h1> <%=c_title %> </h1>
+				<%= c_date %> / <%=c_user %>
 			</div>
 			<div class="content">
-				<%=t_content %>
+				<%=c_content %>
 			</div>
 		
 			<div class="read_actions">
 				<div class="read_action">
-					<button type="button" id="read_action" onclick="location.href='${cp}/board/tipModify?t_idx=<%=t_idx%>'">수정</button>
-					<button type="button" id="read_action" onclick="location.href='${cp}/board/tipDel?t_idx=<%=t_idx%>'">삭제</button>
+					<button type="button" class="read-btn" onclick="location.href='${cp}/comp/compModify?c_idx=<%=c_idx%>'">수정</button>
+					<button type="button" class="read-btn" data-c-idx="<%=c_idx %>" id="read_delete">삭제</button>
 				</div>
 			</div>
 			
 <!-- 			댓글 -->
 			<div class="commentForm">
-				<form id="form" action="${cp}/comment/tcWrite" method="post">
-			    	<input type="hidden" name="t_idx" value="<%=t_idx%>">
-			    	<textarea class="comment" name="tc_comment" rows="4" cols="50"></textarea>
+				<form id="form" action="${cp}/comment/ccWrite" method="post">
+			    	<input type="hidden" name="c_idx" value="<%=c_idx%>">
+			    	<textarea class="comment" name="cc_comment" rows="4" cols="50"></textarea>
 			    	<div class="commentSubmit">
 			    	<button type="submit">작성</button>
 			   		</div>
@@ -124,64 +124,57 @@ var userName = "<c:out value='${userName}' />";
 
 			<div class="comments">
 <!-- 			댓글 -->
-				<c:forEach var="comment" items="${tcList}">
+				<c:forEach var="comment" items="${ccList}">
 				<c:choose>
-           		<c:when test="${comment.tc_num == 0}">
-				<c:set var="tc_user" value="${comment.tc_user}" />
-				<c:set var="tc_id" value="${comment.tc_id}" />
-				<c:set var="tc_comment" value="${comment.tc_comment}" />
-				<c:set var="tc_date" value="${comment.tc_date}" />
-				<c:set var="tc_idx" value="${comment.tc_idx}" />
-				<c:set var="tc_group" value="${comment.tc_group}" />
+           		<c:when test="${comment.cc_num == 0}">
+				<c:set var="cc_user" value="${comment.cc_user}" />
+				<c:set var="cc_id" value="${comment.cc_id}" />
+				<c:set var="cc_comment" value="${comment.cc_comment}" />
+				<c:set var="cc_date" value="${comment.cc_date}" />
+				<c:set var="cc_idx" value="${comment.cc_idx}" />
+				<c:set var="cc_group" value="${comment.cc_group}" />
 				
 				    <div class="c_top">
-				        <span class="user">${comment.tc_user}</span> <span class="date"> ${comment.tc_date}</span>
+				        <span class="user">${comment.cc_user}</span> <span class="date"> ${comment.cc_date}</span>
 				    </div>
 				    <div class="c_content">
-				        ${comment.tc_comment}
+				        ${comment.cc_comment}
 				    </div>
 				    
 <!-- 				    대댓글 -->
-				        <div class="c_reply" data-tc-group="${comment.tc_group}">
-				        	<div class="btnTrue">
-				        	<button class="replyForm-modify" id="comment_modify" data-tc-idx="${comment.tc_idx}" data-tc-id="${comment.tc_id}">수정</button>
-							<button class="replyForm-delete" id="comment_delete" onclick="location.href='${cp}/comment/tcDel?tc_idx=${comment.tc_idx}'">삭제</button>
-				            <button class="replyForm-btn" id="comment_reply">답글</button>
-				        	</div>
-				        	<div class="btnFalse">
-				            <button class="replyForm-btn" id="comment_reply">답글</button>
-				        	</div>
+				        <div class="c_reply" data-cc-group="${comment.cc_group}">
+				        	<button class="replyForm-modify" id="comment_modify" data-cc-idx="${comment.cc_idx}" data-cc-id="${comment.cc_id}" data-cc-comment="${comment.cc_comment}">수정</button>
+							<button class="replyForm-delete" id="comment_delete" data-cc-idx="${comment.cc_idx}" data-cc-id="${comment.cc_id}">삭제</button>
+				            <button class="replyForm-btn" id="comment_reply" data-cc-id="${comment.cc_id}">답글</button>
                             <div class="replyList hidden">
-				        <c:forEach var="reply" items="${tcList}">
-				        <c:set var="tc_user" value="${reply.tc_user}" />
-				        <c:set var="tc_id" value="${reply.tc_id}" />
-						<c:set var="tc_comment" value="${reply.tc_comment}" />
-						<c:set var="tc_date" value="${reply.tc_date}" />
-						<c:set var="tc_idx" value="${reply.tc_idx}" />
-						<c:set var="tc_group" value="${reply.tc_group}" />
+				        <c:forEach var="reply" items="${ccList}">
+				        <c:set var="cc_user" value="${reply.cc_user}" />
+				        <c:set var="cc_id" value="${reply.cc_id}" />
+						<c:set var="cc_comment" value="${reply.cc_comment}" />
+						<c:set var="cc_date" value="${reply.cc_date}" />
+						<c:set var="cc_idx" value="${reply.cc_idx}" />
+						<c:set var="cc_group" value="${reply.cc_group}" />
                         <c:choose>
-                            <c:when test="${reply.tc_num != 0 && reply.tc_group == comment.tc_group}">
+                            <c:when test="${reply.cc_num != 0 && reply.cc_group == comment.cc_group}">
                             <div class="reply_mark" style="font-size: 22px; color: lightgrey;">┗</div>
                                     <div class="r_top">
-                                        <span class="user">${reply.tc_user}</span> <span class="date"> ${reply.tc_date}</span>
+                                        <span class="user">${reply.cc_user}</span> <span class="date"> ${reply.cc_date}</span>
                                     </div>
                                     <div class="r_content">
-                                        ${reply.tc_comment}
+                                        ${reply.cc_comment}
                                     </div>
-                            <div class="btnTrue">
-                            <button class="replyForm-modify" id="reply_modify" data-tc-idx="${reply.tc_idx} "data-tc-id="${reply.tc_id}">수정</button>
-							<button class="replyForm-delete" id="reply_delete" onclick="location.href='${cp}/comment/tcDel?tc_idx=${reply.tc_idx}'">삭제</button>
-                            </div>
+                            <button class="replyForm-modify" id="reply_modify" data-cc-idx="${reply.cc_idx}" data-cc-id="${reply.cc_id}" data-cc-comment="${reply.cc_comment}">수정</button>
+							<button class="replyForm-delete" id="reply_delete" data-cc-idx="${reply.cc_idx}" data-cc-id="${reply.cc_id}">삭제</button>
                             </c:when>
                         </c:choose>
                     </c:forEach>
                     	<div class="reply_mark" style="font-size: 22px; color: lightgrey;">┗</div>
 					        <div class="replyForm hidden">
-							    <form id="form" action="${cp}/comment/tcWrite" method="post">
-							        <input type="hidden" name="t_idx" value="<%=t_idx%>">
-							        <input type="hidden" name="tc_class" value="1">
-							        <textarea class="comment" name="tc_comment" rows="4" cols="50"></textarea>
-        							<input type="hidden" name="tc_group" value="${comment.tc_group}">
+							    <form id="form" action="${cp}/comment/ccWrite" method="post">
+							        <input type="hidden" name="c_idx" value="<%=c_idx%>">
+							        <input type="hidden" name="cc_class" value="1">
+							        <textarea class="comment" name="cc_comment" rows="4" cols="50"></textarea>
+        							<input type="hidden" name="cc_group" value="${comment.cc_group}">
 								    <div class="commentSubmit">
 								    	<button type="submit">작성</button>
 								    </div>
@@ -197,13 +190,13 @@ var userName = "<c:out value='${userName}' />";
 			
 			<div class="modal" id="commentModal">
 			    <div class="modal-content">
-			        <form id="form" action="${cp}/comment/tcModify" method="post">
-			            <input type="hidden" name="tc_idx">
-			            <input type="hidden" name="t_idx" value="<%=t_idx%>">
-			            <textarea name="tc_comment" rows="4" cols="50"></textarea>
+			        <form id="form" action="${cp}/comment/ccModify" method="post">
+			            <input type="hidden" name="cc_idx">
+			            <input type="hidden" name="c_idx" value="<%=c_idx%>">
+			            <textarea id="modalForm" name="cc_comment" rows="4" cols="50"></textarea>
 			            <div class="replyAction">
-			                <button type="submit">수정</button>
-			                <button type="button" class="modifyForm-cancel">취소</button>
+			                <button class="modalBtn" type="submit" id="modal-modify">수정</button>
+			                <button class="modalBtn" type="button" id="modifyForm-cancel">취소</button>
 			            </div>
 			        </form>
 			    </div>
@@ -217,7 +210,7 @@ var userName = "<c:out value='${userName}' />";
 </div>
 
 <script type="text/javascript" src="${cp}/resources/free/freeBoard.js"></script>
-<script type="text/javascript" src="${cp}/resources/tip/tipRead.js"></script>
+<script type="text/javascript" src="${cp}/resources/comp/compRead.js"></script>
 <script type="text/javascript" src="${cp}/resources/t.js?ver=<%= System.currentTimeMillis() %>"></script>
 </body>
 </html>
