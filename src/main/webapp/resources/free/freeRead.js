@@ -93,21 +93,13 @@
              	});
 
 				// 댓글 삭제 팝업
-				document.getElementById('comment_delete').addEventListener('click', function () {
-					var fcIdx = this.getAttribute('data-fc-idx');
-					if (confirm("삭제하시겠습니까?")) {
-						location.href = '/teamgg/comment/fcDel?fc_idx=' + fcIdx;
-					} else {
-						window.close();
-					}
-				});
-				
-				// 대댓글 삭제 팝업
-				document.getElementById('reply_delete').addEventListener('click', function () {
-					var fcIdx = this.getAttribute('data-fc-idx');
-					if (confirm("삭제하시겠습니까?")) {
-						location.href = '/teamgg/comment/fcDel?fc_idx=' + fcIdx;
-					} else {
-						window.close();
-					}
+				document.querySelectorAll('.replyForm-delete').forEach(function (element) {
+					element.addEventListener('click', function () {
+						var fcIdx = this.getAttribute('data-fc-idx');
+						if (confirm("삭제하시겠습니까?")) {
+							location.href = '/teamgg/comment/fcDel?fc_idx=' + fcIdx;
+						} else {
+							window.close();
+						}
+					});
 				});

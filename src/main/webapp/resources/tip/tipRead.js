@@ -22,7 +22,7 @@
                 var replyButtons = document.querySelectorAll('.replyForm-btn');
                 replyButtons.forEach(function (button) {
                     button.addEventListener('click', function () {
-                        var replyContainer = this.parentElement.parentElement;
+                        var replyContainer = this.parentElement;
                         var replyForm = replyContainer.querySelector('.replyForm');
                         var replyList = replyContainer.querySelector('.replyList');
                         replyForm.classList.toggle('hidden');
@@ -93,21 +93,13 @@
             	});
 
 				// 댓글 삭제 팝업
-				document.getElementById('comment_delete').addEventListener('click', function () {
-					var tcIdx = this.getAttribute('data-tc-idx');
-					if (confirm("삭제하시겠습니까?")) {
-						location.href = '/teamgg/comment/tcDel?tc_idx=' + tcIdx;
-					} else {
-						window.close();
-					}
-				});
-				
-				// 대댓글 삭제 팝업
-				document.getElementById('reply_delete').addEventListener('click', function () {
-					var tcIdx = this.getAttribute('data-tc-idx');
-					if (confirm("삭제하시겠습니까?")) {
-						location.href = '/teamgg/comment/tcDel?tc_idx=' + tcIdx;
-					} else {
-						window.close();
-					}
+				document.querySelectorAll('.replyForm-delete').forEach(function (element) {
+					element.addEventListener('click', function () {
+						var tcIdx = this.getAttribute('data-tc-idx');
+						if (confirm("삭제하시겠습니까?")) {
+							location.href = '/teamgg/comment/tcDel?tc_idx=' + tcIdx;
+						} else {
+							window.close();
+						}
+					});
 				});
