@@ -1,5 +1,5 @@
 <%@page import="com.teamproject.spring.teamgg.vo.BoardVO"%>
-<%@page import="com.teamproject.spring.teamgg.vo.FreeCommentVo"%>
+<%@page import="com.teamproject.spring.teamgg.vo.CommentVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="java.sql.Date"%>
@@ -143,14 +143,9 @@ var userName = "<c:out value='${userName}' />";
 				    
 <!-- 				    대댓글 -->
 				        <div class="c_reply" data-fc-group="${comment.fc_group}">
-				        	<div class="btnTrue">
-				        	<button class="replyForm-modify" id="comment_modify" data-fc-idx="${comment.fc_idx}" data-fc-id="${comment.fc_id}">수정</button>
-							<button class="replyForm-delete" id="comment_delete" onclick="location.href='${cp}/comment/fcDel?fc_idx=${comment.fc_idx}'">삭제</button>
-				            <button class="replyForm-btn" id="comment_reply">답글</button>
-				        	</div>
-				        	<div class="btnFalse">
-				            <button class="replyForm-btn" id="comment_reply">답글</button>
-				        	</div>
+				        	<button class="replyForm-modify" id="comment_modify" data-fc-idx="${comment.fc_idx}" data-fc-id="${comment.fc_id}" data-fc-comment="${comment.fc_comment}">수정</button>
+							<button class="replyForm-delete" id="comment_delete" data-fc-idx="${comment.fc_idx}" data-fc-id="${comment.fc_id}">삭제</button>
+				            <button class="replyForm-btn" id="comment_reply" data-fc-id="${comment.fc_id}">답글</button> 
                             <div class="replyList hidden">
 				        <c:forEach var="reply" items="${fcList}">
 				        <c:set var="fc_user" value="${reply.fc_user}" />
@@ -168,10 +163,8 @@ var userName = "<c:out value='${userName}' />";
                                     <div class="r_content">
                                         ${reply.fc_comment}
                                     </div>
-                            <div class="btnTrue">
-                            <button class="replyForm-modify" id="reply_modify" data-fc-idx="${reply.fc_idx} "data-fc-id="${reply.fc_id}">수정</button>
-							<button class="replyForm-delete" id="reply_delete" onclick="location.href='${cp}/comment/fcDel?fc_idx=${reply.fc_idx}'">삭제</button>
-                            </div>
+                            <button class="replyForm-modify" id="reply_modify" data-fc-idx="${reply.fc_idx}" data-fc-id="${reply.fc_id}" data-fc-comment="${reply.fc_comment}">수정</button>
+							<button class="replyForm-delete" id="reply_delete" data-fc-idx="${reply.fc_idx}" data-fc-id="${reply.fc_id}">삭제</button>
                             </c:when>
                         </c:choose>
                     </c:forEach>

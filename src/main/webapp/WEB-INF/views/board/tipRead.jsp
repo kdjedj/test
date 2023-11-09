@@ -1,5 +1,5 @@
 <%@page import="com.teamproject.spring.teamgg.vo.BoardVO"%>
-<%@page import="com.teamproject.spring.teamgg.vo.TipCommentVo"%>
+<%@page import="com.teamproject.spring.teamgg.vo.CommentVO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 <%@page import="java.sql.Date"%>

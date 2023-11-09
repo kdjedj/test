@@ -13,14 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.teamproject.spring.teamgg.board.ConfigBoard;
 import com.teamproject.spring.teamgg.service.BoardService;
-import com.teamproject.spring.teamgg.service.CompCommentService;
-import com.teamproject.spring.teamgg.service.FreeCommentService;
-import com.teamproject.spring.teamgg.service.TipCommentService;
+import com.teamproject.spring.teamgg.service.CommentService;
 import com.teamproject.spring.teamgg.vo.BoardVO;
-import com.teamproject.spring.teamgg.vo.CompCommentVo;
-import com.teamproject.spring.teamgg.vo.FreeCommentVo;
+import com.teamproject.spring.teamgg.vo.CommentVO;
 import com.teamproject.spring.teamgg.vo.MemberVO;
-import com.teamproject.spring.teamgg.vo.TipCommentVo;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -31,9 +27,7 @@ import lombok.extern.log4j.Log4j;
 @Controller
 public class BoardController {
 	private BoardService service;
-	private FreeCommentService fcService;
-	private TipCommentService tcService;
-	private CompCommentService ccService;
+	private CommentService commentService;
 	
 	// FreeBoard
 	@GetMapping("/freeList")
@@ -105,7 +99,7 @@ public class BoardController {
 		System.out.println("====== 읽기, 수정 (" + f_idx + ")");
 		model.addAttribute("freeRead",service.freeRead(f_idx));
 		
-		List<FreeCommentVo> fcList = fcService.getFcList(f_idx);
+		List<CommentVO> fcList = commentService.getFcList(f_idx);
 	    model.addAttribute("fcList", fcList);
 	}
 
@@ -263,7 +257,7 @@ public class BoardController {
 		System.out.println("====== 읽기, 수정 (" + t_idx + ")");
 		model.addAttribute("tipRead",service.tipRead(t_idx));
 		
-		List<TipCommentVo> tcList = tcService.getTcList(t_idx);
+		List<CommentVO> tcList = commentService.getTcList(t_idx);
 		model.addAttribute("tcList", tcList);
 	}
 	
@@ -422,7 +416,7 @@ public class BoardController {
 		System.out.println("====== 읽기, 수정 (" + c_idx + ")");
 		model.addAttribute("compRead",service.compRead(c_idx));
 		
-		List<CompCommentVo> ccList = ccService.getCcList(c_idx);
+		List<CommentVO> ccList = commentService.getCcList(c_idx);
 		model.addAttribute("ccList", ccList);
 	}
 
